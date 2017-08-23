@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user")
 public class UserAction {
 
-	@RequestMapping("hi")
-	private String sayhi() {
+	@RequestMapping("login.do")
+	private String sayhi(String username,String password) {
 		// TODO Auto-generated method stub
-		System.out.println("hello word!做点手脚");
-		return "login";
+		System.out.println("hello "+ username +"!");
+		return "index";
 	}
 	
 }
