@@ -1,41 +1,4 @@
-body {
-	margin: 0px;
-	padding: 0px;
-}
-
-.page {
-	width: 80%;
-	background: #E0E0E0;
-}
-
-.himg { 
-	width: 100px;
-	height: 100px;
-	background-color: red;
-	border-radius: 50%;
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	overflow: hidden;
-	box-shadow: 5px 5px 5px #C0C0C0;
-}
-
-.icon-nav {
-	display: none;
-}
-
-.div-nav-s {
-	float: left;
-	margin-top: 50px;
-	margin-left: 30px
-}
-
-.navlist {
-	text-align: center;
-}
-
-#title-nav {
-	display: none;
-}
+@CHARSET "UTF-8";
 
 @media screen and (max-width:480px) {
 	.div-himg {
@@ -48,7 +11,7 @@ body {
 		width: 40px;
 		margin-left: 10px;
 		box-shadow: 1px 1px 2px #000;
-		/* ´¹Ö±¾ÓÖÐ */
+		/* åž‚ç›´å±…ä¸­ */
 		position: relative;
 		top: 50%;
 		transform: translateY(-50%);
@@ -86,7 +49,7 @@ body {
 	}
 	#title-nav {
 		color: #fff;
-		font-size: 18px;
+		font-size: 20px;
 		display: block;
 		position: absolute;
 		top: 50%;
