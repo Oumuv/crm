@@ -510,4 +510,17 @@ Caused by: java.io.FileNotFoundException: class path resource [resources/spring-
   [INFO] [2017-08-23 16:15:39][org.springframework.web.servlet.DispatcherServlet]FrameworkServlet 'SpringMVC': initialization started
   [INFO] [2017-08-23 16:15:39][org.springframework.web.context.support.XmlWebApplicationContext]Refreshing WebApplicationContext for namespace 'SpringMVC-servlet': startup date [Wed Aug 23 16:15:39 CST 2017]; root of context hierarchy
   [INFO] [2017-08-23 16:15:39][org.springframework.web.servlet.DispatcherServlet]FrameworkServlet 'SpringMVC': initialization completed in 71 ms
+  [WARN] [2017-08-23 19:44:34][org.springframework.web.servlet.PageNotFound]No mapping found for HTTP request with URI [/mycrm/user/login.do] in DispatcherServlet with name 'SpringMVC'
+  [WARN] [2017-08-23 19:45:07][org.springframework.web.servlet.PageNotFound]No mapping found for HTTP request with URI [/mycrm/user/login.do] in DispatcherServlet with name 'SpringMVC'
+  [INFO] [2017-08-23 19:47:34][org.springframework.web.context.support.XmlWebApplicationContext]Closing WebApplicationContext for namespace 'SpringMVC-servlet': startup date [Wed Aug 23 16:15:39 CST 2017]; root of context hierarchy
+  [INFO] [2017-08-23 19:47:34][org.springframework.web.servlet.DispatcherServlet]FrameworkServlet 'SpringMVC': initialization started
+  [INFO] [2017-08-23 19:47:34][org.springframework.web.context.support.XmlWebApplicationContext]Refreshing WebApplicationContext for namespace 'SpringMVC-servlet': startup date [Wed Aug 23 19:47:34 CST 2017]; root of context hierarchy
+  [INFO] [2017-08-23 19:47:34][org.springframework.web.servlet.DispatcherServlet]FrameworkServlet 'SpringMVC': initialization completed in 83 ms
+  [INFO] [2017-08-24 09:05:59][org.springframework.web.context.support.XmlWebApplicationContext]Closing WebApplicationContext for namespace 'SpringMVC-servlet': startup date [Wed Aug 23 19:47:34 CST 2017]; root of context hierarchy
+  [INFO] [2017-08-24 09:05:59][org.springframework.web.servlet.DispatcherServlet]FrameworkServlet 'SpringMVC': initialization started
+  [INFO] [2017-08-24 09:05:59][org.springframework.web.context.support.XmlWebApplicationContext]Refreshing WebApplicationContext for namespace 'SpringMVC-servlet': startup date [Thu Aug 24 09:05:59 CST 2017]; root of context hierarchy
+  [INFO] [2017-08-24 09:05:59][org.springframework.web.servlet.DispatcherServlet]FrameworkServlet 'SpringMVC': initialization completed in 71 ms
+  [INFO] [2017-08-24 09:41:55][org.springframework.web.servlet.DispatcherServlet]FrameworkServlet 'SpringMVC': initialization started
+  [INFO] [2017-08-24 09:41:55][org.springframework.web.context.support.XmlWebApplicationContext]Refreshing WebApplicationContext for namespace 'SpringMVC-servlet': startup date [Thu Aug 24 09:41:55 CST 2017]; root of context hierarchy
+  [INFO] [2017-08-24 09:41:55][org.springframework.web.servlet.DispatcherServlet]FrameworkServlet 'SpringMVC': initialization completed in 112 ms
   

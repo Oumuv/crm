@@ -12,6 +12,8 @@
 
 <!-- Bootstrap -->
 <link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
 <style>
 	.index{
 		width:50%;
@@ -55,7 +57,7 @@
 		</p>
 		<br>
 		<!-- 登录框 -->
-		<form action="user/login.do" method="post">
+		<form action="user/login" method="post">
 			<div class="container hmax" style="text-align: center">
 			
 				<div class="alert alert-danger alert-dismissible" style="display:none;" role="alert">

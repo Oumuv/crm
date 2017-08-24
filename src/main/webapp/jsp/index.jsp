@@ -10,82 +10,33 @@
 <!-- Bootstrap -->
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/style.css"
+	rel="stylesheet">
 
-<style>
-body{
-	margin:0px;
-	padding: 0px;
-}
-.page{
-	width: 80%;
-}
-.himg {
-	width: 100px;
-	height: 100px;
-	background-color: red;
-	border-radius: 50%;
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	overflow: hidden;
-	box-shadow: 5px 5px 5px #C0C0C0;
-}
-.icon-nav{
-	display:none;
-}
-.text-nav{
-		display:block;
-	}
-@media screen and (max-width:480px){
-	.div-himg{
-		width:100%;
-		height: 50px;
-		background: #4f9fcf;
-		
-	}
-	.himg {
-		height: 40px;
-		width:40px;
-		margin-left:10px;
-		box-shadow: 1px 1px 2px #000;
-		/* 垂直居中 */
-		position: relative;
-		top:50%;
-		transform:translateY(-50%);
-	} 
-	.page{
-		margin:0px; padding: 0px;
-		width:100%;
-	}
-	.div-nav{
-		position:fixed;
-		bottom:0px;
-		width:100%;
-	}
-	.icon-nav{
-		display:block;
-	}
-	.text-nav{
-		display:none;
-	}
-}
-</style>
 
 </head>
 <body>
 	<div class="container page" style="">
 		<div class="div-himg">
 			<div class="himg" style="float: left;">
-				<img alt="头像" style="width: 100%;"
+				<img alt="头像" style="width: 100%;" 
 					src="<%=request.getContextPath()%>/images/headM.png">
 			</div>
+			<span id="title-nav" alt="标题"></span>
 		</div>
 
 		<div class="div-nav">
-			<div style="float: left; margin-top: 50px; margin-left: 30px">
+			<div class="div-nav-s" style="">
 				<ul class="nav nav-tabs">
-					<li role="presentation" class="active"><span class="glyphicon glyphicon-search icon-nav"></span><a class="text-nav" href="#">Home</a></li>
-					<li role="presentation"><span class="glyphicon glyphicon-search icon-nav"></span><a class="text-nav" href="#">Work</a></li>
-					<li role="presentation"><span class="glyphicon glyphicon-search icon-nav"></span><a class="text-nav" href="#">Messages</a></li>
+					<li role="presentation" class="active navlist"><a
+						class="btn-lg glyphicon glyphicon-home text-nav"><span
+							class="text-nav"> Home</span></a></li>
+					<li role="presentation" class="navlist"><a
+						class="btn-lg glyphicon glyphicon-folder-open text-nav"><span
+							class="text-nav"> Work</span></a></li>
+					<li role="presentation" class="navlist"><a
+						class="btn-lg glyphicon glyphicon-comment text-nav"><span
+							class="text-nav"> Messages</span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -93,4 +44,12 @@ body{
 </body>
 <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+
+<script type="text/javascript">
+	$(".navlist").click(function() {
+		$(".navlist").removeClass("active");
+		$(this).addClass("active");
+		$("#title-nav").html($(this).find("span").html());
+	});
+</script>
 </html>
