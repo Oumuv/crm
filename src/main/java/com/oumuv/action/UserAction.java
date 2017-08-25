@@ -7,11 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.HttpServletBean;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author Administrator
@@ -22,9 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserAction {
 
 	@RequestMapping("/login.do")
-	public String sayhi(String username,String password,ModelMap map,HttpSession session) {
-		System.out.println(username);
-		System.out.println(password);
+	public String login(String username,String password,ModelMap map,HttpSession session) {
 		if(username.equals("123")&&password.equals("123")){
 			map.clear();
 			map.put("user", username);
@@ -40,17 +35,16 @@ public class UserAction {
 
 	
 	@RequestMapping("/check.do")
-	public void check(String username,HttpServletRequest request,HttpServletResponse response,ModelMap map) {
-		if(!username.equals("123")){
-			response.setHeader("Content-type", "text/html;charset=UTF-8");
-			response.setCharacterEncoding("UTF-8");
-			try {
-				response.getWriter().write("用户不存在");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+	public void check(String username,HttpServletRequest request,HttpServletResponse response,ModelMap map) throws IOException {
+		response.setHeader("Content-type", "text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		if(username.equals("")){
+			response.getWriter().write("请输入用户名");
+		}else if(!username.equals("123")){
+			response.getWriter().write("用户不存在");
 		}
 	}
+	
 	@RequestMapping("/logout.do")
 	public String check(HttpSession session,HttpServletRequest request,HttpServletResponse response) {
 		session.removeAttribute("user");

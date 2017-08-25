@@ -68,7 +68,7 @@
 		</p>
 		<br>
 		<!-- 登录框 -->
-		<form  id="form-data">
+		<form action="<%=request.getContextPath()%>/user/login.do" id="form-data" method="post">
 			<div class="container hmax" style="text-align: center">
 				<!-- 提示框 -->
 					<div id="tis-msg" class="alert alert-danger alert-dismissible" style="display:none"
@@ -112,7 +112,7 @@
 				<br>
 				<div class="container control"
 					style="width: 80%; text-align: center">
-					<input type="button" class="btn btn-primary lbtn" onclick="submits()" value="Login"
+					<input type="submit" class="btn btn-primary lbtn" onclick="return submits(this.form)" value="Login"
 						role="button"></input> <input type="reset"
 						class="btn btn-danger lbtn" value="Reset" role="button"></input>
 				</div>
@@ -146,25 +146,19 @@
 				}
 			});
 		}
-		<%--  --%>
-		function submits(){
-			 if($(".form-control").eq(0).val()==""||$(".form-control").eq(1).val()==""){
+		
+		/* 表单提交验证 */
+		function submits(form){
+			if($(".form-control").eq(0).val()==""||$(".form-control").eq(1).val()==""){
 				$("#tis-msg").show(200).html("<button type='button' class='close' data-dismiss='alert'aria-label='Close'><span aria-hidden='true'>&times;</span></button><!-- 用户不存在提示 --><strong>提示：</strong> 用户名密码不能为空！");
-			}else{ 
-				<%-- $.ajax({
-					url:'<%=request.getContextPath()%>/user/login.do',
-					/* data:$("#form-data").serialize(), */
-					 data:{username:'123',password:'123'}, 
-					type:'post'
-				}); --%>
-				$.ajax({
-					url:'<%=request.getContextPath()%>/user/login.do',
-					type:'post',
-					data:{username:'123',password:'123'}
-				});
-			} 
-			
+				return false;
+			}
+			return true;
 		};
+		
+		$(".form-control").focus(function(){
+			$(".alert").hide(200);
+		});
 	</script>
 </body>
 </html>
