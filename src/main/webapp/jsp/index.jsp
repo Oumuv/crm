@@ -72,9 +72,9 @@ body {
 		margin: 0px;
 		padding: 0px;
 		width: 100%;
-		display: flex;
+	/* 	display: flex;
 		justify-content: center;
-		align-items: center;
+		align-items: center; */
 	}
 	.div-nav {
 		position: fixed;
