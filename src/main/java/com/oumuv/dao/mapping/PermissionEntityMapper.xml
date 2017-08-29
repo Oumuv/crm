@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oumuv.dao.PermissionEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.oumuv.entity.PermissionEntity" >
+    <id column="rf_id" property="rfId" jdbcType="BIGINT" />
+    <result column="rf_role_id" property="rfRoleId" jdbcType="BIGINT" />
+    <result column="rf_right_code" property="rfRightCode" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rf_id, rf_role_id, rf_right_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from role_right_info
+    where rf_id = #{rfId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from role_right_info
+    where rf_id = #{rfId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.oumuv.entity.PermissionEntity" >
+    insert into role_right_info (rf_id, rf_role_id, rf_right_code
+      )
+    values (#{rfId,jdbcType=BIGINT}, #{rfRoleId,jdbcType=BIGINT}, #{rfRightCode,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oumuv.entity.PermissionEntity" >
+    insert into role_right_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rfId != null" >
+        rf_id,
+      </if>
+      <if test="rfRoleId != null" >
+        rf_role_id,
+      </if>
+      <if test="rfRightCode != null" >
+        rf_right_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rfId != null" >
+        #{rfId,jdbcType=BIGINT},
+      </if>
+      <if test="rfRoleId != null" >
+        #{rfRoleId,jdbcType=BIGINT},
+      </if>
+      <if test="rfRightCode != null" >
+        #{rfRightCode,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.PermissionEntity" >
+    update role_right_info
+    <set >
+      <if test="rfRoleId != null" >
+        rf_role_id = #{rfRoleId,jdbcType=BIGINT},
+      </if>
+      <if test="rfRightCode != null" >
+        rf_right_code = #{rfRightCode,jdbcType=BIGINT},
+      </if>
+    </set>
+    where rf_id = #{rfId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oumuv.entity.PermissionEntity" >
+    update role_right_info
+    set rf_role_id = #{rfRoleId,jdbcType=BIGINT},
+      rf_right_code = #{rfRightCode,jdbcType=BIGINT}
+    where rf_id = #{rfId,jdbcType=BIGINT}
+  </update>
+</mapper>

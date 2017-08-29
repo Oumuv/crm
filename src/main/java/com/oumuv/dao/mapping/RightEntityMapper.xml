@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oumuv.dao.RightEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.oumuv.entity.RightEntity" >
+    <id column="right_code" property="rightCode" jdbcType="BIGINT" />
+    <result column="right_parent_code" property="rightParentCode" jdbcType="BIGINT" />
+    <result column="right_type" property="rightType" jdbcType="VARCHAR" />
+    <result column="right_text" property="rightText" jdbcType="VARCHAR" />
+    <result column="right_url" property="rightUrl" jdbcType="VARCHAR" />
+    <result column="right_tip" property="rightTip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    right_code, right_parent_code, right_type, right_text, right_url, right_tip
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from right_info
+    where right_code = #{rightCode,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from right_info
+    where right_code = #{rightCode,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.oumuv.entity.RightEntity" >
+    insert into right_info (right_code, right_parent_code, right_type, 
+      right_text, right_url, right_tip
+      )
+    values (#{rightCode,jdbcType=BIGINT}, #{rightParentCode,jdbcType=BIGINT}, #{rightType,jdbcType=VARCHAR}, 
+      #{rightText,jdbcType=VARCHAR}, #{rightUrl,jdbcType=VARCHAR}, #{rightTip,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oumuv.entity.RightEntity" >
+    insert into right_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rightCode != null" >
+        right_code,
+      </if>
+      <if test="rightParentCode != null" >
+        right_parent_code,
+      </if>
+      <if test="rightType != null" >
+        right_type,
+      </if>
+      <if test="rightText != null" >
+        right_text,
+      </if>
+      <if test="rightUrl != null" >
+        right_url,
+      </if>
+      <if test="rightTip != null" >
+        right_tip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rightCode != null" >
+        #{rightCode,jdbcType=BIGINT},
+      </if>
+      <if test="rightParentCode != null" >
+        #{rightParentCode,jdbcType=BIGINT},
+      </if>
+      <if test="rightType != null" >
+        #{rightType,jdbcType=VARCHAR},
+      </if>
+      <if test="rightText != null" >
+        #{rightText,jdbcType=VARCHAR},
+      </if>
+      <if test="rightUrl != null" >
+        #{rightUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="rightTip != null" >
+        #{rightTip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.RightEntity" >
+    update right_info
+    <set >
+      <if test="rightParentCode != null" >
+        right_parent_code = #{rightParentCode,jdbcType=BIGINT},
+      </if>
+      <if test="rightType != null" >
+        right_type = #{rightType,jdbcType=VARCHAR},
+      </if>
+      <if test="rightText != null" >
+        right_text = #{rightText,jdbcType=VARCHAR},
+      </if>
+      <if test="rightUrl != null" >
+        right_url = #{rightUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="rightTip != null" >
+        right_tip = #{rightTip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where right_code = #{rightCode,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oumuv.entity.RightEntity" >
+    update right_info
+    set right_parent_code = #{rightParentCode,jdbcType=BIGINT},
+      right_type = #{rightType,jdbcType=VARCHAR},
+      right_text = #{rightText,jdbcType=VARCHAR},
+      right_url = #{rightUrl,jdbcType=VARCHAR},
+      right_tip = #{rightTip,jdbcType=VARCHAR}
+    where right_code = #{rightCode,jdbcType=BIGINT}
+  </update>
+</mapper>
