@@ -78,12 +78,12 @@
 
 				<div class="input-group">
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="button">Username:</button>
+						<button class="btn btn-default" type="button" onfocus="$('#username_input').focus()">Username:</button>
 					</span> 
 					<c:choose>
-						<c:when test="${!empty user }"><input type="text" name="username" class="form-control"
-						placeholder="请输入用户名.." value="${user }"></c:when>
-						<c:otherwise><input type="text" name="username" class="form-control"
+						<c:when test="${!empty username }"><input type="text" name="username" class="form-control"
+						placeholder="请输入用户名.." value="${username }"></c:when>
+						<c:otherwise><input id="username_input" type="text" name="username" class="form-control"
 						placeholder="请输入用户名.." onblur="check(this)"></c:otherwise>
 					</c:choose>
 					
@@ -105,8 +105,8 @@
 
 				<div class="input-group">
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="button">Password:</button>
-					</span> <input type="text" name="password" class="form-control"
+						<button class="btn btn-default" type="button" onfocus="$('#password_input').focus()">Password:</button>
+					</span> <input id="password_input" type="text" name="password" class="form-control"
 						placeholder="请输入密码..">
 				</div>
 				<!-- /input-group -->

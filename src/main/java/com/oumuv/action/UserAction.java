@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.oumuv.entity.User;
+
 /**
  * @author Administrator
  *user控制层
@@ -20,7 +22,11 @@ public class UserAction {
 
 	@RequestMapping("/login.do")
 	public String login(String username,String password,ModelMap map,HttpSession session) {
-		if(username.equals("123")&&password.equals("123")){
+		User user = new User();
+		user.setUsername("123");
+		user.setPassword("123");
+		
+		if(user.getUsername().equals(username)&&user.getPassword().equals(password)){
 			map.clear();
 			map.put("user", username);
 			session.setAttribute("user", username);
@@ -36,6 +42,8 @@ public class UserAction {
 	
 	@RequestMapping("/check.do")
 	public void check(String username,HttpServletRequest request,HttpServletResponse response,ModelMap map) throws IOException {
+		
+		
 		response.setHeader("Content-type", "text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		if(username.equals("")){
