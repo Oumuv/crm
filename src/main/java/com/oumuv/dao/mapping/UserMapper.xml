@@ -12,6 +12,18 @@
   <sql id="Base_Column_List" >
     id, username, password, name, himg, role_id
   </sql>
+  <select id="login" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	select
+    <include refid="Base_Column_List" />
+    from user_info
+    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+  <select id="check" resultType="java.lang.String" parameterType="java.lang.String" >
+  	select
+    username
+    from user_info
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

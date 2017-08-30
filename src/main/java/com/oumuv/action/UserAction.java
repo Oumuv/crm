@@ -2,15 +2,18 @@ package com.oumuv.action;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oumuv.entity.User;
+import com.oumuv.service.UserService;
 
 /**
  * @author Administrator
@@ -20,35 +23,34 @@ import com.oumuv.entity.User;
 @RequestMapping("/user")
 public class UserAction {
 
+	@Resource
+	private UserService userService;
+	
 	@RequestMapping("/login.do")
-	public String login(String username,String password,ModelMap map,HttpSession session) {
-		User user = new User();
-		user.setUsername("123");
-		user.setPassword("123");
-		
-		if(user.getUsername().equals(username)&&user.getPassword().equals(password)){
-			map.clear();
-			map.put("user", username);
-			session.setAttribute("user", username);
-			return "index";
-		}else{
+	public String login(@Param(value="usename") String username,@Param("password") String password,ModelMap map,HttpSession session) {
+		User user = userService.login(username, password);
+		if(user==null){
 			map.clear();
 			map.put("username", username);
 			map.put("msg1", "密码错误，请重新输入");
 			return "forward:/login.jsp";
+		}else if(user.getUsername().equals(username)&&user.getPassword().equals(password)){
+			map.clear();
+			session.setAttribute("user", user);
+			return "index";
 		}
+		return "forward:/login.jsp";
 	}
 
 	
 	@RequestMapping("/check.do")
 	public void check(String username,HttpServletRequest request,HttpServletResponse response,ModelMap map) throws IOException {
-		
-		
+		String user = userService.check(username);
 		response.setHeader("Content-type", "text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		if(username.equals("")){
 			response.getWriter().write("请输入用户名");
-		}else if(!username.equals("123")){
+		}else if(user==null){
 			response.getWriter().write("用户不存在");
 		}
 	}
@@ -58,5 +60,7 @@ public class UserAction {
 		session.removeAttribute("user");
 		return "redirect:/login.jsp";
 	}
+
+
 	
 }

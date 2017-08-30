@@ -10,7 +10,8 @@
 <!-- Bootstrap -->
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
-<link href="../css/style1.css">
+<link href="<%=request.getContextPath()%>/css/style.css"
+	rel="stylesheet">
 
 <style>
 
@@ -23,121 +24,31 @@ body {
 
 .page {
 	width: 80%;
-}
-
-.himg {
-	width: 100px;
-	height: 100px;
-	background-color: red;
-	border-radius: 50%;
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	overflow: hidden;
-	box-shadow: 5px 5px 5px #C0C0C0;
-}
-
-.icon-nav {
-	display: none;
-}
-
-.div-nav-s {
-	float: left;
-	margin-top: 50px;
-	margin-left: 30px
-}
-
-.navlist {
-	text-align: center;
-}
-
-.text-nav {
-	cursor:pointer;
-}
-
-#title-nav {
-	display: none;
+	height:100%;
 }
 
 .conten_div{
-	width:100%;
-	margin-top:110px;
+	height:100%;
 }
 
 @media screen and (max-width:910px) and (min-width:480px) {
-	.page {
-		width: 80%;
-		min-width: 725px;
-	}
+
 }
 @media screen and (max-width:480px) {
-	.div-himg {
-		position:fixed;
-		width: 100%;
-		height: 50px;
-		background: #4f9fcf;
-	}
-	.himg {
-		height: 40px;
-		width: 40px;
-		margin-left: 10px;
-		box-shadow: 1px 1px 2px #000;
-		/* 垂直居中 */
-		position: relative;
-		top: 50%;
-		transform: translateY(-50%);
-	}
+	
 	.page {
 		position: fixed;
 		top: 0px;
 		margin: 0px;
 		padding: 0px;
 		width: 100%;
-	/* 	display: flex;
-		justify-content: center;
-		align-items: center; */
 	}
-	.div-nav {
-		position: fixed;
-		bottom: 0px;
-		width: 100%;
-	}
-	.icon-nav {
-		width: 40px;
-		height: 40px;
-		display: block;
-	}
-	.div-nav-s {
-		margin: 0px;
-		padding: 0px;
-		width: 100%;
-	}
+	
+
 	.div-nav-s ul li {
 		width: 33%;
 	}
-	.text-nav {
-		display: none;
-	}
-	#title-nav {
-		color: #fff;
-		font-size: 18px;
-		display: block;
-		position: absolute;
-		top: 25px;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
-	.btn-uitl{
-		position:fixed;
-		display:none;
-		width:40%;
-		 border-radius: 5px;
-		-moz-border-radius: 5px; 
-		-webkit-border-radius: 5px;
-		top:55px;
-		left:1px;
-		background:#E3E3E3;
-		float:left;
-	}
+	
 	.btn-uitl .btn{
 		width:48%;
 		margin:2px 0px 3px 0px;
@@ -147,7 +58,7 @@ body {
 		display:block;	
 	}
 	.conten_div{
-		width:97%;
+		width:100%;
 		margin-top:50px;
 	}
 }
@@ -172,7 +83,7 @@ body {
 		</div>
 		
 		<!-- 主导航 -->
-		<div class="div-nav test">
+		<div class="div-nav ">
 			<div class="div-nav-s" style="">
 				<ul class="nav nav-tabs">
 					<li role="presentation" class="active navlist btn_nav" link-window="user/home.jsp"><a
@@ -189,12 +100,19 @@ body {
 		</div>
 		
 		<!-- 内容 -->
-		<div class="conten_div  ss" style="">
-			<iframe id="iframe_window" width="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto">
+		<div class="test conten_div  " style="">
+			<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto">
 				
 			</iframe>
+			<div class="jumbotron">
+			<h1>Hello, world!</h1>
+			<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+			<p>
+				<a class="btn btn-primary btn-lg" href="#" role="button">Learn
+					more</a>
+			</p>
 		</div>
-		
+		</div>
 		
 	</div>
 </body>
@@ -208,7 +126,7 @@ body {
 		$(".navlist").removeClass("active");
 		$(this).addClass("active");
 		$("#title-nav").html($(this).find("span").html());
-		$('#iframe_window').attr("src",$(this).attr("link-window"));
+		$('#iframe_window').attr("src","<%=request.getContextPath()%>/jsp/"+$(this).attr("link-window"));
 	});
 	/*显示/隐藏工具栏*/
 	function showbtn(){
