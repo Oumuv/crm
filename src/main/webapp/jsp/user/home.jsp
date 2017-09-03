@@ -57,6 +57,26 @@ bady div {
 
 	<div class="test" style="width: 100%; height: 100px">
 		<div class="jumbotron">
+			<h1>Hello,中文字符画</h1>
+			<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+			<p>
+				<a class="btn btn-primary btn-lg" href="#" role="button">Learn
+					more</a>
+			</p>
+		</div>
+	</div>
+	<div class="test" style="width: 100%; height: 100px">
+		<div class="jumbotron">
+			<h1>Hello, world!</h1>
+			<p>This i中文字符画le hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+			<p>
+				<a class="btn btn-primary btn-lg" href="#" role="button">Learn
+					more</a>
+			</p>
+		</div>
+	</div>
+	<div class="test" style="width: 100%; height: 100px">
+		<div class="jumbotron">
 			<h1>Hello, world!</h1>
 			<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 			<p>
@@ -67,10 +87,10 @@ bady div {
 	</div>
 </body>
 
-<script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+ <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 
 <script type="text/javascript">
 	
 </script>
-</html>
+</html>s

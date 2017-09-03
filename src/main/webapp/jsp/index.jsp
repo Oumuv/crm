@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no">
@@ -16,10 +18,17 @@
 <style>
 
 .test{border: 1px red solid;}
-
+html{
+	margin: 0px;
+	padding: 0px;
+	height:100%;
+	top: 0px;  
+	bottom: 0px;
+}
 body {
 	margin: 0px;
 	padding: 0px;
+	height:100%;
 }
 
 .page {
@@ -71,7 +80,7 @@ body {
 		<div class="div-himg" onclick="showbtn()">
 			<div class="himg" style="float: left;">
 				<img alt="头像" style="width: 100%;"
-					src="<%=request.getContextPath()%>/images/headM.png">
+					src="<%=request.getContextPath()%>${user.himg}">
 			</div>
 			<span id="title-nav" style="">Home</span>
 		</div>
@@ -101,17 +110,10 @@ body {
 		
 		<!-- 内容 -->
 		<div class="test conten_div  " style="">
-			<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto">
-				
-			</iframe>
-			<div class="jumbotron">
-			<h1>Hello, world!</h1>
-			<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-			<p>
-				<a class="btn btn-primary btn-lg" href="#" role="button">Learn
-					more</a>
-			</p>
-		</div>
+		<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto">
+<%-- 		<%@ include file=""%> --%>
+<%-- 		<jsp:include page='/jsp/user/home.jsp' flush='true'/> --%>
+<%-- 		<%@ include file="/jsp/user/home.jsp"%> --%>
 		</div>
 		
 	</div>
@@ -123,9 +125,13 @@ body {
 <script type="text/javascript">
 	/*点击主导航栏切换页面 */
 	$(".navlist").click(function() {
+		alert(123)
 		$(".navlist").removeClass("active");
 		$(this).addClass("active");
 		$("#title-nav").html($(this).find("span").html());
+// 		var html="/mycrm/jsp/"+$(this).attr('link-window')
+// 		$('.conten_div').html("").load(html);
+		
 		$('#iframe_window').attr("src","<%=request.getContextPath()%>/jsp/"+$(this).attr("link-window"));
 	});
 	/*显示/隐藏工具栏*/
@@ -136,4 +142,4 @@ body {
 	}
 	
 </script>
-</html>
+</html>-
