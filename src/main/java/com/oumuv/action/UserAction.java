@@ -33,13 +33,13 @@ public class UserAction {
 			map.clear();
 			map.put("username", username);
 			map.put("msg1", "密码错误，请重新输入");
-			return "forward:/login.jsp";
+			return "forward:/login.vm";
 		}else if(user.getUsername().equals(username)&&user.getPassword().equals(password)){
 			map.clear();
 			session.setAttribute("user", user);
 			return "index";
 		}
-		return "forward:/login.jsp";
+		return "forward:/login.vm";
 	}
 
 	
@@ -58,7 +58,7 @@ public class UserAction {
 	@RequestMapping("/logout.do")
 	public String check(HttpSession session,HttpServletRequest request,HttpServletResponse response) {
 		session.removeAttribute("user");
-		return "redirect:/login.jsp";
+		return "redirect:/login.vm";
 	}
 
 
