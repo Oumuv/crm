@@ -30,7 +30,6 @@ bady div {
 }
 </style>
 <body>
-<input type="hidden">
 	<!-- 天气组件 -->
 	<div class="div_weather ">
 		<div style="position: relative;">

@@ -104,10 +104,10 @@ body {
 					<li role="presentation" class="active navlist btn_nav" link-window="user/home"><a
 						class="btn-lg glyphicon glyphicon-home text-nav"><span
 							class="text-nav" > Home</span></a></li>
-					<li role="presentation" class="navlist btn_nav" link-window="msg/msg"><a
+					<li role="presentation" class="navlist btn_nav" link-window="word/word"><a
 						class="btn-lg glyphicon glyphicon-folder-open text-nav"><span
 							class="text-nav" > Work</span></a></li>
-					<li role="presentation" class="navlist btn_nav" link-window="word/word"><a
+					<li role="presentation" class="navlist btn_nav" link-window="msg/msg"><a
 						class="btn-lg glyphicon glyphicon-comment text-nav"><span
 							class="text-nav" > Messages</span></a></li>
 				</ul>
