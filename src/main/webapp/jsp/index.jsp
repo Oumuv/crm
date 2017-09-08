@@ -101,9 +101,9 @@ body {
 		
 		<!-- 内容 -->
 		<div class="test conten_div  " style="">
-<%-- 			<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto"> --%>
+			<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto">
 				
-<!-- 			</iframe> -->
+			</iframe>
 			
 		</div>
 		</div>

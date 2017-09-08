@@ -7,14 +7,28 @@
 <title>CRM index</title>
 
 <!-- Bootstrap -->
-<link href="#springUrl('/css/bootstrap.css')"
-	rel="stylesheet">
-<link href="#springUrl('/css/style.css')"
-	rel="stylesheet">
+<link href="#springUrl('/css/bootstrap.css')" rel="stylesheet">
+<link href="#springUrl('/css/style.css')" rel="stylesheet">
 
 <style>
-
-.test{border: 1px red solid;}
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+width:9px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+-webkit-box-shadow:inset006pxrgba(0,0,0,0.3);
+border-radius:10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+border-radius:10px;
+background:rgba(0,0,0,0.1);
+-webkit-box-shadow:inset006pxrgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+background:rgba(255,0,0,0.4);
+}
 
 body {
 	margin: 0px;
@@ -27,7 +41,7 @@ body {
 }
 
 .conten_div{
-	height:100%;
+	margin-top: 120px;
 }
 
 @media screen and (max-width:910px) and (min-width:480px) {
@@ -58,7 +72,9 @@ body {
 	}
 	.conten_div{
 		width:100%;
+		height: 100%;
 		margin-top:50px;
+		padding-bottom: 94px;
 	}
 }
 </style>
@@ -77,6 +93,7 @@ body {
 		
 		<!-- 工具按钮 -->
 		<div class="btn-uitl " style="float:right;">
+			<span class="text-nav">$user.name</span>
 		 	<a class="btn  glyphicon glyphicon-cog" aria-hidden="true"><span class="text-nav">设置</span></a>
 		 	<a class="btn  glyphicon glyphicon-log-out" aria-hidden="true" href="#springUrl('/user/logout.do')"><span class="text-nav">注销登录</span></a>
 		</div>
@@ -100,7 +117,9 @@ body {
 		
 		<!-- 内容 -->
 		<div class="test conten_div  " id="conten" style="">
-<!-- 		<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto">  -->
+		<div style="width: 100%;height:100%;overflow: auto"></div>
+<!-- 			<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto"> -->
+				
 <!-- 			</iframe> -->
 			
 		</div>
@@ -118,8 +137,10 @@ body {
 		$(".navlist").removeClass("active");
 		$(this).addClass("active");
 		$("#title-nav").html($(this).find("span").html());
-		$.get("#springUrl('/pageturn.do')",{page:$(this).attr("link-window")});
-// 		jQuery('#conten').load("pageturn.do",{page:$(this).attr("link-window")})
+// 		$('#iframe_window').attr("src","<%=request.getContextPath()%>/jsp/"+$(this).attr("link-window"));
+		jQuery('#conten div').load("#springUrl('/pageturn.do')", {
+			page : $(this).attr("link-window")
+		});
 	});
 	/*显示/隐藏工具栏*/
 	function showbtn(){
