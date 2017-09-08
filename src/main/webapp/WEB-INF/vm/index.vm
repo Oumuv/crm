@@ -93,7 +93,6 @@ body {
 		
 		<!-- 工具按钮 -->
 		<div class="btn-uitl " style="float:right;">
-			<span class="text-nav">$user.name</span>
 		 	<a class="btn  glyphicon glyphicon-cog" aria-hidden="true"><span class="text-nav">设置</span></a>
 		 	<a class="btn  glyphicon glyphicon-log-out" aria-hidden="true" href="#springUrl('/user/logout.do')"><span class="text-nav">注销登录</span></a>
 		</div>
@@ -117,7 +116,7 @@ body {
 		
 		<!-- 内容 -->
 		<div class="test conten_div  " id="conten" style="">
-		<div style="width: 100%;height:100%;overflow: auto"></div>
+		<div  style="width: 100%;height:100%;overflow: auto"></div>
 <!-- 			<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto"> -->
 				
 <!-- 			</iframe> -->
@@ -148,6 +147,31 @@ body {
 			  $(".btn-uitl").toggle(200);
 		}
 	}
-	
+// 	window.onscroll = function(){ 
+// 	 	if(screen.width <= 480){
+// 		    var t = document.documentElement.scrollTop || document.body.scrollTop;  
+// 		    if( t >= 300 ) { 
+// 		    	alert(1)
+// 		    	$('.div_weather').hide(200);
+// 		    }
+// 	 	}
+// 	} 
+	//监听某一个元素的滚动条
+	$('#conten div').scroll(function() {
+		if (screen.width <= 480) {
+			//$('#conten div').scrollTop()获取该元素滚动条滚动后的距离
+			if ($('#conten div').scrollTop() >= 50) {
+				$('.div_weather').hide(200);
+			}
+			if ($('#conten div').scrollTop() <= 45) {
+				$('.div_weather').show(200);
+			}
+		}
+	});
+	$(function(){
+		jQuery('#conten div').load("#springUrl('/pageturn.do')", {
+			page : "user/home"
+		});
+	})
 </script>
 </html>

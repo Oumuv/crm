@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oumuv.entity.User;
 import com.oumuv.service.UserService;
+import com.oumuv.utils.MD5Util;
 
 /**
  * @author Administrator
@@ -28,13 +29,13 @@ public class UserAction {
 	
 	@RequestMapping("/login.do")
 	public String login(@Param(value="usename") String username,@Param("password") String password,ModelMap map,HttpSession session) {
-		User user = userService.login(username, password);
+		User user = userService.login(username, MD5Util.GetMD5Code(password));
 		if(user==null){
 			map.clear();
 			map.put("username", username);
 			map.put("msg1", "密码错误，请重新输入");
 			return "forward:/login.jsp";
-		}else if(user.getUsername().equals(username)&&user.getPassword().equals(password)){
+		}else if(user.getUsername().equals(username)&&user.getPassword().equals(MD5Util.GetMD5Code(password))){
 			map.clear();
 			map.put("user",user);
 			session.setAttribute("user", user);

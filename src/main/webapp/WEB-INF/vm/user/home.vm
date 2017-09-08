@@ -7,7 +7,7 @@ bady div {
 }
 
 .div_weather {
-	position: absolute;
+/* 	position: absolute; */
 	float: right;
 	right: 20px;
 	overflow: hidden;
@@ -20,15 +20,17 @@ bady div {
 
 @media screen and (max-width:480px) {
 	.div_weather {
+		position: absolute;
 		float: none;
 		width: 116px;
-		top: 20px;
+		top: 70px;
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
 }
 </style>
 <body>
+<input type="hidden">
 	<!-- 天气组件 -->
 	<div class="div_weather ">
 		<div style="position: relative;">
@@ -44,8 +46,8 @@ bady div {
 
 	<div class="test" style="width: 100%;">
 		<div class="jumbotron">
-			<h1>Hello, ${user.name}!</h1>
-			<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+			<h1>Hello, ${user.username}!</h1>
+			<p>${user.username}This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 			<p>
 				<a class="btn btn-primary btn-lg" href="#" role="button">Learn
 					more</a>
@@ -73,4 +75,6 @@ bady div {
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
 
+</script>
