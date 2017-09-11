@@ -12,6 +12,8 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/style.css"
 	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/calendar.css"
+	rel="stylesheet">
 
 <style>
 
@@ -101,9 +103,8 @@ body {
 		
 		<!-- 内容 -->
 		<div class="test conten_div  " style="">
-			<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto">
-				
-			</iframe>
+			<div id="calendar" class="calendar">
+			</div>
 			
 		</div>
 		</div>
@@ -113,6 +114,7 @@ body {
 
 <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+<script src="<%=request.getContextPath()%>/js/calendar.js"></script>
 
 <script type="text/javascript">
 	/*点击主导航栏切换页面 */

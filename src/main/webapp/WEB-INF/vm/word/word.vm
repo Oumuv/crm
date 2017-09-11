@@ -2,19 +2,73 @@
 li {
 	text-align: center;
 }
-</style>
+.tests{
+	border: 1px red solid;
+}
+#nav {
+	width: 200px;
+	margin-top: 50px;
+}
 
-<div>
-	<nav class="navbar navbar-default" style="width: 160px;"
-		role="navigation">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#example-navbar-collapse">
-				<span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-			</button>
-		</div>
-		<div class="collapse navbar-collapse" style="width: 100%;padding:0px;" id="example-navbar-collapse">
+#nav .collapse {
+	width: 100%;
+	padding: 0px;
+}
+.nav_div{
+	width: 20%;
+    float: left;
+    padding-left:5px;
+}
+.nav_div>div{
+	margin-top:10px;
+}
+.nav_div nav,.nav_div>div{
+    box-shadow: 1px 1px 8px #C0C0C0;
+}
+#nav_btn {
+	display:none;
+}
+.word_div{
+float: right;
+    width: 79%;
+    top: 0px;
+ }
+@media screen and (max-width:910px) and (min-width:480px) {
+	#nav {
+		min-width: 
+	}
+}
+
+@media screen and (max-width:480px) {
+	#nav {
+		width: 200px;
+		margin-top: -50px;
+		float: right;
+		right: 0px;
+		position: relative;
+	}
+	#nav .collapse {
+		position: fixed;
+		width: 200px; 
+		margin-top : 50px;
+		background: white;
+	}
+	#nav_btn {
+	display:black;
+		position: fixed;
+		right: 0px;
+		top: 17px;
+		background: #4f9fcf;
+		border: 0px;
+		width: 30px;
+	}
+}
+</style>
+<div class="test">
+<span class="glyphicon glyphicon-option-horizontal" id="nav_btn" style="color: white;" aria-hidden="true"></span>
+	<!-- 导航模块 -->
+	<div class="test nav_div">
+		<nav style="" class="test">
 			<ul class="nav nav-pills nav-stacked " style="width: 100%;">
 				<li role="presentation" class="active"><a href="#">系统管理</a></li>
 				<li role="presentation"><a href="#">营销管理</a></li>
@@ -30,6 +84,40 @@ li {
 				<li role="presentation"><a href="#">统计报表</a></li>
 				<li role="presentation"><a href="#">基本数据</a></li>
 			</ul>
+		</nav>
+		<!-- 日历 -->
+		<div style="width: 100%; height: 290px" class="calendar_div">
+			<iframe src="#springUrl('/calendar.html')" height="100%" width="100%" scrolling="no" style="border: 0px;padding: 1px;"></iframe>
 		</div>
-	</nav>
+	</div>
+	
+	<!-- 工作空间 -->
+	<div class="test word_div" style="">
+			
+		<div class="test" style="width: 100%;">
+			<div class="jumbotron">
+				<h1>Hello, ${user.username}!</h1>
+				<p>${user.username}This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+				<p>
+					<a class="btn btn-primary btn-lg" href="#" role="button">Learn
+						more</a>
+				</p>
+			</div>
+		</div>
+		<div class="test" style="width: 100%;">
+			<div class="jumbotron">
+				<h1>Hello, world!</h1>
+				<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+				<p>
+					<a class="btn btn-primary btn-lg" href="#" role="button">Learn
+						more</a>
+				</p>
+			</div>
+		</div>
+	</div>
 </div>
+
+<script>
+$(function(){
+})
+</script>
