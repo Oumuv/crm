@@ -1,5 +1,7 @@
 package com.oumuv.entity;
 
+import java.util.List;
+
 public class RightEntity {
     private Long rightCode;
 
@@ -13,7 +15,28 @@ public class RightEntity {
 
     private String rightTip;
 
-    public Long getRightCode() {
+    private Integer ispatent;
+    
+    private List<RightEntity> rlist;
+
+    public List<RightEntity> getRlist() {
+		return rlist;
+	}
+
+	@Override
+	public String toString() {
+		return "RightEntity [rightCode=" + rightCode + ", rightParentCode="
+				+ rightParentCode + ", rightType=" + rightType + ", rightText="
+				+ rightText + ", rightUrl=" + rightUrl + ", rightTip="
+				+ rightTip + ", ispatent=" + ispatent + ", rlist=" + rlist
+				+ "]";
+	}
+
+	public void setRlist(List<RightEntity> rlist) {
+		this.rlist = rlist;
+	}
+
+	public Long getRightCode() {
         return rightCode;
     }
 
@@ -59,5 +82,13 @@ public class RightEntity {
 
     public void setRightTip(String rightTip) {
         this.rightTip = rightTip == null ? null : rightTip.trim();
+    }
+
+    public Integer getIspatent() {
+        return ispatent;
+    }
+
+    public void setIspatent(Integer ispatent) {
+        this.ispatent = ispatent;
     }
 }

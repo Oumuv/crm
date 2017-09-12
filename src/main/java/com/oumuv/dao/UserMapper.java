@@ -18,7 +18,6 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
     
-    //User login(String username,String password);
     User login(@Param("username")String username,@Param("password")String password);
 
 	String check(String username);

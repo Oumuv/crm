@@ -8,10 +8,26 @@
     <result column="right_text" property="rightText" jdbcType="VARCHAR" />
     <result column="right_url" property="rightUrl" jdbcType="VARCHAR" />
     <result column="right_tip" property="rightTip" jdbcType="VARCHAR" />
+    <result column="ispatent" property="ispatent" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    right_code, right_parent_code, right_type, right_text, right_url, right_tip
+    right_code, right_parent_code, right_type, right_text, right_url, right_tip, ispatent
   </sql>
+  
+  <select id="getRightByUId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from right_info
+    where right_code in(select rr.rf_right_code from role_right_info rr where rr.rf_role_id=#{rightCode,jdbcType=BIGINT})
+  </select>
+  <select id="getRightByParentId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from right_info
+    where right_parent_code = #{right_parent_code,jdbcType=BIGINT}
+  </select>
+  
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
@@ -24,11 +40,11 @@
   </delete>
   <insert id="insert" parameterType="com.oumuv.entity.RightEntity" >
     insert into right_info (right_code, right_parent_code, right_type, 
-      right_text, right_url, right_tip
-      )
+      right_text, right_url, right_tip, 
+      ispatent)
     values (#{rightCode,jdbcType=BIGINT}, #{rightParentCode,jdbcType=BIGINT}, #{rightType,jdbcType=VARCHAR}, 
-      #{rightText,jdbcType=VARCHAR}, #{rightUrl,jdbcType=VARCHAR}, #{rightTip,jdbcType=VARCHAR}
-      )
+      #{rightText,jdbcType=VARCHAR}, #{rightUrl,jdbcType=VARCHAR}, #{rightTip,jdbcType=VARCHAR}, 
+      #{ispatent,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.oumuv.entity.RightEntity" >
     insert into right_info
@@ -51,6 +67,9 @@
       <if test="rightTip != null" >
         right_tip,
       </if>
+      <if test="ispatent != null" >
+        ispatent,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="rightCode != null" >
@@ -70,6 +89,9 @@
       </if>
       <if test="rightTip != null" >
         #{rightTip,jdbcType=VARCHAR},
+      </if>
+      <if test="ispatent != null" >
+        #{ispatent,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -91,6 +113,9 @@
       <if test="rightTip != null" >
         right_tip = #{rightTip,jdbcType=VARCHAR},
       </if>
+      <if test="ispatent != null" >
+        ispatent = #{ispatent,jdbcType=INTEGER},
+      </if>
     </set>
     where right_code = #{rightCode,jdbcType=BIGINT}
   </update>
@@ -100,7 +125,8 @@
       right_type = #{rightType,jdbcType=VARCHAR},
       right_text = #{rightText,jdbcType=VARCHAR},
       right_url = #{rightUrl,jdbcType=VARCHAR},
-      right_tip = #{rightTip,jdbcType=VARCHAR}
+      right_tip = #{rightTip,jdbcType=VARCHAR},
+      ispatent = #{ispatent,jdbcType=INTEGER}
     where right_code = #{rightCode,jdbcType=BIGINT}
   </update>
 </mapper>

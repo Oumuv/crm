@@ -78,9 +78,11 @@ body {
 	}
 }
 </style>
-
+<script src="#springUrl('/js/jquery.min.js')"></script>
+<script src="#springUrl('/js/bootstrap.js')"></script>
 </head>
 <body>
+<div>
 	<div class="container page test">
 		<!-- 头像框 -->
 		<div class="div-himg" onclick="showbtn()">
@@ -127,20 +129,23 @@ body {
 	</div>
 </body>
 
-<script src="#springUrl('/js/jquery.min.js')"></script>
-<script src="#springUrl('/js/bootstrap.js')"></script>
-
 <script type="text/javascript">
 	/*点击主导航栏切换页面 */
 	$(".navlist").click(function() {
 		$(".navlist").removeClass("active");
 		$(this).addClass("active");
 		$("#title-nav").html($(this).find("span").html());
-// 		$('#iframe_window').attr("src","<%=request.getContextPath()%>/jsp/"+$(this).attr("link-window"));
 		jQuery('#conten div').load("#springUrl('/pageturn.do')", {
 			page : $(this).attr("link-window")
+		},function(result){
+			alert(1)
 		});
+		
 	});
+	//,function(result){
+	//	console.log($(result).find("script"));
+	//	$(result).find("script").appendTo("body");
+	//}
 	/*显示/隐藏工具栏*/
 	function showbtn(){
 		if(screen.width <= 480){
@@ -168,10 +173,14 @@ body {
 			}
 		}
 	});
+	//初始化页面
 	$(function(){
 		jQuery('#conten div').load("#springUrl('/pageturn.do')", {
 			page : "user/home"
 		});
 	})
+	function shownav() {
+		alert($('#11').val());
+	}
 </script>
 </html>
