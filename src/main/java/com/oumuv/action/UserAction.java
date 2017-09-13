@@ -1,6 +1,8 @@
 package com.oumuv.action;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -8,11 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.oumuv.entity.LoginRecordEntity;
 import com.oumuv.entity.User;
+import com.oumuv.service.LoginRecordService;
 import com.oumuv.service.UserService;
 import com.oumuv.utils.MD5Util;
 
@@ -26,6 +31,8 @@ public class UserAction {
 
 	@Resource
 	private UserService userService;
+	@Autowired
+	private LoginRecordService loginRecordService;
 	
 	@RequestMapping("/login.do")
 	public String login(@Param(value="usename") String username,@Param("password") String password,ModelMap map,HttpSession session) {
@@ -39,6 +46,12 @@ public class UserAction {
 			map.clear();
 			map.put("user",user);
 			session.setAttribute("user", user);
+			LoginRecordEntity record =new LoginRecordEntity();//保存登录记录
+			record.setUserId(user.getId());
+//			String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+			Timestamp Timestamp=new Timestamp(new Date().getTime());
+			record.setLoginDate(Timestamp);
+			loginRecordService.loginRecored(record);
 			return "index";
 		}
 		return "forward:/login.jsp";

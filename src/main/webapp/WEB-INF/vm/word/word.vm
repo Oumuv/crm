@@ -3,7 +3,7 @@ li {
 	text-align: center;
 }
 
-.tests {
+.test {
 	border: 1px red solid;
 }
 
@@ -21,6 +21,7 @@ li {
 	width: 20%;
 	float: left;
 	padding-left: 5px;
+	padding-top: 2px;
 }
 
 .nav_div>div {
@@ -43,9 +44,6 @@ li {
 }
 
 @media screen and (max-width:910px) and (min-width:480px) {
-	#nav {
-		min-width:
-	}
 }
 
 @media screen and (max-width:480px) {
@@ -65,24 +63,40 @@ li {
 	#nav_btn {
 		display: block;
 		position: fixed;
-		right: 0px;
+		right: 10px;
 		top: 9px;
 		background: #4f9fcf;
 		border: 0px;
 	}
-	.calendar_div,.nav_list {
+	.nav_div,.calendar_div {
 		display: none;
+	}
+	.nav_div {
+		width: 200px;
+		float: right;
+		margin-top: 2px;
+		position: fixed;
+		z-index: 9999;
+		right: 1px;
+	}
+	.word_div{
+		float: none;
+		width:100%;
+	}
+	.nav-stacked > li + li {
+		 margin-top: 0px;
+	}
+	.nav-stacked > li {
+		 background: white;
 	}
 }
 </style>
-<div class="test">
-	<button id="btn" onclick="shownav()">123</button>
-	<input type="text" id="11" value="123">
+<div class="">
 	<span class="btn glyphicon glyphicon-option-horizontal" id="nav_btn"
-		style="color: white;"></span>
+		style="color: white;" onclick="nav_control()"></span>
 	<!-- 导航模块 -->
-	<div class="test nav_div">
-		<nav style="" class="test nav_list">
+	<div class=" nav_div">
+		<nav style="" class=" nav_list">
 			<ul class="nav nav-pills nav-stacked " style="width: 100%;">
 				<li role="presentation" class="active"><a href="#">系统管理</a></li>
 				<li role="presentation"><a href="#">营销管理</a></li>
@@ -100,16 +114,38 @@ li {
 			</ul>
 		</nav>
 		<!-- 日历 -->
-		<div style="width: 100%; height: 310px" class="calendar_div">
+		<div style="width: 100%; height: 320px" class="calendar_div">
 			<iframe src="#springUrl('/calendar.html')" height="100%" width="100%"
 				scrolling="no" style="border: 0px; padding: 1px;"></iframe>
 		</div>
 	</div>
 
 	<!-- word space -->
-	<div class="test word_div" style="" ></div>
+	<div class="test word_div" style="" >
+		<div class="test" style="width: 100%;">
+			<div class="jumbotron">
+				<h1>Hello, ${user.username}!asdfasddfff</h1>
+				<p>${user.username}This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+				<p>
+					<a class="btn btn-primary btn-lg" href="#" role="button" onclick="clibtn()">Learn
+						more</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	
+<!-- 	<div style="position:absolute; height: 100%;width:100%;background:black; FILTER: alpha(opacity = 0.1); -moz-opacity: 0.1; opacity: 0.1;"></div> -->
 </div>
 
 <script type="text/javascript">
-	
+/*隐藏/显示菜单导航栏*/
+function nav_control() {
+	$('.nav_div').toggle(300);
+	blurback();
+}
+
+$(".nav_list>ul>li").click(function(){
+	$(".nav_list li").removeClass("active")
+	$(this).addClass("active")
+})
 </script>

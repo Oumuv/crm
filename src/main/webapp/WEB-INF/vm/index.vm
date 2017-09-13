@@ -43,7 +43,15 @@ body {
 .conten_div{
 	margin-top: 120px;
 }
-
+.blurclass {
+	filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
+	-webkit-filter: blur(10px); /* Chrome, Opera */
+	-moz-filter: blur(10px);
+	-ms-filter: blur(10px);
+	filter: blur(10px);
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10,
+		MakeShadow=false ); /* IE6~IE9 */
+}
 @media screen and (max-width:910px) and (min-width:480px) {
 
 }
@@ -83,14 +91,14 @@ body {
 </head>
 <body>
 <div>
-	<div class="container page test">
+	<div class="container page ">
 		<!-- 头像框 -->
 		<div class="div-himg" onclick="showbtn()">
 			<div class="himg" style="float: left;">
 				<img alt="头像" style="width: 100%;"
 					src="#springUrl('/images/headM.png')">
 			</div>
-			<span id="title-nav" style="">Home</span>
+			<span id="title_nav" style="">Home</span>
 		</div>
 		
 		<!-- 工具按钮 -->
@@ -117,13 +125,14 @@ body {
 		</div>
 		
 		<!-- 内容 -->
-		<div class="test conten_div  " id="conten" style="">
-		<div  style="width: 100%;height:100%;overflow: auto"></div>
-<!-- 			<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto"> -->
+		<div class=" conten_div " id="conten" style="">
+<!-- 		<button id="btn1">+</button> -->
+			<div  style="width: 100%;height:100%;overflow: auto"></div>
+	<!-- 			<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto"> -->
+					
+	<!-- 			</iframe> -->
 				
-<!-- 			</iframe> -->
-			
-		</div>
+			</div>
 		</div>
 		
 	</div>
@@ -132,20 +141,15 @@ body {
 <script type="text/javascript">
 	/*点击主导航栏切换页面 */
 	$(".navlist").click(function() {
+// 	$("#btn1").click(function() {
 		$(".navlist").removeClass("active");
 		$(this).addClass("active");
-		$("#title-nav").html($(this).find("span").html());
+		$("#title_nav").html($(this).find("span").html());
+		jQuery('#conten div').empty();
 		jQuery('#conten div').load("#springUrl('/pageturn.do')", {
-			page : $(this).attr("link-window")
-		},function(result){
-			alert(1)
+			page :  $(this).attr("link-window")
 		});
-		
 	});
-	//,function(result){
-	//	console.log($(result).find("script"));
-	//	$(result).find("script").appendTo("body");
-	//}
 	/*显示/隐藏工具栏*/
 	function showbtn(){
 		if(screen.width <= 480){
@@ -178,9 +182,14 @@ body {
 		jQuery('#conten div').load("#springUrl('/pageturn.do')", {
 			page : "user/home"
 		});
-	})
-	function shownav() {
-		alert($('#11').val());
+		
+	});
+	
+	//背景模糊
+	function blurback(){
+		$('.word_div').toggleClass("blurclass")
 	}
+	
+	
 </script>
 </html>

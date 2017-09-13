@@ -15,7 +15,7 @@ public class MenuServivceImpl implements MenuService{
 	@Autowired
 	private RightEntityMapper menuDao;
 	/**
-	 * 获取
+	 * 获取菜单
 	 * */
 	public List<RightEntity> getMenu(Long id) {
 		List<RightEntity> rightByUId = menuDao.getRightByUId(id);

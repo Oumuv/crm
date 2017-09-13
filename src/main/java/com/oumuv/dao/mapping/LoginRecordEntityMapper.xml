@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oumuv.dao.LoginRecordEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.oumuv.entity.LoginRecordEntity" >
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="login_date" property="loginDate" jdbcType="TIMESTAMP" />
+    <result column="login_site" property="loginSite" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.oumuv.entity.LoginRecordEntity" >
+    insert into loginrecord (user_id, login_date, login_site
+      )
+    values (#{userId,jdbcType=BIGINT}, #{loginDate,jdbcType=TIMESTAMP}, #{loginSite,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oumuv.entity.LoginRecordEntity" >
+    insert into loginrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="loginDate != null" >
+        login_date,
+      </if>
+      <if test="loginSite != null" >
+        login_site,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="loginDate != null" >
+        #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginSite != null" >
+        #{loginSite,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
