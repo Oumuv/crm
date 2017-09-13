@@ -8,5 +8,7 @@ encoding//src/main/webapp/WEB-INF/vm/index.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/msg/msg.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/user/home.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/word/word.vm=UTF-8
+encoding//src/main/webapp/css/bootstrap.min.css=UTF-8
+encoding//src/main/webapp/css/dcalendar.picker.css=UTF-8
 encoding//src/main/webapp/login.jsp=UTF-8
 encoding/<project>=UTF-8

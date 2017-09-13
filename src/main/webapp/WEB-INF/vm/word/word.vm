@@ -124,7 +124,7 @@ li {
 	<div class="test word_div" style="" >
 		<div class="test" style="width: 100%;">
 			<div class="jumbotron">
-				<h1>Hello, ${user.username}!asdfasddfff</h1>
+				<h1>Hello, ${user.username}!</h1>
 				<p>${user.username}This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 				<p>
 					<a class="btn btn-primary btn-lg" href="#" role="button" onclick="clibtn()">Learn

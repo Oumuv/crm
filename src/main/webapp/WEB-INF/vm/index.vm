@@ -88,6 +88,7 @@ body {
 </style>
 <script src="#springUrl('/js/jquery.min.js')"></script>
 <script src="#springUrl('/js/bootstrap.js')"></script>
+<script type="text/javascript" src="http://tool.keleyi.com/ip/visitoriphost/"></script>
 </head>
 <body>
 <div>
@@ -106,7 +107,7 @@ body {
 		 	<a class="btn  glyphicon glyphicon-cog" aria-hidden="true"><span class="text-nav">设置</span></a>
 		 	<a class="btn  glyphicon glyphicon-log-out" aria-hidden="true" href="#springUrl('/user/logout.do')"><span class="text-nav">注销登录</span></a>
 		</div>
-		
+		<span id="keleyivisitorip" style="display:none"></span>
 		<!-- 主导航 -->
 		<div class="div-nav ">
 			<div class="div-nav-s" style="">

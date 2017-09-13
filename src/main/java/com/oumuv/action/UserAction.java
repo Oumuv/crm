@@ -1,6 +1,7 @@
 package com.oumuv.action;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -19,6 +20,7 @@ import com.oumuv.entity.LoginRecordEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.LoginRecordService;
 import com.oumuv.service.UserService;
+import com.oumuv.utils.AccessSiteUtil;
 import com.oumuv.utils.MD5Util;
 
 /**
@@ -34,8 +36,10 @@ public class UserAction {
 	@Autowired
 	private LoginRecordService loginRecordService;
 	
+	
+	@SuppressWarnings("static-access")
 	@RequestMapping("/login.do")
-	public String login(@Param(value="usename") String username,@Param("password") String password,ModelMap map,HttpSession session) {
+	public String login(@Param(value="usename") String username,@Param("password") String password,HttpServletRequest request,ModelMap map,HttpSession session) throws UnsupportedEncodingException {
 		User user = userService.login(username, MD5Util.GetMD5Code(password));
 		if(user==null){
 			map.clear();
@@ -49,8 +53,10 @@ public class UserAction {
 			LoginRecordEntity record =new LoginRecordEntity();//保存登录记录
 			record.setUserId(user.getId());
 //			String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-			Timestamp Timestamp=new Timestamp(new Date().getTime());
-			record.setLoginDate(Timestamp);
+			AccessSiteUtil accessSiteUtil = new AccessSiteUtil();
+//			String ipAddr = accessSiteUtil.getIpAddr(request);
+			record.setLoginDate(new Timestamp(new Date().getTime()));
+			record.setLoginSite(accessSiteUtil.getAddresses("ip="+accessSiteUtil.getV4IP(), "utf-8"));
 			loginRecordService.loginRecored(record);
 			return "index";
 		}
