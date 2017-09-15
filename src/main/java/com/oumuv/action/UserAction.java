@@ -47,7 +47,7 @@ public class UserAction {
 	private LoginRecordService loginRecordService;
 
 	@SuppressWarnings("static-access")
-	@RequestMapping("/login.do")
+	@RequestMapping("/login")
 	public String login(@Param(value = "usename") String username,
 			@Param("password") String password, HttpServletRequest request,
 			ModelMap map, HttpSession session)
@@ -78,7 +78,7 @@ public class UserAction {
 		return "forward:/login.jsp";
 	}
 
-	@RequestMapping("/check.do")
+	@RequestMapping("/check")
 	public void check(String username, HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
 		String user = userService.check(username);
@@ -91,7 +91,7 @@ public class UserAction {
 		}
 	}
 
-	@RequestMapping("/logout.do")
+	@RequestMapping("/logout")
 	public String check(HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
 		session.removeAttribute("user");
@@ -105,7 +105,7 @@ public class UserAction {
 	 *            用户id
 	 * @throws ParseException
 	 * */
-	@RequestMapping("/getloginrecords.do")
+	@RequestMapping("/getloginrecords")
 	public void getloginRecoredForMonth(@Param("uid") String uid,
 			HttpServletRequest request, HttpServletResponse response,
 			ModelMap map) throws JsonGenerationException, JsonMappingException,
