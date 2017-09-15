@@ -1,5 +1,11 @@
 package com.oumuv.serviceimpl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.json.simple.JSONArray;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +21,13 @@ public class LoginRecordServiceImpl implements LoginRecordService{
 	
 	public void loginRecored(LoginRecordEntity record) {
 		loginRecordDao.insertSelective(record);
+	}
+
+	@Test
+	public List<Map<String, String>> getloginRecoredForMonth(Long uid) {
+		List<Map<String, String>> maplis;
+		maplis= loginRecordDao.getloginRecoredForMonth(uid);
+		return maplis;
 	}
 
 }

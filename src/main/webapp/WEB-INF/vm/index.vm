@@ -29,7 +29,9 @@ background:rgba(0,0,0,0.1);
 ::-webkit-scrollbar-thumb:window-inactive {
 background:rgba(255,0,0,0.4);
 }
-
+.bg_shadow{
+	box-shadow: 0px 0px 10px #C0C0C0;
+}
 body {
 	margin: 0px;
 	padding: 0px;
@@ -88,7 +90,6 @@ body {
 </style>
 <script src="#springUrl('/js/jquery.min.js')"></script>
 <script src="#springUrl('/js/bootstrap.js')"></script>
-<script type="text/javascript" src="http://tool.keleyi.com/ip/visitoriphost/"></script>
 </head>
 <body>
 <div>
@@ -103,11 +104,10 @@ body {
 		</div>
 		
 		<!-- 工具按钮 -->
-		<div class="btn-uitl " style="float:right;">
+		<div class="btn-uitl " style="float:right;z-index:99">
 		 	<a class="btn  glyphicon glyphicon-cog" aria-hidden="true"><span class="text-nav">设置</span></a>
 		 	<a class="btn  glyphicon glyphicon-log-out" aria-hidden="true" href="#springUrl('/user/logout.do')"><span class="text-nav">注销登录</span></a>
 		</div>
-		<span id="keleyivisitorip" style="display:none"></span>
 		<!-- 主导航 -->
 		<div class="div-nav ">
 			<div class="div-nav-s" style="">
@@ -124,7 +124,8 @@ body {
 				</ul>
 			</div>
 		</div>
-		
+		<!-- 透明背景 -->
+		<div class="bg_div" style="position:absolute; height: 100%;width:100%;background:black; FILTER: alpha(opacity = 0.1); -moz-opacity: 0.1; opacity: 0.1;display:none;z-index:555;"></div>
 		<!-- 内容 -->
 		<div class=" conten_div " id="conten" style="">
 <!-- 		<button id="btn1">+</button> -->
@@ -188,7 +189,8 @@ body {
 	
 	//背景模糊
 	function blurback(){
-		$('.word_div').toggleClass("blurclass")
+		$('.word_div,.div-nav').toggleClass("blurclass");
+		$(".bg_div").toggle();
 	}
 	
 	

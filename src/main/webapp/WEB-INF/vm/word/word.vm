@@ -41,8 +41,11 @@ li {
 	float: right;
 	width: 79%;
 	top: 0px;
+	padding: 10px 10px 10px 10px;
 }
-
+.charts_a{
+		height: 400px;
+	}
 @media screen and (max-width:910px) and (min-width:480px) {
 }
 
@@ -79,21 +82,26 @@ li {
 		z-index: 9999;
 		right: 1px;
 	}
-	.word_div{
+	.word_div {
 		float: none;
-		width:100%;
+		width: 100%;
 	}
-	.nav-stacked > li + li {
-		 margin-top: 0px;
+	.nav-stacked>li+li {
+		margin-top: 0px;
 	}
-	.nav-stacked > li {
-		 background: white;
+	.nav-stacked>li {
+		background: white;
+	}
+	.charts_a{
+		height: 300px;
 	}
 }
 </style>
+<!-- 引入 ECharts 文件 -->
+<script src="#springUrl('/js/echarts.min.js')"></script>
 <div class="">
 	<span class="btn glyphicon glyphicon-option-horizontal" id="nav_btn"
-		style="color: white;" onclick="nav_control()"></span>
+		style="color: white; z-index: 999" onclick="nav_control()"></span>
 	<!-- 导航模块 -->
 	<div class=" nav_div">
 		<nav style="" class=" nav_list">
@@ -121,31 +129,116 @@ li {
 	</div>
 
 	<!-- word space -->
-	<div class="test word_div" style="" >
-		<div class="test" style="width: 100%;">
-			<div class="jumbotron">
-				<h1>Hello, ${user.username}!</h1>
-				<p>${user.username}This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-				<p>
-					<a class="btn btn-primary btn-lg" href="#" role="button" onclick="clibtn()">Learn
-						more</a>
-				</p>
-			</div>
+	<div class="word_div" style="">
+		<div class="bg_shadow charts_a" style="width: 100%;">
+				<div id="charts" style="width: 100%;height: 100%;margin-bottom: 1px"></div>
 		</div>
 	</div>
-	
-<!-- 	<div style="position:absolute; height: 100%;width:100%;background:black; FILTER: alpha(opacity = 0.1); -moz-opacity: 0.1; opacity: 0.1;"></div> -->
+
+
 </div>
-
 <script type="text/javascript">
-/*隐藏/显示菜单导航栏*/
-function nav_control() {
-	$('.nav_div').toggle(300);
-	blurback();
-}
+$(function(){
+	// 基于准备好的dom，初始化echarts实例
+	var myChart = echarts.init(document.getElementById('charts'));
+	var k = [];
+	var v = [];
+	$.ajax({
+		type : "post",
+		async : false, //同步执行
+		url : "#springUrl('/user/getloginrecords.do')",
+		data : {},
+		dataType : "json", //返回数据形式为json
+		success : function(json) {
+			if (json) {
+				
+				for ( var key in json) {
+					k.push(key);
+					v.push(json[key]+"")
+				}
+			}
+		},
+		error : function(errorMsg) {
+			alert("不好意思,图表请求数据失败啦!");
+			myChart.hideLoading();
+		}
+	})
+	// 指定图表的配置项和数据
+	var option = {
+		title : {
+			text : '近30天登录记录',
+			x : 'center'
+		},
+		tooltip : {},
+		legend : {
+			right : 10,
+			data : [ '次/天' ],
+			textStyle : {
+				fontSize : 10
+			}
+		},
+		xAxis : {
+			data : k
+// 				(function() {
+// 				var arr = [];
+// 				$.ajax({
+// 					type : "post",
+// 					async : false, //同步执行
+// 					url : "#springUrl('/text.json')",
+// 					data : {},
+// 					dataType : "json", //返回数据形式为json
+// 					success : function(json) {
+// 						if (json) {
+// 							for ( var key in json) {
+// 								arr.push(key);
+// 							}
+// 						}
+// 					},
+// 					error : function(errorMsg) {
+// 						alert("不好意思,图表请求数据失败啦!");
+// 						myChart.hideLoading();
+// 					}
+// 				})
+// 				console.log(arr)
+// 				return arr;
+// 			})()
 
-$(".nav_list>ul>li").click(function(){
-	$(".nav_list li").removeClass("active")
-	$(this).addClass("active")
+		},
+		yAxis : {},
+		series : [ {
+			name : '次/天',
+			type : 'bar',
+			data : v
+
+		} ],
+		dataZoom : [ {
+			type : 'slider', 
+			start : 0,
+			end : 30
+		}, { 
+			type : 'inside',
+			start : 0, 
+			end : 30
+		} ],
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	//浏览器宽高改变时重置图标尺寸 
+	window.onresize = function() {
+		myChart.resize();
+	};
 })
+</script>
+<script type="text/javascript">
+	/*隐藏/显示菜单导航栏*/
+	function nav_control() {
+		$('.nav_div').toggle(300);
+		blurback();
+	}
+
+	$(".nav_list>ul>li").click(function() {
+		$(".nav_list li").removeClass("active")
+		$(this).addClass("active")
+	})
 </script>

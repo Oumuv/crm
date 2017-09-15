@@ -1,4 +1,3 @@
-
 .himg {
 	width: 100px;
 	height: 100px;
@@ -25,13 +24,12 @@
 }
 
 .text-nav {
-	cursor:pointer;
+	cursor: pointer;
 }
 
 #title_nav {
 	display: none;
 }
-
 
 @media screen and (max-width:910px) and (min-width:480px) {
 	.page {
@@ -39,12 +37,14 @@
 		min-width: 768px;
 	}
 }
+
 @media screen and (max-width:480px) {
 	.div-himg {
-		position:fixed;
+		position: fixed;
 		width: 100%;
 		height: 50px;
 		background: #4f9fcf;
+		z-index: 999;
 	}
 	.himg {
 		height: 40px;
@@ -86,25 +86,25 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
-	.btn-uitl{
-		position:fixed;
-		display:none;
-		width:40%;
-		 border-radius: 5px;
-		-moz-border-radius: 5px; 
+	.btn-uitl {
+		position: fixed;
+		display: none;
+		width: 40%;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
 		-webkit-border-radius: 5px;
-		top:55px;
-		left:1px;
-		background:#E3E3E3;
-		float:left;
+		top: 55px;
+		left: 1px;
+		background: #E3E3E3;
+		float: left;
+		z-index: 99;
 	}
-	.btn-uitl .btn{
-		width:48%;
-		margin:2px 0px 3px 0px;
+	.btn-uitl .btn {
+		width: 48%;
+		margin: 2px 0px 3px 0px;
 		padding: 0px;
 	}
-	.btn-uitl .text-nav{
-		display:block;	
+	.btn-uitl .text-nav {
+		display: block;
 	}
-
 }
