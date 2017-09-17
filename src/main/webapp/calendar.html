@@ -1,0 +1,30 @@
+<head>
+<title>基于Bootstrap和jQuery的日历控件和日期选择插件</title>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/dcalendar.picker.css"/>
+
+</head>
+<body>
+<div class="zzsc-container">
+	<div class="">
+		<div class="">
+			<div class="">
+				<h3>Calendar</h3>
+				<table id='mycalendar' class='calendar'></table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/dcalendar.picker.js"></script>
+<script type="text/javascript">
+	$('#mydatepicker').dcalendarpicker(); 
+	$('#mydatepicker2').dcalendarpicker({
+		format:'yyyy-mm-dd'
+	}); 
+	$('#mycalendar').dcalendar();
+</script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 package com.oumuv.dao;
 
+import java.util.List;
+
 import com.oumuv.entity.RightEntity;
 
 public interface RightEntityMapper {
@@ -14,4 +16,8 @@ public interface RightEntityMapper {
     int updateByPrimaryKeySelective(RightEntity record);
 
     int updateByPrimaryKey(RightEntity record);
+
+	List<RightEntity> getRightByUId(long uid);
+	
+	List<RightEntity> getRightByParentId(long pid);
 }

@@ -25,10 +25,31 @@
 	<mvc:default-servlet-handler />
 
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<!-- 	<bean -->
+<!-- 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
 		<!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
-		<property name="prefix" value="/jsp/" />
-		<property name="suffix" value=".jsp" />
+<!-- 		<property name="prefix" value="/jsp/" /> -->
+<!-- 		<property name="suffix" value=".jsp" /> -->
+<!-- 	</bean> -->
+	
+	
+	<!-- 配置VelocityConfigurer，负责在spring中设置Velocity引擎。通过属性resourceLoaderPath告诉Velocity到哪里寻找它的模板。
+   通常将模板放到WEB-INF下的某个子目录下，可以保证这些模板不能被直接访问。-->
+	<bean id="velocityConfig"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/vm" />
+		<property name="configLocation" value="classpath:velocity/velocity.properties" />
 	</bean>
+
+    <!--配置试图解析器-->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="cache" value="false"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".vm"/>
+        <property name="contentType" value="text/html;charset=utf-8"/>
+        <property name="exposeRequestAttributes" value="false" />
+		<property name="exposeSessionAttributes" value="false" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+    </bean>
 </beans>  

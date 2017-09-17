@@ -16,35 +16,39 @@
 	rel="stylesheet">
 
 <style>
-
-.test{border: 1px red solid;}
-html{
-	margin: 0px;
-	padding: 0px;
-	height:100%;
-	top: 0px;  
-	bottom: 0px;
+.test {
+	border: 1px red solid;
 }
+
+html {
+	top: 0px;
+	bottom: 0px;
+	height: 100%;
+}
+
 body {
+	top: 0px;
+	bottom: 0px;
 	margin: 0px;
 	padding: 0px;
-	height:100%;
+	height: 100%;
 }
 
 .page {
+	top: 0px;
+	bottom: 0px;
 	width: 80%;
-	height:100%;
+	height: 100%;
 }
 
-.conten_div{
-	height:100%;
+.conten_div {
+	
 }
 
 @media screen and (max-width:910px) and (min-width:480px) {
-
 }
+
 @media screen and (max-width:480px) {
-	
 	.page {
 		position: fixed;
 		top: 0px;
@@ -52,23 +56,20 @@ body {
 		padding: 0px;
 		width: 100%;
 	}
-	
-
 	.div-nav-s ul li {
 		width: 33%;
 	}
-	
-	.btn-uitl .btn{
-		width:48%;
-		margin:2px 0px 3px 0px;
+	.btn-uitl .btn {
+		width: 48%;
+		margin: 2px 0px 3px 0px;
 		padding: 0px;
 	}
-	.btn-uitl .text-nav{
-		display:block;	
+	.btn-uitl .text-nav {
+		display: block;
 	}
-	.conten_div{
-		width:100%;
-		margin-top:50px;
+	.conten_div {
+		width: 100%;
+		margin-top: 50px;
 	}
 }
 </style>
@@ -110,12 +111,15 @@ body {
 		
 		<!-- 内容 -->
 		<div class="test conten_div  " style="">
-		<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto">
+<!-- 		<iframe id="iframe_window" width="100%" height="100%" src="" frameborder="0" scrolling="auto"> -->
+<!-- 		</iframe> -->
 <%-- 		<%@ include file=""%> --%>
-<%-- 		<jsp:include page='/jsp/user/home.jsp' flush='true'/> --%>
-<%-- 		<%@ include file="/jsp/user/home.jsp"%> --%>
+<%-- 			<jsp:include page='/jsp/user/home.jsp' flush='true'/> --%>
+		<%@ include file="/jsp/user/home1.jsp" %>
 		</div>
-		
+		<div class="footer"style="background:red;position:absolute;bottom: 0px;width:100%;height:50px;">
+			
+		</div>
 	</div>
 </body>
 
@@ -125,14 +129,16 @@ body {
 <script type="text/javascript">
 	/*点击主导航栏切换页面 */
 	$(".navlist").click(function() {
-		alert(123)
 		$(".navlist").removeClass("active");
 		$(this).addClass("active");
 		$("#title-nav").html($(this).find("span").html());
-// 		var html="/mycrm/jsp/"+$(this).attr('link-window')
-// 		$('.conten_div').html("").load(html);
+		var html="/mycrm/jsp/"+$(this).attr('link-window');
+// 		$('.conten_div').load("/mycrm/jsp/"+$(this).attr('link-window'));
+$.ajax(
 		
-		$('#iframe_window').attr("src","<%=request.getContextPath()%>/jsp/"+$(this).attr("link-window"));
+		);
+		
+<%-- 		$('#iframe_window').attr("src","<%=request.getContextPath()%>/jsp/"+$(this).attr("link-window")); --%>
 	});
 	/*显示/隐藏工具栏*/
 	function showbtn(){
@@ -142,4 +148,4 @@ body {
 	}
 	
 </script>
-</html>-
+</html>
