@@ -193,7 +193,7 @@ body {
 
 <script type="text/javascript">
 	// 获取位置信息
-	$(function() {
+	/* $(function() {
 		var r=confirm("浏览器请求获取位置信息，是否同意？");
 		if (r==true)
 		  {
@@ -204,7 +204,7 @@ body {
 				alert("您的浏览器不支持自动定位!");
 			}
 		  }
-	})
+	}) */
 	
 	function getPositionSuccess(position) {
 // 		var lat = position.coords.latitude;

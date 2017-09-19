@@ -13,11 +13,18 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -26,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.oumuv.entity.LoginRecordEntity;
 import com.oumuv.entity.User;
@@ -46,13 +54,56 @@ public class UserAction {
 	@Autowired
 	private LoginRecordService loginRecordService;
 
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public String shiroLogin(@Param(value = "usename") String username,
+			@Param("password") String password,
+			@Param("address") String address, HttpServletRequest request,
+			ModelMap map, HttpSession session) throws UnsupportedEncodingException {
+
+		Subject subject = SecurityUtils.getSubject();// 获取subject实例
+		boolean authenticated = subject.isAuthenticated();// 判断用户是否已经登录
+//			SavedRequest request2 = WebUtils.getSavedRequest(request);
+//			String requestUrl = request2.getRequestUrl();//获取登录之前的url
+		if(authenticated){
+			return "index";//已经登录直接跳转
+		}
+		String psw= MD5Util.GetMD5Code(password);
+		UsernamePasswordToken token = new UsernamePasswordToken(username,psw);// 使用UsernamePasswordToken对象封装用户名及密码信息
+		try {
+			subject.login(token);
+			map.clear();
+			User user = userService.login(username,psw);
+			map.put("user", user);
+			session.setAttribute("user", user);
+			LoginRecordEntity record = new LoginRecordEntity();// 保存登录记录
+			record.setUserId(user.getId());
+			AccessSiteUtil accessSiteUtil = new AccessSiteUtil();
+			// String ipAddr = accessSiteUtil.getIpAddr(request);
+			record.setLoginDate(new Timestamp(new Date().getTime()));
+			if (!address.equals("")) {
+				record.setLoginSite(address);
+			} else {
+				record.setLoginSite(accessSiteUtil.getAddresses("ip="+ accessSiteUtil.getV4IP(), "utf-8"));
+			}
+			loginRecordService.loginRecored(record);
+			return "index";
+		} catch (AuthenticationException e) {
+			map.clear();
+			map.put("username", username);
+			map.put("msg1", "密码错误，请重新输入");
+			return "forward:/login.jsp";
+		}
+	}
+
 	@SuppressWarnings("static-access")
-	@RequestMapping("/login")
+	@RequestMapping("/login1")
 	public String login(@Param(value = "usename") String username,
-			@Param("password") String password, HttpServletRequest request,
+			@Param("password") String password,
+			@Param("address") String address, HttpServletRequest request,
 			ModelMap map, HttpSession session)
 			throws UnsupportedEncodingException {
 		User user = userService.login(username, MD5Util.GetMD5Code(password));
+
 		if (user == null) {
 			map.clear();
 			map.put("username", username);
@@ -68,8 +119,12 @@ public class UserAction {
 			AccessSiteUtil accessSiteUtil = new AccessSiteUtil();
 			// String ipAddr = accessSiteUtil.getIpAddr(request);
 			record.setLoginDate(new Timestamp(new Date().getTime()));
-			record.setLoginSite(accessSiteUtil.getAddresses("ip="
-					+ accessSiteUtil.getV4IP(), "utf-8"));
+			if (!address.equals("")) {
+				record.setLoginSite(address);
+			} else {
+				record.setLoginSite(accessSiteUtil.getAddresses("ip="
+						+ accessSiteUtil.getV4IP(), "utf-8"));
+			}
 			loginRecordService.loginRecored(record);
 			return "index";
 		}
@@ -93,6 +148,7 @@ public class UserAction {
 	public String check(HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
 		session.removeAttribute("user");
+		SecurityUtils.getSubject().logout();
 		return "redirect:/login.jsp";
 	}
 
@@ -104,17 +160,18 @@ public class UserAction {
 	 * @throws ParseException
 	 * */
 	@RequestMapping("/getloginrecords")
-	public void getloginRecoredForMonth( HttpSession session,
+	public void getloginRecoredForMonth(HttpSession session,
 			HttpServletRequest request, HttpServletResponse response,
 			ModelMap map) throws JsonGenerationException, JsonMappingException,
 			IOException, ParseException {
 		User user = (User) session.getAttribute("user");
-		List<Map<String, String>> maplis = loginRecordService.getloginRecoredForMonth(user.getId());
+		List<Map<String, String>> maplis = loginRecordService
+				.getloginRecoredForMonth(user.getId());
 		Map<Object, Object> resultMap = new HashMap();
 		Map<Object, Object> m1 = new LinkedHashMap();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String endDate = sdf.format(new Date());// 当前时间
-		String dateformat=null;
+		String dateformat = null;
 		Calendar calendar = Calendar.getInstance();
 		for (Map m : maplis) {
 			Object t = m.get("t");
@@ -125,13 +182,13 @@ public class UserAction {
 			calendar.setTime(sdf.parse(endDate));
 			calendar.add(calendar.DATE, -i);
 			dateformat = sdf.format(calendar.getTime());
-			if(resultMap.get(dateformat)!=null){
+			if (resultMap.get(dateformat) != null) {
 				m1.put(dateformat, resultMap.get(dateformat));
 				continue;
 			}
 			m1.put(dateformat, 0);
 		}
-		
+
 		String json = new ObjectMapper().writeValueAsString(m1);
 		response.getWriter().write(json);
 	}

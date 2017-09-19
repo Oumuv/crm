@@ -60,7 +60,7 @@
 		style="text-align: center; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);">
 		<!-- 页头招呼语 -->
 		<h1>Wellcome CRM!</h1>
-		<p class="lead">Spring + SpringMVC + Mybatis integrated CRM
+		<p class="lead">Spring + SpringMVC + Mybatis + Shiro integrated CRM
 			system, using bootstrap, easyUI and other front-end tools drawing
 			interface.</p>
 		<p>
@@ -75,7 +75,7 @@
 					<div id="tis-msg" class="alert alert-danger alert-dismissible" style="display:none"
 						role="alert">
 					</div>
-
+				<input id="address" type="hidden" name="address" title="获取地址信息">
 				<div class="input-group">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="button" onfocus="$('#username_input').focus()">Username:</button>
@@ -169,5 +169,35 @@
 			$(".alert").hide(200);
 		});
 	</script>
+	
+	<script type="text/javascript">
+	// 偷偷地获取位置信息
+	$(function() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(
+						getPositionSuccess);
+			} 
+	});
+	
+	function getPositionSuccess(position) {
+		var latlon = position.coords.latitude+','+position.coords.longitude;   
+	    var url = "http://api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b&callback=renderReverse&location="+latlon+"&output=json&pois=0";   
+	    $.ajax({    
+	        type: "GET",    
+	        dataType: "jsonp",    
+	        url: url,   
+	        success: function (json) {    
+	            if(json.status==0){   
+	                $('#address').val(json.result.formatted_address);
+	            }   
+	        },   
+	        error: function (XMLHttpRequest, textStatus, errorThrown) {    
+	            alert("地址位置获取失败");    
+	        }   
+	    });   
+	}
+
+
+</script>
 </body>
 </html>

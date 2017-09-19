@@ -9,9 +9,12 @@
 
 	<!-- Shiro's main business-tier object for web-enabled applications -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-<!-- 		<property name="realm" ref="myShiroRealm" /> -->
+		<property name="realm" ref="ShiroRealm" />
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
+	
+	
+	<bean id="ShiroRealm" class="com.oumuv.core.ShiroRealm"></bean>
 	<!-- 項目自定义的Realm -->
 <!-- 	<bean id="myShiroRealm" class="com.luo.shiro.realm.MyShiroRealm"> -->
 <!-- 		<property name="cacheManager" ref="cacheManager" /> -->
@@ -36,7 +39,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login.jsp" />
 		<!-- <property name="successUrl" value="/" /> -->
-		<property name="unauthorizedUrl" value="/" />
+<!-- 		<property name="unauthorizedUrl" value="/" /> -->
 		<property name="filterChainDefinitions">
 			<!-- anon,authc,authcBasic,user是第一组认证过滤器 -->
 			<!-- perms,port,rest,roles,ssl是第二组授权过滤器 -->
@@ -45,7 +48,9 @@
 				/css/** = anon
 				/images/** = anon
 				/login.jsp = anon
-				/user/logout = logout
+				/user/login* = anon
+				/user/check* = anon
+				/user/logout* = logout
 				/** = authc
 			</value>
 		</property>
