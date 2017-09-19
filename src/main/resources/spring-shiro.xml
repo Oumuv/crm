@@ -12,27 +12,40 @@
 <!-- 		<property name="realm" ref="myShiroRealm" /> -->
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
-
 	<!-- 項目自定义的Realm -->
 <!-- 	<bean id="myShiroRealm" class="com.luo.shiro.realm.MyShiroRealm"> -->
 <!-- 		<property name="cacheManager" ref="cacheManager" /> -->
 <!-- 	</bean> -->
 
+<!-- 	<bean id="sampleRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm"> -->
+<!-- 		<property name="dataSource" ref="dataSource" /> -->
+<!-- 		<property name="authenticationQuery" -->
+<!-- 			value="select t.password from my_user t where t.username = ?" /> -->
+<!-- 		<property name="userRolesQuery" -->
+<!-- 			value="select a.rolename from my_user_role t left join my_role a on t.roleid = a.id where t.username = ? " /> -->
+<!-- 		<property name="permissionsQuery" -->
+<!-- 			value="SELECT B.PERMISSION FROM MY_ROLE T LEFT JOIN MY_ROLE_PERMISSION A ON T.ID = A.ROLE_ID LEFT JOIN MY_PERMISSION B ON A.PERMISSION = B.ID WHERE T.ROLENAME = ? " /> -->
+<!-- 		<property name="permissionsLookupEnabled" value="true" /> -->
+<!-- 		<property name="saltStyle" value="NO_SALT" /> -->
+<!-- 		<property name="credentialsMatcher" ref="hashedCredentialsMatcher" /> -->
+<!-- 	</bean> -->
+
+
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login.jsp" />
-		<!-- <property name="successUrl" value="/loginsuccess.jhtml" /> -->
-		<property name="unauthorizedUrl" value="/error.jhtml" />
+		<!-- <property name="successUrl" value="/" /> -->
+		<property name="unauthorizedUrl" value="/" />
 		<property name="filterChainDefinitions">
 			<!-- anon,authc,authcBasic,user是第一组认证过滤器 -->
 			<!-- perms,port,rest,roles,ssl是第二组授权过滤器 -->
 			<value>
-				/index.jhtml = authc
-				/login.jhtml = anon
-				/checkLogin.json = anon
-				/loginsuccess.jhtml = anon
-				/logout.json = anon
+				/js/** = anon
+				/css/** = anon
+				/images/** = anon
+				/login.jsp = anon
+				/user/logout = logout
 				/** = authc
 			</value>
 		</property>

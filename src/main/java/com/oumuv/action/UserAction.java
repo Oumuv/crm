@@ -65,8 +65,6 @@ public class UserAction {
 			session.setAttribute("user", user);
 			LoginRecordEntity record = new LoginRecordEntity();// 保存登录记录
 			record.setUserId(user.getId());
-			// String format = new
-			// SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 			AccessSiteUtil accessSiteUtil = new AccessSiteUtil();
 			// String ipAddr = accessSiteUtil.getIpAddr(request);
 			record.setLoginDate(new Timestamp(new Date().getTime()));
@@ -106,11 +104,12 @@ public class UserAction {
 	 * @throws ParseException
 	 * */
 	@RequestMapping("/getloginrecords")
-	public void getloginRecoredForMonth(@Param("uid") String uid,
+	public void getloginRecoredForMonth( HttpSession session,
 			HttpServletRequest request, HttpServletResponse response,
 			ModelMap map) throws JsonGenerationException, JsonMappingException,
 			IOException, ParseException {
-		List<Map<String, String>> maplis = loginRecordService.getloginRecoredForMonth(1L);
+		User user = (User) session.getAttribute("user");
+		List<Map<String, String>> maplis = loginRecordService.getloginRecoredForMonth(user.getId());
 		Map<Object, Object> resultMap = new HashMap();
 		Map<Object, Object> m1 = new LinkedHashMap();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
