@@ -11,7 +11,7 @@
 	<select id="getloginRecoredForMonth" resultType="java.util.Map"
 		parameterType="java.lang.Long">
 		select count(*) as c, DATE_FORMAT(login_date, '%Y-%m-%d') as t from
-		loginrecord where user_id=1 and 30>=datediff(CURDATE(), login_date)
+		loginrecord where user_id=#{uid,jdbcType=BIGINT} and 30>=datediff(CURDATE(), login_date)
 		GROUP BY t ORDER BY t
 	</select>
 	<insert id="insert" parameterType="com.oumuv.entity.LoginRecordEntity">

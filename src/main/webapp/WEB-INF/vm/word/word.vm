@@ -169,7 +169,9 @@ $(function(){
 			text : '近30天登录记录',
 			x : 'center'
 		},
-		tooltip : {},
+		tooltip : {
+			formatter : '{b} 登录 {c} 次  '
+		},
 		legend : {
 			right : 10,
 			data : [ '次/天' ],
@@ -213,12 +215,12 @@ $(function(){
 		} ],
 		dataZoom : [ {
 			type : 'slider', 
-			start : 0,
-			end : 30
+			start : 20,
+			end : 80
 		}, { 
 			type : 'inside',
-			start : 0, 
-			end : 30
+			start : 20, 
+			end : 80
 		} ],
 	};
 

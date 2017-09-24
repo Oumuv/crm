@@ -1,7 +1,14 @@
 package com.oumuv.entity;
 
-public class User {
-    private Long id;
+import java.io.Serializable;
+
+public class User implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private String username;
 

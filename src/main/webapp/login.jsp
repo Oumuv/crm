@@ -60,7 +60,7 @@
 		style="text-align: center; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);">
 		<!-- 页头招呼语 -->
 		<h1>Wellcome CRM!</h1>
-		<p class="lead">Spring + SpringMVC + Mybatis integrated CRM
+		<p class="lead">Spring + SpringMVC + Mybatis + Shiro integrated CRM
 			system, using bootstrap, easyUI and other front-end tools drawing
 			interface.</p>
 		<p>
@@ -75,14 +75,14 @@
 					<div id="tis-msg" class="alert alert-danger alert-dismissible" style="display:none"
 						role="alert">
 					</div>
-
+				<input id="address" type="hidden" name="address" title="获取地址信息">
 				<div class="input-group">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="button" onfocus="$('#username_input').focus()">Username:</button>
 					</span> 
 					<c:choose>
-						<c:when test="${!empty username }"><input type="text" name="username" class="form-control"
-						placeholder="请输入用户名.." value="${username }"></c:when>
+						<c:when test="${!empty username }"><input id="username_input"  type="text" name="username" class="form-control"
+						placeholder="请输入用户名.." value="${username }" onblur="check(this)"></c:when>
 						<c:otherwise><input id="username_input" type="text" name="username" class="form-control"
 						placeholder="请输入用户名.." onblur="check(this)"></c:otherwise>
 					</c:choose>
@@ -113,14 +113,14 @@
 				<br>
 				<div class="container control"
 					style="width: 80%; text-align: center">
-					<input type="submit" class="btn btn-primary lbtn" onclick="return submits(this.form)" value="Login"
+					<input type="submit" class="btn btn-primary lbtn" onclick="return submits()" value="Login"
 						role="button"></input> <input type="reset"
 						class="btn btn-danger lbtn" value="Reset" role="button"></input>
 				</div>
 				<br>
 				<div class="container control"
 					style="width: 80%; min-width: 250px; text-align: center">
-					<span>And you can <a>password retrieva</a><span> or </span>
+					<span>And you can <a>retrieve password</a><span> or </span>
 						<a>register</a></span>
 				</div>
 			</div>
@@ -133,24 +133,32 @@
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 	
 	<script type="text/javascript">
+	
+		/*验证用户是否存在*/
 		function check(t){
-			$.ajax({
-				url:"<%=request.getContextPath()%>/user/check.do",
-				data:{username:$(t).val()},
-				type:'post',
-				success:function(msg){
-					if(msg.length>0){
-						$("#tis-msg").show(200).html("<button type='button' class='close' data-dismiss='alert'aria-label='Close'><span aria-hidden='true'>&times;</span></button><!-- 用户不存在提示 --><strong>提示：</strong> "+msg);
-					}else{
-						$("#tis-msg").hide(200);
+			if($(".form-control").eq(0).val()==""){
+				return false;
+			}else{
+			
+				$.ajax({
+					url:"<%=request.getContextPath()%>/user/check.do",
+					data:{username:$(t).val()},
+					type:'post',
+					success:function(msg){
+						if(msg.length>0){
+							$("#tis-msg").show(200).html("<button type='button' class='close' data-dismiss='alert'aria-label='Close'><span aria-hidden='true'>&times;</span></button><!-- 用户不存在提示 --><strong>提示：</strong> "+msg);
+						}else{
+							$("#tis-msg").hide(200);
+						}
 					}
-				}
-			});
+				});
+ 			}
 		}
 		
 		/* 表单提交验证 */
-		function submits(form){
+		function submits(){
 			if($(".form-control").eq(0).val()==""||$(".form-control").eq(1).val()==""){
+				$("#tis-msg").empty();
 				$("#tis-msg").show(200).html("<button type='button' class='close' data-dismiss='alert'aria-label='Close'><span aria-hidden='true'>&times;</span></button><!-- 用户不存在提示 --><strong>提示：</strong> 用户名密码不能为空！");
 				return false;
 			}
@@ -161,5 +169,35 @@
 			$(".alert").hide(200);
 		});
 	</script>
+	
+	<script type="text/javascript">
+	// 偷偷地获取位置信息
+	$(function() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(
+						getPositionSuccess);
+			} 
+	});
+	
+	function getPositionSuccess(position) {
+		var latlon = position.coords.latitude+','+position.coords.longitude;   
+	    var url = "http://api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b&callback=renderReverse&location="+latlon+"&output=json&pois=0";   
+	    $.ajax({    
+	        type: "GET",    
+	        dataType: "jsonp",    
+	        url: url,   
+	        success: function (json) {    
+	            if(json.status==0){   
+	                $('#address').val(json.result.formatted_address);
+	            }   
+	        },   
+	        error: function (XMLHttpRequest, textStatus, errorThrown) {    
+	            alert("地址位置获取失败");    
+	        }   
+	    });   
+	}
+
+
+</script>
 </body>
 </html>

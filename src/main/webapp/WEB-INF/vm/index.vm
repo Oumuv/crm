@@ -9,29 +9,34 @@
 <!-- Bootstrap -->
 <link href="#springUrl('/css/bootstrap.css')" rel="stylesheet">
 <link href="#springUrl('/css/style.css')" rel="stylesheet">
+<!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script> -->
+
 
 <style>
 /* 设置滚动条的样式 */
 ::-webkit-scrollbar {
-width:9px;
+	width: 9px;
 }
 /* 滚动槽 */
 ::-webkit-scrollbar-track {
--webkit-box-shadow:inset006pxrgba(0,0,0,0.3);
-border-radius:10px;
+	-webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.3);
+	border-radius: 10px;
 }
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
-border-radius:10px;
-background:rgba(0,0,0,0.1);
--webkit-box-shadow:inset006pxrgba(0,0,0,0.5);
+	border-radius: 10px;
+	background: rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
 }
+
 ::-webkit-scrollbar-thumb:window-inactive {
-background:rgba(255,0,0,0.4);
+	background: rgba(255, 0, 0, 0.4);
 }
-.bg_shadow{
+
+.bg_shadow {
 	box-shadow: 0px 0px 10px #C0C0C0;
 }
+
 body {
 	margin: 0px;
 	padding: 0px;
@@ -39,12 +44,13 @@ body {
 
 .page {
 	width: 80%;
-	height:100%;
+	height: 100%;
 }
 
-.conten_div{
+.conten_div {
 	margin-top: 120px;
 }
+
 .blurclass {
 	filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
 	-webkit-filter: blur(10px); /* Chrome, Opera */
@@ -54,11 +60,11 @@ body {
 	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10,
 		MakeShadow=false ); /* IE6~IE9 */
 }
-@media screen and (max-width:910px) and (min-width:480px) {
 
+@media screen and (max-width:910px) and (min-width:480px) {
 }
+
 @media screen and (max-width:480px) {
-	
 	.page {
 		position: fixed;
 		top: 0px;
@@ -66,24 +72,21 @@ body {
 		padding: 0px;
 		width: 100%;
 	}
-	
-
 	.div-nav-s ul li {
 		width: 33%;
 	}
-	
-	.btn-uitl .btn{
-		width:48%;
-		margin:2px 0px 3px 0px;
+	.btn-uitl .btn {
+		width: 48%;
+		margin: 2px 0px 3px 0px;
 		padding: 0px;
 	}
-	.btn-uitl .text-nav{
-		display:block;	
+	.btn-uitl .text-nav {
+		display: block;
 	}
-	.conten_div{
-		width:100%;
+	.conten_div {
+		width: 100%;
 		height: 100%;
-		margin-top:50px;
+		margin-top: 50px;
 		padding-bottom: 94px;
 	}
 }
@@ -92,81 +95,73 @@ body {
 <script src="#springUrl('/js/bootstrap.js')"></script>
 </head>
 <body>
-<div>
-	<div class="container page ">
-		<!-- 头像框 -->
-		<div class="div-himg" onclick="showbtn()">
-			<div class="himg" style="float: left;">
-				<img alt="头像" style="width: 100%;"
-					src="#springUrl('/images/headM.png')">
+	<div>
+		<div class="container page ">
+			<!-- 头像框 -->
+			<div class="div-himg" onclick="showbtn()">
+				<div class="himg" style="float: left;">
+					<img alt="头像" style="width: 100%;"
+						src="#springUrl('/images/headM.png')">
+				</div>
+				<span id="title_nav" style="">Home</span>
 			</div>
-			<span id="title_nav" style="">Home</span>
-		</div>
-		
-		<!-- 工具按钮 -->
-		<div class="btn-uitl " style="float:right;z-index:99">
-		 	<a class="btn  glyphicon glyphicon-cog" aria-hidden="true"><span class="text-nav">设置</span></a>
-		 	<a class="btn  glyphicon glyphicon-log-out" aria-hidden="true" href="#springUrl('/user/logout.do')"><span class="text-nav">注销登录</span></a>
-		</div>
-		<!-- 主导航 -->
-		<div class="div-nav ">
-			<div class="div-nav-s" style="">
-				<ul class="nav nav-tabs">
-					<li role="presentation" class="active navlist btn_nav" link-window="user/home"><a
-						class="btn-lg glyphicon glyphicon-home text-nav"><span
-							class="text-nav" > Home</span></a></li>
-					<li role="presentation" class="navlist btn_nav" link-window="word/word"><a
-						class="btn-lg glyphicon glyphicon-folder-open text-nav"><span
-							class="text-nav" > Work</span></a></li>
-					<li role="presentation" class="navlist btn_nav" link-window="msg/msg"><a
-						class="btn-lg glyphicon glyphicon-comment text-nav"><span
-							class="text-nav" > Messages</span></a></li>
-				</ul>
+
+			<!-- 工具按钮 -->
+			<div class="btn-uitl " style="float: right; z-index: 99">
+				<a class="btn  glyphicon glyphicon-cog" aria-hidden="true"><span
+					class="text-nav">设置</span></a> <a
+					class="btn  glyphicon glyphicon-log-out" aria-hidden="true"
+					href="#springUrl('/user/logout.do')"><span class="text-nav">注销登录</span></a>
+			</div>
+			<!-- 主导航 -->
+			<div class="div-nav ">
+				<div class="div-nav-s" style="">
+					<ul class="nav nav-tabs">
+						<li role="presentation" class="active navlist btn_nav"
+							link-window="user/home"><a
+							class="btn-lg glyphicon glyphicon-home text-nav"><span
+								class="text-nav"> Home</span></a></li>
+						<li role="presentation" class="navlist btn_nav"
+							link-window="word/word"><a
+							class="btn-lg glyphicon glyphicon-folder-open text-nav"><span
+								class="text-nav"> Work</span></a></li>
+						<li role="presentation" class="navlist btn_nav"
+							link-window="msg/msg"><a
+							class="btn-lg glyphicon glyphicon-comment text-nav"><span
+								class="text-nav"> Messages</span></a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- 透明背景 -->
+			<div class="bg_div"
+				style="position: absolute; height: 100%; width: 100%; background: black; FILTER: alpha(opacity =   0.1); -moz-opacity: 0.1; opacity: 0.1; display: none; z-index: 555;"></div>
+			<!-- 内容 -->
+			<div class=" conten_div " id="conten" style="">
+				<div style="width: 100%; height: 100%; overflow: auto"></div>
 			</div>
 		</div>
-		<!-- 透明背景 -->
-		<div class="bg_div" style="position:absolute; height: 100%;width:100%;background:black; FILTER: alpha(opacity = 0.1); -moz-opacity: 0.1; opacity: 0.1;display:none;z-index:555;"></div>
-		<!-- 内容 -->
-		<div class=" conten_div " id="conten" style="">
-<!-- 		<button id="btn1">+</button> -->
-			<div  style="width: 100%;height:100%;overflow: auto"></div>
-	<!-- 			<iframe id="iframe_window" width="100%" height="100%" src="<%=request.getContextPath()%>/jsp/user/home.jsp" frameborder="0" scrolling="auto"> -->
-					
-	<!-- 			</iframe> -->
-				
-			</div>
-		</div>
-		
+
 	</div>
 </body>
 
 <script type="text/javascript">
 	/*点击主导航栏切换页面 */
 	$(".navlist").click(function() {
-// 	$("#btn1").click(function() {
+		// 	$("#btn1").click(function() {
 		$(".navlist").removeClass("active");
 		$(this).addClass("active");
 		$("#title_nav").html($(this).find("span").html());
 		jQuery('#conten div').empty();
 		jQuery('#conten div').load("#springUrl('/pageturn.do')", {
-			page :  $(this).attr("link-window")
+			page : $(this).attr("link-window")
 		});
 	});
 	/*显示/隐藏工具栏*/
-	function showbtn(){
-		if(screen.width <= 480){
-			  $(".btn-uitl").toggle(200);
+	function showbtn() {
+		if (screen.width <= 480) {
+			$(".btn-uitl").toggle(200);
 		}
 	}
-// 	window.onscroll = function(){ 
-// 	 	if(screen.width <= 480){
-// 		    var t = document.documentElement.scrollTop || document.body.scrollTop;  
-// 		    if( t >= 300 ) { 
-// 		    	alert(1)
-// 		    	$('.div_weather').hide(200);
-// 		    }
-// 	 	}
-// 	} 
 	//监听某一个元素的滚动条
 	$('#conten div').scroll(function() {
 		if (screen.width <= 480) {
@@ -180,19 +175,88 @@ body {
 		}
 	});
 	//初始化页面
-	$(function(){
+	$(function() {
 		jQuery('#conten div').load("#springUrl('/pageturn.do')", {
 			page : "user/home"
 		});
-		
+
 	});
-	
+
 	//背景模糊
-	function blurback(){
+	function blurback() {
 		$('.word_div,.div-nav').toggleClass("blurclass");
 		$(".bg_div").toggle();
 	}
+</script>
+
+
+
+<script type="text/javascript">
+	// 获取位置信息
+	/* $(function() {
+		var r=confirm("浏览器请求获取位置信息，是否同意？");
+		if (r==true)
+		  {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(
+						getPositionSuccess, getPositionError);
+			} else {
+				alert("您的浏览器不支持自动定位!");
+			}
+		  }
+	}) */
 	
-	
+	function getPositionSuccess(position) {
+// 		var lat = position.coords.latitude;
+// 		var lng = position.coords.longitude;
+// 		var address;
+// 		var map = new BMap.Map("allmap");
+// 		var point = new BMap.Point(lng, lat);
+// 		var gc = new BMap.Geocoder();
+// 		gc.getLocation(point, function(rs) {
+// 			var addComp = rs.addressComponents;
+// 			address = addComp.province + ", " + addComp.city + ", "
+// 					+ addComp.district + ", " + addComp.street + ", "
+// 					+ addComp.streetNumber;
+// 			alert("address=" + address);
+// 		});
+// 		alert("longitude=" + lng + "  latitude=" + lat);
+
+		var latlon = position.coords.latitude+','+position.coords.longitude;   
+	       
+	    //baidu   
+	    var url = "http://api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b&callback=renderReverse&location="+latlon+"&output=json&pois=0";   
+	    $.ajax({    
+	        type: "GET",    
+	        dataType: "jsonp",    
+	        url: url,   
+	        beforeSend: function(){   
+// 	            $("#baidu_geo").html('正在定位...');   
+	        },   
+	        success: function (json) {    
+	            if(json.status==0){   
+	                alert(json.result.formatted_address);   
+	            }   
+	        },   
+	        error: function (XMLHttpRequest, textStatus, errorThrown) {    
+	            alert(latlon+"地址位置获取失败");    
+	        }   
+	    });   
+	}
+
+	function getPositionError(error) {
+		switch (error.code) {
+		case error.TIMEOUT:
+			alert("连接超时，请重试");
+			break;
+		case error.PERMISSION_DENIED:
+			alert("您拒绝了使用位置共享服务，查询已取消");
+			break;
+		case error.POSITION_UNAVAILABLE:
+			alert("亲爱的火星网友，非常抱歉，我们暂时无法为您所在的星球提供位置服务");
+			break;
+		}
+	}
+
 </script>
 </html>
