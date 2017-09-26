@@ -5,6 +5,7 @@
 		<result column="user_id" property="userId" jdbcType="BIGINT" />
 		<result column="login_date" property="loginDate" jdbcType="TIMESTAMP" />
 		<result column="login_site" property="loginSite" jdbcType="VARCHAR" />
+		<result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
 	</resultMap>
 
 
@@ -15,10 +16,10 @@
 		GROUP BY t ORDER BY t
 	</select>
 	<insert id="insert" parameterType="com.oumuv.entity.LoginRecordEntity">
-		insert into loginrecord (user_id, login_date, login_site
+		insert into loginrecord (user_id, login_date, login_site, login_ip
 		)
 		values (#{userId,jdbcType=BIGINT}, #{loginDate,jdbcType=TIMESTAMP},
-		#{loginSite,jdbcType=VARCHAR}
+		#{loginSite,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR}
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.oumuv.entity.LoginRecordEntity">
@@ -33,6 +34,9 @@
 			<if test="loginSite != null">
 				login_site,
 			</if>
+			<if test="loginIp != null">
+				login_ip,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="userId != null">
@@ -43,6 +47,9 @@
 			</if>
 			<if test="loginSite != null">
 				#{loginSite,jdbcType=VARCHAR},
+			</if>
+			<if test="loginIp != null">
+				#{loginIp,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>

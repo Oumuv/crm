@@ -8,8 +8,18 @@ public class LoginRecordEntity {
     private Date loginDate;
 
     private String loginSite;
+    
+    private String loginIp;
 
-    public Long getUserId() {
+    public String getLoginIp() {
+		return loginIp;
+	}
+
+	public void setLoginIp(String loginIp) {
+		this.loginIp = loginIp == null ? null : loginIp.trim();
+	}
+
+	public Long getUserId() {
         return userId;
     }
 

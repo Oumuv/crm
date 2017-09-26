@@ -57,7 +57,8 @@ public class UserAction {
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String shiroLogin(@Param(value = "usename") String username,
 			@Param("password") String password,
-			@Param("address") String address, HttpServletRequest request,
+			@Param("address") String address,
+			@Param("loginIp") String loginIp,HttpServletRequest request,
 			ModelMap map, HttpSession session) throws UnsupportedEncodingException {
 
 		Subject subject = SecurityUtils.getSubject();// 获取subject实例
@@ -80,11 +81,13 @@ public class UserAction {
 			AccessSiteUtil accessSiteUtil = new AccessSiteUtil();
 			// String ipAddr = accessSiteUtil.getIpAddr(request);
 			record.setLoginDate(new Timestamp(new Date().getTime()));
-			if (!address.equals("")) {
-				record.setLoginSite(address);
-			} else {
-				record.setLoginSite(accessSiteUtil.getAddresses("ip="+ accessSiteUtil.getV4IP(), "utf-8"));
-			}
+//			if (!address.equals("")) {
+//				record.setLoginSite(address);
+//			} else {
+//				record.setLoginSite(accessSiteUtil.getAddresses("ip="+ accessSiteUtil.getV4IP(), "utf-8"));
+//			}
+			record.setLoginSite(accessSiteUtil.getAddresses("ip="+ loginIp, "utf-8"));
+			record.setLoginIp(loginIp);
 			loginRecordService.loginRecored(record);
 			return "index";
 		} catch (AuthenticationException e) {
