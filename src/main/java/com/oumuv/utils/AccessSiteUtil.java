@@ -152,7 +152,7 @@ public class AccessSiteUtil {
 	}
 	
 	/**
-	 * 获取外网ip
+	 * 获取服务器外网ip
 	 * */
 	public static String getV4IP(){
 		String ip = "";
@@ -215,13 +215,15 @@ public class AccessSiteUtil {
                 ipAddress = request.getRemoteAddr();  
                 if(ipAddress.equals("127.0.0.1") || ipAddress.equals("0:0:0:0:0:0:0:1")){  
                     //根据网卡取本机配置的IP  
-                    InetAddress inet=null;  
-                    try {  
-                        inet = InetAddress.getLocalHost();  
-                    } catch (UnknownHostException e) {  
-                        e.printStackTrace();  
-                    }  
-                    ipAddress= inet.getHostAddress();  
+//                    InetAddress inet=null;  
+//                    try {  
+//                        inet = InetAddress.getLocalHost();  
+//                    } catch (UnknownHostException e) {  
+//                        e.printStackTrace();  
+//                    }  
+//                    ipAddress= inet.getHostAddress();  
+                    ipAddress= getV4IP();//如果是通过内网访问的只能获取服务器端的外网ip
+                	
                 }  
             }  
             //对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割  

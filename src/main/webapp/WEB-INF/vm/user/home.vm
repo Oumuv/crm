@@ -36,20 +36,17 @@ bady div {
 				height="36" frameborder="0" marginwidth="0" marginheight="0"
 				scrolling="no" disabled="disabled"></iframe>
 			<div
-				style="position: absolute; top: 0px; background: #6f5499; FILTER: alpha(opacity =           0); -moz-opacity: 0; opacity: 0; width: 100%; height: 100%; margin: 0px;"
+				style="position: absolute; top: 0px; background: #6f5499; FILTER: alpha(opacity =             0); -moz-opacity: 0; opacity: 0; width: 100%; height: 100%; margin: 0px;"
 				alt="遮罩层"></div>
 		</div>
 	</div>
 
 	<div class="test" style="width: 100%;">
 		<div class="jumbotron">
-			<h1>Hello, ${user.username}!</h1>
-			<p>${user.username}This is a simple hero unit, a simple
-				jumbotron-style component for calling extra attention to featured
-				content or information.</p>
+			<h2>你好！${user.username}！</h2>
+			<p>在这里你可以查看或修改你的个人信息，请点击下方按钮开始吧</p>
 			<p>
-				<a class="btn btn-primary btn-lg" href="#" role="button"
-					onclick="clibtn()">Learn more</a>
+				<a class="btn btn-primary btn-lg" id="Personal_info" href="#" role="button">Personal information</a>
 			</p>
 		</div>
 	</div>
@@ -75,9 +72,18 @@ bady div {
 			</p>
 		</div>
 	</div>
-	<script type="text/javascript">
-// 	$("#btn_one").click(function(){
-// 		alert("点击2")	})
-					
-</script>
+	<div id="window-viwe" class="panel panel-primary" role="view" style="display:none; position: fixed;width: 50%;height:60%;top: 50%;left: 50%;transform: translate(-50%,-50%);">
+		
+		
+	</div>
 </body>
+<script type="text/javascript">
+	$(function(){
+		$('#Personal_info').on("click",function(){
+			$('#window-viwe').show(0).load("#springUrl('/dailogturn.do')",{page:"user/person_info"});
+		});
+		
+	})
+	
+	
+</script>

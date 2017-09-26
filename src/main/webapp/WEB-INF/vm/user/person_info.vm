@@ -1,0 +1,23 @@
+
+<div class="panel-heading">
+	自定义窗口
+	<button type="button" class="close close_panel">
+		<span>&times;</span>
+	</button>
+</div>
+
+
+
+
+<div style="bottom: 10px; position: absolute; right: 10px;">
+	<span type="button" class="btn btn-default close_panel_btn"
+		style="bottom: 10px; float: right; right: 10px; margin: 2px;">关闭</span>
+	<span type="button" class="btn btn-primary"
+		style="bottom: 10px; float: right; right: 10px; margin: 2px;">保存</span>
+</div>
+
+<script>
+	$('.close_panel_btn,.close_panel').on("click",function(){
+		$('#window-viwe').empty().hide();
+	})
+</script>

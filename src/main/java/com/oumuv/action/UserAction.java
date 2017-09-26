@@ -83,7 +83,7 @@ public class UserAction {
 			if (!address.equals("")) {
 				record.setLoginSite(address);
 			} else {
-				record.setLoginSite(accessSiteUtil.getAddresses("ip="+ accessSiteUtil.getV4IP(), "utf-8"));
+				record.setLoginSite(accessSiteUtil.getAddresses("ip="+ accessSiteUtil.getIpAddr(request), "utf-8"));
 			}
 			loginRecordService.loginRecored(record);
 			return "index";
