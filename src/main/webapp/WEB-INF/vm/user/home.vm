@@ -12,6 +12,9 @@ bady div {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+#window-viwe{
+		 position: fixed;width: 50%;height:60%;top: 50%;left: 50%;transform: translate(-50%,-50%);overflow: hidden;
+	}
 
 @media screen and (max-width:910px) and (min-width:480px) {
 }
@@ -25,6 +28,13 @@ bady div {
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
+	#window-viwe{
+		width:100%;
+		height: 100%;
+		margin: 0px;
+		z-index: 999;
+	}
+	
 }
 </style>
 <body>
@@ -72,7 +82,7 @@ bady div {
 			</p>
 		</div>
 	</div>
-	<div id="window-viwe" class="panel panel-primary" role="view" style="display:none; position: fixed;width: 50%;height:60%;top: 50%;left: 50%;transform: translate(-50%,-50%);">
+	<div id="window-viwe" class="panel panel-primary" role="view" style="display:none;" >
 		
 		
 	</div>

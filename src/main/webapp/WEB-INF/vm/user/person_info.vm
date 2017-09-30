@@ -1,11 +1,21 @@
 
 <div class="panel-heading">
-	自定义窗口
-	<button type="button" class="close close_panel">
-		<span>&times;</span>
-	</button>
+	$!{title}
+	<!-- 	<button type="button" class="close close_panel"> -->
+	<!-- 		<span>&times;</span> -->
+	<!-- 	</button> -->
 </div>
 
+<div class="" style="width:100%;overflow: auto">
+	<!-- 头像框 -->
+	<div style="width: 100%;">
+		<div class=""
+			style="width: 100%; border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%; overflow: hidden; box-shadow: 5px 5px 5px #C0C0C0;">
+			<img alt="头像" style="width: 100%;"
+				src="#if(${user.himg})#springUrl('/${user.himg}') #else #springUrl('/images/headM.png')#end">
+		</div>
+	</div>
+</div>
 
 
 
@@ -17,7 +27,7 @@
 </div>
 
 <script>
-	$('.close_panel_btn,.close_panel').on("click",function(){
+	$('.close_panel_btn,.close_panel').on("click", function() {
 		$('#window-viwe').empty().hide();
-	})
+	});
 </script>
