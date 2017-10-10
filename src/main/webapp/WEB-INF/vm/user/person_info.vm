@@ -6,15 +6,37 @@
 	<!-- 	</button> -->
 </div>
 
-<div class="" style="width:100%;overflow: auto">
-	<!-- 头像框 -->
-	<div style="width: 100%;">
-		<div class=""
-			style="width: 100%; border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%; overflow: hidden; box-shadow: 5px 5px 5px #C0C0C0;">
-			<img alt="头像" style="width: 100%;"
-				src="#if(${user.himg})#springUrl('/${user.himg}') #else #springUrl('/images/headM.png')#end">
+<div class="" style="width:100%;overflow: auto;height:100%;padding-top:10px;padding-bottom:10px;">
+	<div class=" row" style="width:100%;height:100%;">
+		<div class="test col-md-4 col-sm-4">
+			<!-- 头像框 -->
+			<div style="width: 100%;">
+				<div class=""
+					style="width: 100%; border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%; overflow: hidden; box-shadow: 1px 1px 10px #C0C0C0;">
+					<img alt="头像" style="width: 100%;"
+						src="#if(${user.himg})#springUrl('/${user.himg}') #else #springUrl('/images/headM.png')#end">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8 col-sm-8 row">
+			<div class="form-group col-md-6">
+				<label for="firstname" class=" control-label" style="min-width: 95px;width:30%">姓名:</label>
+				<div class="" style="width:95%">
+					<input type="text" class="form-control" id="firstname"
+						placeholder="请输入名">
+				</div>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="lastname" class=" control-label" style="min-width: 95px;width:30%">出生年月:</label>
+				<div class="" style="width:95%">
+					<input type="text" class="form-control" id="lastname"
+						placeholder="请输入姓">
+				</div>
+			</div>
 		</div>
 	</div>
+	
+
 </div>
 
 

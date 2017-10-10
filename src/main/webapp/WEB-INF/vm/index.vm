@@ -13,6 +13,10 @@
 
 
 <style>
+.test{
+	border: 1px red solid;
+}
+
 /* 设置滚动条的样式 */
 ::-webkit-scrollbar {
 	width: 9px;
