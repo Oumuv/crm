@@ -10,5 +10,10 @@ public interface LoginRecordEntityMapper {
 
     int insertSelective(LoginRecordEntity record);
     
+    /**
+     *获取用户近30天的登陆记录，并统计每天登陆的次数
+     * @param uid 用户id
+     * @return
+     */
     List<Map<String, String>> getloginRecoredForMonth(Long uid);
 }

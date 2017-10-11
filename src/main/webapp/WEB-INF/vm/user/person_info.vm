@@ -1,4 +1,7 @@
-
+<link href="#springUrl('/css/bootstrap-datetimepicker.css')" rel="stylesheet">
+<script type="text/javascript" src="#springUrl('/js/bootstrap-datetimepicker.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/bootstrap-datetimepicker.fr.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/bootstrap-datetimepicker.zh-CN.js')"></script>
 <div class="panel-heading">
 	$!{title}
 	<!-- 	<button type="button" class="close close_panel"> -->
@@ -6,11 +9,11 @@
 	<!-- 	</button> -->
 </div>
 
-<div class="" style="width:100%;overflow: auto;height:100%;padding-top:10px;padding-bottom:10px;">
-	<div class=" row" style="width:100%;height:100%;">
-		<div class="test col-md-4 col-sm-4">
+<div class="" style="width:100%;overflow: auto;height:100%;padding: 10px 10px 10px 10px;">
+	<div class=" row" style="width:100%;height:100%;margin-left: 0px;">
+		<div class=" col-md-4 col-sm-4">
 			<!-- 头像框 -->
-			<div style="width: 100%;">
+			<div style="width: 80%;">
 				<div class=""
 					style="width: 100%; border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%; overflow: hidden; box-shadow: 1px 1px 10px #C0C0C0;">
 					<img alt="头像" style="width: 100%;"
@@ -19,18 +22,34 @@
 			</div>
 		</div>
 		<div class="col-md-8 col-sm-8 row">
-			<div class="form-group col-md-6">
-				<label for="firstname" class=" control-label" style="min-width: 95px;width:30%">姓名:</label>
-				<div class="" style="width:95%">
+			<div class="form-group col-md-6 col-sm-12">
+				<label for="firstname" class=" control-label"
+					style="min-width: 95px; width: 30%">姓名:</label>
+				<div class="">
 					<input type="text" class="form-control" id="firstname"
 						placeholder="请输入名">
 				</div>
 			</div>
-			<div class="form-group col-md-6">
-				<label for="lastname" class=" control-label" style="min-width: 95px;width:30%">出生年月:</label>
-				<div class="" style="width:95%">
-					<input type="text" class="form-control" id="lastname"
-						placeholder="请输入姓">
+			<div class="form-group col-md-6 col-sm-12">
+				<label for="lastname" class=" control-label"
+					style="min-width: 95px; width: 30%">出生年月:</label>
+				<input class="form_datetime form-control" type="text" value="2016-03-07" size="16" readonly>
+				<span class="add-on"><i class="icon-th"></i></span>
+			</div>
+			<div class="form-group col-md-6 col-sm-12">
+				<label for="email" class=" control-label"
+					style="min-width: 95px; width: 30%">电子邮箱:</label>
+				<div class="">
+					<input type="text" class="form-control" id="email"
+						placeholder="请输入名">
+				</div>
+			</div>
+			<div class="form-group col-md-6 col-sm-12">
+				<label for="phonenum" class=" control-label"
+					style="min-width: 95px; width: 30%">联系电话:</label>
+				<div class="">
+					<input type="text" class="form-control" id="phonenum"
+						placeholder="请输入名">
 				</div>
 			</div>
 		</div>
@@ -48,6 +67,20 @@
 		style="bottom: 10px; float: right; right: 10px; margin: 2px;">保存</span>
 </div>
 
+
+<script type="text/javascript">
+ $(".form_datetime").datetimepicker({
+	 format: "yyyy-mm-dd",
+	 autoclose: true,
+	 todayBtn: true,
+	 todayHighlight: true,
+	 showMeridian: true,
+	 pickerPosition: "bottom-left",
+	 language: 'zh-CN',//中文，需要引用zh-CN.js包
+	 startView: 2,//月视图
+	 minView: 2//日期时间选择器所能够提供的最精确的时间选择视图
+ });
+</script> 
 <script>
 	$('.close_panel_btn,.close_panel').on("click", function() {
 		$('#window-viwe').empty().hide();

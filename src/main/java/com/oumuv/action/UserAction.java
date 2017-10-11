@@ -160,36 +160,34 @@ public class UserAction {
 	 * @throws ParseException
 	 * */
 	@RequestMapping("/getloginrecords")
-	public void getloginRecoredForMonth(HttpSession session,
-			HttpServletRequest request, HttpServletResponse response,
-			ModelMap map) throws JsonGenerationException, JsonMappingException,
+	public void getloginRecoredForMonth(HttpSession session,HttpServletRequest request, HttpServletResponse response) throws JsonGenerationException, JsonMappingException,
 			IOException, ParseException {
 		User user = (User) session.getAttribute("user");
-		List<Map<String, String>> maplis = loginRecordService
-				.getloginRecoredForMonth(user.getId());
-		Map<Object, Object> resultMap = new HashMap();
-		Map<Object, Object> m1 = new LinkedHashMap();
+		List<Map<String, String>> maplis = loginRecordService.getloginRecoredForMonth(user.getId());//查询30天内登陆次数
+		Map<Object, Object> loginCount = new HashMap<Object, Object>();//保存30天内登陆次数统计
+		Map<Object, Object> resultMap = new LinkedHashMap<Object, Object>();//返回前端的json数据
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String endDate = sdf.format(new Date());// 当前时间
 		String dateformat = null;
 		Calendar calendar = Calendar.getInstance();
 		for (Map m : maplis) {
-			Object t = m.get("t");
-			Object c = m.get("c");
-			resultMap.put(t, c);
+			Object t = m.get("t");//t登陆的日期
+			Object c = m.get("c");//登陆的次数
+			loginCount.put(t, c);
 		}
+		
+		//遍历保存记录
 		for (int i = 29; i >= 0; i--) {
 			calendar.setTime(sdf.parse(endDate));
 			calendar.add(calendar.DATE, -i);
 			dateformat = sdf.format(calendar.getTime());
-			if (resultMap.get(dateformat) != null) {
-				m1.put(dateformat, resultMap.get(dateformat));
+			if (loginCount.get(dateformat) != null) {
+				resultMap.put(dateformat, loginCount.get(dateformat));
 				continue;
 			}
-			m1.put(dateformat, 0);
+			resultMap.put(dateformat, 0);
 		}
-
-		String json = new ObjectMapper().writeValueAsString(m1);
+		String json = new ObjectMapper().writeValueAsString(resultMap);//转换json格式
 		response.getWriter().write(json);
 	}
 
