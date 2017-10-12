@@ -24,7 +24,7 @@
 		<div class="col-md-8 col-sm-8 row">
 			<div class="form-group col-md-6 col-sm-12">
 				<label for="firstname" class=" control-label"
-					style="min-width: 95px; width: 30%">姓名:</label>
+					>姓名:</label>
 				<div class="">
 					<input type="text" class="form-control" id="firstname"
 						placeholder="请输入名">
@@ -32,13 +32,13 @@
 			</div>
 			<div class="form-group col-md-6 col-sm-12">
 				<label for="lastname" class=" control-label"
-					style="min-width: 95px; width: 30%">出生年月:</label>
+					>出生年月:</label>
 				<input class="form_datetime form-control" type="text" value="2016-03-07" size="16" readonly>
 				<span class="add-on"><i class="icon-th"></i></span>
 			</div>
 			<div class="form-group col-md-6 col-sm-12">
 				<label for="email" class=" control-label"
-					style="min-width: 95px; width: 30%">电子邮箱:</label>
+					>电子邮箱:</label>
 				<div class="">
 					<input type="text" class="form-control" id="email"
 						placeholder="请输入名">
@@ -46,7 +46,7 @@
 			</div>
 			<div class="form-group col-md-6 col-sm-12">
 				<label for="phonenum" class=" control-label"
-					style="min-width: 95px; width: 30%">联系电话:</label>
+					>联系电话:</label>
 				<div class="">
 					<input type="text" class="form-control" id="phonenum"
 						placeholder="请输入名">
