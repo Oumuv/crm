@@ -23,17 +23,17 @@
 		</div>
 		<div class="col-md-8 col-sm-8 row">
 			<div class="form-group col-md-6 col-sm-12">
-				<label for="firstname" class=" control-label"
+				<label for="name" class=" control-label"
 					>姓名:</label>
 				<div class="">
-					<input type="text" class="form-control" id="firstname"
+					<input type="text" class="form-control" id="name"
 						placeholder="请输入名">
 				</div>
 			</div>
 			<div class="form-group col-md-6 col-sm-12">
-				<label for="lastname" class=" control-label"
+				<label for="birthday" class=" control-label"
 					>出生年月:</label>
-				<input class="form_datetime form-control" type="text" value="2016-03-07" size="16" readonly>
+				<input class="form_datetime form-control" type="text" value="2016-03-07" size="16" id="birthday" readonly>
 				<span class="add-on"><i class="icon-th"></i></span>
 			</div>
 			<div class="form-group col-md-6 col-sm-12">
@@ -45,10 +45,10 @@
 				</div>
 			</div>
 			<div class="form-group col-md-6 col-sm-12">
-				<label for="phonenum" class=" control-label"
+				<label for="phone" class=" control-label"
 					>联系电话:</label>
 				<div class="">
-					<input type="text" class="form-control" id="phonenum"
+					<input type="text" class="form-control" id="phone"
 						placeholder="请输入名">
 				</div>
 			</div>
