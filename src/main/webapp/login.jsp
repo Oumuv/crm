@@ -121,7 +121,7 @@
 				<div class="container control"
 					style="width: 80%; min-width: 250px; text-align: center">
 					<span>And you can <a>retrieve password</a><span> or </span>
-						<a>register</a></span>
+						<a href="pagejumps.do?page=register1">register</a></span>
 				</div>
 			</div>
 		</form>

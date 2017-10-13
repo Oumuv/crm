@@ -45,12 +45,15 @@
 			<!-- perms,port,rest,roles,ssl是第二组授权过滤器 -->
 			<value>
 				/js/** = anon
+				/register* = anon
 				/css/** = anon
 				/images/** = anon
 				/login.jsp = anon
 				/user/login* = anon
 				/user/check* = anon
+				/pagejumps* = anon
 				/user/logout* = logout
+				/pageturn* = authc
 				/** = authc
 			</value>
 		</property>

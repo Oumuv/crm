@@ -1,7 +1,9 @@
 <link href="#springUrl('/css/bootstrap-datetimepicker.css')" rel="stylesheet">
+<link href="#springUrl('/css/bootstrapValidator.css')" rel="stylesheet">
 <script type="text/javascript" src="#springUrl('/js/bootstrap-datetimepicker.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/bootstrap-datetimepicker.fr.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/bootstrap-datetimepicker.zh-CN.js')"></script>
+<script src="#springUrl('/js/bootstrapValidator.js')"></script>
 <div class="panel-heading">
 	$!{title}
 	<!-- 	<button type="button" class="close close_panel"> -->
