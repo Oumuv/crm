@@ -216,7 +216,7 @@ $(function(){
 		dataZoom : [ {
 			type : 'slider', 
 			start : 20,
-			end : 80
+			end : 100
 		}, { 
 			type : 'inside',
 			start : 20, 
