@@ -185,7 +185,12 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-
+		<!-- 解决报错      http://blog.csdn.net/testcs_dn/article/details/64908771-->
+		<dependency>  
+		    <groupId>org.hibernate</groupId>  
+		    <artifactId>hibernate-validator</artifactId>  
+		    <version>5.2.4.Final</version>  
+		</dependency>  
 	</dependencies>
 
 

@@ -13,6 +13,10 @@
 
 
 <style>
+.test{
+	border: 1px red solid;
+}
+
 /* 设置滚动条的样式 */
 ::-webkit-scrollbar {
 	width: 9px;
@@ -101,7 +105,7 @@ body {
 			<div class="div-himg" onclick="showbtn()">
 				<div class="himg" style="float: left;">
 					<img alt="头像" style="width: 100%;"
-						src="#springUrl('/images/headM.png')">
+						src="#if(${user.himg})#springUrl('/${user.himg}') #else #springUrl('/images/headM.png')#end">
 				</div>
 				<span id="title_nav" style="">Home</span>
 			</div>

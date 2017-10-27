@@ -1,5 +1,7 @@
 package com.oumuv.dao;
 
+import java.util.List;
+
 import com.oumuv.entity.MenuEntity;
 
 public interface MenuEntityMapper {
@@ -14,4 +16,6 @@ public interface MenuEntityMapper {
     int updateByPrimaryKeySelective(MenuEntity record);
 
     int updateByPrimaryKey(MenuEntity record);
+    
+    List<MenuEntity> findMenusByUid(Long uid);
 }
