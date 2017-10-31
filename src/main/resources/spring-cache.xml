@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+    		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
+	default-lazy-init="false">
+
+	<context:component-scan base-package="com.oumuv" /> 
+	<!--使用注解 -->
+<!-- 	<context:annotation-config /> -->
+	<!-- 加载redis配置文件 -->
+	 <!-- 引入配置文件 -->  
+<!-- 	<context:property-placeholder location="classpath:redis.properties" /> -->
+
+	<bean id="jedisPoolConfig1" class="redis.clients.jedis.JedisPoolConfig">
+	</bean>
+
+	<!-- ################RedisTemplate操作模板配置begin##################### -->
+	<bean id="jedisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="${redis.hostName}"></property>
+		<property name="port" value="${redis.port}"></property>
+<!-- 		<property name="password" value="${redis.password}"></property> -->
+		<property name="timeout" value="${redis.timeout}"></property>
+		<property name="usePool" value="${redis.pool.usePool}"></property>
+		<property name="poolConfig" ref="jedisPoolConfig1"></property>
+	</bean>
+
+	<bean id="jedisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory" />
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+	</bean>
+	<!-- ################RedisTemplate操作模板配置end##################### -->
+
+	<!-- ################JedisPool操作配置begin ############################## -->
+	<!-- Redis连接池的配置 -->
+	<bean id="jedisPoolConfig2" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="${redis.pool.maxActive}" /> <!-- 控制一个pool可分配多少个jedis实例 -->
+		<property name="maxIdle" value="${redis.pool.maxIdle}" /> <!-- 控制一个pool最多有多少个状态为idle(空闲)的jedis实例 -->
+		<property name="minIdle" value="${redis.pool.minIdle}" /> <!-- 控制一个pool最少有多少个状态为idle(空闲)的jedis实例 -->
+		<property name="maxWaitMillis" value="${redis.pool.maxWait}" /><!-- 
+			表示当borrow一个jedis实例时，最大的等待时间，如果超过等待时间，则直接抛出JedisConnectionException -->
+		<property name="testOnBorrow" value="${redis.pool.testOnBorrow}" /><!-- 
+			在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的 -->
+		<property name="testOnReturn" value="${redis.pool.testOnReturn}" />
+	</bean>
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg index="0" ref="jedisPoolConfig2" />
+		<constructor-arg index="1" value="${redis.hostName}" />
+		<constructor-arg index="2" value="${redis.port}" />
+		<constructor-arg index="3" value="${redis.timeout}" />
+		<!--Redis密码 -->
+<!-- 		<constructor-arg index="4" value="${redis.password}" /> -->
+	</bean>
+	<!-- ################JedisPool操作配置end ################################ -->
+</beans>

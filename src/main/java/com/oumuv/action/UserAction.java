@@ -35,6 +35,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.oumuv.core.JedisUtil;
 import com.oumuv.entity.LoginRecordEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.LoginRecordService;
@@ -49,6 +50,8 @@ import com.oumuv.utils.MD5Util;
 @RequestMapping("/user")
 public class UserAction {
 
+	@Autowired
+	private JedisUtil jedisUtil;
 	@Resource
 	private UserService userService;
 	@Autowired
