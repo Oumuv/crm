@@ -5,9 +5,9 @@
    <!--  <properties>  
         <property name="dialect" value="mysql" />  
     </properties>  -->
-    <settings>  
-        <setting name="logImpl" value="LOG4J" />    
-    </settings> 
+<!--     <settings>   -->
+<!--         <setting name="logImpl" value="LOG4J" />     -->
+<!--     </settings>  -->
      <!-- <settings>  
         <setting name="logImpl" value="STDOUT_LOGGING"/>  
     </settings>  -->

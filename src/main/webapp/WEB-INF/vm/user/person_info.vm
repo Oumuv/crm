@@ -1,7 +1,9 @@
 <link href="#springUrl('/css/bootstrap-datetimepicker.css')" rel="stylesheet">
+<link href="#springUrl('/css/bootstrapValidator.css')" rel="stylesheet">
 <script type="text/javascript" src="#springUrl('/js/bootstrap-datetimepicker.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/bootstrap-datetimepicker.fr.js')"></script>
 <script type="text/javascript" src="#springUrl('/js/bootstrap-datetimepicker.zh-CN.js')"></script>
+<script src="#springUrl('/js/bootstrapValidator.js')"></script>
 <div class="panel-heading">
 	$!{title}
 	<!-- 	<button type="button" class="close close_panel"> -->
@@ -50,6 +52,46 @@
 				<div class="">
 					<input type="text" class="form-control" id="phone"
 						placeholder="请输入名">
+				</div>
+			</div>
+			<div class="form-group col-md-6 col-sm-12">
+				<label for="idcard" class=" control-label"
+					>身份证号:</label>
+				<div class="">
+					<input type="text" class="form-control" id="idcard"
+						placeholder="身份证号">
+				</div>
+			</div>
+			<div class="form-group col-md-6 col-sm-12">
+				<label for="censusaddress" class=" control-label"
+					>户籍地址:</label>
+				<div class="">
+					<input type="text" class="form-control" id="censusaddress"
+						placeholder="户籍地址">
+				</div>
+			</div>
+			<div class="form-group col-md-6 col-sm-12">
+				<label for="homeaddress" class=" control-label"
+					>现家庭住址:</label>
+				<div class="">
+					<input type="text" class="form-control" id="homeaddress"
+						placeholder="现家庭住址">
+				</div>
+			</div>
+			<div class="form-group col-md-6 col-sm-12">
+				<label for="wechatorqq" class=" control-label"
+					>微信/QQ:</label>
+				<div class="">
+					<input type="text" class="form-control" id="wechatorqq"
+						placeholder="微信/QQ">
+				</div>
+			</div>
+			<div class="form-group col-md-12 col-sm-12">
+				<label for="remarkinfo" class=" control-label"
+					>个人信息备注:</label>
+				<div class="">
+					<input type="text" class="form-control" id="wechatorqq"
+						placeholder="个人信息备注">
 				</div>
 			</div>
 		</div>

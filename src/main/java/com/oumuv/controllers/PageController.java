@@ -21,7 +21,7 @@ import com.oumuv.entity.User;
 public class PageController {
 
 	/**
-	 * 页面局部跳转
+	 * 页面局部跳转(已登录)
 	 * 
 	 * @param page
 	 * @param request
@@ -34,6 +34,18 @@ public class PageController {
 			HttpServletRequest request, HttpSession session, ModelMap map) {
 		User user = (User) session.getAttribute("user");
 		map.put("user", user);
+		return page;
+	}
+	
+	/**
+	 * 页面局部跳转(未登录)
+	 * @param page
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "pagejumps")
+	public String pageResult(@RequestParam("page") String page,
+			HttpServletRequest request) {
 		return page;
 	}
 

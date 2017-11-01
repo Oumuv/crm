@@ -14,7 +14,6 @@
 		<!-- log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
-		<!-- <jetty.version>8.1.9.v20130131</jetty.version> -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -96,6 +95,20 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.24</version>
+		</dependency>
+		<!-- ************************************************* -->
+		<!-- Redis客户端jedis依赖 -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+
+		<!-- spring-data-redis依赖 -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.5.0.RELEASE</version>
 		</dependency>
 		<!-- ************************************************* -->
 		<!-- JSTL标签类 -->
@@ -183,7 +196,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
-			<scope>test</scope>
+<!-- 			<scope>test</scope> -->
 		</dependency>
 		<!-- 解决报错      http://blog.csdn.net/testcs_dn/article/details/64908771-->
 		<dependency>  

@@ -17,6 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Test;
 
+/**
+ * @author Oumuv
+ *
+ * 地址信息获取工具
+ */
 public class AccessSiteUtil {
 	/**
 	 * @param urlStr

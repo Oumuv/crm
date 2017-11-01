@@ -1,4 +1,4 @@
-
+<script src="#springUrl('/js/echarts.min.js')"></script>
 <style>
 bady div {
 	margin: 0px;
@@ -12,9 +12,45 @@ bady div {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-#window-viwe{
-		 position: fixed;width: 50%;height:60%;top: 50%;left: 50%;transform: translate(-50%,-50%);overflow: hidden;
-	}
+
+#window-viwe {
+	position: fixed;
+	width: 50%;
+	height: 60%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+}
+.pannel_div>div{
+	margin-bottom: 35px;
+	
+}
+.pannel_div .bg_shadow{
+	
+}
+.icon_list>div>div {
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.icon_list div img {
+	width: 60%;
+	border-radius: 16%;
+	-moz-border-radius: 16%;
+	-webkit-border-radius: 16%;
+	overflow: hidden;
+	box-shadow: 1px 1px 10px #C0C0C0;
+	transition: all 0.3s;
+}
+
+.icon_list div img:HOVER {
+	transform: scale(1.1);
+	
+/* 	border-radius: 50%; */
+/* 	-moz-border-radius: 50%; */
+/* 	-webkit-border-radius: 50%; */
+}
 
 @media screen and (max-width:910px) and (min-width:480px) {
 }
@@ -28,13 +64,12 @@ bady div {
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
-	#window-viwe{
-		width:100%;
+	#window-viwe {
+		width: 100%;
 		height: 100%;
 		margin: 0px;
 		z-index: 999;
 	}
-	
 }
 </style>
 <body>
@@ -51,37 +86,71 @@ bady div {
 		</div>
 	</div>
 
-	<div class="" style="width: 100%;">
-		<div class="jumbotron">
-			<h2>你好！${user.username}！</h2>
-			<p>在这里你可以查看或修改你的个人信息，请点击下方按钮开始吧</p>
-			<p>
-				<a class="btn btn-primary btn-lg" id="Personal_info" href="#" role="button">Personal information</a>
-			</p>
+<!-- 	<div class="" style="width: 100%;"> -->
+<!-- 		<div class="jumbotron"> -->
+<!-- 			<h2>你好！${user.username}！</h2> -->
+<!-- 			<p>在这里你可以查看或修改你的个人信息，请点击下方按钮开始吧</p> -->
+<!-- 			<p> -->
+<!-- 				<a class="btn btn-primary btn-lg" id="Personal_info" href="#" role="button">Personal information</a> -->
+<!-- 			</p> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+	
+	<div class="pannel_div row" style="width:100%;float: left;">
+		<div class="col-md-8" style="height: 200px;">
+			<div class="bg_shadow charts_a" style="width: 100%;height: 100%;margin-left: 10px;">
+				<div id="charts" style="width: 100%;height: 100%;margin-bottom: 1px"></div>
+			</div>
+		</div>
+		
+		<div class="col-md-4" style="height: 200px;">
+			<div class="bg_shadow charts_a" style="width: 100%;height: 100%;margin-left: 10px;">
+				<div id="charts2" style="width: 100%;height: 100%;margin-bottom: 1px"></div>
+			</div>
+		</div>
+		<div class="icon_list  col-md-8" style="margin-right: 0px;margin-left: 0px;">
+			<div class="bg_shadow row" style="width: 100%;height: 100%;margin-left: 10px;padding-top: 25px;">
+				<div class="col-md-3 col-sm-3 col-xs-4">
+					<img style="" alt="个人信息" title="个人信息" src="#springUrl('/images/icon/grxx.png')">
+					<h5 class="text-primary">个人信息</h5>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-4">
+					<img style="" alt="任务进度" title="任务进度" src="#springUrl('/images/icon/rwjd.png')">
+					<h5 class="text-primary">任务进度</h5>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-4">
+					<img style="" alt="工作进度" title="工作进度" src="#springUrl('/images/icon/gzjd.png')">
+					<h5 class="text-primary">工作进度</h5>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-4">
+					<img style="" alt="公告" title="公告" src="#springUrl('/images/icon/gg.png')">
+					<h5 class="text-primary">公告</h5>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-4">
+					<img style="" alt="未读消息" title="未读消息" src="#springUrl('/images/icon/wdxx.png')">
+					<h5 class="text-primary">未读消息</h5>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-4">
+					<img style="" alt="销售进度" title="销售进度" src="#springUrl('/images/icon/xsjl.png')">
+					<h5 class="text-primary">任务清单</h5>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-4">
+					<img style="" alt="日常安排" title="日常安排" src="#springUrl('/images/icon/rcap.png')">
+					<h5 class="text-primary">日常安排</h5>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-4">
+					<img style="" alt="任务清单" title="任务清单"  src="#springUrl('/images/icon/rwqd.png')">
+					<h5 class="text-primary">任务清单</h5>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4" style="height: 250px;">
+			<div class="bg_shadow charts_a" style="width: 100%;height: 100%;margin-left: 10px;">
+				<div id="charts3" style="width: 100%;height: 100%;margin-bottom: 1px"></div>
+			</div>
 		</div>
 	</div>
-	<div class="" style="width: 100%;">
-		<div class="jumbotron">
-			<h1>Hello, world!</h1>
-			<p>This is a simple hero unit, a simple jumbotron-style component
-				for calling extra attention to featured content or information.</p>
-			<p>
-				<a id="btn_one" class="btn btn-primary btn-lg" href="#"
-					role="button">Learn more</a>
-			</p>
-		</div>
-	</div>
-	<div class="" style="width: 100%;">
-		<div class="jumbotron">
-			<h1>Hello, world!</h1>
-			<p>This is a simple hero unit, a simple jumbotron-style component
-				for calling extra attention to featured content or information.</p>
-			<p>
-				<a class="btn btn-primary btn-lg" href="#" role="button">Learn
-					more</a>
-			</p>
-		</div>
-	</div>
+	
 	<div id="window-viwe" class="panel panel-primary" role="view" style="display:none;" >
 		
 		
@@ -92,8 +161,213 @@ bady div {
 		$('#Personal_info').on("click",function(){
 			$('#window-viwe').show(0).load("#springUrl('/dailogturn.do')",{page:"user/person_info"});
 		});
-		
 	})
+</script>
+<script type="text/javascript">
+$(function(){
+	// 基于准备好的dom，初始化echarts实例
+	var myChart = echarts.init(document.getElementById('charts'));
+	var k = [];
+	var v = [];
+	$.ajax({
+		type : "post",
+		async : false, //同步执行
+		url : "#springUrl('/user/getloginrecords.do')",
+		data : {},
+		dataType : "json", //返回数据形式为json
+		success : function(json) {
+			if (json) {
+				
+				for ( var key in json) {
+					k.push(key);
+					v.push(json[key]+"")
+				}
+			}
+		},
+		error : function(errorMsg) {
+			alert("不好意思,图表请求数据失败啦!");
+			myChart.hideLoading();
+		}
+	})
+	// 指定图表的配置项和数据
+	var option = {
+		title : {
+			text : '近30天登录记录',
+			x : 'center'
+		},
+		tooltip : {
+			formatter : '{b} 登录 {c} 次  '
+		},
+		legend : {
+			right : 10,
+			data : [ '次/天' ],
+			textStyle : {
+				fontSize : 10
+			}
+		},
+		xAxis : {
+			data : k
+		},
+		yAxis : {},
+		series : [ {
+			name : '次/天',
+			type : 'bar',
+			data : v
+
+		} ],
+		dataZoom : [ {
+			type : 'slider', 
+			start : 20,
+			end : 100
+		}, { 
+			type : 'inside',
+			start : 20, 
+			end : 80
+		} ],
+	};
+
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	//浏览器宽高改变时重置图标尺寸 
 	
+})
+</script>
+<script>
+$(function(){
+var myChart2 = echarts.init(document.getElementById('charts2'));
+option2 = {
+	    title: {
+	        text: '近30天工作动态',
+	        left: 'center',
+	    },
+
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+
+	    visualMap: {
+	        show: false,
+	        min: 80,
+	        max: 600,
+	        inRange: {
+	            colorLightness: [0, 1]
+	        }
+	    },
+	    series : [
+	        {
+	            name:'访问来源',
+	            type:'pie',
+	            radius : '55%',
+	            center: ['50%', '50%'],
+	            data:[
+	                {value:335, name:'来访接待'},
+	                {value:310, name:'上门'},
+	                {value:274, name:'网络咨询'},
+	                {value:235, name:'媒体广告'},
+	                {value:400, name:'电话咨询'}
+	            ].sort(function (a, b) { return a.value - b.value; }),
+	            roseType: 'radius',
+
+	            animationType: 'scale',
+	            animationEasing: 'elasticOut',
+	            animationDelay: function (idx) {
+	                return Math.random() * 200;
+	            }
+	        }
+	    ]
+	};
 	
+	myChart2.setOption(option2);
+	
+})
+</script>
+<script>
+$(function(){
+var myChart3 = echarts.init(document.getElementById('charts3'));
+option3 = {
+		title : {
+		        text: '销售记录',
+		        subtext: '纯属虚构',
+		        x:'center'
+		},
+	    tooltip: {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b}: {c} ({d}%)"
+	    },
+	    legend: {
+// 	        orient: 'vertical',
+	        x: 'left',
+	        y:'bottom',
+	        data:['月销售目标','已完成目标','未完成目标','总负责客户数','签约客户数','已签约客户数','未签约客户数']
+	    },
+	    series: [
+	        {
+	            name:'访问来源',
+	            type:'pie',
+	            radius: ['20%', '40%'],
+	            center : ['25%', '50%'],
+	            avoidLabelOverlap: false,
+	            label: {
+	                normal: {
+	                    show: false,
+	                    position: 'center'
+	                },
+	                emphasis: {
+	                    show: true,
+	                    textStyle: {
+	                        fontWeight: 'bold'
+	                    }
+	                }
+	            },
+	            labelLine: {
+	                normal: {
+	                    show: false
+	                }
+	            },
+	            data:[
+	                {value:335, name:'月销售目标'},
+	                {value:310, name:'已完成目标'},
+	                {value:234, name:'未完成目标'},
+	            ]
+	        },
+	        {
+	            name:'访问来源',
+	            type:'pie',
+	            radius: ['20%', '40%'],
+	            center : ['75%', '50%'],
+	            avoidLabelOverlap: false,
+	            label: {
+	                normal: {
+	                    show: false,
+	                    position: 'center'
+	                },
+	                emphasis: {
+	                    show: true,
+	                    textStyle: {
+	                        fontWeight: 'bold'
+	                    }
+	                }
+	            },
+	            labelLine: {
+	                normal: {
+	                    show: false
+	                }
+	            },
+	            data:[
+	                {value:205, name:'总负责客户数'},
+	                {value:98, name:'签约客户数'},
+	                {value:50, name:'已签约客户数'},
+	                {value:57, name:'未签约客户数'},
+	            ]
+	        }
+	    ]
+	};
+	myChart3.setOption(option3);
+	window.onresize = function() {
+		myChart.resize();
+		myChart2.resize();
+		myChart3.resize();
+	};
+})
 </script>

@@ -21,7 +21,6 @@
 <script>
 	/* alert('${msg}'+'${user}'); */
 </script>
-<script type="text/javascript" src="http://tool.keleyi.com/ip/visitoriphost/"></script>
 <style>
 .index {
 	width: 50%;
@@ -71,14 +70,12 @@
 		<br>
 		<!-- 登录框 -->
 		<form action="<%=request.getContextPath()%>/user/login.do" id="form-data" method="post">
-			<span  id="keleyivisitorip"></span>
 			<div class="container hmax" style="text-align: center">
 				<!-- 提示框 -->
 					<div id="tis-msg" class="alert alert-danger alert-dismissible" style="display:none"
 						role="alert">
 					</div>
-				<input id="loginIp" type="text" name="loginIp" title="获取ip地址信息">
-				<input id="address" type="text" name="address" title="获取地理位置信息">
+				<input id="address" type="hidden" name="address" title="获取地址信息">
 				<div class="input-group">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="button" onfocus="$('#username_input').focus()">Username:</button>
@@ -123,8 +120,8 @@
 				<br>
 				<div class="container control"
 					style="width: 80%; min-width: 250px; text-align: center">
-					<span>And you can <a>retrieve password</a><span> or </span>
-						<a>register</a></span>
+					<span>You can <a>retrieve password</a><span> or </span>
+						<a href="pagejumps.do?page=register">register</a></span>
 				</div>
 			</div>
 		</form>
@@ -180,13 +177,10 @@
 				navigator.geolocation.getCurrentPosition(
 						getPositionSuccess);
 			} 
-			console.log($('#keleyivisitorip').html());
-			$('#loginIp').val(11);
 	});
 	
 	function getPositionSuccess(position) {
-		var latlon = position.coords.latitude+','+position.coords.longitude;  
-		alert(latlon)
+		var latlon = position.coords.latitude+','+position.coords.longitude;   
 	    var url = "http://api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b&callback=renderReverse&location="+latlon+"&output=json&pois=0";   
 	    $.ajax({    
 	        type: "GET",    
