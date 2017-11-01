@@ -40,26 +40,28 @@
 .bg_shadow {
 	box-shadow: 0px 0px 10px #C0C0C0;
 }
-
+.register_div h2,.register_div label{
+	color: white;
+}
 </style>
 <script src="#springUrl('/js/jquery.min.js')"></script>
 <script src="#springUrl('/js/bootstrap.js')"></script>
 <script src="#springUrl('/js/bootstrapValidator.js')"></script>
 </head>
-<body>
-<div class="container">
+<body style="background:url(#springUrl('/images/background_img3.jpg'));background-size:100% 100%;background-attachment: fixed; ">
+<div class="container register_div">
         <div class="row">
             <!-- form: -->
             <section>
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="page-header">
-                        <h2>Sign up</h2>
+                        <h2>Sign up <label style="font-size: 14px">>>用户注册</label></h2>
                     </div>
 
                     <form id="defaultForm" method="post" class="form-horizontal" action="target.php">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">姓名</label>
-                            <div class="col-lg-4">
+                            <div class="col-lg-5">
                                 <input type="text" class="form-control" name="name" placeholder="" />
                             </div>
                         </div>
@@ -143,82 +145,76 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            firstName: {
-                group: '.col-lg-4',
+//             firstName: {
+//                 group: '.col-lg-4',
+//                 validators: {
+//                     notEmpty: {
+//                         message: 'The first name is required and cannot be empty'
+//                     }
+//                 }
+//             },
+            name: {
                 validators: {
                     notEmpty: {
-                        message: 'The first name is required and cannot be empty'
-                    }
-                }
-            },
-            lastName: {
-                group: '.col-lg-4',
-                validators: {
-                    notEmpty: {
-                        message: 'The last name is required and cannot be empty'
+                        message: '请输入你的姓名'
                     }
                 }
             },
             username: {
-                message: 'The username is not valid',
                 validators: {
                     notEmpty: {
-                        message: 'The username is required and cannot be empty'
+                        message: '请输入你的用户名'
                     },
                     stringLength: {
                         min: 6,
                         max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
+                        message: '用户名格式为6到30位字母或数字'
                     },
                     regexp: {
                         regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                        message: '用户名不可包含特殊符号'
                     },
                     remote: {
                         type: 'POST',
                         url: 'remote.php',
-                        message: 'The username is not available'
+                        message: '用户名已存在'
                     },
                     different: {
                         field: 'password,confirmPassword',
-                        message: 'The username and password cannot be the same as each other'
+                        message: '用户名不可与密码相同'
                     }
                 }
             },
             email: {
                 validators: {
                     emailAddress: {
-                        message: 'The input is not a valid email address'
+                        message: '请输入有效的电子邮箱'
                     }
                 }
             },
             password: {
                 validators: {
                     notEmpty: {
-                        message: 'The password is required and cannot be empty'
-                    },
-                    identical: {
-                        field: 'confirmPassword',
-                        message: 'The password and its confirm are not the same'
+                        message: '请输入密码'
                     },
                     different: {
                         field: 'username',
-                        message: 'The password cannot be the same as username'
+                        message: '密码不可与用户名相同'
                     }
                 }
             },
             confirmPassword: {
                 validators: {
                     notEmpty: {
-                        message: 'The confirm password is required and cannot be empty'
+                        message: '请确认密码'
                     },
                     identical: {
                         field: 'password',
-                        message: 'The password and its confirm are not the same'
+                        message: '密码输入不一致'
                     },
                     different: {
                         field: 'username',
-                        message: 'The password cannot be the same as username'
+                        message: '密码不ke与用户名相同'
                     }
                 }
             },
@@ -226,14 +222,14 @@ $(document).ready(function() {
                 validators: {
                     date: {
                         format: 'YYYY/MM/DD',
-                        message: 'The birthday is not valid'
+                        message: '内容格式不正确'
                     }
                 }
             },
             gender: {
                 validators: {
                     notEmpty: {
-                        message: 'The gender is required'
+                        message: '性别不可为空'
                     }
                 }
             }

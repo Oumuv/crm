@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,12 +22,9 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.util.SavedRequest;
-import org.apache.shiro.web.util.WebUtils;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.oumuv.core.JedisUtil;
+import com.oumuv.core.ObjectUtil;
 import com.oumuv.entity.LoginRecordEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.LoginRecordService;
@@ -160,38 +157,45 @@ public class UserAction {
 	 * 
 	 * @param uid
 	 *            用户id
-	 * @throws ParseException
+	 * @throws Exception 
 	 * */
 	@RequestMapping("/getloginrecords")
-	public void getloginRecoredForMonth(HttpSession session,HttpServletRequest request, HttpServletResponse response) throws JsonGenerationException, JsonMappingException,
-			IOException, ParseException {
+	public void getloginRecoredForMonth(HttpSession session,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		User user = (User) session.getAttribute("user");
-		List<Map<String, String>> maplis = loginRecordService.getloginRecoredForMonth(user.getId());//查询30天内登陆次数
-		Map<Object, Object> loginCount = new HashMap<Object, Object>();//保存30天内登陆次数统计
-		Map<Object, Object> resultMap = new LinkedHashMap<Object, Object>();//返回前端的json数据
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String endDate = sdf.format(new Date());// 当前时间
-		String dateformat = null;
-		Calendar calendar = Calendar.getInstance();
-		for (Map m : maplis) {
-			Object t = m.get("t");//t登陆的日期
-			Object c = m.get("c");//登陆的次数
-			loginCount.put(t, c);
+		String key="login_records_"+user.getId();
+		String value = jedisUtil.get(key);//查redis是否有该数据的缓存，没有缓存或者缓存已经过期则再查db
+		if(value!=null){
+			response.getWriter().write(value);//有缓存则直接返回缓存的数据
+		}else{
+			//查db数据库
+			List<Map<String, String>> maplis = loginRecordService.getloginRecoredForMonth(user.getId());//查询30天内登陆次数
+			Map<Object, Object> loginCount = new HashMap<Object, Object>();//保存30天内登陆次数统计
+			Map<Object, Object> resultMap = new LinkedHashMap<Object, Object>();//返回前端的json数据
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String endDate = sdf.format(new Date());// 当前时间
+			String dateformat = null;
+			Calendar calendar = Calendar.getInstance();
+			for (Map m : maplis) {
+				Object t = m.get("t");//t登陆的日期
+				Object c = m.get("c");//登陆的次数
+				loginCount.put(t, c);
+				}
+			
+			//遍历保存记录
+			for (int i = 29; i >= 0; i--) {
+				calendar.setTime(sdf.parse(endDate));
+				calendar.add(calendar.DATE, -i);
+				dateformat = sdf.format(calendar.getTime());
+				if (loginCount.get(dateformat) != null) {
+					resultMap.put(dateformat, loginCount.get(dateformat));
+					continue;
+				}
+				resultMap.put(dateformat, 0);
 			}
-		
-		//遍历保存记录
-		for (int i = 29; i >= 0; i--) {
-			calendar.setTime(sdf.parse(endDate));
-			calendar.add(calendar.DATE, -i);
-			dateformat = sdf.format(calendar.getTime());
-			if (loginCount.get(dateformat) != null) {
-				resultMap.put(dateformat, loginCount.get(dateformat));
-				continue;
-			}
-			resultMap.put(dateformat, 0);
+			String json = new ObjectMapper().writeValueAsString(resultMap);//转换json格式
+			jedisUtil.set(key, json,60);//从db查出的数据缓存到redis，缓存时间为60秒
+			response.getWriter().write(json);
 		}
-		String json = new ObjectMapper().writeValueAsString(resultMap);//转换json格式
-		response.getWriter().write(json);
 	}
 
 }
