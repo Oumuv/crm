@@ -98,8 +98,22 @@ body {
 </style>
 <script src="#springUrl('/js/jquery.min.js')"></script>
 <script src="#springUrl('/js/bootstrap.js')"></script>
+<script>
+	function initPage(){   
+	    $('#loading_div').css("display","none");
+	} 
+	function loadingPage(){
+		$('#loading_div').css("display","block");
+	}
+	
+</script>
 </head>
 <body>
+	<div id="loading_div" style="width: 100%;height: 100%;position: fixed;z-index: 99999;/* display:none; */">
+		<img style="position: fixed;left: 50%;top:50%;transform: translate(-50%, -50%);z-index: 9999;" src="#springUrl('/images/loading.gif')">
+		<h3 style="position: fixed;color: rgb(62, 47, 47);z-index: 99999;left: 50%;top: 80%;font-weight: 600;transform: translate(-50%, -50%);">Loading...</h3>
+		<div style="width: 100%;height: 100%;position: fixed;background: #b3b3b3; FILTER: alpha(opacity =   0.5); -moz-opacity: 0.5; opacity: 0.5;"></div>
+	</div>
 	<div>
 		<div class="container page ">
 			<!-- 头像框 -->
@@ -144,6 +158,7 @@ body {
 			<div class=" conten_div " id="conten" style="">
 				<div style="width: 100%; height: 100%; overflow: auto"></div>
 			</div>
+			
 		</div>
 
 	</div>
@@ -153,13 +168,14 @@ body {
 	/*点击主导航栏切换页面 */
 	$(".navlist").click(function() {
 		// 	$("#btn1").click(function() {
+		loadingPage();
 		$(".navlist").removeClass("active");
 		$(this).addClass("active");
 		$("#title_nav").html($(this).find("span").html());
 		jQuery('#conten div').empty();
 		jQuery('#conten div').load("#springUrl('/pageturn.do')", {
 			page : $(this).attr("link-window")
-		});
+		},function(){initPage();});
 	});
 	/*显示/隐藏工具栏*/
 	function showbtn() {
@@ -183,7 +199,7 @@ body {
 	$(function() {
 		jQuery('#conten div').load("#springUrl('/pageturn.do')", {
 			page : "user/home"
-		});
+		},function(){initPage();});
 
 	});
 
@@ -192,11 +208,7 @@ body {
 		$('.word_div,.div-nav').toggleClass("blurclass");
 		$(".bg_div").toggle();
 	}
-</script>
-
-
-
-<script type="text/javascript">
+	
 	// 获取位置信息
 	/* $(function() {
 		var r=confirm("浏览器请求获取位置信息，是否同意？");
@@ -229,7 +241,7 @@ body {
 
 		var latlon = position.coords.latitude+','+position.coords.longitude;   
 	       
-	    //baidu   
+	    //baidu Map API   
 	    var url = "http://api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b&callback=renderReverse&location="+latlon+"&output=json&pois=0";   
 	    $.ajax({    
 	        type: "GET",    
@@ -262,6 +274,5 @@ body {
 			break;
 		}
 	}
-
 </script>
 </html>
