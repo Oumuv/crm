@@ -25,6 +25,9 @@ bady div {
 	transform: translate(-50%, -50%);
 	overflow: hidden;
 }
+.pannel_div{
+/* 	margin-top: 11px; */
+}
 .pannel_div>div{
 	margin-bottom: 35px;
 	
@@ -73,6 +76,9 @@ bady div {
 		margin: 0px;
 		z-index: 999;
 	}
+	.div_weather{
+		display:none;
+	}
 }
 </style>
 <body>
@@ -89,15 +95,6 @@ bady div {
 		</div>
 	</div>
 
-<!-- 	<div class="" style="width: 100%;"> -->
-<!-- 		<div class="jumbotron"> -->
-<!-- 			<h2>你好！${user.username}！</h2> -->
-<!-- 			<p>在这里你可以查看或修改你的个人信息，请点击下方按钮开始吧</p> -->
-<!-- 			<p> -->
-<!-- 				<a class="btn btn-primary btn-lg" id="Personal_info" href="#" role="button">Personal information</a> -->
-<!-- 			</p> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
 	
 	<div class="pannel_div row" style="width:100%;float: left;">
 		<div class="col-md-8" style="height: 200px;">
@@ -162,7 +159,8 @@ bady div {
 <script>
 $(function(){
 	$('#Personal_info').on("click",function(){
-		$('#window-viwe').show(0).load("#springUrl('/dailogturn.do')",{page:"user/person_info"});
+		loadingPage();
+		$('#window-viwe').show(0).load("#springUrl('/dailogturn.do')",{page:"user/person_info"},function(){initPage();});
 	});
 	
 	// 基于准备好的dom，初始化echarts实例
