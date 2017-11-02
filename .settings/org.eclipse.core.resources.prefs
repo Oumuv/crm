@@ -8,11 +8,17 @@ encoding//src/main/resources/redis.properties=UTF-8
 encoding//src/main/resources/velocity/velocity.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/index.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/msg/msg.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/vm/register.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/vm/register1.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/user/home.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/user/person_info.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/word/word.vm=UTF-8
 encoding//src/main/webapp/css/bootstrap.min.css=UTF-8
 encoding//src/main/webapp/css/dcalendar.picker.css=UTF-8
 encoding//src/main/webapp/login.jsp=UTF-8
+<<<<<<< HEAD
 encoding//src/test/java=UTF-8
+=======
+encoding//src/main/webapp/register1.html=UTF-8
+>>>>>>> refs/remotes/origin/bonoon
 encoding/<project>=UTF-8
