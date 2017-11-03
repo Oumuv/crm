@@ -28,10 +28,11 @@ public class PageController {
 	 * @param session
 	 * @param map
 	 * @return
+	 * @throws InterruptedException 
 	 */
 	@RequestMapping(value = "pageturn")
 	public String pageResult(@RequestParam("page") String page,
-			HttpServletRequest request, HttpSession session, ModelMap map) {
+			HttpServletRequest request, HttpSession session, ModelMap map) throws InterruptedException {
 		User user = (User) session.getAttribute("user");
 		map.put("user", user);
 		return page;
