@@ -54,6 +54,17 @@ public class UserAction {
 	@Autowired
 	private LoginRecordService loginRecordService;
 
+	/**
+	 * shiro的登录认证
+	 * @param username
+	 * @param password
+	 * @param address
+	 * @param request
+	 * @param map
+	 * @param session
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String shiroLogin(@Param(value = "usename") String username,
 			@Param("password") String password,
@@ -95,6 +106,17 @@ public class UserAction {
 		}
 	}
 
+	/**
+	 * 放弃使用的login
+	 * @param username
+	 * @param password
+	 * @param address
+	 * @param request
+	 * @param map
+	 * @param session
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	@SuppressWarnings("static-access")
 	@RequestMapping("/login1")
 	public String login(@Param(value = "usename") String username,

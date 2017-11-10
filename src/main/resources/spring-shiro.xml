@@ -14,8 +14,8 @@
 	</bean>
 	
 	
-	<bean id="ShiroRealm" class="com.oumuv.core.ShiroRealm"></bean>
 	<!-- 項目自定义的Realm -->
+	<bean id="ShiroRealm" class="com.oumuv.core.ShiroRealm"></bean>
 <!-- 	<bean id="myShiroRealm" class="com.luo.shiro.realm.MyShiroRealm"> -->
 <!-- 		<property name="cacheManager" ref="cacheManager" /> -->
 <!-- 	</bean> -->

@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
 
 import com.oumuv.entity.User;
 
@@ -65,5 +66,13 @@ public class PageController {
 		User user = (User) session.getAttribute("user");
 		map.put("user", user);
 		return page;
+	}
+	
+	
+	@RequestMapping(value="index")
+	public String indexPage(HttpServletRequest request, HttpSession session, ModelMap map){
+		User user = (User) session.getAttribute("user");
+		map.put("user", user);
+		return "index";
 	}
 }
