@@ -1,4 +1,4 @@
-package com.oumuv.serviceimpl;
+package com.oumuv.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

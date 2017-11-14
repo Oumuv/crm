@@ -1,4 +1,4 @@
-package com.oumuv.core;
+package com.oumuv.utils;
 
 import java.util.List;
 import java.util.Map;

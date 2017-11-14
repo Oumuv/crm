@@ -1,4 +1,4 @@
-package com.oumuv.core;
+package com.oumuv.utils;
 import java.io.*;
 /**
  * Created by Kinglf on 2016/10/17.

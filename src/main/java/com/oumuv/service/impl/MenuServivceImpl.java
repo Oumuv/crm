@@ -1,4 +1,4 @@
-package com.oumuv.serviceimpl;
+package com.oumuv.service.impl;
 
 import java.util.List;
 
