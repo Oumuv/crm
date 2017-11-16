@@ -104,21 +104,9 @@ li {
 		style="color: white; z-index: 999" onclick="nav_control()"></span>
 	<!-- 导航模块 -->
 	<div class=" nav_div">
-		<nav style="" class=" nav_list">
-			<ul class="nav nav-pills nav-stacked " style="width: 100%;">
-				<li role="presentation" class="active"><a href="#">系统管理</a></li>
-				<li role="presentation"><a href="#">营销管理</a></li>
-				<li role="presentation" class="dropdown"><a
-					class="dropdown-toggle" data-toggle="dropdown" href="#"
-					role="button" aria-haspopup="true" aria-expanded="false">客户管理<span
-						class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li role="presentation"><a href="#">权限管理</a></li>
-						<li role="presentation"><a href="#">用户管理</a></li>
-					</ul></li>
-				<li role="presentation"><a href="#">服务管理</a></li>
-				<li role="presentation"><a href="#">统计报表</a></li>
-				<li role="presentation"><a href="#">基本数据</a></li>
+		<nav style="border-radius: 8px 8px 0px 0px;" class=" nav_list">
+			<ul id="navigation_ul" class="nav nav-pills nav-stacked " style="width: 100%;">
+				
 			</ul>
 		</nav>
 		<!-- 日历 -->
@@ -139,6 +127,8 @@ li {
 </div>
 <script type="text/javascript">
 $(function(){
+	$('#navigation_ul').load("#springUrl('/getmenu.do')");
+	
 	// 基于准备好的dom，初始化echarts实例
 	var myChart = echarts.init(document.getElementById('charts'));
 	var k = [];
@@ -232,15 +222,4 @@ $(function(){
 	};
 })
 </script>
-<script type="text/javascript">
-	/*隐藏/显示菜单导航栏*/
-	function nav_control() {
-		$('.nav_div').toggle(300);
-		blurback();
-	}
 
-	$(".nav_list>ul>li").click(function() {
-		$(".nav_list li").removeClass("active")
-		$(this).addClass("active")
-	})
-</script>

@@ -54,7 +54,7 @@
 				/pagejumps* = anon
 				/user/logout* = logout
 				/pageturn* = authc
-				/** = authc
+				/** = anon
 			</value>
 		</property>
 	</bean>

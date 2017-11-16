@@ -18,15 +18,7 @@ public class MenuServivceImpl implements MenuService{
 	 * 获取菜单
 	 * */
 	public List<RightEntity> getMenu(Long id) {
-		List<RightEntity> rightByUId = menuDao.getRightByUId(id);
-		for(RightEntity r:rightByUId){
-			if(r.getIspatent()==1){
-				List<RightEntity> list = menuDao.getRightByParentId(r.getRightCode());
-				if(list.size()>0){
-					r.setRlist(list);
-				}
-			}
-		}
+		List<RightEntity> rightByUId = menuDao.getRightByUId(1L);
 		return rightByUId;
 	}
 

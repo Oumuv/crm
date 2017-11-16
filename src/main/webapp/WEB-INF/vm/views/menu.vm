@@ -1,0 +1,41 @@
+<!-- <li role="presentation" class="active"><a href="#">系统管理</a></li> -->
+<!-- <li role="presentation"><a href="#">营销管理</a></li> -->
+<!-- <li role="presentation" class="dropdown"><a class="dropdown-toggle" -->
+<!-- 	data-toggle="dropdown" href="#" role="button" aria-haspopup="true" -->
+<!-- 	aria-expanded="false">客户管理<span class="caret"></span></a> -->
+<!-- 	<ul class="dropdown-menu"> -->
+<!-- 		<li role="presentation"><a href="#">权限管理</a></li> -->
+<!-- 		<li role="presentation"><a href="#">用户管理</a></li> -->
+<!-- 	</ul></li> -->
+<!-- <li role="presentation"><a href="#">服务管理</a></li> -->
+<!-- <li role="presentation"><a href="#">统计报表</a></li> -->
+<!-- <li role="presentation"><a href="#">基本数据</a></li> -->
+<li role="presentation" class="active"><a href="#"></a></li>
+#foreach($m in $menulist)
+	#if(${m.menus})
+		<li role="presentation" class="dropdown"><a class="dropdown-toggle"
+		data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+		aria-expanded="false">$m.name<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+			#foreach($ms in ${m.menus})
+				<li role="presentation"><a href= #if($!ms.url)"$!ms.url" #else "#"#end>$ms.name</a></li>
+			#end
+			</ul>
+		</li>
+	#else
+		<li role="presentation" class=""><a href=#if($!m.url)"$!m.url" #else "#"#end>$m.name</a></li>
+	#end
+#end
+
+<script type="text/javascript">
+	/*隐藏/显示菜单导航栏*/
+	function nav_control() {
+		$('.nav_div').toggle(300);
+		blurback();
+	}
+
+	$(".nav_list>ul>li").click(function() {
+		$(".nav_list li").removeClass("active")
+		$(this).addClass("active")
+	})
+</script>

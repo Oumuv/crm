@@ -1,56 +1,104 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oumuv.dao.LoginRecordEntityMapper">
-	<resultMap id="BaseResultMap" type="com.oumuv.entity.LoginRecordEntity">
-		<result column="user_id" property="userId" jdbcType="BIGINT" />
-		<result column="login_date" property="loginDate" jdbcType="TIMESTAMP" />
-		<result column="login_site" property="loginSite" jdbcType="VARCHAR" />
-		<result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
-	</resultMap>
+  <resultMap id="BaseResultMap" type="com.oumuv.entity.LoginRecordEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="login_date" jdbcType="TIMESTAMP" property="loginDate" />
+    <result column="login_site" jdbcType="VARCHAR" property="loginSite" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, login_date, login_site, login_ip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from loginrecord
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from loginrecord
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.oumuv.entity.LoginRecordEntity">
+    insert into loginrecord (id, user_id, login_date, 
+      login_site, login_ip)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{loginDate,jdbcType=TIMESTAMP}, 
+      #{loginSite,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oumuv.entity.LoginRecordEntity">
+    insert into loginrecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="loginDate != null">
+        login_date,
+      </if>
+      <if test="loginSite != null">
+        login_site,
+      </if>
+      <if test="loginIp != null">
+        login_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="loginDate != null">
+        #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginSite != null">
+        #{loginSite,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null">
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.LoginRecordEntity">
+    update loginrecord
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="loginDate != null">
+        login_date = #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginSite != null">
+        login_site = #{loginSite,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null">
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oumuv.entity.LoginRecordEntity">
+    update loginrecord
+    set user_id = #{userId,jdbcType=BIGINT},
+      login_date = #{loginDate,jdbcType=TIMESTAMP},
+      login_site = #{loginSite,jdbcType=VARCHAR},
+      login_ip = #{loginIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 
 
-	<select id="getloginRecoredForMonth" resultType="java.util.Map"
-		parameterType="java.lang.Long">
+<!-- ******************************************************* -->
+
+	<select id="getloginRecoredForMonth" parameterType="java.lang.Long" resultType="java.util.Map">
 		select count(*) as c, DATE_FORMAT(login_date, '%Y-%m-%d') as t from
-		loginrecord where user_id=#{uid,jdbcType=BIGINT} and 30>=datediff(CURDATE(), login_date)
+		loginrecord where user_id=#{uid,jdbcType=BIGINT} and 30&gt;=datediff(CURDATE(), login_date)
 		GROUP BY t ORDER BY t
 	</select>
-	<insert id="insert" parameterType="com.oumuv.entity.LoginRecordEntity">
-		insert into loginrecord (user_id, login_date, login_site, login_ip
-		)
-		values (#{userId,jdbcType=BIGINT}, #{loginDate,jdbcType=TIMESTAMP},
-		#{loginSite,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR}
-		)
-	</insert>
-	<insert id="insertSelective" parameterType="com.oumuv.entity.LoginRecordEntity">
-		insert into loginrecord
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="userId != null">
-				user_id,
-			</if>
-			<if test="loginDate != null">
-				login_date,
-			</if>
-			<if test="loginSite != null">
-				login_site,
-			</if>
-			<if test="loginIp != null">
-				login_ip,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="userId != null">
-				#{userId,jdbcType=BIGINT},
-			</if>
-			<if test="loginDate != null">
-				#{loginDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="loginSite != null">
-				#{loginSite,jdbcType=VARCHAR},
-			</if>
-			<if test="loginIp != null">
-				#{loginIp,jdbcType=VARCHAR},
-			</if>
-		</trim>
-	</insert>
+	
+	
 </mapper>

@@ -65,7 +65,7 @@
 			interface.</p>
 		<p>
 			<a class="btn btn-lg btn-success hbtn" style="max-width: 380px"
-				href="<%=request.getContextPath()%>/index.do" role="button">Log in and start to using</a>
+				href="<%=request.getContextPath()%>/getmenu.do" role="button">Log in and start to using</a>
 		</p>
 		<br>
 		<!-- 登录框 -->

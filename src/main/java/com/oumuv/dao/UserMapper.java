@@ -6,18 +6,22 @@ import org.springframework.stereotype.Repository;
 import com.oumuv.entity.User;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
-    int insert(User record);
+	int insert(User record);
 
-    int insertSelective(User record);
+	int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer id);
+	User selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(User record);
+	int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(User record);
+	int updateByPrimaryKey(User record);
+
     
+    
+    
+//    ***********************************************
     User login(@Param("username")String username,@Param("password")String password);
 
 	String check(String username);

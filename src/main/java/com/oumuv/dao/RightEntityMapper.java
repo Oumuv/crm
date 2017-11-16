@@ -7,15 +7,18 @@ import com.oumuv.entity.RightEntity;
 public interface RightEntityMapper {
     int deleteByPrimaryKey(Long rightCode);
 
-    int insert(RightEntity record);
+	int insert(RightEntity record);
 
-    int insertSelective(RightEntity record);
+	int insertSelective(RightEntity record);
 
-    RightEntity selectByPrimaryKey(Long rightCode);
+	RightEntity selectByPrimaryKey(Long rightCode);
 
-    int updateByPrimaryKeySelective(RightEntity record);
+	int updateByPrimaryKeySelective(RightEntity record);
 
-    int updateByPrimaryKey(RightEntity record);
+	int updateByPrimaryKey(RightEntity record);
+
+    
+//    **************************************************
 
 	List<RightEntity> getRightByUId(long uid);
 	

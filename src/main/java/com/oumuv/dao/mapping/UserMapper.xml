@@ -1,116 +1,241 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.oumuv.dao.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.oumuv.entity.User" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="himg" property="himg" jdbcType="VARCHAR" />
-    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oumuv.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.oumuv.entity.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="himg" jdbcType="VARCHAR" property="himg" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="INTEGER" property="phone" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="height" jdbcType="INTEGER" property="height" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="graduate_school" jdbcType="VARCHAR" property="graduateSchool" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="graduation_time" jdbcType="DATE" property="graduationTime" />
+    <result column="male" jdbcType="VARCHAR" property="male" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, username, password, name, himg, role_id
+  <sql id="Base_Column_List">
+    id, username, password, name, himg, email, phone, birthday, height, weight, education, 
+    graduate_school, major, graduation_time, male, role_id
   </sql>
-  <select id="login" resultMap="BaseResultMap" parameterType="java.lang.String" >
-  	select
-    <include refid="Base_Column_List" />
-    from user_info
-    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
-  </select>
-  <select id="check" resultType="java.lang.String" parameterType="java.lang.String" >
-  	select
-    username
-    from user_info
-    where username = #{username,jdbcType=VARCHAR}
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user_info
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.oumuv.entity.User" >
+  <insert id="insert" parameterType="com.oumuv.entity.User">
     insert into user_info (id, username, password, 
-      name, himg, role_id)
+      name, himg, email, 
+      phone, birthday, height, 
+      weight, education, graduate_school, 
+      major, graduation_time, male, 
+      role_id)
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{himg,jdbcType=VARCHAR}, #{roleId,jdbcType=BIGINT})
+      #{name,jdbcType=VARCHAR}, #{himg,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, #{height,jdbcType=INTEGER}, 
+      #{weight,jdbcType=INTEGER}, #{education,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, 
+      #{major,jdbcType=VARCHAR}, #{graduationTime,jdbcType=DATE}, #{male,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.oumuv.entity.User" >
+  <insert id="insertSelective" parameterType="com.oumuv.entity.User">
     insert into user_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="username != null" >
+      <if test="username != null">
         username,
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         password,
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name,
       </if>
-      <if test="himg != null" >
+      <if test="himg != null">
         himg,
       </if>
-      <if test="roleId != null" >
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="graduateSchool != null">
+        graduate_school,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="graduationTime != null">
+        graduation_time,
+      </if>
+      <if test="male != null">
+        male,
+      </if>
+      <if test="roleId != null">
         role_id,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="username != null" >
+      <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="himg != null" >
+      <if test="himg != null">
         #{himg,jdbcType=VARCHAR},
       </if>
-      <if test="roleId != null" >
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateSchool != null">
+        #{graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="graduationTime != null">
+        #{graduationTime,jdbcType=DATE},
+      </if>
+      <if test="male != null">
+        #{male,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
         #{roleId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.User">
     update user_info
-    <set >
-      <if test="username != null" >
+    <set>
+      <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="himg != null" >
+      <if test="himg != null">
         himg = #{himg,jdbcType=VARCHAR},
       </if>
-      <if test="roleId != null" >
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateSchool != null">
+        graduate_school = #{graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="graduationTime != null">
+        graduation_time = #{graduationTime,jdbcType=DATE},
+      </if>
+      <if test="male != null">
+        male = #{male,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
         role_id = #{roleId,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.oumuv.entity.User" >
+  <update id="updateByPrimaryKey" parameterType="com.oumuv.entity.User">
     update user_info
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       himg = #{himg,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      height = #{height,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      graduate_school = #{graduateSchool,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      graduation_time = #{graduationTime,jdbcType=DATE},
+      male = #{male,jdbcType=VARCHAR},
       role_id = #{roleId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+<!-- ************************************************** -->
+  
+  
+  <select id="login" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select
+    <include refid="Base_Column_List" />
+    from user_info
+    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+  <select id="check" parameterType="java.lang.String" resultType="java.lang.String">
+  	select
+    username
+    from user_info
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  
+  
 </mapper>
