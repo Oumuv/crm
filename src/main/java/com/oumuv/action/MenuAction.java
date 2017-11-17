@@ -32,10 +32,10 @@ public class MenuAction {
 	
 	/**获取用户菜单
 	 * @throws IOException */
-	@RequestMapping("/getmenu.do")
+	@RequestMapping("/user/getmenu.do")
 	public String getMenu(HttpSession session,HttpServletResponse response,ModelMap map) throws IOException{
 		User user = (User) session.getAttribute("user");
-		List<RightEntity> menu = menuservice.getMenu(1L);
+		List<RightEntity> menu = menuservice.getMenu(user.getId());
 		List<MenuInfo> menuresult = new LinkedList<MenuInfo>();//最后的结果 
 		
 		//遍历一级菜单，一级菜单没有parentid
@@ -70,14 +70,73 @@ public class MenuAction {
 				mi.setId(m.getRightCode());
 				mi.setName(m.getRightText());
 				mi.setUrl(m.getRightUrl());
-//				if(m.getIspatent()){
+				if(m.getIspatent()){
 					List<MenuInfo> getchild = getchild(m.getRightCode(),menu);//迭代遍历子菜单
 					mi.setMenus(getchild);
-//				}
+				}
 				list.add(mi);
 			}
 		}
 		return list;
 	}
+	
+	/**
+	 * 获取所有menu转换成json数据
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/testurl/getmenu.json.do")
+	public void getmenujson(HttpServletResponse response){
+		String json = "";
+		response.setCharacterEncoding("utf-8");
+		List<RightEntity> menu = menuservice.getMenu(1L);
+		List<MenuInfo> menuresult = new LinkedList<MenuInfo>();//最后的结果 
+		
+		//遍历一级菜单，一级菜单没有parentid
+		for(RightEntity m:menu){
+			if(m.getRightType().equals("1")){
+				MenuInfo mi = new MenuInfo();
+				mi.setId(m.getRightCode());
+				mi.setName(m.getRightText());
+				mi.setUrl(m.getRightUrl());
+				menuresult.add(mi);
+			}
+		}
+		//获取一级菜单的子菜单
+		for(MenuInfo m:menuresult){
+			List<MenuInfo> getchild = getchild(m.getId(),menu);
+			if(getchild.size()>0){
+				m.setMenus(getchild);
+			}
+		}
+		
+		json = getjson(menuresult);
+		System.out.println(json);
+		try {
+			response.getWriter().write(json);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**转换json*/
+	private String getjson(List<MenuInfo> list){
+		String json = "[";
+		for(MenuInfo mi:list){
+			json+="{\"text\":\""+mi.getName()+"\",";
+			if(null!=mi.getMenus()&&mi.getMenus().size()>0){
+				json += "\"nodes\":";
+				json += getjson(mi.getMenus());
+				json += ",";
+			}
+			json = json.substring(0, json.length()-1);
+			json += "},";
+		}
+		json = json.substring(0, json.length()-1);
+		json += "]";
+		return json;
+	}
+	
 	
 }

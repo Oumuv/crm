@@ -44,6 +44,8 @@
 			<!-- anon,authc,authcBasic,user是第一组认证过滤器 -->
 			<!-- perms,port,rest,roles,ssl是第二组授权过滤器 -->
 			<value>
+				/testurl/** = anon
+				/open/** = anon
 				/js/** = anon
 				/register* = anon
 				/css/** = anon

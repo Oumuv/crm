@@ -116,6 +116,7 @@ body {
 	</div>
 	<div>
 		<div class="container page ">
+			<div>
 			<!-- 头像框 -->
 			<div class="div-himg" onclick="showbtn()">
 				<div class="himg" style="float: left;">
@@ -150,6 +151,7 @@ body {
 								class="text-nav"> Messages</span></a></li>
 					</ul>
 				</div>
+			</div>
 			</div>
 			<!-- 透明背景 -->
 			<div class="bg_div"
