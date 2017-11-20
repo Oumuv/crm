@@ -68,7 +68,13 @@ public class PageController {
 		return page;
 	}
 	
-	
+	/**
+	 * 返回首页
+	 * @param request
+	 * @param session
+	 * @param map
+	 * @return
+	 */
 	@RequestMapping(value="index")
 	public String indexPage(HttpServletRequest request, HttpSession session, ModelMap map){
 		User user = (User) session.getAttribute("user");

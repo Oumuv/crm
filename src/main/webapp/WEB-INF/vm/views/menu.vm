@@ -18,12 +18,12 @@
 		aria-expanded="false">$m.name<span class="caret"></span></a>
 			<ul class="dropdown-menu">
 			#foreach($ms in ${m.menus})
-				<li role="presentation"><a href= #if($!ms.url)"$!ms.url" #else "#"#end>$ms.name</a></li>
+				<li role="presentation"><a onclick=#if($!ms.url)"returnpage('$!ms.url',this)" #else "#"#end>$ms.name</a></li>
 			#end
 			</ul>
 		</li>
 	#else
-		<li role="presentation" class=""><a href=#if($!m.url)"$!m.url" #else "#"#end>$m.name</a></li>
+		<li role="presentation" class=""><a onclick=#if($!m.url)"returnpage('$!m.url',this)" #else "#"#end>$m.name</a></li>
 	#end
 #end
 
@@ -38,4 +38,14 @@
 		$(".nav_list li").removeClass("active")
 		$(this).addClass("active")
 	})
+	
+	function returnpage(link,li){
+		var menuText = li.innerHTML;
+		if($(li).closest("ul").hasClass("dropdown-menu")){
+			var menuText = $(li).closest("ul").prev().text()+'>>'+menuText;
+		}
+		$('.position_span').html(menuText);//“当前位置”变化
+		var href = "#springUrl('/')"+link;
+		$('.word_div').load(href);
+	}
 </script>

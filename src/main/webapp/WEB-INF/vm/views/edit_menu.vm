@@ -1,0 +1,78 @@
+<style>
+#form_table td {
+	text-align: center;
+	line-height: 2.5;
+	vertical-align: top;
+}
+</style>
+
+<div class="modal-dialog" style="z-index: 9999">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h4 class="modal-title" id="myModalLabel">
+				$!title | 编辑<input type='hidden'></input>
+			</h4>
+		</div>
+		<div class="modal-body">
+			<form id="form_table" action="">
+				<table class="table">
+					<tbody>
+						<input type="hidden" value="$!menu.rightCode" name="rightCode">
+						<tr>
+							<td>菜单名</td>
+							<td><input type="input" name="rightText"
+								value="$!menu.rightText" class="form-control" placeholder="NULL"></td>
+						</tr>
+						<tr>
+							<td>URL</td>
+							<td><input type="input" name="rightUrl"
+								value="$!menu.rightUrl" class="form-control" placeholder="NULL"></td>
+						</tr>
+						<tr>
+							<td>提示</td>
+							<td><input type="input" name="rightTip"
+								value="$!menu.rightTip" class="form-control" placeholder="NULL"></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+			</button>
+			<button type="button" class="btn btn-primary" id="submit_btn">提交更改</button>
+		</div>
+	</div>
+	<!-- /.modal-content -->
+</div>
+
+<script>
+	$('#submit_btn').click(function() {
+		if (confirm("确认修改信息？")) {
+			var params = $("#form_table").serialize();
+			$.ajax({
+				type : "POST",
+				url : "#springUrl('/testurl/saveMenu.do')",
+				data : params,
+				success : function(msg) {
+					alert( msg);
+					$('#myModal').empty();
+					$('#myModal').modal('hide');
+					$('#tree').treeview({data: getTree(),
+					      	checkboxes: true,
+					      	color:"#337ab7",
+					      	showTags:true,//显示tags
+					      	showCheckbox:true//显示选择框
+					      });
+				},
+				error:function(msg){
+					if(confirm("修改失败,是否查看错误详细信息？")){
+						alert(msg)
+					}
+				}
+			});
+		}
+	})
+</script>

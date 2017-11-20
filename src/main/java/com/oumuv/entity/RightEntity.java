@@ -3,11 +3,13 @@ package com.oumuv.entity;
 import java.util.List;
 
 public class RightEntity {
-private Long rightCode;
+	
+	
+	private Long rightCode;
 
 	private Long rightParentCode;
 
-	private String rightType;
+	private Integer rightType;
 
 	private String rightText;
 
@@ -33,12 +35,12 @@ private Long rightCode;
 		this.rightParentCode = rightParentCode;
 	}
 
-	public String getRightType() {
+	public Integer getRightType() {
 		return rightType;
 	}
 
-	public void setRightType(String rightType) {
-		this.rightType = rightType == null ? null : rightType.trim();
+	public void setRightType(Integer rightType) {
+		this.rightType = rightType;
 	}
 
 	public String getRightText() {

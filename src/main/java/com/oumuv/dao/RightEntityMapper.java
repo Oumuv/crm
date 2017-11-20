@@ -19,8 +19,16 @@ public interface RightEntityMapper {
 
     
 //    **************************************************
-
+	/**根据用户id获取用户的权限菜单*/
 	List<RightEntity> getRightByUId(long uid);
 	
+	/**根据父id获取子对象*/
 	List<RightEntity> getRightByParentId(long pid);
+	
+	/**获取所有的RightEntity*/
+	List<RightEntity> getAllRightEntity();
+	
+	/**根据level获取所有的RightEntity*/
+	List<RightEntity> getMenuByLevel(int level);
+	
 }
