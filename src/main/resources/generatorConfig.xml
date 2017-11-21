@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
 <generatorConfiguration>  
-    <classPathEntry  location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.24/mysql-connector-java-5.1.24.jar"/>  
+    <classPathEntry  location="C:\Users\Oumuv\Desktop/mysql-connector-java-5.1.24.jar"/>  
     <context id="DB2Tables"  targetRuntime="MyBatis3"> 
     	<property name="javaFileEncoding" value="UTF-8"/> 
         <commentGenerator>  
@@ -27,8 +27,9 @@
         </javaClientGenerator>  
 <!--         <table tableName="user_info" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
 <!--         <table tableName="role_right_info" domainObjectName="MenuEntity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
-        <table tableName="right_info" domainObjectName="RightEntity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+<!--         <table tableName="right_info" domainObjectName="RightEntity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
 <!--         <table tableName="role_info" domainObjectName="RoleEntity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
 <!--         <table tableName="loginRecord" domainObjectName="LoginRecordEntity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
+        <table tableName="department_info" domainObjectName="DepartmentEntity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>  
 </generatorConfiguration>  

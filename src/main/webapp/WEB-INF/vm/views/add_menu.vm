@@ -1,0 +1,141 @@
+<style>
+#form_table td {
+	text-align: center;
+	line-height: 2.5;
+	vertical-align: top;
+}
+</style>
+<link href="#springUrl('/css/bootstrap-select.min.css')"
+	rel="stylesheet">
+<script src="#springUrl('/js/bootstrap-select.min.js')"></script>
+<div class="modal-dialog" style="z-index: 9999">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h4 class="modal-title" id="myModalLabel">
+				菜单 | 添加<input type='hidden'></input>
+			</h4>
+		</div>
+		<div class="modal-body">
+			<form id="form_table" action="">
+				<table class="table">
+					<tbody>
+						<input type="hidden" value="$!menu.rightCode" name="rightCode">
+						<tr>
+							<td>菜单名</td>
+							<td><input type="input" name="rightText"
+								value="$!menu.rightText" class="form-control" placeholder="NULL"></td>
+						</tr>
+						<tr>
+							<td>URL</td>
+							<td><input type="input" name="rightUrl"
+								value="$!menu.rightUrl" class="form-control" placeholder="NULL"></td>
+						</tr>
+						<tr>
+							<td>提示</td>
+							<td><input type="input" name="rightTip"
+								value="$!menu.rightTip" class="form-control" placeholder="NULL"></td>
+						</tr>
+						<tr>
+							<td>菜单等级</td>
+							<td><select id="level_1" class="selectpicker"
+								name="rightType" data-live-search="false"></select> <select
+								id="level_2" class="selectpicker" name="rightParentCode"
+								data-live-search="true" disabled></select> <!-- 							<select id="level_3" class="selectpicker" data-live-search="false" multiple></select> multiple为多选data-live-search可搜索 -->
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+			</button>
+			<button type="button" class="btn btn-primary" id="submit_btn">提交更改</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function() {
+		//数据赋值  
+		var select = $("#level_1");
+		select.append("<option value='1'>一级菜单</option>");
+		select.append("<option value='2'>二级菜单</option>");
+		var select2 = $("#level_2");
+		// 		select2.append("<option value='1'>一级菜单</option>");
+		$(".selectpicker").selectpicker({
+			noneSelectedText : '请选择'//默认显示内容  
+		});
+		//初始化刷新数据  
+		$(window).on('load', function() {
+			$('.selectpicker').selectpicker('refresh');
+		});
+
+		/**控制下拉框状态*/
+
+		$('#level_1').change(
+				function() {
+					var flag = $('#level_1').selectpicker('val');
+					//选中的是一级菜单则二级菜单的下拉框为不可选状态
+
+					if (flag == 1) {
+						$("#level_2").attr('disabled', true);
+						$('#level_2').selectpicker('refresh');
+					} else if (flag == 2) {
+						$("#level_2").attr('disabled', false);
+						$.ajax({
+							type : 'get',
+							async : false,
+							url : "#springUrl('/word/getMenu.do?level=')"
+									+ flag,
+							dataType : 'text',
+							success : function(datas) {//返回list数据并循环获取  
+								var json = eval("(" + datas + ")");
+								var select = $("#level_2");
+								$.each(json, function(key, value) {
+									select.append("<option value='"+key+"'>"
+											+ value + "</option>");
+								});
+// 								$('#level_2').selectpicker('val', '');
+								// $('#level_2').selectpicker('refresh');  
+							}
+						});
+						$('#level_2').selectpicker({
+							noneSelectedText : '请选择父菜单'//默认显示内容  
+						});
+						$('#level_2').selectpicker('refresh');
+					}
+				})
+	});
+
+	$('#submit_btn').click(function() {
+		if (confirm("确认新增菜单？")) {
+			var params = $("#form_table").serialize();
+			$.ajax({
+				type : "POST",
+				url : "#springUrl('/word/addMenu.do')",
+				data : params,
+				success : function(msg) {
+					alert(msg);
+					$('#myModal').empty();
+					$('#myModal').modal('hide');
+					$('#tree').treeview({
+						data : getTree(),
+						checkboxes : true,
+						color : "#337ab7",
+						showTags : true,//显示tags
+						showCheckbox : true
+					//显示选择框
+					});
+				},
+				error : function(msg) {
+					if (confirm("新增失败,是否查看错误详细信息？")) {
+						alert(msg)
+					}
+				}
+			});
+		}
+	})
+</script>

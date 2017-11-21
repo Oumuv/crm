@@ -6,6 +6,7 @@ public class MenuInfo {
 	private Long id;
 	private String name;
 	private String url;
+	private String tip;
 	private List<MenuInfo> menus;
 	
 	
@@ -32,6 +33,12 @@ public class MenuInfo {
 	}
 	public void setMenus(List<MenuInfo> menus) {
 		this.menus = menus;
+	}
+	public String getTip() {
+		return tip;
+	}
+	public void setTip(String tip) {
+		this.tip = tip;
 	}
 	
 	

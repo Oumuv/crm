@@ -164,6 +164,15 @@ body {
 		</div>
 
 	</div>
+		<!-- 			内容编辑面板 -->
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	<!-- 按钮触发模态框 -->
 </body>
 
 <script type="text/javascript">

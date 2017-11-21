@@ -1,7 +1,8 @@
 package com.oumuv.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import com.oumuv.entity.User;
 
@@ -22,7 +23,18 @@ public interface UserMapper {
     
     
 //    ***********************************************
+	
+	/**登录验证*/
     User login(@Param("username")String username,@Param("password")String password);
 
+    /**用户名验证*/
 	String check(String username);
+	
+	/**
+	 * 用户管理--获取用户列表
+	 * sql传入
+	 * @return
+	 */
+	List<User> getUserListBySql(@Param("sqlString")String sqlString);
+	
 }

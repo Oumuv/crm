@@ -120,11 +120,11 @@ li {
 	<div class="position_div" style="color: #337ab7;">
 		<span class="btn glyphicon glyphicon-map-marker"></span>
 		<span class="" style="font-size: 15px;font-weight: 700;">当前位置：</span>
-		<span style="font-size: 10px;font-weight: 600;">系统管理 >> 菜单管理</span>
+		<span class="position_span" style="font-size: 10px;font-weight: 600;">系统管理 >> 菜单管理</span>
 	</div>
 	<!-- word space -->
 	<div class="word_div" style="">
-		#parse("./views/menumanage.vm")
+		#parse("./word/departmentmanage.vm")
 	</div>
 
 

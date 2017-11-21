@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.oumuv.entity.RightEntity">
     <id column="right_code" jdbcType="BIGINT" property="rightCode" />
     <result column="right_parent_code" jdbcType="BIGINT" property="rightParentCode" />
-    <result column="right_type" jdbcType="VARCHAR" property="rightType" />
+    <result column="right_type" jdbcType="INTEGER" property="rightType" />
     <result column="right_text" jdbcType="VARCHAR" property="rightText" />
     <result column="right_url" jdbcType="VARCHAR" property="rightUrl" />
     <result column="right_tip" jdbcType="VARCHAR" property="rightTip" />
@@ -27,7 +27,7 @@
     insert into right_info (right_code, right_parent_code, right_type, 
       right_text, right_url, right_tip, 
       ispatent)
-    values (#{rightCode,jdbcType=BIGINT}, #{rightParentCode,jdbcType=BIGINT}, #{rightType,jdbcType=VARCHAR}, 
+    values (#{rightCode,jdbcType=BIGINT}, #{rightParentCode,jdbcType=BIGINT}, #{rightType,jdbcType=INTEGER}, 
       #{rightText,jdbcType=VARCHAR}, #{rightUrl,jdbcType=VARCHAR}, #{rightTip,jdbcType=VARCHAR}, 
       #{ispatent,jdbcType=BIT})
   </insert>
@@ -64,7 +64,7 @@
         #{rightParentCode,jdbcType=BIGINT},
       </if>
       <if test="rightType != null">
-        #{rightType,jdbcType=VARCHAR},
+        #{rightType,jdbcType=INTEGER},
       </if>
       <if test="rightText != null">
         #{rightText,jdbcType=VARCHAR},
@@ -87,7 +87,7 @@
         right_parent_code = #{rightParentCode,jdbcType=BIGINT},
       </if>
       <if test="rightType != null">
-        right_type = #{rightType,jdbcType=VARCHAR},
+        right_type = #{rightType,jdbcType=INTEGER},
       </if>
       <if test="rightText != null">
         right_text = #{rightText,jdbcType=VARCHAR},
@@ -107,7 +107,7 @@
   <update id="updateByPrimaryKey" parameterType="com.oumuv.entity.RightEntity">
     update right_info
     set right_parent_code = #{rightParentCode,jdbcType=BIGINT},
-      right_type = #{rightType,jdbcType=VARCHAR},
+      right_type = #{rightType,jdbcType=INTEGER},
       right_text = #{rightText,jdbcType=VARCHAR},
       right_url = #{rightUrl,jdbcType=VARCHAR},
       right_tip = #{rightTip,jdbcType=VARCHAR},
@@ -136,6 +136,19 @@
     <include refid="Base_Column_List" />
     from right_info
     where right_parent_code = #{right_parent_code,jdbcType=BIGINT}
+  </select>
+  
+  <select id="getAllRightEntity" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from right_info
+  </select>
+  
+  <select id="getMenuByLevel" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from right_info
+    where right_type = #{level}
   </select>
   
 </mapper>

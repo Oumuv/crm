@@ -68,11 +68,27 @@ public class PageController {
 		return page;
 	}
 	
-	
+	/**
+	 * 返回首页
+	 * @param request
+	 * @param session
+	 * @param map
+	 * @return
+	 */
 	@RequestMapping(value="index")
 	public String indexPage(HttpServletRequest request, HttpSession session, ModelMap map){
 		User user = (User) session.getAttribute("user");
 		map.put("user", user);
 		return "index";
 	}
+	/**
+	 * 功能未开放提示页
+	 * @return
+	 */
+	@RequestMapping("/open/developing.do")
+	public String developingPage(){
+		System.out.println("+++++++++++");
+		return "msg/msg";
+	}
+
 }
