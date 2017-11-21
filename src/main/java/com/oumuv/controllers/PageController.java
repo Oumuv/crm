@@ -81,4 +81,14 @@ public class PageController {
 		map.put("user", user);
 		return "index";
 	}
+	/**
+	 * 功能未开放提示页
+	 * @return
+	 */
+	@RequestMapping("/open/developing.do")
+	public String developingPage(){
+		System.out.println("+++++++++++");
+		return "msg/msg";
+	}
+
 }

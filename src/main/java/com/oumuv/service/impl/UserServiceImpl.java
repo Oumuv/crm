@@ -1,5 +1,7 @@
 package com.oumuv.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,19 @@ public class UserServiceImpl implements UserService {
 	public String check(String username) {
 		String user = userDao.check(username);
 		return user;
+	}
+
+	public List<User> getUserListByUnameAndDid(String uname, Long did) {
+		String sql = "SELECT * FROM user_info";
+//		if(null!=uname&&uname.equals("")){
+//			sql += "WHERE name LIKE BINARY '"+uname+"'";
+//		}
+//		if(null!=did&&did.equals("")){
+//			sql += "AND department_id="+did;
+//		}
+		System.out.println(sql);
+		List<User> userListBySql = userDao.getUserListBySql(sql);
+		return userListBySql;
 	}
 
 }

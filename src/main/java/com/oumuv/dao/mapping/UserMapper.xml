@@ -237,5 +237,9 @@
     where username = #{username,jdbcType=VARCHAR}
   </select>
   
+  <select id="getUserListBySql" parameterType="java.lang.String" resultMap="BaseResultMap">
+    ${sqlString}
+  </select>
+  
   
 </mapper>

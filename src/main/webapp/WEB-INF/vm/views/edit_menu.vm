@@ -54,7 +54,7 @@
 			var params = $("#form_table").serialize();
 			$.ajax({
 				type : "POST",
-				url : "#springUrl('/testurl/saveMenu.do')",
+				url : "#springUrl('/word/saveMenu.do')",
 				data : params,
 				success : function(msg) {
 					alert( msg);

@@ -1,3 +1,6 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/bonoon
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
@@ -12,13 +15,17 @@ encoding//src/main/webapp/WEB-INF/vm/register.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/register1.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/user/home.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/user/person_info.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/vm/user/usermanage.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/vm/views/add_menu.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/vm/views/edit_menu.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/vm/views/loginrecord.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/vm/views/menu.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/vm/views/menumanage.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/vm/views/namecard.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/word/word.vm=UTF-8
 encoding//src/main/webapp/css/bootstrap.min.css=UTF-8
 encoding//src/main/webapp/css/dcalendar.picker.css=UTF-8
 encoding//src/main/webapp/login.jsp=UTF-8
-<<<<<<< HEAD
-encoding//src/test/java=UTF-8
-=======
 encoding//src/main/webapp/register1.html=UTF-8
->>>>>>> refs/remotes/origin/bonoon
+encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

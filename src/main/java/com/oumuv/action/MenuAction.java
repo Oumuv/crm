@@ -96,7 +96,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("/testurl/getmenu.json.do")
+	@RequestMapping("/word/getmenu.json.do")
 	public void getmenujson(HttpServletResponse response){
 		String json = "";
 		response.setCharacterEncoding("utf-8");
@@ -122,7 +122,7 @@ public class MenuAction {
 			}
 		}
 		json = getjson(menuresult);
-		System.out.println(json);
+//		System.out.println(json);
 		try {
 			response.getWriter().write(json);
 		} catch (IOException e) {
@@ -182,7 +182,7 @@ public class MenuAction {
 	 * @param mid 菜单id
 	 * @return
 	 */
-	@RequestMapping("/testurl/openEditPage.do")
+	@RequestMapping("/word/openEditPage.do")
 	public String editMenuTree(ModelMap map,@RequestParam(value="mid",required=true)Long mid){
 		RightEntity menu = menuservice.getMenu(mid);
 		map.put("menu", menu);
@@ -197,7 +197,7 @@ public class MenuAction {
 	 * @throws IOException 
 	 */
 	@ResponseBody
-	@RequestMapping(value="/testurl/saveMenu.do",method=RequestMethod.POST )
+	@RequestMapping(value="/word/saveMenu.do",method=RequestMethod.POST )
 	public void updataaMenuTree(RightEntity rightEntity,HttpServletResponse response) throws IOException{
 			response.setCharacterEncoding("utf-8");
 		
@@ -215,7 +215,7 @@ public class MenuAction {
 	 * @param mid 菜单id
 	 * @return
 	 */
-	@RequestMapping(value="/testurl/openAddPage.do",method=RequestMethod.POST )
+	@RequestMapping(value="/word/openAddPage.do",method=RequestMethod.POST )
 	public String addMenuTree(ModelMap map,Long mid){
 		map.put("pid", mid);
 		return "views/add_menu";
@@ -229,7 +229,7 @@ public class MenuAction {
 	 * @throws IOException 
 	 */
 	@ResponseBody
-	@RequestMapping(value="/testurl/addMenu.do",method=RequestMethod.POST )
+	@RequestMapping(value="/word/addMenu.do",method=RequestMethod.POST )
 	public void addMenuTree(RightEntity rightEntity,HttpServletResponse response) throws IOException{
 			response.setCharacterEncoding("utf-8");
 			try {
@@ -272,7 +272,7 @@ public class MenuAction {
 		response.setCharacterEncoding("utf-8");
 		String msg = "";
 		int i=0;
-		System.out.println(ids);
+//		System.out.println(ids);
 		String[] split = ids.split("\\|");
 		for(int j = 0;j<split.length;j++){
 			i += menuservice.delMenuByLevel(Long.parseLong(split[j]));

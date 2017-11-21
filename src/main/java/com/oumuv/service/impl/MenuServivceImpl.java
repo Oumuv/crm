@@ -26,7 +26,7 @@ public class MenuServivceImpl implements MenuService{
 		return list;
 	}
 	public void updataMenu(RightEntity rightEntity) {
-		menuDao.updateByPrimaryKeySelective(rightEntity);
+		menuDao.updateByPrimaryKeySelective(dispose(rightEntity));
 	}
 	public RightEntity getMenu(Long id) {
 		RightEntity rightEntity = menuDao.selectByPrimaryKey(id);
@@ -40,7 +40,7 @@ public class MenuServivceImpl implements MenuService{
 			r.setIspatent(true);
 			menuDao.updateByPrimaryKeySelective(r);
 		}
-		menuDao.insertSelective(rightEntity);	
+		menuDao.insertSelective(dispose(rightEntity));	
 	}
 	public List<RightEntity> getMenuByLevel(int level) {
 		List<RightEntity> menuByLevel = menuDao.getMenuByLevel(level);
@@ -61,4 +61,21 @@ public class MenuServivceImpl implements MenuService{
 		return i;
 	}
 
+	/**
+	 * 空值、null值处理
+	 */
+	private RightEntity dispose(RightEntity rightEntity){
+		
+		if(null==rightEntity.getRightText()||rightEntity.getRightText().equals("")){
+			rightEntity.setRightText("菜单名未定义");
+		}
+		if(null==rightEntity.getRightUrl()||rightEntity.getRightUrl().equals("")){
+			rightEntity.setRightUrl("open/developing.do");
+		}
+		if(null==rightEntity.getRightTip()||rightEntity.getRightTip().equals("")){
+			rightEntity.setRightTip(null);
+		}
+		return rightEntity;
+		
+	}
 }

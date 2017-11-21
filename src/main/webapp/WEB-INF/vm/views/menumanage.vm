@@ -130,7 +130,7 @@ $(function(){
 	        	var str = result.text;
 	        	id = str.match(/start(\S*)end/)[1];//正则表达式获取id
 	      	});
-	        $('#myModal').load("#springUrl('/testurl/openEditPage.do')",{mid:id})
+	        $('#myModal').load("#springUrl('/word/openEditPage.do')",{mid:id})
 		}else{
 			alert("未选中任何菜单节点");
 		}
@@ -152,7 +152,7 @@ $(function(){
 	        	console.log(id);
 	      	});
 			ids = ids.substring(0,ids.length-1)
-	        $.post("#springUrl('/testurl/delMenu.do')",{ids:ids},function(msg){
+	        $.post("#springUrl('/word/delMenu.do')",{ids:ids},function(msg){
 	        	alert(msg);
 	        	$('#tree').treeview({
 					data : getTree(),
@@ -176,7 +176,7 @@ $(function(){
 	        var str = result.text;
 	        id = str.match(/start(\S*)end/)[1];//正则表达式获取id
 	     });
-	    $('#myModal').load("#springUrl('/testurl/openAddPage.do')",{mid:id})
+	    $('#myModal').load("#springUrl('/word/openAddPage.do')",{mid:id})
 	})
 		
 
@@ -199,7 +199,7 @@ function getTree() {
 	var json;
 	$.ajax({
 		type:"get",
-		url:"#springUrl('/testurl/getmenu.json.do')",
+		url:"#springUrl('/word/getmenu.json.do')",
 		dataType:"text",
 		async: false,
 		success:function(data){
