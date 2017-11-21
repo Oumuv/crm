@@ -1,4 +1,15 @@
 <style>
+.List_div {
+	margin: 20px 0;
+	border: 1px solid #eee;
+	border-left-width: 5px;
+	border-radius: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-left-color: #337ab7;
+	min-height: 100px;
+	padding: 10px 5px 10px 5px;
+}
 </style>
 
 <div class="bg_shadow charts_a"
@@ -21,8 +32,8 @@
 	</div>
 
 	<!-- 内容 -->
-	<div>
-		<div id="tree" style="margin-top: 10px;"></div>
+	<div style="padding: 20px;">
+		<div class="List_div" style="">内容</div>
 	</div>
 
 </div>
@@ -31,30 +42,30 @@
 
 
 <script type="text/javascript">
-	$(function() {
-		var $dataTree = $('#tree').treeview({
-			data : getTree(),
-			checkboxes : true,
-			color : "#337ab7",
-			showTags : true,//显示tags
-			showCheckbox : true
-		});
-	})
+	// 	$(function() {
+	// 		var $dataTree = $('#tree').treeview({
+	// 			data : getTree(),
+	// 			checkboxes : true,
+	// 			color : "#337ab7",
+	// 			showTags : true,//显示tags
+	// 			showCheckbox : true
+	// 		});
+	// 	})
 
 	// ******************************************************
-	
+
 	/**后台获取数据*/
-function getTree() {
-	var json;
-	$.ajax({
-		type:"get",
-// 		url:"#springUrl('/word/getmenu.json.do')",
-		dataType:"text",
-		async: false,
-		success:function(data){
-			json=data;
-		}
-	});
-	return json;
-}
+	function getTree() {
+		var json;
+		$.ajax({
+			type : "get",
+			// 		url:"#springUrl('/word/getmenu.json.do')",
+			dataType : "text",
+			async : false,
+			success : function(data) {
+				json = data;
+			}
+		});
+		return json;
+	}
 </script>
