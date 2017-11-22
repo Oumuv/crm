@@ -30,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.oumuv.entity.LoginRecordEntity;
 import com.oumuv.entity.User;
@@ -54,6 +55,15 @@ public class UserAction {
 	@Autowired
 	private LoginRecordService loginRecordService;
 
+	@RequestMapping(value = "/editPersoninfo.do")
+	public String pageResult(HttpServletRequest request, HttpSession session,
+			ModelMap map) throws InterruptedException {
+		User personInfo = (User) session.getAttribute("user");
+		User User = userService.getPersonInfo(personInfo);
+		map.put("user", User);
+		return "user/person_info";
+	}
+	
 	/**
 	 * shiro的登录认证
 	 * @param username

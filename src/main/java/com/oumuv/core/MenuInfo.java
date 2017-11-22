@@ -1,7 +1,11 @@
 package com.oumuv.core;
 
 import java.util.List;
-
+/**
+ * 菜单info
+ * @author Administrator
+ *
+ */
 public class MenuInfo {
 	private Long id;
 	private String name;

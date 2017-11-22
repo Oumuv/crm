@@ -1,23 +1,30 @@
-package com.oumuv.entity;
+package com.oumuv.core;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable{
-	
-    private Long id;
+import com.oumuv.entity.DepartmentEntity;
 
-	private String username;
+/**
+ * 用户名片
+ * 
+ * @author Administrator
+ * 
+ */
+public class UserCardInfo {
+	
+	private Long id;
+	
+	private String username;//登录名
 
 	private String password;
 
-	private String name;
+	private String name;//用户名
 
 	private String himg;
 
 	private String email;
 
-	private Long phone;
+	private Integer phone;
 
 	private Date birthday;
 
@@ -34,10 +41,8 @@ public class User implements Serializable{
 	private Date graduationTime;
 
 	private String male;
-
-	private Long roleId;
-
-	private Long departmentId;
+	
+	private DepartmentEntity departmentEntity;
 
 	public Long getId() {
 		return id;
@@ -52,7 +57,7 @@ public class User implements Serializable{
 	}
 
 	public void setUsername(String username) {
-		this.username = username == null ? null : username.trim();
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -60,7 +65,7 @@ public class User implements Serializable{
 	}
 
 	public void setPassword(String password) {
-		this.password = password == null ? null : password.trim();
+		this.password = password;
 	}
 
 	public String getName() {
@@ -68,7 +73,7 @@ public class User implements Serializable{
 	}
 
 	public void setName(String name) {
-		this.name = name == null ? null : name.trim();
+		this.name = name;
 	}
 
 	public String getHimg() {
@@ -76,7 +81,7 @@ public class User implements Serializable{
 	}
 
 	public void setHimg(String himg) {
-		this.himg = himg == null ? null : himg.trim();
+		this.himg = himg;
 	}
 
 	public String getEmail() {
@@ -84,14 +89,14 @@ public class User implements Serializable{
 	}
 
 	public void setEmail(String email) {
-		this.email = email == null ? null : email.trim();
+		this.email = email;
 	}
 
-	public Long getPhone() {
+	public Integer getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Long phone) {
+	public void setPhone(Integer phone) {
 		this.phone = phone;
 	}
 
@@ -124,7 +129,7 @@ public class User implements Serializable{
 	}
 
 	public void setEducation(String education) {
-		this.education = education == null ? null : education.trim();
+		this.education = education;
 	}
 
 	public String getGraduateSchool() {
@@ -132,8 +137,7 @@ public class User implements Serializable{
 	}
 
 	public void setGraduateSchool(String graduateSchool) {
-		this.graduateSchool = graduateSchool == null ? null : graduateSchool
-				.trim();
+		this.graduateSchool = graduateSchool;
 	}
 
 	public String getMajor() {
@@ -141,7 +145,7 @@ public class User implements Serializable{
 	}
 
 	public void setMajor(String major) {
-		this.major = major == null ? null : major.trim();
+		this.major = major;
 	}
 
 	public Date getGraduationTime() {
@@ -157,25 +161,17 @@ public class User implements Serializable{
 	}
 
 	public void setMale(String male) {
-		this.male = male == null ? null : male.trim();
+		this.male = male;
 	}
 
-	public Long getRoleId() {
-		return roleId;
+	public DepartmentEntity getDepartmentEntity() {
+		return departmentEntity;
 	}
 
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+	public void setDepartmentEntity(DepartmentEntity departmentEntity) {
+		this.departmentEntity = departmentEntity;
 	}
+	
+	
 
-	public Long getDepartmentId() {
-		return departmentId;
-	}
-
-	public void setDepartmentId(Long departmentId) {
-		this.departmentId = departmentId;
-	}
-
-
-    
 }

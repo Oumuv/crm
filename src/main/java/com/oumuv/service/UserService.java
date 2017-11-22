@@ -2,8 +2,7 @@ package com.oumuv.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
+import com.oumuv.core.UserCardInfo;
 import com.oumuv.entity.User;
 
 public interface UserService {
@@ -28,4 +27,10 @@ public interface UserService {
 	 * @return
 	 */
 	public List<User> getUserListByUnameAndDid(String uname,Long did);
+	public List<UserCardInfo> getUserCardListByUnameAndDid(String uname,Long did);
+	
+	/**
+	 * 获取个人信息
+	 */
+	public User getPersonInfo(User u);
 }

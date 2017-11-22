@@ -8,7 +8,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="himg" jdbcType="VARCHAR" property="himg" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="phone" jdbcType="INTEGER" property="phone" />
+    <result column="phone" jdbcType="BIGINT" property="phone" />
     <result column="birthday" jdbcType="DATE" property="birthday" />
     <result column="height" jdbcType="INTEGER" property="height" />
     <result column="weight" jdbcType="INTEGER" property="weight" />
@@ -18,10 +18,11 @@
     <result column="graduation_time" jdbcType="DATE" property="graduationTime" />
     <result column="male" jdbcType="VARCHAR" property="male" />
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="department_id" jdbcType="BIGINT" property="departmentId" />
   </resultMap>
   <sql id="Base_Column_List">
     id, username, password, name, himg, email, phone, birthday, height, weight, education, 
-    graduate_school, major, graduation_time, male, role_id
+    graduate_school, major, graduation_time, male, role_id, department_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -39,13 +40,13 @@
       phone, birthday, height, 
       weight, education, graduate_school, 
       major, graduation_time, male, 
-      role_id)
+      role_id, department_id)
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{himg,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, #{height,jdbcType=INTEGER}, 
+      #{phone,jdbcType=BIGINT}, #{birthday,jdbcType=DATE}, #{height,jdbcType=INTEGER}, 
       #{weight,jdbcType=INTEGER}, #{education,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, 
       #{major,jdbcType=VARCHAR}, #{graduationTime,jdbcType=DATE}, #{male,jdbcType=VARCHAR}, 
-      #{roleId,jdbcType=BIGINT})
+      #{roleId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.oumuv.entity.User">
     insert into user_info
@@ -98,6 +99,9 @@
       <if test="roleId != null">
         role_id,
       </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -119,7 +123,7 @@
         #{email,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        #{phone,jdbcType=INTEGER},
+        #{phone,jdbcType=BIGINT},
       </if>
       <if test="birthday != null">
         #{birthday,jdbcType=DATE},
@@ -148,6 +152,9 @@
       <if test="roleId != null">
         #{roleId,jdbcType=BIGINT},
       </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=BIGINT},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.User">
@@ -169,7 +176,7 @@
         email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        phone = #{phone,jdbcType=INTEGER},
+        phone = #{phone,jdbcType=BIGINT},
       </if>
       <if test="birthday != null">
         birthday = #{birthday,jdbcType=DATE},
@@ -198,6 +205,9 @@
       <if test="roleId != null">
         role_id = #{roleId,jdbcType=BIGINT},
       </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -208,7 +218,7 @@
       name = #{name,jdbcType=VARCHAR},
       himg = #{himg,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=BIGINT},
       birthday = #{birthday,jdbcType=DATE},
       height = #{height,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER},
@@ -217,7 +227,8 @@
       major = #{major,jdbcType=VARCHAR},
       graduation_time = #{graduationTime,jdbcType=DATE},
       male = #{male,jdbcType=VARCHAR},
-      role_id = #{roleId,jdbcType=BIGINT}
+      role_id = #{roleId,jdbcType=BIGINT},
+      department_id = #{departmentId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 

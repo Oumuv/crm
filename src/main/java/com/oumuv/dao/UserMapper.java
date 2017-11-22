@@ -19,6 +19,7 @@ public interface UserMapper {
 
 	int updateByPrimaryKey(User record);
 
+
     
     
     
@@ -27,7 +28,7 @@ public interface UserMapper {
 	/**登录验证*/
     User login(@Param("username")String username,@Param("password")String password);
 
-    /**用户名验证*/
+    /**用户名验*/
 	String check(String username);
 	
 	/**

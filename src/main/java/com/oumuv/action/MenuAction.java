@@ -1,6 +1,7 @@
 package com.oumuv.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -247,7 +248,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/testurl/getMenu.do",produces = "application/json;charset=utf-8",method={RequestMethod.POST,RequestMethod.GET} )
+	@RequestMapping(value="/word/getMenu.do",produces = "application/json;charset=utf-8",method={RequestMethod.POST,RequestMethod.GET} )
 	public String getMenubyLevel(int level,HttpServletResponse response){
 		response.setCharacterEncoding("utf-8");
 		List<RightEntity> list = menuservice.getMenuByLevel(level-1);
@@ -267,18 +268,20 @@ public class MenuAction {
 	 * @throws IOException 
 	 */
 	@ResponseBody
-	@RequestMapping(value="/testurl/delMenu.do",produces = "application/json;charset=utf-8",method={RequestMethod.POST,RequestMethod.GET} )
-	public void delMenubyLevel(String ids,HttpServletResponse response) throws IOException{
+	@RequestMapping(value="/word/delMenu.do",produces = "application/json;charset=utf-8",method={RequestMethod.POST,RequestMethod.GET} )
+	public void delMenubyLevel(String ids,HttpServletResponse response) throws IOException {
 		response.setCharacterEncoding("utf-8");
 		String msg = "";
 		int i=0;
 //		System.out.println(ids);
 		String[] split = ids.split("\\|");
+		List<Long> idlist = new ArrayList<Long>();
 		for(int j = 0;j<split.length;j++){
-			i += menuservice.delMenuByLevel(Long.parseLong(split[j]));
+			idlist.add(Long.parseLong(split[j]));
 		}
+		i = menuservice.delMenuByLevel(idlist);
 		if(i==0){
-			msg="数据删除失败！";
+			msg="数据删除失败！请先删除子菜单再删除父菜单";
 		}else{
 			msg=i+"条数据删除成功！";
 		}

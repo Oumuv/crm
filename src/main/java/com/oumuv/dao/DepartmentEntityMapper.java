@@ -1,5 +1,7 @@
 package com.oumuv.dao;
 
+import java.util.List;
+
 import com.oumuv.entity.DepartmentEntity;
 
 public interface DepartmentEntityMapper {
@@ -14,4 +16,13 @@ public interface DepartmentEntityMapper {
     int updateByPrimaryKeySelective(DepartmentEntity record);
 
     int updateByPrimaryKey(DepartmentEntity record);
+    
+    
+    /****************************************************/
+    /**
+     * 获取所有的部门
+     * @return
+     */
+    public List<DepartmentEntity> getAllDepartmentEntity();
+    
 }

@@ -58,42 +58,10 @@ $(function(){
 	
 	
 	var $dataTree = $('#tree').treeview({data: getTree(),
-// 	       emptyIcon: '',    //没有子节点的节点图标
-	       //multiSelect: true,    //多选
 	      	checkboxes: true,
 	      	color:"#337ab7",
 	      	showTags:true,//显示tags
-	      	showCheckbox:true,//显示选择框
-// 	      	nodeIcon:"glyphicon glyphicon-bookmark"
-// 			checkedIcon:"glyphicon glyphicon-check"
-// 			collapseIcon:"glyphicon glyphicon-minus"
-// 			emptyIcon:"glyphicon"
-			onNodeChecked: function(event, node) { //选中节点
-				 alert("onNodeChecked")
-// 	      var selectNodes = getChildNodeIdArr(node); //获取所有子节点
-// 	      if (selectNodes) { //子节点不为空，则选中所有子节点
-// 	       $('#tree').treeview('checkNode', [selectNodes, { silent: true }]);
-// 	      },
-// 	      var parentNode = $("#tree").treeview("getNode", node.parentId);
-// 	      setParentNodeCheck(node);
-	     },
-	     onNodeUnchecked: function(event, node) { //取消选中节点
-	    	 alert("onNodeUnchecked")
-// 	      var selectNodes = getChildNodeIdArr(node); //获取所有子节点
-// 	      if (selectNodes) { //子节点不为空，则取消选中所有子节点
-// 	       $('#tree').treeview('uncheckNode', [selectNodes, { silent: true }]);
-// 	      }
-	     }
-// 	     onNodeExpanded: function(event, data) {
-// 	    	 alert("onNodeExpanded")
-// 	       if (data.nodes === undefined || data.nodes === null) {
-	         
-// 	       } else if (data.tags[0] === "2") {
-// 	        alert("Tags 2");
-// 	       } else {
-// 	        alert("1111");
-// 	       }
-// 	      }
+	      	showCheckbox:true//显示选择框
 	      });
 	/**搜索*/
     var search = function(e) {
@@ -139,13 +107,13 @@ $(function(){
 	/**删除*/
 	$('#del_btn').on('click',function(){
 		flag=true;
-// 		if(flag){$(".check-icon").show();}//显示节点勾选框
 		var checkresluts = $dataTree.treeview('getChecked')//获取checked状态的node节点
-		var checkresluts = $dataTree.treeview('getParent')//返回给定节点
 		if(checkresluts.length>0){
 // 			$('#myModal').modal({keyboard: true})//打开modle窗口
 			var ids="";
 			$.each(checkresluts, function (index, result) {
+// 				var checkreslutsp = $dataTree.treeview('getChild',result)//返回给定节点的父节点
+// 				console.log(checkreslutsp.length)
 	        	var str = result.text;
 	        	id = str.match(/start(\S*)end/)[1];//正则表达式获取id
 	        	ids=ids+id+"|";

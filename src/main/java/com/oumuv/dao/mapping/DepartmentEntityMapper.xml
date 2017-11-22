@@ -66,4 +66,13 @@
       pid = #{pid,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  
+<!--   ******************************************************************** -->
+ <select id="getAllDepartmentEntity" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from department_info
+  </select>
+
 </mapper>

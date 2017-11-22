@@ -24,5 +24,5 @@ public interface MenuService {
 	public List<RightEntity> getMenuByLevel(int level);
 	
 	/**根据id删除菜单*/
-	public int delMenuByLevel(Long id);
+	public int delMenuByLevel(List<Long> ids);
 }

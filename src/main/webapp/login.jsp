@@ -106,7 +106,7 @@
 				<div class="input-group">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="button" onfocus="$('#password_input').focus()">Password:</button>
-					</span> <input id="password_input" type="text" name="password" class="form-control"
+					</span> <input id="password_input" type="text" name="password" value="123456" class="form-control"
 						placeholder="请输入密码..">
 				</div>
 				<!-- /input-group -->

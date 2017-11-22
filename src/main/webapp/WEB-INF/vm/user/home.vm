@@ -159,8 +159,8 @@ bady div {
 <script>
 $(function(){
 	$('#Personal_info').on("click",function(){
-		loadingPage();
-		$('#window-viwe').show(0).load("#springUrl('/dailogturn.do')",{page:"user/person_info"},function(){initPage();});
+		$('#myModal').load("#springUrl('/user/editPersoninfo.do')").modal({keyboard: true});
+// 		$('#window-viwe').show(0).load("#springUrl('/dailogturn.do')",{page:"user/person_info"},function(){initPage();});
 	});
 	
 	// 基于准备好的dom，初始化echarts实例

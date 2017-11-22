@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.oumuv.core.UserCardInfo;
 import com.oumuv.entity.User;
 import com.oumuv.service.UserService;
 
@@ -46,9 +47,8 @@ public class UserManageAction {
 	 */
 	@RequestMapping(value="word/getusercard.do")
 	public String getUserList(ModelMap map,@RequestParam(value="name",required=false)String name,@RequestParam(value="id",required=false)Long did){
-		List<User> users = userService.getUserListByUnameAndDid(name, did);
+		List<UserCardInfo> users = userService.getUserCardListByUnameAndDid(name, did);
 		map.put("users", users);
 		return "views/namecard";
-		
 	}
 }

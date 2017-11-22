@@ -4,7 +4,10 @@
 }
 
 .context_div .thumbnail:HOVER {
-	transform: scale(1.05);
+ 	transform: scale(1.05); 
+}
+.context_div .thumbnail:ACTIVE {
+	transform: scale(0.8);
 }
 </style>
 <link href="#springUrl('/css/bootstrap-select.min.css')"
@@ -18,18 +21,18 @@
 		<!-- 				搜索输入框 -->
 		<div class="col-lg-5 col-sm-5 col-md-5 col-xs-5">
 			<div class="input-group">
-				<input type="input" id="input-search" name="name" class="form-control"
+				<input type="input" id="name-search" name="uname" class="form-control"
 					placeholder="快速搜索..."> <span class="input-group-btn">
-					<button class="btn btn-default" id="reset_btn" type="button">Search</button>
+					<button class="btn btn-default" id="search_btn" type="button">Search</button>
 				</span>
 			</div>
 		</div>
 		<!--  菜单等级下拉框 -->
 		<div class="btn-group">
-				<select id="level_1" class="btn btn-primary  form-control" name="department" data-live-search="false" ><!-- disabled -->
-						<option value='-1'>部门</option>
-						<option value='1'>销售部</option>
-						<option value='2'>人事部</option>
+				<select id="department_select" class="btn btn-primary  form-control" name="department" data-live-search="false" ><!-- disabled -->
+<!-- 						<option value='-1'>部门</option> -->
+<!-- 						<option value='1'>销售部</option> -->
+<!-- 						<option value='2'>人事部</option> -->
 				</select> 
 		</div>
 		<div class="btn btn-warning " id="edit_btn">编辑</div>
@@ -51,7 +54,19 @@
 <script type="text/javascript">
 	$(function() {
 		$('#context_div').load("#springUrl('/word/getusercard.do')")
+		
+		$('#department_select').load("#springUrl('/word/getAllDepartment.do')")
 	})
 
 	// ******************************************************
+	
+	
+	$('#department_select').change(function(){loadUserCard()});
+	$('#search_btn').click(function(){loadUserCard()});
+	
+	function loadUserCard(){
+		var d = $('#department_select').val();
+		var n = $('#name-search').val();
+		$('#context_div').load("#springUrl('/word/getusercard.do')",{name:n,id:d})
+	}
 </script>

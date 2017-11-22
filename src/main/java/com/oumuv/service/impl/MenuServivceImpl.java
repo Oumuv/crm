@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.oumuv.dao.RightEntityMapper;
 import com.oumuv.entity.RightEntity;
 import com.oumuv.service.MenuService;
@@ -46,18 +48,27 @@ public class MenuServivceImpl implements MenuService{
 		List<RightEntity> menuByLevel = menuDao.getMenuByLevel(level);
 		return menuByLevel;
 	}
-	public int delMenuByLevel(Long id) {
-		RightEntity entity = menuDao.selectByPrimaryKey(id);
-		if(entity.getRightType()!=1){
-			List<RightEntity> list = menuDao.getRightByParentId(entity.getRightParentCode());
-			if(list.size()<2){
-				RightEntity r = new RightEntity();
-				r.setRightCode(entity.getRightParentCode());
-				r.setIspatent(false);
-				int j = menuDao.updateByPrimaryKeySelective(r);
+	
+	@Transactional
+	public int delMenuByLevel(List<Long> ids) {
+		int i=0;
+			try {
+				for(Long id:ids){
+					RightEntity entity = menuDao.selectByPrimaryKey(id);
+					if(entity.getRightType()!=1){
+						List<RightEntity> list = menuDao.getRightByParentId(entity.getRightParentCode());
+						if(list.size()<2){
+							RightEntity r = new RightEntity();
+							r.setRightCode(entity.getRightParentCode());
+							r.setIspatent(false);
+							int j = menuDao.updateByPrimaryKeySelective(r);
+						}
+					}
+					i += menuDao.deleteByPrimaryKey(id);
+				}
+			} catch (Exception e) {
+				throw new RuntimeException("数据删除失败");
 			}
-		}
-		int i = menuDao.deleteByPrimaryKey(id);
 		return i;
 	}
 
