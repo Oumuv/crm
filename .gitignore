@@ -1,2 +1,8 @@
 /target/
+<<<<<<< HEAD
 /.classpath
+=======
+/log/
+/.classpath
+/.gitignore
+>>>>>>> branch 'master' of https://github.com/Oumuv/crm.git
