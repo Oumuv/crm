@@ -34,12 +34,13 @@
 	})
 	
 	function returnpage(link,li){
+		loadingPage();
 		var menuText = li.innerHTML;
 		if($(li).closest("ul").hasClass("dropdown-menu")){
 			var menuText = $(li).closest("ul").prev().text()+'>>'+menuText;
 		}
 		$('.position_span').html(menuText);//“当前位置”变化
 		var href = "#springUrl('/')"+link;
-		$('.word_div').load(href);
+		$('.word_div').load(href,function(){initPage()});
 	}
 </script>

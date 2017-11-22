@@ -178,7 +178,6 @@ body {
 <script type="text/javascript">
 	/*点击主导航栏切换页面 */
 	$(".navlist").click(function() {
-		// 	$("#btn1").click(function() {
 		loadingPage();
 		$(".navlist").removeClass("active");
 		$(this).addClass("active");

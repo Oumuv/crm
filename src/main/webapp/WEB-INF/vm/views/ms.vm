@@ -1,0 +1,53 @@
+<style>
+.navbar {
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	/* 		border-radius: 50%; */
+	background: #337ab7;
+	margin: 7px auto;
+	position: relative;
+	cursor: pointer;
+	text-align: center;
+	font-size: 1.75px;
+	font-weight: bold;
+	color: #fafafa;
+	transition: 0.24s 0.2s;
+}
+
+.showclass:HOVER {
+	transform: rotate(90deg);
+	-ms-transform: rotate(90deg); /* IE 9 */
+	-moz-transform: rotate(90deg); /* Firefox */
+	-webkit-transform: rotate(90deg); /* Safari 和 Chrome */
+	-o-transform: rotate(90deg);
+}
+
+.hideclass {
+	/* 	display:none; */
+	width: 0px;
+	height: 0px;
+}
+</style>
+
+<div style="position: fixed; float: right; right: 50px; bottom: 50px;background: #6d583d;">
+	<div class="navbar hideclass">1</div>
+	<div class="navbar hideclass">2</div>
+	<div class="navbar hideclass">3</div>
+	<div class="navbar showclass">4</div>
+</div>
+
+<script>
+	$('.showclass').mouseover(function() {
+		$('.hideclass').animate({
+			width : "50px",
+			height : "50px"
+		});
+	})
+	$('.showclass').mouseout(function() {
+		$('.hideclass').animate({
+			width : "0px",
+			height : "0px"
+		});
+	})
+</script>
