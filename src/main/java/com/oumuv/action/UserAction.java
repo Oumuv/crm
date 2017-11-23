@@ -31,6 +31,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oumuv.entity.LoginRecordEntity;
 import com.oumuv.entity.User;
@@ -54,7 +55,16 @@ public class UserAction {
 	private UserService userService;
 	@Autowired
 	private LoginRecordService loginRecordService;
-
+	
+	
+	/**
+	 * 打开个人信息编辑页
+	 * @param request
+	 * @param session
+	 * @param map
+	 * @return
+	 * @throws InterruptedException
+	 */
 	@RequestMapping(value = "/editPersoninfo.do")
 	public String pageResult(HttpServletRequest request, HttpSession session,
 			ModelMap map) throws InterruptedException {
@@ -230,7 +240,17 @@ public class UserAction {
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @param user
+	 */
+	@ResponseBody
+	@RequestMapping("/savePersonInfo.do")
+	public void savePersoninfo(User user){
+		int i = 0;
+		i = userService.savePersonInfo(user);
+		
+	}
 
 
 }

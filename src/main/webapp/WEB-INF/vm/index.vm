@@ -173,6 +173,8 @@ body {
 	</div>
 	<!-- /.modal -->
 	<!-- 按钮触发模态框 -->
+	
+	#parse("./views/ms.vm")
 </body>
 
 <script type="text/javascript">
@@ -189,13 +191,13 @@ body {
 	});
 	/*显示/隐藏工具栏*/
 	function showbtn() {
-		if (screen.width <= 480) {
+		if ($(window).width() <= 480) {
 			$(".btn-uitl").toggle(200);
 		}
 	}
 	//监听某一个元素的滚动条
 	$('#conten div').scroll(function() {
-		if (screen.width <= 480) {
+		if ($(window).width() <= 480) {
 			//$('#conten div').scrollTop()获取该元素滚动条滚动后的距离
 			if ($('#conten div').scrollTop() >= 50) {
 				$('.div_weather').hide(200);

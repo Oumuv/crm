@@ -5,7 +5,13 @@ import java.util.Date;
 
 public class User implements Serializable{
 	
-    private Long id;
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7680804400728108093L;
+
+	private Long id;
 
 	private String username;
 
@@ -14,6 +20,12 @@ public class User implements Serializable{
 	private String name;
 
 	private String himg;
+
+	private String idcard;
+
+	private String qq;
+
+	private String wechat;
 
 	private String email;
 
@@ -38,6 +50,8 @@ public class User implements Serializable{
 	private Long roleId;
 
 	private Long departmentId;
+
+	private String remark;
 
 	public Long getId() {
 		return id;
@@ -77,6 +91,30 @@ public class User implements Serializable{
 
 	public void setHimg(String himg) {
 		this.himg = himg == null ? null : himg.trim();
+	}
+
+	public String getIdcard() {
+		return idcard;
+	}
+
+	public void setIdcard(String idcard) {
+		this.idcard = idcard == null ? null : idcard.trim();
+	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq == null ? null : qq.trim();
+	}
+
+	public String getWechat() {
+		return wechat;
+	}
+
+	public void setWechat(String wechat) {
+		this.wechat = wechat == null ? null : wechat.trim();
 	}
 
 	public String getEmail() {
@@ -174,6 +212,14 @@ public class User implements Serializable{
 
 	public void setDepartmentId(Long departmentId) {
 		this.departmentId = departmentId;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark == null ? null : remark.trim();
 	}
 
 

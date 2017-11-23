@@ -33,4 +33,11 @@ public interface UserService {
 	 * 获取个人信息
 	 */
 	public User getPersonInfo(User u);
+	
+	/**
+	 * 保存个人信息
+	 * @param u
+	 * @return
+	 */
+	public int savePersonInfo(User u);
 }

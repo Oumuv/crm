@@ -1,13 +1,8 @@
 <link href="#springUrl('/css/bootstrap-datetimepicker.css')"
 	rel="stylesheet">
 <link href="#springUrl('/css/bootstrapValidator.css')" rel="stylesheet">
-<script type="text/javascript"
-	src="#springUrl('/js/bootstrap-datetimepicker.js')"></script>
-<script type="text/javascript"
-	src="#springUrl('/js/bootstrap-datetimepicker.fr.js')"></script>
-<script type="text/javascript"
-	src="#springUrl('/js/bootstrap-datetimepicker.zh-CN.js')"></script>
-<script src="#springUrl('/js/bootstrapValidator.js')"></script>
+<link rel="stylesheet" href="#springUrl('/css/jquery-labelauty.css')">
+
 <div class="modal-dialog" style="z-index: 9999">
 	<div class="modal-content">
 		<div class="modal-header">
@@ -18,80 +13,119 @@
 			</h4>
 		</div>
 		<div class="modal-body">
-			<form>
+			<form id="form_table">
 				<div class=" row"
 					style="width: 100%; height: 100%; margin-left: 0px;">
 					<div class=" col-md-4 col-sm-4">
 						<!-- 头像框 -->
-						<div style="width: 80%;">
-							<div class=""
-								style="width: 100%; border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%; overflow: hidden; box-shadow: 1px 1px 10px #C0C0C0;">
-								<img alt="头像" style="width: 100%;"
+							<a href="#" class="thumbnail" style="border:0px;">
+								<img alt="头像" style="width: 68%;border-radius: 50%;-moz-border-radius: 50%;-webkit-border-radius: 50%;overflow: hidden;"
 									src="#if(${user.himg})#springUrl(${user.himg}) #else #springUrl('/images/headM.png')#end">
-							</div>
-						</div>
+							</a>
 					</div>
+					<input type="hidden" name="id" value="$!{user.id}">
 					<div class="col-md-8 col-sm-8 row">
 						<div class="form-group col-md-6 col-sm-12">
 							<label for="name" class=" control-label">姓名:</label>
 							<div class="">
-								<input type="text" class="form-control" value="$!{user.name}" id="name"
-									placeholder="请输入名">
-							</div>
-						</div>
-						<div class="form-group col-md-6 col-sm-12">
-							<label for="birthday" class=" control-label">出生年月:</label> <input
-								class="form_datetime form-control" type="text"
-								value="$!{user.birthday}" size="16" id="birthday" readonly> <span
-								class="add-on"><i class="icon-th"></i></span>
-						</div>
-						<div class="form-group col-md-6 col-sm-12">
-							<label for="email" class=" control-label">电子邮箱:</label>
-							<div class="">
-								<input type="text" class="form-control" value="$!{user.email}" id="email"
+								<input type="text" class="form-control" value="$!{user.name}" name="name" id="name"
 									placeholder="请输入名">
 							</div>
 						</div>
 						<div class="form-group col-md-6 col-sm-12">
 							<label for="phone" class=" control-label">联系电话:</label>
 							<div class="">
-								<input type="text" class="form-control" value="$!{user.phone}" id="phone"
-									placeholder="请输入名">
+								<input type="text" class="form-control" value="$!{user.phone}" name="phone" id="phone"
+									placeholder="联系电话">
 							</div>
+						</div>
+						<div class="form-group col-md-6 col-sm-12">
+							<label for="email" class=" control-label">电子邮箱:</label>
+							<div class="">
+								<input type="text" class="form-control" value="$!{user.email}" name="email" id="email"
+									placeholder="电子邮箱">
+							</div>
+						</div>
+						<div class="form-group col-md-6 col-sm-12">
+							<label for="wechat" class=" control-label">微信:</label>
+							<div class="">
+								<input type="text" class="form-control" value="$!{user.wechat}" name="wechat" id="wechat"
+									placeholder="微信">
+							</div>
+						</div>
+						<div class="form-group col-md-6 col-sm-12">
+							<label for="qq" class=" control-label">QQ:</label>
+							<div class="">
+								<input type="text" class="form-control" value="$!{user.qq}" name="qq" id="qq"
+									placeholder="QQ">
+							</div>
+						</div>
+						<div class="form-group col-md-6 col-sm-12">
+							<label for="birthday" class=" control-label">出生年月:</label> <input
+								class="form_datetime form-control" type="text"
+								value="$!{user.birthday}" size="16" id="birthday" name="birthday" readonly> <span
+								class="add-on"><i class="icon-th"></i></span>
 						</div>
 						<div class="form-group col-md-6 col-sm-12">
 							<label for="idcard" class=" control-label">身份证号:</label>
 							<div class="">
-								<input type="text" class="form-control" value="$!{user.email}" id="idcard"
+								<input type="text" class="form-control" value="$!{user.idcard}" name="idcard" id="idcard"
 									placeholder="身份证号">
 							</div>
 						</div>
 						<div class="form-group col-md-6 col-sm-12">
-							<label for="censusaddress" class=" control-label">户籍地址:</label>
+							<label for="education" class=" control-label">学历:</label>
 							<div class="">
-								<input type="text" class="form-control" value="$!{user.email}" id="censusaddress"
-									placeholder="户籍地址">
+								<input type="text" class="form-control" value="$!{user.education}" name="education" id="education"
+									placeholder="学历">
 							</div>
 						</div>
 						<div class="form-group col-md-6 col-sm-12">
-							<label for="homeaddress" class=" control-label">现家庭住址:</label>
+							<label for="graduateSchool" class=" control-label">毕业院校:</label>
 							<div class="">
-								<input type="text" class="form-control" value="$!{user.email}" id="homeaddress"
-									placeholder="现家庭住址">
+								<input type="text" class="form-control" value="$!{user.graduateSchool}" name="graduateSchool" id="graduateSchool"
+									placeholder="毕业院校">
 							</div>
 						</div>
 						<div class="form-group col-md-6 col-sm-12">
-							<label for="wechatorqq" class=" control-label">微信/QQ:</label>
+							<label for="major" class=" control-label">专业:</label>
 							<div class="">
-								<input type="text" class="form-control" value="$!{user.email}" id="wechatorqq"
-									placeholder="微信/QQ">
+								<input type="text" class="form-control" value="$!{user.major}" name="major" id="major"
+									placeholder="专业">
+							</div>
+						</div>
+						<div class="form-group col-md-6 col-sm-12">
+							<label for="graduationTime" class=" control-label">毕业时间:</label> <input
+								class="form_datetime form-control" type="text"
+								value="$!{user.graduationTime}" size="16" id="graduationTime" name="graduationTime" readonly> <span
+								class="add-on"><i class="icon-th"></i></span>
+						</div>
+						<div class="form-group col-md-6 col-sm-12">
+							<label class=" control-label">性别:</label> 
+							<div class="row">
+								<input type="radio" name="male" class="labelauty" id="labelauty-m" value="男" #if($!{user.male}=='男')checked="checked"#end style="display: none;">
+								<label for="labelauty-m" class="col-md-4 col-sm-6 radio_labels" style="margin: 0px 5px 0px 5px">
+									<span class="labelauty-unchecked-image"></span>
+									<span class="labelauty-unchecked">男</span>
+									<span class="labelauty-checked-image"></span>
+									<span class="labelauty-checked">男</span>
+								</label>
+								
+								<input type="radio" name="male" class="labelauty" id="labelauty-w" value="女" #if($!{user.male}=='女')checked="checked"#end style="display: none;">
+								<label for="labelauty-w" class="col-md-4 col-sm-6 radio_labels" style="margin: 0px 5px 0px 5px">
+									<span class="labelauty-unchecked-image"></span>
+									<span class="labelauty-unchecked">女</span>
+									<span class="labelauty-checked-image"></span>
+									<span class="labelauty-checked">女</span>
+								</label>
+								
 							</div>
 						</div>
 						<div class="form-group col-md-12 col-sm-12">
-							<label for="remarkinfo" class=" control-label">个人信息备注:</label>
+							<label for="remark" class=" control-label">个人信息备注:</label>
 							<div class="">
-								<input type="text" class="form-control" value="$!{user.email}" id="wechatorqq"
-									placeholder="个人信息备注">
+								<textarea  class="form-control" id="remark" name="remark"
+									placeholder="个人信息备注">$!{user.remark}</textarea>
 							</div>
 						</div>
 					</div>
@@ -110,7 +144,14 @@
 
 
 
-
+<script type="text/javascript"
+	src="#springUrl('/js/bootstrap-datetimepicker.js')"></script>
+<script type="text/javascript"
+	src="#springUrl('/js/bootstrap-datetimepicker.fr.js')"></script>
+<script type="text/javascript"
+	src="#springUrl('/js/bootstrap-datetimepicker.zh-CN.js')"></script>
+<script src="#springUrl('/js/bootstrapValidator.js')"></script>
+<script src="#springUrl('/js/jquery-labelauty.js')"></script>
 <script type="text/javascript">
 	$(".form_datetime").datetimepicker({
 		format : "yyyy-mm-dd",
@@ -124,4 +165,29 @@
 		minView : 2
 	//日期时间选择器所能够提供的最精确的时间选择视图
 	});
+	
+	$('#submit_btn').click(function() {
+		if (confirm("确认修改信息？")) {
+			var params = $("#form_table").serialize();
+			$.ajax({
+				type : "POST",
+				url : "#springUrl('/user/savePersonInfo.do')",
+				data : params,
+				success : function(msg) {
+					alert( msg);
+					$('#myModal').empty();
+					$('#myModal').modal('hide');
+				},
+				error:function(msg){
+					if(confirm("修改失败,是否查看错误详细信息？")){
+						alert(msg)
+					}
+				}
+			});
+		}
+	})
+	
+	$('.radio_labels').click(function(e){
+		console.log($(e).attr("for"))
+	})
 </script>

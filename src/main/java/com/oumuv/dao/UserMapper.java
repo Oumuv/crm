@@ -7,7 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import com.oumuv.entity.User;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Long id);
+
+	int deleteByPrimaryKey(Long id);
 
 	int insert(User record);
 

@@ -1,12 +1,17 @@
 package com.oumuv.core;
 
+import java.io.Serializable;
 import java.util.List;
 /**
  * 菜单info
  * @author Administrator
  *
  */
-public class MenuInfo {
+public class MenuInfo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2357855834195447237L;
 	private Long id;
 	private String name;
 	private String url;

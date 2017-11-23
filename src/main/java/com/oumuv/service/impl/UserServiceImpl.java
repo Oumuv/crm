@@ -101,4 +101,9 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	public int savePersonInfo(User u) {
+		int selective = userDao.updateByPrimaryKeySelective(u);
+		return selective;
+	}
+
 }

@@ -1,9 +1,8 @@
 <style>
-.navbar {
+.navbars {
 	width: 50px;
 	height: 50px;
-	line-height: 50px;
-	/* 		border-radius: 50%; */
+	border-radius: 50%;
 	background: #337ab7;
 	margin: 7px auto;
 	position: relative;
@@ -13,41 +12,116 @@
 	font-weight: bold;
 	color: #fafafa;
 	transition: 0.24s 0.2s;
+	box-shadow: 0px 0px 10px #888888;
 }
 
-.showclass:HOVER {
-	transform: rotate(90deg);
-	-ms-transform: rotate(90deg); /* IE 9 */
-	-moz-transform: rotate(90deg); /* Firefox */
-	-webkit-transform: rotate(90deg); /* Safari 和 Chrome */
-	-o-transform: rotate(90deg);
+.shownavbar{
+	position:absolute;
+	bottom:57px;
+	left: 50%;
+    transform: translateX(-50%);
+    z-index:2;
 }
-
 .hideclass {
-	/* 	display:none; */
 	width: 0px;
 	height: 0px;
+	overflow:hidden;
+}
+.hideclass .bar_icon{
+	display:none;
+	font-size:18px;
+	transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+}
+.bar_icon{
+	font-size:16px;
+	position:absolute;
+	top:50%;
+	left: 50%;
+    transform: translate(-50%,-50%);
+}
+.showclass{
+	z-index:999;
 }
 </style>
-
-<div style="position: fixed; float: right; right: 50px; bottom: 50px;background: #6d583d;">
-	<div class="navbar hideclass">1</div>
-	<div class="navbar hideclass">2</div>
-	<div class="navbar hideclass">3</div>
-	<div class="navbar showclass">4</div>
+<link href="#springUrl('/css/font-awesome-4.7.0/css/font-awesome.css')" rel="stylesheet">
+<div class="navbarcon" style="position: fixed; float: right; right: 50px; bottom: 50px;">
+	<div class="navbars showclass "><span class="glyphicon glyphicon-plus bar_icon" ></span></div>
+	<div class="shownavbar">
+		<div class="navbars hideclass"><span class="fa fa-home bar_icon" ></span></div>
+		<div class="navbars hideclass"><span class="fa fa-qq bar_icon" ></span></div>
+		<div class="navbars hideclass"><span class="fa fa-weixin  bar_icon" ></span></div>
+	</div>
 </div>
 
 <script>
-	$('.showclass').mouseover(function() {
-		$('.hideclass').animate({
-			width : "50px",
-			height : "50px"
-		});
-	})
-	$('.showclass').mouseout(function() {
-		$('.hideclass').animate({
-			width : "0px",
-			height : "0px"
-		});
-	})
+	if ($(window).width() <= 480) {
+		$('.showclass').click(function(){
+				if($('.hideclass .bar_icon').css("display")=="block"){
+					$('.hideclass').css("width","0px")
+					$('.hideclass').css("height","0px")
+					$('.showclass ').css({"transform":"rotate(-360deg)","-ms-transform":"rotate(-360deg)","-moz-transform":"rotate(-360deg)","-webkit-transform":"rotate(-360deg)","-o-transform":"rotate(-360deg)"});
+					$('.hideclass .bar_icon').css("display","none").css("font-size","0px")
+				}else{
+					$('.hideclass').css("width","50px")
+					$('.hideclass').css("height","50px")
+					$('.showclass ').css({"transform":"rotate(405deg)","-ms-transform":"rotate(405deg)","-moz-transform":"rotate(405deg)","-webkit-transform":"rotate(405deg)","-o-transform":"rotate(405deg)"});
+					$('.hideclass .bar_icon').css("display","block").css("font-size","18px")
+				}
+		})
+		$('.navbarcon').mouseleave(
+				function() {
+					$('.showclass ').css({
+						"transform" : "rotate(-360deg)",
+						"-ms-transform" : "rotate(-360deg)",
+						"-moz-transform" : "rotate(-360deg)",
+						"-webkit-transform" : "rotate(-360deg)",
+						"-o-transform" : "rotate(-360deg)"
+					});
+					$('.hideclass').css({
+						"width" : "0px",
+						"height" : "0px"
+					});
+					$('.hideclass .bar_icon').css("display", "none").css(
+							"font-size", "0px")
+				})
+
+	}
+
+	if ($(window).width() >= 480) {
+		$('.navbarcon').mouseleave(
+				function() {
+					$('.showclass ').css({
+						"transform" : "rotate(-360deg)",
+						"-ms-transform" : "rotate(-360deg)",
+						"-moz-transform" : "rotate(-360deg)",
+						"-webkit-transform" : "rotate(-360deg)",
+						"-o-transform" : "rotate(-360deg)"
+					});
+					$('.hideclass').css({
+						"width" : "0px",
+						"height" : "0px"
+					});
+					$('.hideclass .bar_icon').css("display", "none").css(
+							"font-size", "0px")
+				})
+		$('.navbarcon').mouseenter(
+				function() {
+					$('.showclass ').css({
+						"transform" : "rotate(405deg)",
+						"-ms-transform" : "rotate(405deg)",
+						"-moz-transform" : "rotate(405deg)",
+						"-webkit-transform" : "rotate(405deg)",
+						"-o-transform" : "rotate(405deg)"
+					});
+					$('.hideclass').css({
+						"width" : "50px",
+						"height" : "50px"
+					});
+					$('.hideclass .bar_icon').css("display", "block").css(
+							"font-size", "18px")
+				})
+	}
 </script>

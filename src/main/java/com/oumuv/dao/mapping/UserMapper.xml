@@ -7,6 +7,9 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="himg" jdbcType="VARCHAR" property="himg" />
+    <result column="IDcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="wechat" jdbcType="VARCHAR" property="wechat" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="phone" jdbcType="BIGINT" property="phone" />
     <result column="birthday" jdbcType="DATE" property="birthday" />
@@ -19,10 +22,12 @@
     <result column="male" jdbcType="VARCHAR" property="male" />
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="department_id" jdbcType="BIGINT" property="departmentId" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, username, password, name, himg, email, phone, birthday, height, weight, education, 
-    graduate_school, major, graduation_time, male, role_id, department_id
+    id, username, password, name, himg, IDcard, qq, wechat, email, phone, birthday, height, 
+    weight, education, graduate_school, major, graduation_time, male, role_id, department_id, 
+    remark
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -36,17 +41,21 @@
   </delete>
   <insert id="insert" parameterType="com.oumuv.entity.User">
     insert into user_info (id, username, password, 
-      name, himg, email, 
+      name, himg, IDcard, 
+      qq, wechat, email, 
       phone, birthday, height, 
       weight, education, graduate_school, 
       major, graduation_time, male, 
-      role_id, department_id)
+      role_id, department_id, remark
+      )
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{himg,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{himg,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{phone,jdbcType=BIGINT}, #{birthday,jdbcType=DATE}, #{height,jdbcType=INTEGER}, 
       #{weight,jdbcType=INTEGER}, #{education,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, 
       #{major,jdbcType=VARCHAR}, #{graduationTime,jdbcType=DATE}, #{male,jdbcType=VARCHAR}, 
-      #{roleId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT})
+      #{roleId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.oumuv.entity.User">
     insert into user_info
@@ -65,6 +74,15 @@
       </if>
       <if test="himg != null">
         himg,
+      </if>
+      <if test="idcard != null">
+        IDcard,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="wechat != null">
+        wechat,
       </if>
       <if test="email != null">
         email,
@@ -102,6 +120,9 @@
       <if test="departmentId != null">
         department_id,
       </if>
+      <if test="remark != null">
+        remark,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -118,6 +139,15 @@
       </if>
       <if test="himg != null">
         #{himg,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
@@ -155,6 +185,9 @@
       <if test="departmentId != null">
         #{departmentId,jdbcType=BIGINT},
       </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.User">
@@ -171,6 +204,15 @@
       </if>
       <if test="himg != null">
         himg = #{himg,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        IDcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        wechat = #{wechat,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
@@ -208,6 +250,9 @@
       <if test="departmentId != null">
         department_id = #{departmentId,jdbcType=BIGINT},
       </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -217,6 +262,9 @@
       password = #{password,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       himg = #{himg,jdbcType=VARCHAR},
+      IDcard = #{idcard,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=BIGINT},
       birthday = #{birthday,jdbcType=DATE},
@@ -228,7 +276,8 @@
       graduation_time = #{graduationTime,jdbcType=DATE},
       male = #{male,jdbcType=VARCHAR},
       role_id = #{roleId,jdbcType=BIGINT},
-      department_id = #{departmentId,jdbcType=BIGINT}
+      department_id = #{departmentId,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 

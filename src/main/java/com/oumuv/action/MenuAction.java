@@ -23,12 +23,17 @@ import com.oumuv.core.MenuInfo;
 import com.oumuv.entity.RightEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.MenuService;
+import com.oumuv.utils.JedisUtil;
+import com.oumuv.utils.ObjectUtil;
 
 @Controller
 public class MenuAction {
 	
 	@Autowired
 	private MenuService menuservice;
+
+	@Autowired
+	private JedisUtil jedisUtil;
 	
 	
 	/**
@@ -42,31 +47,42 @@ public class MenuAction {
 	}
 	
 	/**获取用户菜单
-	 * @throws IOException */
+	 * @throws Exception */
 	@RequestMapping("/user/getmenu.do")
-	public String getMenu(HttpSession session,HttpServletResponse response,ModelMap map) throws IOException{
+	public String getMenu(HttpSession session,HttpServletResponse response,ModelMap map) throws Exception{
 		User user = (User) session.getAttribute("user");
-		List<RightEntity> menu = menuservice.getMenuByUid(user.getId());
-		List<MenuInfo> menuresult = new LinkedList<MenuInfo>();//最后的结果 
+		String key="menus"+user.getId();
+		byte[] keyBytes = ObjectUtil.object2Bytes(key);
+		byte[] bs = jedisUtil.get(keyBytes);
 		
-		//遍历一级菜单，一级菜单没有parentid
-		for(RightEntity m:menu){
-			if(m.getRightType()==1){
-				MenuInfo mi = new MenuInfo();
-				mi.setId(m.getRightCode());
-				mi.setName(m.getRightText());
-				mi.setUrl(m.getRightUrl());
-				menuresult.add(mi);
+		if(null==bs){
+			List<RightEntity> menu = menuservice.getMenuByUid(user.getId());
+			List<MenuInfo> menuresult = new LinkedList<MenuInfo>();//最后的结果 
+			
+			//遍历一级菜单，一级菜单没有parentid
+			for(RightEntity m:menu){
+				if(m.getRightType()==1){
+					MenuInfo mi = new MenuInfo();
+					mi.setId(m.getRightCode());
+					mi.setName(m.getRightText());
+					mi.setUrl(m.getRightUrl());
+					menuresult.add(mi);
+				}
 			}
-		}
-		//获取一级菜单的子菜单
-		for(MenuInfo m:menuresult){
-			List<MenuInfo> getchild = getchild(m.getId(),menu);
-			if(getchild.size()>0){
-				m.setMenus(getchild);
+			//获取一级菜单的子菜单
+			for(MenuInfo m:menuresult){
+				List<MenuInfo> getchild = getchild(m.getId(),menu);
+				if(getchild.size()>0){
+					m.setMenus(getchild);
+				}
 			}
+			map.put("menulist", menuresult);
+			jedisUtil.set(keyBytes, ObjectUtil.object2Bytes(menuresult), 240);//缓存到redis,缓存时间4分钟
+		}else{
+			List<MenuInfo> bytes2Object = (List<MenuInfo>) ObjectUtil.bytes2Object(bs);
+			map.put("menulist", bytes2Object);
 		}
-		map.put("menulist", menuresult);
+		
 		return "views/menu";
 	}
 	
