@@ -124,7 +124,7 @@ li {
 	</div>
 	<!-- word space -->
 	<div class="word_div" style="">
-		#parse("./word/departmentmanage.vm")
+		#parse("./user/upload.vm")
 	</div>
 
 
