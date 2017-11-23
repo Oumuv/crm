@@ -3,7 +3,6 @@ package com.oumuv.action;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,25 +21,24 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oumuv.core.UserInfo;
 import com.oumuv.entity.LoginRecordEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.LoginRecordService;
 import com.oumuv.service.UserService;
 import com.oumuv.utils.AccessSiteUtil;
+import com.oumuv.utils.DateUtils;
 import com.oumuv.utils.JedisUtil;
 import com.oumuv.utils.MD5Util;
-import com.oumuv.utils.ObjectUtil;
+import com.oumuv.utils.MyCopyUtil;
 
 /**
  * @author Administrator user控制层
@@ -69,8 +67,12 @@ public class UserAction {
 	public String pageResult(HttpServletRequest request, HttpSession session,
 			ModelMap map) throws InterruptedException {
 		User personInfo = (User) session.getAttribute("user");
-		User User = userService.getPersonInfo(personInfo);
-		map.put("user", User);
+		User u = userService.getPersonInfo(personInfo);
+		UserInfo user = new UserInfo();
+		MyCopyUtil.copyProp(user, u, new String []{"birthday","graduationTime"});
+		user.setBirthday(DateUtils.getDateTime(u.getBirthday(), 3));
+		user.setGraduationTime(DateUtils.getDateTime(u.getGraduationTime(),3));
+		map.put("user", user);
 		return "user/person_info";
 	}
 	
@@ -246,9 +248,15 @@ public class UserAction {
 	 */
 	@ResponseBody
 	@RequestMapping("/savePersonInfo.do")
-	public void savePersoninfo(User user){
+	public void savePersoninfo(UserInfo user){
+		User u = new User();
+		
+		MyCopyUtil.copyProp(u, user, new String []{"birthday","graduationTime"});
+		u.setBirthday(DateUtils.parseStr2Date(user.getBirthday(), 3));
+		u.setGraduationTime(DateUtils.parseStr2Date(user.getGraduationTime(),3));
+		
 		int i = 0;
-		i = userService.savePersonInfo(user);
+		i = userService.savePersonInfo(u);
 		
 	}
 

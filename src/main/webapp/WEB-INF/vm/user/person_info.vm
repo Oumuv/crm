@@ -169,6 +169,7 @@
 	$('#submit_btn').click(function() {
 		if (confirm("确认修改信息？")) {
 			var params = $("#form_table").serialize();
+			alert($('#birthday').val());
 			$.ajax({
 				type : "POST",
 				url : "#springUrl('/user/savePersonInfo.do')",
@@ -181,13 +182,11 @@
 				error:function(msg){
 					if(confirm("修改失败,是否查看错误详细信息？")){
 						alert(msg)
+						console.log(msg)
 					}
 				}
 			});
 		}
 	})
 	
-	$('.radio_labels').click(function(e){
-		console.log($(e).attr("for"))
-	})
 </script>
