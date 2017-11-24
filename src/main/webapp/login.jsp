@@ -83,7 +83,7 @@
 					<c:choose>
 						<c:when test="${!empty username }"><input id="username_input"  type="text" name="username" class="form-control"
 						placeholder="请输入用户名.." value="${username }" onblur="check(this)"></c:when>
-						<c:otherwise><input id="username_input" type="text" name="username" class="form-control"
+						<c:otherwise><input id="username_input" type="text" name="username" value="admin" class="form-control"
 						placeholder="请输入用户名.." onblur="check(this)"></c:otherwise>
 					</c:choose>
 					

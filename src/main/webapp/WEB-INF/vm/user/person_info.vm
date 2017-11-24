@@ -19,8 +19,8 @@
 					<div class=" col-md-4 col-sm-4">
 						<!-- 头像框 -->
 							<a href="#" class="thumbnail" style="border:0px;">
-								<img alt="头像" style="width: 68%;border-radius: 50%;-moz-border-radius: 50%;-webkit-border-radius: 50%;overflow: hidden;"
-									src="#if(${user.himg})#springUrl(${user.himg}) #else #springUrl('/images/headM.png')#end">
+								<img alt="头像" data-toggle="tooltip" data-placement="bottom" title="点击更换头像" style="width: 68%;border-radius: 50%;-moz-border-radius: 50%;-webkit-border-radius: 50%;overflow: hidden;"
+									src="#if(${user.himg})#springUrl(${user.himg}) #else #springUrl('/images/headM.png')#end" onclick="editImg(this)">
 							</a>
 					</div>
 					<input type="hidden" name="id" value="$!{user.id}">
@@ -139,7 +139,9 @@
 		</div>
 	</div>
 </div>
+<div id="">
 
+</div>
 
 
 
@@ -153,6 +155,10 @@
 <script src="#springUrl('/js/bootstrapValidator.js')"></script>
 <script src="#springUrl('/js/jquery-labelauty.js')"></script>
 <script type="text/javascript">
+
+	$(function () {
+		$("[data-toggle='tooltip']").tooltip("show"); 
+	});
 	$(".form_datetime").datetimepicker({
 		format : "yyyy-mm-dd",
 		autoclose : true,
@@ -169,7 +175,6 @@
 	$('#submit_btn').click(function() {
 		if (confirm("确认修改信息？")) {
 			var params = $("#form_table").serialize();
-			alert($('#birthday').val());
 			$.ajax({
 				type : "POST",
 				url : "#springUrl('/user/savePersonInfo.do')",
@@ -189,4 +194,10 @@
 		}
 	})
 	
+	function editImg(e){
+// 		alert($(e)[0].src)
+// $('#imgedit_div').load("springUrl('/user/editImg.do')")
+		$('#myModal').load("#springUrl('/user/editImg.do')",function(){
+		})
+	}
 </script>

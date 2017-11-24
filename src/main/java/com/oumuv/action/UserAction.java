@@ -1,5 +1,6 @@
 package com.oumuv.action;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
@@ -7,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -27,7 +33,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.MultipartFilter;
 
 import com.oumuv.core.UserInfo;
 import com.oumuv.entity.LoginRecordEntity;
@@ -74,6 +83,87 @@ public class UserAction {
 		user.setGraduationTime(DateUtils.getDateTime(u.getGraduationTime(),3));
 		map.put("user", user);
 		return "user/person_info";
+	}
+	/**
+	 * 打开头像修改页面
+	 * @param request
+	 * @param session
+	 * @param map
+	 * @return
+	 * @throws InterruptedException
+	 */
+	@RequestMapping(value = "/editImg.do")
+	public String editImgPage(HttpServletRequest request, HttpSession session,
+			ModelMap map) throws InterruptedException {
+		User u = (User) session.getAttribute("user");
+		User user = userService.getPersonInfo(u);
+		map.put("user", user);
+		return "user/uploadImg";
+	}
+	String uploadPath = "E:\\upload";
+	@RequestMapping(value = "/uploadImg2.do")
+	public void editImg2(HttpServletRequest request, HttpSession session,
+			HttpServletResponse response,@RequestParam("avatar_file")MultipartFile file) throws IOException {
+		 // 判断文件是否为空  
+        if (!file.isEmpty()) {  
+            try {  
+                // 文件保存路径  
+                String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/"  
+                        + file.getOriginalFilename();  
+                // 转存文件  
+                file.transferTo(new File(uploadPath+file.getOriginalFilename()));  
+            } catch (Exception e) {  
+                e.printStackTrace();  
+            }  
+        }  
+	}
+	@RequestMapping(value = "/uploadImg.do")
+	public void editImg(HttpServletRequest request, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		response.setCharacterEncoding("utf-8");
+		
+		User u = (User) session.getAttribute("user");
+		User user = userService.getPersonInfo(u);
+		
+		String uploadPath = "E:\\upload";
+		File tempFile = null;
+		try {
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+			factory.setSizeThreshold(4096);//设置缓存区大小，这里是4kb
+			factory.setRepository(tempFile);//缓存区目录
+			
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			upload.setFileSizeMax(4194304);//设置最大文件的大小  这里是4M
+			
+			List<FileItem> fileItemList = upload.parseRequest(request);//获取所有文件
+			Iterator<FileItem> iterator = fileItemList.iterator();
+			while(iterator.hasNext()){
+				FileItem fi = (FileItem) iterator.next();  
+			    String fileName = fi.getName();  
+			    if (fileName != null) {  
+			        File fullFile = new File(new String(fi.getName().getBytes(), "utf-8")); // 解决文件名乱码问题  
+			        File savedFile = new File(uploadPath, fullFile.getName());  
+			        fi.write(savedFile);  
+			    }  
+			    System.out.print("upload succeed");
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			response.getWriter().write("上传失败");
+			e.printStackTrace();
+			return;
+		} catch (FileUploadException e) {
+			// TODO Auto-generated catch block
+			response.getWriter().write("上传失败");
+			e.printStackTrace();
+			return;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			response.getWriter().write("上传失败");
+			e.printStackTrace();
+			return;
+		}
+		response.getWriter().write("上传成功");
 	}
 	
 	/**
@@ -243,7 +333,7 @@ public class UserAction {
 	}
 	
 	/**
-	 * 
+	 * 保存个人信息
 	 * @param user
 	 */
 	@ResponseBody
