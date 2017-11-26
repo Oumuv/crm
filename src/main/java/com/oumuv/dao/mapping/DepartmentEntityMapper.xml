@@ -74,5 +74,11 @@
     <include refid="Base_Column_List" />
     from department_info
   </select>
+ <select id="getAllDepartmentEntityByInput" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from department_info
+    where name like '%${input}%'
+  </select>
 
 </mapper>

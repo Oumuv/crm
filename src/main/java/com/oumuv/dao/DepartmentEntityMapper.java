@@ -2,6 +2,8 @@ package com.oumuv.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.oumuv.entity.DepartmentEntity;
 
 public interface DepartmentEntityMapper {
@@ -24,5 +26,9 @@ public interface DepartmentEntityMapper {
      * @return
      */
     public List<DepartmentEntity> getAllDepartmentEntity();
+    
+    public List<DepartmentEntity> getAllDepartmentEntityByInput(@Param("input")String input);
+    
+    
     
 }

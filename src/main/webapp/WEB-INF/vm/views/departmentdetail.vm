@@ -1,0 +1,36 @@
+
+#foreach($d in $list)
+	<div class="list-group">
+		<a href="#" class="list-group-item lsit_title" did="$d.id">
+			<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-flag"></span>$d.name</h4>
+			<span>
+				成员：$d.menber.size()人
+			</span>
+			<span class="glyphicon glyphicon-menu-down"></span>
+		</a> 
+		#if($d.menber.size()>0)
+		<a href="#" class="list-group-item">
+			<p class="list-group-item-text">
+				#foreach($u in $d.menber)
+				<img class="img-icon" src="#if(${u.himg})#springUrl(${u.himg}) #else #springUrl('/images/headM.png')#end" alt="">
+				#end
+			</p>
+		</a>
+		#end
+	</div>
+#end
+
+<script>
+	$(function(){
+		$('.list-group .lsit_title').click(function(){
+			$('.list-group .lsit_title').removeClass("active")
+			$(this).addClass("active")
+		})
+	})
+	
+	function showmenber(id){
+// 		alert(id)
+		
+	}
+	
+</script>
