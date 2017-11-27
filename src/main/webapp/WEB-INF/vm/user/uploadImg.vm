@@ -25,8 +25,8 @@
 								<div class="avatar-upload">
 									<input type="hidden" class="avatar-src" name="avatar_src">
 									<input type="hidden" class="avatar-data" name="avatar_data">
-									<label for="avatarInput">Local upload</label> <input
-										type="file" class="avatar-input" id="avatarInput"
+									<label for="avatarInput">Local upload</label> 
+									<input type="file" class="avatar-input" id="avatarInput"
 										name="avatar_file">
 								</div>
 
@@ -129,6 +129,7 @@
 			$('#avatarInput').change(function() {
 				var imgFile = this.files[0];
 				var reader = new FileReader();
+				alert($('#avatarInput').val())
 
 				reader.onloadstart = function(e) {
 					console.log("开始读取....");
@@ -155,6 +156,8 @@
 		$('.avatar-save').click(function() {
 			if (confirm("确认修改信息？")) {
 				var params = $(".avatar-form").serialize();
+				console.log(params)
+				return;
 				$.ajax({
 					type : "POST",
 					url : "#springUrl('/user/uploadImg2.do')",

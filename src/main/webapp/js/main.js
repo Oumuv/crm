@@ -101,14 +101,14 @@
           try {
             data = $(this).contents().find('body').text();
           } catch (e) {
-            console.log(e.message);
+            console.log("initIframe:"+e.message);
           }
 
           if (data) {
             try {
               data = $.parseJSON(data);
             } catch (e) {
-              console.log(e.message);
+              console.log("initIframe:"+e.message);
             }
 
             _this.submitDone(data);
@@ -235,8 +235,8 @@
       var data = new FormData(this.$avatarForm[0]);
       var _this = this;
       var datas=$('.avatar-form').serialize();
-      console.log(datas)
-return false;
+      console.log("ajaxUpload:"+datas)
+//return false;
       $.ajax(url, {
         type: 'post',
         data: data,
@@ -249,6 +249,7 @@ return false;
         },
 
         success: function (data) {
+        	console.log("success:"+data)
           _this.submitDone(data);
         },
 
@@ -271,9 +272,9 @@ return false;
     },
 
     submitDone: function (data) {
-      console.log(data);
+      console.log("submitDone"+data);
 
-      if ($.isPlainObject(data) && data.state === 200) {
+      if ($.isPlainObject(data)) {
         if (data.result) {
           this.url = data.result;
 
@@ -288,7 +289,8 @@ return false;
 
           this.$avatarInput.val('');
         } else if (data.message) {
-          this.alert(data.message);
+//          this.alert(data.message);
+        	alert(data.message);
         }
       } else {
         this.alert('Failed to response');
@@ -311,6 +313,7 @@ return false;
     },
 
     alert: function (msg) {
+    	console.log("alert:"+msg)
       var $alert = [
             '<div class="alert alert-danger avatar-alert alert-dismissable">',
               '<button type="button" class="close" data-dismiss="alert">&times;</button>',
