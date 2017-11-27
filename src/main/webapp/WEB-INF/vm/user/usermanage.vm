@@ -30,9 +30,6 @@
 		<!--  菜单等级下拉框 -->
 		<div class="btn-group">
 				<select id="department_select" class="btn btn-primary  form-control" name="department" data-live-search="false" ><!-- disabled -->
-<!-- 						<option value='-1'>部门</option> -->
-<!-- 						<option value='1'>销售部</option> -->
-<!-- 						<option value='2'>人事部</option> -->
 				</select> 
 		</div>
 		<div class="btn btn-warning " id="edit_btn">编辑</div>

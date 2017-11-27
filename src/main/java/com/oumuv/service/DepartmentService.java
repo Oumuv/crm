@@ -14,5 +14,18 @@ public interface DepartmentService {
 	 */
 	public List<DepartmentEntity> getAllEntity();
 	
+	/**
+	 * 模糊搜索 
+	 * @param input
+	 * @return
+	 */
+	public List<DepartmentEntity> getAllEntity(String input);
 	
+	public DepartmentEntity getEntity(Long id);
+	
+	public int saveEntity(DepartmentEntity departmentEntity);
+	
+	public int addEntity(DepartmentEntity departmentEntity);
+	
+	public int deleteEntity(Long id);
 }

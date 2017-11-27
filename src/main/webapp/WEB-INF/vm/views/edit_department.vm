@@ -1,0 +1,61 @@
+<style>
+#form_table td {
+	text-align: center;
+	line-height: 2.5;
+	vertical-align: top;
+}
+</style>
+
+<div class="modal-dialog" style="z-index: 9999">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h4 class="modal-title" id="myModalLabel">
+				$!info.name | 编辑<input type='hidden'></input>
+			</h4>
+		</div>
+		<div class="modal-body">
+			<form id="form_table" action="">
+				<table class="table">
+					<tbody>
+						<input type="hidden" value="$!info.id" name="id">
+						<tr>
+							<td>部门名</td>
+							<td><input type="input" name="name"
+								value="$!info.name" class="form-control" placeholder="NULL"></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+			</button>
+			<button type="button" class="btn btn-primary" id="submit_btn">提交更改</button>
+		</div>
+	</div>
+	<!-- /.modal-content -->
+</div>
+
+<script>
+	$('#submit_btn').click(function() {
+		if (confirm("确认修改信息？")) {
+			var params = $("#form_table").serialize();
+			$.ajax({
+				type : "POST",
+				url : "#springUrl('/word/saveDepartment.do')",
+				data : params,
+				success : function(msg) {
+					alert( msg);
+					$('#myModal').empty();
+					$('#myModal').modal('hide');
+					getdetails();
+				},
+				error:function(msg){
+						alert("修改失败")
+				}
+			});
+		}
+	})
+</script>

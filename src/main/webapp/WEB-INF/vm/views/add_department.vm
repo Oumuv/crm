@@ -1,0 +1,97 @@
+<style>
+#form_table td {
+	text-align: center;
+	line-height: 2.5;
+	vertical-align: top;
+}
+</style>
+<link href="#springUrl('/css/bootstrap-select.min.css')"
+	rel="stylesheet">
+<script src="#springUrl('/js/bootstrap-select.min.js')"></script>
+<div class="modal-dialog" style="z-index: 9999">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h4 class="modal-title" id="myModalLabel">
+				部门 | 添加<input type='hidden'></input>
+			</h4>
+		</div>
+		<div class="modal-body">
+			<form id="form_table" action="">
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>菜单名</td>
+							<td><input type="input" name="name" id="name_input"
+								 class="form-control" placeholder="NULL"></td>
+						</tr>
+						<tr>
+							<td>上级部门</td>
+							<td>
+							<select id="level_1" class="selectpicker" name="pid" data-live-search="true"></select>
+								 <!-- <select id="level_3" class="selectpicker" data-live-search="false" multiple></select> multiple为多选data-live-search可搜索 -->
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+			</button>
+			<button type="button" class="btn btn-primary" id="submit_btn">提交更改</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function() {
+		//数据赋值  
+		var select = $("#level_1");
+// 		select.append("<option value='1'>一级菜单</option>");
+// 		select.append("<option value='2'>二级菜单</option>");
+		$(".selectpicker").selectpicker({
+			noneSelectedText : '请选择'//默认显示内容  
+		});
+		
+		$.ajax({
+			type : 'post',
+			async : false,
+			url : "#springUrl('/word/getParent.do')",
+			dataType : 'text',
+			success : function(data) {//返回list数据并循环获取  
+				$("#level_1").append(data);
+				$('#level_1').selectpicker('val', '');
+				$('#level_1').selectpicker('refresh');  
+			}
+		});
+
+
+	});
+
+	$('#submit_btn').click(function() {
+		var name = $("#name_input").val();
+		if(name==""){
+			alert("请输入部门名")
+			return;
+		}
+		if (confirm("确认新增菜单？")) {
+			var params = $("#form_table").serialize();
+			$.ajax({
+				type : "POST",
+				url : "#springUrl('/word/addDepartment.do')",
+				data : params,
+				success : function(msg) {
+					alert(msg);
+					$('#myModal').empty();
+					$('#myModal').modal('hide');
+					getdetails();
+				},
+				error : function(msg) {
+					alert(msg)
+				}
+			});
+		}
+	})
+</script>

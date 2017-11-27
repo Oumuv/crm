@@ -25,4 +25,29 @@ public class DepartmentServiceImpl implements DepartmentService{
 		return list;
 	}
 
+	public List<DepartmentEntity> getAllEntity(String input) {
+		List<DepartmentEntity> list = DepartmentDao.getAllDepartmentEntityByInput(input);
+		return list;
+	}
+
+	public DepartmentEntity getEntity(Long id) {
+		DepartmentEntity entity = DepartmentDao.selectByPrimaryKey(id);
+		return entity;
+	}
+
+	public int saveEntity(DepartmentEntity departmentEntity) {
+		int i = DepartmentDao.updateByPrimaryKeySelective(departmentEntity);
+		return i;
+	}
+
+	public int addEntity(DepartmentEntity departmentEntity) {
+		int i = DepartmentDao.insert(departmentEntity);
+		return i;
+	}
+
+	public int deleteEntity(Long id) {
+		int i = DepartmentDao.deleteByPrimaryKey(id);
+		return i;
+	}
+
 }
