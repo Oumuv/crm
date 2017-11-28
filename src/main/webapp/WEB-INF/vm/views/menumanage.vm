@@ -23,19 +23,6 @@
 				</span>
 			</div>
 		</div>
-		<!-- 				 菜单等级下拉框 -->
-		<!-- 						<div class="btn-group"> -->
-		<!-- 						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-		<!-- 						    菜单等级 <span class="caret"></span> -->
-		<!-- 						  </button> -->
-		<!-- 						  <ul class="dropdown-menu"> -->
-		<!-- 						    <li><a href="#">一级菜单</a></li> -->
-		<!-- 						    <li><a href="#">二级菜单</a></li> -->
-		<!-- 						    <li><a href="#">三级菜单</a></li> -->
-		<!-- 						    <li role="separator" class="divider"></li> -->
-		<!-- 						    <li><a href="#">所有菜单</a></li> -->
-		<!-- 						  </ul> -->
-		<!-- 						</div> -->
 		<div class="btn btn-warning " id="edit_btn">编辑</div>
 		<div class="btn btn-success " id="add_btn">添加</div>
 		<div class="btn btn-danger" id="del_btn">删除</div>
@@ -117,7 +104,7 @@ $(function(){
 	        	var str = result.text;
 	        	id = str.match(/start(\S*)end/)[1];//正则表达式获取id
 	        	ids=ids+id+"|";
-	        	console.log(id);
+// 	        	console.log(id);
 	      	});
 			ids = ids.substring(0,ids.length-1)
 	        $.post("#springUrl('/word/delMenu.do')",{ids:ids},function(msg){
@@ -129,7 +116,7 @@ $(function(){
 					showTags : true,//显示tags
 					showCheckbox : true
 				});
-	        })
+	        }).error(function(msg) {alert("删除失败，请先删除子菜单") })
 		}else{
 			alert("未选中任何菜单节点");
 		}
@@ -148,15 +135,6 @@ $(function(){
 	})
 		
 
-// 	$('#tree').on('click','li',function(){
-// // 		alert(flag)
-// 		if(flag){
-// 			$("#tree .check-icon").show();//显示节点勾选框
-// 		}
-// 		else{
-// 			$("#tree .check-icon").hide();//隐藏节点勾选框
-// 		}
-// 	})
 })
 
 	// ******************************************************
@@ -177,49 +155,5 @@ function getTree() {
 	return json;
 }
 
-function deletree(){
-
-}
-
-function addTree(){
-	
-}
-
-
-// function getChildNodeIdArr(node) {
-// 	   var ts = [];
-// 	   if (node.nodes) {
-// 	    for (x in node.nodes) {
-// 	     ts.push(node.nodes[x].nodeId);
-// 	     if (node.nodes[x].nodes) {
-// 	      var getNodeDieDai = getChildNodeIdArr(node.nodes[x]);
-// 	      for (j in getNodeDieDai) {
-// 	       ts.push(getNodeDieDai[j]);
-// 	      }
-// 	     }
-// 	    }
-// 	   } else {
-// 	    ts.push(node.nodeId);
-// 	   }
-// 	   return ts;
-// 	  }
-	 
-// 	  function setParentNodeCheck(node) {
-// 	   var parentNode = $("#tree").treeview("getNode", node.parentId);
-// 	   if (parentNode.nodes) {
-// 	    var checkedCount = 0;
-// 	    for (x in parentNode.nodes) {
-// 	     if (parentNode.nodes[x].state.checked) {
-// 	      checkedCount ++;
-// 	     } else {
-// 	      break;
-// 	     }
-// 	    }
-// 	    if (checkedCount === parentNode.nodes.length) {
-// 	     $("#tree").treeview("checkNode", parentNode.nodeId);
-// 	     setParentNodeCheck(parentNode);
-// 	    }
-// 	   }
-// 	  }
 
 </script>

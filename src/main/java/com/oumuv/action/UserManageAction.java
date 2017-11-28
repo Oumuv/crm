@@ -10,7 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.oumuv.core.UserCardInfo;
+import com.oumuv.core.info.UserCardInfo;
 import com.oumuv.entity.User;
 import com.oumuv.service.UserService;
 

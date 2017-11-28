@@ -79,4 +79,16 @@
       role_flag = #{roleFlag,jdbcType=INTEGER}
     where role_id = #{roleId,jdbcType=BIGINT}
   </update>
+  
+  
+  
+<!--   ******************************************************************** -->
+ <select id="findRoleByUid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+	select r.* 
+	from role_info r 
+	inner join user_role_info  ur on r. role_id=ur.rid
+	inner join user_info u on  u.id=ur.uid
+	where u.id=#{uid}
+  </select>
+  
 </mapper>

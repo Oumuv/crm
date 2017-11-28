@@ -2,7 +2,7 @@ package com.oumuv.service;
 
 import java.util.List;
 
-import com.oumuv.core.UserCardInfo;
+import com.oumuv.core.info.UserCardInfo;
 import com.oumuv.entity.User;
 
 public interface UserService {

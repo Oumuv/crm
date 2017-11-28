@@ -12,7 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.oumuv.core.DepartmentInfo;
+import com.oumuv.core.info.DepartmentInfo;
 import com.oumuv.entity.DepartmentEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.DepartmentService;
