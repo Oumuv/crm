@@ -1,4 +1,4 @@
-package com.oumuv.core;
+package com.oumuv.core.info;
 
 import java.io.Serializable;
 import java.util.List;

@@ -36,8 +36,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.oumuv.core.DeleteFileTimerTask;
-import com.oumuv.core.Result;
-import com.oumuv.core.UserInfo;
+import com.oumuv.core.info.Result;
+import com.oumuv.core.info.UserInfo;
 import com.oumuv.entity.LoginRecordEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.LoginRecordService;

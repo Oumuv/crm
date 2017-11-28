@@ -10,6 +10,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.subject.Subject;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.oumuv.core.MenuInfo;
+import com.oumuv.core.info.MenuInfo;
 import com.oumuv.entity.RightEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.MenuService;
@@ -40,9 +43,11 @@ public class MenuAction {
 	 * 跳转菜单管理页面
 	 * @return
 	 */
+//	@RequiresRoles("admin")
 	@RequestMapping("/word/Menumanage.do")
 	public String goMenumanage(){
-		
+		Subject subject = SecurityUtils.getSubject();// 获取subject实例
+		boolean hasRole = subject.hasRole("admin");
 		return "views/menumanage";
 	}
 	

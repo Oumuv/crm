@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.oumuv.core.UserCardInfo;
+import com.oumuv.core.info.UserCardInfo;
 import com.oumuv.dao.DepartmentEntityMapper;
 import com.oumuv.dao.UserMapper;
 import com.oumuv.entity.DepartmentEntity;
