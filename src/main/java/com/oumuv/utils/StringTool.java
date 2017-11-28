@@ -1,17 +1,25 @@
 package com.oumuv.utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringTool {
 
+
 	/**
-	 * 如果对象是空则返回true
-	 * @param o
-	 * @return
+	 * 字符串截取，指定位置截取到字符末尾
+	 * @param regex 开始截取的位置的字符
+	 * @param str
 	 */
-	private static boolean isEmpty(Object o){
-		//if 'object' is NULL or the String length is 0 retrun true
-		if(null==o&&o.toString().equals("")){
-			return true;
-		}
-		return false;
+	public final static String subStringIndex2End(String regex,String str){
+		String substring = "";
+        Pattern compile = Pattern.compile(regex);
+        Matcher matcher = compile.matcher(str);
+        if(matcher.find()){
+//        	System.out.println("匹配字符："+matcher.start());
+			substring += str.substring(matcher.start(), str.length());
+//        	System.out.println(substring);
+        }
+		return substring;
 	}
 }

@@ -6,7 +6,7 @@
 	-moz-border-radius: 50%;
 	-webkit-border-radius: 50%;
 	overflow: hidden;
-	box-shadow: 5px 5px 5px #C0C0C0;
+	box-shadow: 0px 0px 10px #C0C0C0;
 }
 
 .icon-nav {

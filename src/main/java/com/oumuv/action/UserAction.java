@@ -8,20 +8,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -39,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.oumuv.core.DeleteFileTimerTask;
 import com.oumuv.core.Result;
 import com.oumuv.core.UserInfo;
 import com.oumuv.entity.LoginRecordEntity;
@@ -47,10 +44,10 @@ import com.oumuv.service.LoginRecordService;
 import com.oumuv.service.UserService;
 import com.oumuv.utils.AccessSiteUtil;
 import com.oumuv.utils.DateUtils;
-import com.oumuv.utils.ImageUtils;
 import com.oumuv.utils.JedisUtil;
 import com.oumuv.utils.MD5Util;
 import com.oumuv.utils.MyCopyUtil;
+import com.oumuv.utils.StringTool;
 import com.oumuv.utils.ThumbnailatorUtils;
 
 /**
@@ -67,7 +64,6 @@ public class UserAction {
 	@Autowired
 	private LoginRecordService loginRecordService;
 	
-	private String uploadPath = "E:\\upload\\";//头像上传路径
 	/**
 	 * 打开个人信息编辑页
 	 * @param request
@@ -102,70 +98,48 @@ public class UserAction {
 		User u = (User) session.getAttribute("user");
 		User user = userService.getPersonInfo(u);
 		map.put("user", user);
-		return "user/uploadImg2";
+		return "user/uploadImg";
 	}
 	
-
-	@RequestMapping(value = "/uploadImg3.do")
-	public void editImg3(@RequestParam(value = "avatar_file",required=false) MultipartFile avatar_file,
-            String avatar_src,String avatar_data, HttpServletRequest request) {
-//        System.out.println("==========Start=============");
-//        String realPath = request.getSession().getServletContext().getRealPath("/");
-//        String resourcePath = "/upload/image/";
-//        //判断文件的MIMEtype
-//        String type = avatar_file.getContentType();
-//        if(type==null || !FileUploadUtil.allowUpload(type)) return  JSON.toJSONString(new Result(null,"不支持的文件类型，仅支持图片！"));
-//        System.out.println("file type:"+type);
-//        String fileName = FileUploadUtil.rename(avatar_file.getOriginalFilename());
-//        int end = fileName.lastIndexOf(".");
-//        String saveName = fileName.substring(0,end);
-//        try {
-//            File dir = new File(realPath + resourcePath);
-//            if(!dir.exists()){
-//                dir.mkdirs();
-//            }
-//            File file = new File(dir,saveName+"_src.jpg");
-//            avatar_file.transferTo(file);
-//        } catch (Exception e) {
-//            e.printStackTrace();  
-//            return  JSON.toJSONString(new Result(null,"上传失败，出现异常："+e.getMessage()));
-//        }   
-//        String srcImagePath = realPath + resourcePath + saveName;
-//        JSONObject joData = (JSONObject) JSONObject.parse(avatar_data);
-//        // 用户经过剪辑后的图片的大小  
-//        float x = joData.getFloatValue("x");
-//        float y = joData.getFloatValue("y");
-//        float w =  joData.getFloatValue("width");
-//        float h =  joData.getFloatValue("height");
-//        float r = joData.getFloatValue("rotate");
-//        //这里开始截取操作
-//        System.out.println("==========imageCutStart=============");
-//        ImgCut.cutAndRotateImage(srcImagePath, (int)x,(int) y,(int) w,(int) h,(int) r);
-//        System.out.println("==========imageCutEnd=============");         
+	/**
+	 * 创建文件夹
+	 * @param path
+	 * @return
+	 */
+	public static boolean mkDirectory(String path) {
+		File file = null;
+		try {
+			file = new File(path);
+			if (!file.exists()) {
+				return file.mkdirs();
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+		} finally {
+			file = null;
+		}
+		return false;
 	}
-	public static boolean mkDirectory(String path) {  
-        File file = null;  
-        try {  
-            file = new File(path);  
-            if (!file.exists()) {  
-                return file.mkdirs();  
-            }  
-            else{  
-                return false;  
-            }  
-        } catch (Exception e) {  
-        } finally {  
-            file = null;  
-        }  
-        return false;  
-    }  
+	
+	
+	/**
+	 * 头像上传
+	 * @param request
+	 * @param session
+	 * @param response
+	 * @param file
+	 * @param avatar_src
+	 * @param avatar_data
+	 * @throws IOException
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/uploadImg2.do",produces = "application/json;charset=utf-8")
 	public void editImg2(HttpServletRequest request, HttpSession session,
 			HttpServletResponse response,@RequestParam("avatar_file")MultipartFile file, String avatar_src,String avatar_data) throws IOException {
 		response.setCharacterEncoding("utf-8");
 		 // 判断文件是否为空  
-		System.out.println("=============================开始获取文件=============================");
+		System.out.println("=============================开始上传图片=============================");
 		String type = file.getContentType();
 		System.out.println("文件类型："+type);
 		SimpleDateFormat dateformat = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
@@ -175,83 +149,40 @@ public class UserAction {
 		String date = dateformat.format(today);//日期
 		String _dy = dy.format(today);//年
 		String _dm = dm.format(today);//月日
+		Gson gson=new Gson();
         if (!file.isEmpty()) {  
             try {  
                 // 文件保存路径  
-                String path = request.getSession().getServletContext().getRealPath("/") + "/upload/"
-                		+_dy+"/"+_dm+"/";
-//            	String path = uploadPath+_dy+"\\"+_dm+"\\";
-                String filePath = path + date +"_" + file.getOriginalFilename();
+                String path = request.getSession().getServletContext().getRealPath("/") + "/upload/" +_dy+"/"+_dm+"/";
                 System.out.println("文件名："+file.getOriginalFilename());
-                System.out.println("文件保存路径:"+filePath); 
                 mkDirectory(path);//创建文件夹路径
                 File file2 = new File(path,date +"_" +file.getOriginalFilename());
+                String filePath = file2.getPath();
+                System.out.println("文件保存路径:"+filePath);
                 file.transferTo(file2);// 转存文件  
-                Gson gson=new Gson();
                 JSONObject object =gson.fromJson(avatar_data, JSONObject.class);
                 double x = (Double)object.get("x");
                 double y = (Double) object.get("y");
                 double rotate = (Double) object.get("rotate");
                 double width = (Double) object.get("width");
                 double height = (Double) object.get("height");
-                ThumbnailatorUtils.ImgSourceRegion(filePath,filePath,(int)x,(int)y,(int)width,(int)height,(int)width,(int)height,true);
+                ThumbnailatorUtils.ImgSourceRegion(filePath,filePath,(int)x,(int)y,(int)width,(int)height,170/*固定宽度*/,170/*固定长度*/,true);
+                System.out.println("=============================结束上传图片=============================");
                 response.getWriter().write(gson.toJson(new Result(file.getOriginalFilename()+"上传成功",null,200)));
+                User user = (User) session.getAttribute("user");
+                String imgpath = StringTool.subStringIndex2End("/upload", filePath.replace("\\", "/"));
+                String oldimg =request.getSession().getServletContext().getRealPath("/") + user.getHimg();
+                new Timer().schedule(new DeleteFileTimerTask(new File(oldimg)), 5000);//延迟删除旧的图片
+                user.setHimg(imgpath);
+                userService.savePersonInfo(user);
                 
             } catch (Exception e) {  
+            	response.getWriter().write(gson.toJson(new Result(file.getOriginalFilename()+"上传失败",e.getMessage(),500)));
                 e.printStackTrace();  
             }  
         }  
-        System.out.println("=============================结束获取文件=============================");
 	}
 	
-	@RequestMapping(value = "/uploadImg.do")
-	public void editImg(HttpServletRequest request, HttpSession session,
-			HttpServletResponse response) throws IOException {
-		response.setCharacterEncoding("utf-8");
-		
-		User u = (User) session.getAttribute("user");
-		User user = userService.getPersonInfo(u);
-		
-		String uploadPath = "E:\\upload";
-		File tempFile = null;
-		try {
-			DiskFileItemFactory factory = new DiskFileItemFactory();
-			factory.setSizeThreshold(4096);//设置缓存区大小，这里是4kb
-			factory.setRepository(tempFile);//缓存区目录
-			
-			ServletFileUpload upload = new ServletFileUpload(factory);
-			upload.setFileSizeMax(4194304);//设置最大文件的大小  这里是4M
-			
-			List<FileItem> fileItemList = upload.parseRequest(request);//获取所有文件
-			Iterator<FileItem> iterator = fileItemList.iterator();
-			while(iterator.hasNext()){
-				FileItem fi = (FileItem) iterator.next();  
-			    String fileName = fi.getName();  
-			    if (fileName != null) {  
-			        File fullFile = new File(new String(fi.getName().getBytes(), "utf-8")); // 解决文件名乱码问题  
-			        File savedFile = new File(uploadPath, fullFile.getName());  
-			        fi.write(savedFile);  
-			    }  
-			    System.out.print("upload succeed");
-			}
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			response.getWriter().write("上传失败");
-			e.printStackTrace();
-			return;
-		} catch (FileUploadException e) {
-			// TODO Auto-generated catch block
-			response.getWriter().write("上传失败");
-			e.printStackTrace();
-			return;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			response.getWriter().write("上传失败");
-			e.printStackTrace();
-			return;
-		}
-		response.getWriter().write("上传成功");
-	}
 	
 	/**
 	 * shiro的登录认证
@@ -275,6 +206,8 @@ public class UserAction {
 //			SavedRequest request2 = WebUtils.getSavedRequest(request);
 //			String requestUrl = request2.getRequestUrl();//获取登录之前的url
 		if(authenticated){
+			User user = (User)session.getAttribute("user");
+			map.put("user", user);
 			return "index";//已经登录直接跳转
 		}
 		String psw= MD5Util.GetMD5Code(password);
