@@ -1,5 +1,7 @@
 package com.oumuv.dao;
 
+import java.util.List;
+
 import com.oumuv.entity.RoleEntity;
 
 public interface RoleEntityMapper {
@@ -14,4 +16,12 @@ public interface RoleEntityMapper {
     int updateByPrimaryKeySelective(RoleEntity record);
 
     int updateByPrimaryKey(RoleEntity record);
+    
+    
+    
+    
+//    *******************************************************
+    
+    List<RoleEntity> findRoleByUid(Long uid);
+    
 }

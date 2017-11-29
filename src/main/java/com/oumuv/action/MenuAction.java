@@ -47,7 +47,7 @@ public class MenuAction {
 	@RequestMapping("/word/Menumanage.do")
 	public String goMenumanage(){
 		Subject subject = SecurityUtils.getSubject();// 获取subject实例
-		boolean hasRole = subject.hasRole("admin");
+		boolean hasRole = subject.hasRole("Admin");
 		return "views/menumanage";
 	}
 	

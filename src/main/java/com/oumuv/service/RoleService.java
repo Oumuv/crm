@@ -11,6 +11,6 @@ public interface RoleService {
 	 * @param id
 	 * @return
 	 */
-	List<RoleEntity>getRoles(Long id);
+	List<String>getRoles(Long id);
 	
 }
