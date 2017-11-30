@@ -78,7 +78,7 @@
     select 
     <include refid="Base_Column_List" />
     from department_info
-    where name like '%${input}%'
+    where name like '%${name}%'
   </select>
 
 </mapper>

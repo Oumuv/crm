@@ -3,8 +3,7 @@ package com.oumuv.entity;
 import java.util.List;
 
 public class RightEntity {
-	
-	
+
 	private Long rightCode;
 
 	private Long rightParentCode;

@@ -1,94 +1,111 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.oumuv.dao.RoleEntityMapper" >
-  <resultMap id="BaseResultMap" type="com.oumuv.entity.RoleEntity" >
-    <id column="role_id" property="roleId" jdbcType="BIGINT" />
-    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
-    <result column="role_desc" property="roleDesc" jdbcType="VARCHAR" />
-    <result column="role_flag" property="roleFlag" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oumuv.dao.RoleEntityMapper">
+  <resultMap id="BaseResultMap" type="com.oumuv.entity.RoleEntity">
+    <id column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_desc" jdbcType="VARCHAR" property="roleDesc" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    role_id, role_name, role_desc, role_flag
+  <sql id="Base_Column_List">
+    role_id, role_name, role_desc, status, role_code
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from role_info
     where role_id = #{roleId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from role_info
     where role_id = #{roleId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.oumuv.entity.RoleEntity" >
+  <insert id="insert" parameterType="com.oumuv.entity.RoleEntity">
     insert into role_info (role_id, role_name, role_desc, 
-      role_flag)
+      status, role_code)
     values (#{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{roleDesc,jdbcType=VARCHAR}, 
-      #{roleFlag,jdbcType=INTEGER})
+      #{status,jdbcType=INTEGER}, #{roleCode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.oumuv.entity.RoleEntity" >
+  <insert id="insertSelective" parameterType="com.oumuv.entity.RoleEntity">
     insert into role_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="roleId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
         role_id,
       </if>
-      <if test="roleName != null" >
+      <if test="roleName != null">
         role_name,
       </if>
-      <if test="roleDesc != null" >
+      <if test="roleDesc != null">
         role_desc,
       </if>
-      <if test="roleFlag != null" >
-        role_flag,
+      <if test="status != null">
+        status,
+      </if>
+      <if test="roleCode != null">
+        role_code,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="roleId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
         #{roleId,jdbcType=BIGINT},
       </if>
-      <if test="roleName != null" >
+      <if test="roleName != null">
         #{roleName,jdbcType=VARCHAR},
       </if>
-      <if test="roleDesc != null" >
+      <if test="roleDesc != null">
         #{roleDesc,jdbcType=VARCHAR},
       </if>
-      <if test="roleFlag != null" >
-        #{roleFlag,jdbcType=INTEGER},
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="roleCode != null">
+        #{roleCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.RoleEntity" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.RoleEntity">
     update role_info
-    <set >
-      <if test="roleName != null" >
+    <set>
+      <if test="roleName != null">
         role_name = #{roleName,jdbcType=VARCHAR},
       </if>
-      <if test="roleDesc != null" >
+      <if test="roleDesc != null">
         role_desc = #{roleDesc,jdbcType=VARCHAR},
       </if>
-      <if test="roleFlag != null" >
-        role_flag = #{roleFlag,jdbcType=INTEGER},
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="roleCode != null">
+        role_code = #{roleCode,jdbcType=VARCHAR},
       </if>
     </set>
     where role_id = #{roleId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.oumuv.entity.RoleEntity" >
+  <update id="updateByPrimaryKey" parameterType="com.oumuv.entity.RoleEntity">
     update role_info
     set role_name = #{roleName,jdbcType=VARCHAR},
       role_desc = #{roleDesc,jdbcType=VARCHAR},
-      role_flag = #{roleFlag,jdbcType=INTEGER}
+      status = #{status,jdbcType=INTEGER},
+      role_code = #{roleCode,jdbcType=VARCHAR}
     where role_id = #{roleId,jdbcType=BIGINT}
   </update>
   
   
   
 <!--   ******************************************************************** -->
- <select id="findRoleByUid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+ <select id="findRoleByUid" parameterType="java.lang.Long" resultMap="BaseResultMap">
 	select r.* 
 	from role_info r 
 	inner join user_role_info  ur on r. role_id=ur.rid
 	inner join user_info u on  u.id=ur.uid
 	where u.id=#{uid}
+  </select>
+ <select id="findRoleByInput" parameterType="java.lang.String" resultMap="BaseResultMap">
+	select 
+	<include refid="Base_Column_List" />
+	from role_info 
+	where role_name like '%${name}%' 
   </select>
   
 </mapper>

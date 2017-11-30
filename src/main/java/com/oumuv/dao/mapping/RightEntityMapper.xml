@@ -116,7 +116,7 @@
   </update>
   
   
-<!--   ************************ -->
+<!--   ************************************************************** -->
   <select id="getRightByUId" parameterType="java.lang.Long" resultMap="BaseResultMap">
 <!--     select  -->
 <!--     <include refid="Base_Column_List" /> -->

@@ -25,4 +25,9 @@ public class RoleServiceImpl implements RoleService{
 		return rlist;
 	}
 
+	public List<RoleEntity> getRoleByInput(String name) {
+		List<RoleEntity> list = RoleDao.findRoleByInput(name);
+		return list;
+	}
+
 }

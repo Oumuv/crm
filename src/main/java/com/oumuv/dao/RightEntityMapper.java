@@ -5,7 +5,8 @@ import java.util.List;
 import com.oumuv.entity.RightEntity;
 
 public interface RightEntityMapper {
-    int deleteByPrimaryKey(Long rightCode);
+
+	int deleteByPrimaryKey(Long rightCode);
 
 	int insert(RightEntity record);
 

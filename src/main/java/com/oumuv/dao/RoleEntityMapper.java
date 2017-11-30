@@ -2,10 +2,13 @@ package com.oumuv.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.oumuv.entity.RoleEntity;
 
 public interface RoleEntityMapper {
-    int deleteByPrimaryKey(Long roleId);
+
+	int deleteByPrimaryKey(Long roleId);
 
     int insert(RoleEntity record);
 
@@ -21,7 +24,12 @@ public interface RoleEntityMapper {
     
     
 //    *******************************************************
-    
+    /**
+     * 根据用户id获取role
+     * @param uid
+     * @return
+     */
     List<RoleEntity> findRoleByUid(Long uid);
     
+    List<RoleEntity> findRoleByInput(@Param("name")String name);
 }

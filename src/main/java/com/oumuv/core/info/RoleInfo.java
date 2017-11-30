@@ -1,7 +1,15 @@
-package com.oumuv.entity;
+package com.oumuv.core.info;
 
-public class RoleEntity {
-    private Long roleId;
+import java.io.Serializable;
+import java.util.Date;
+
+public class RoleInfo implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6424511646834419548L;
+	private Long roleId;
 
 	private String roleName;
 

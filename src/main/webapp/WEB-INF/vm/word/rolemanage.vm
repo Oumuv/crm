@@ -73,5 +73,9 @@
 		var input = $('#input-search').val();
 		
 		var page = $('.footer .pagination-sm .active>a').html();
+		
+		$('#tbody_content').load("#springUrl('/word/getRoleByName.do')");
+		
+		
 	})
 </script>
