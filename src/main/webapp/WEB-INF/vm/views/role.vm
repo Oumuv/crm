@@ -1,0 +1,18 @@
+<tr>
+	<td style="max-width: 150px; min-width: 80px;">Admin</td>
+	<td style="max-width: 150px; min-width: 60px;">管理员</td>
+	<td class=""
+		style="max-width: 150px; min-width: 100px; max-height: 60px;"><span
+		class="label label-info">信息标签</span> <span class="label label-info">信息标签</span>
+		<span class="badge pull-right">9</span></td>
+	<td class=""
+		style="max-width: 150px; min-width: 100px; max-height: 60px;"><span
+		class="label label-success">信息标签</span> <span
+		class="label label-success">信息标签</span> <span class="badge pull-right">18</span>
+	</td>
+	<td>可用</td>
+	<td class="tdoverhied" style="max-width: 150px; max-height: 60px;">这里给个描述N个字你好你好你好你好哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</td>
+	<td><span class="glyphicon glyphicon-pencil" data-toggle="tooltip"
+		title="编辑"></span> <span class="glyphicon glyphicon-trash"
+		data-toggle="tooltip" title="删除"></span></td>
+</tr>

@@ -27,7 +27,7 @@
 				</span>
 			</div>
 		</div>
-		<div class="btn btn-warning " id="edit_btn" onclick="edti()">编辑</div>
+		<div class="btn btn-warning " id="edit_btn" onclick="edit()">编辑</div>
 		<div class="btn btn-success " id="add_btn" onclick="add()">添加</div>
 		<div class="btn btn-danger" id="del_btn" onclick="del()">删除</div>
 	</div>

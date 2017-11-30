@@ -44,6 +44,7 @@ public class MenuAction {
 	 * 跳转菜单管理页面
 	 * @return
 	 */
+	@RequiresRoles("admin")
 	@RequestMapping("/word/Menumanage.do")
 	public String goMenumanage(){
 		Subject subject = SecurityUtils.getSubject();// 获取subject实例

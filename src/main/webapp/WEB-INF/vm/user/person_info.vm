@@ -19,8 +19,9 @@
 					<div class=" col-md-4 col-sm-4">
 						<!-- 头像框 -->
 							<a href="#" class="thumbnail" style="border:0px;">
-								<img alt="头像" data-toggle="tooltip" data-placement="bottom" title="点击更换头像" style="width: 68%;border-radius: 50%;-moz-border-radius: 50%;-webkit-border-radius: 50%;overflow: hidden;"
-									src="#if(${user.himg})#springUrl(${user.himg}) #else #springUrl('/images/headM.png')#end" onclick="editImg(this)">
+								<img alt="头像"  style="width: 68%;border-radius: 50%;-moz-border-radius: 50%;-webkit-border-radius: 50%;overflow: hidden;"
+									src="#if(${user.himg})#springUrl(${user.himg}) #else #springUrl('/images/headM.png')#end" onclick="editImg(this)" 
+									data-toggle="tooltip"  title="点击更换头像">
 							</a>
 					</div>
 					<input type="hidden" name="id" value="$!{user.id}">
