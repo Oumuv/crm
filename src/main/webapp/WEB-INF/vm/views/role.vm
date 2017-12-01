@@ -1,18 +1,64 @@
-<tr>
-	<td style="max-width: 150px; min-width: 80px;">Admin</td>
-	<td style="max-width: 150px; min-width: 60px;">管理员</td>
-	<td class=""
-		style="max-width: 150px; min-width: 100px; max-height: 60px;"><span
-		class="label label-info">信息标签</span> <span class="label label-info">信息标签</span>
-		<span class="badge pull-right">9</span></td>
-	<td class=""
-		style="max-width: 150px; min-width: 100px; max-height: 60px;"><span
-		class="label label-success">信息标签</span> <span
-		class="label label-success">信息标签</span> <span class="badge pull-right">18</span>
+#foreach($r in $roles)
+<tr rid="$r.roleId">
+	<td style="max-width: 150px; min-width: 80px;">$!r.roleCode</td>
+	<td style="max-width: 150px; min-width: 60px;">$!r.roleName</td>
+	<td class="td_badge"
+		style="max-width: 150px; min-width: 100px; max-height: 60px;">
+		#if($r.menus)
+			#foreach($m in $r.menus)
+				<code>$m</code>
+				#if(${velocityCount}==2)<span style="color: #c7254e;">...</span>#break#end
+			#end
+			<span class="badge">$r.mCount</span></td>
+		#else
+			<span class="glyphicon glyphicon-plus" style="color: #337ab7" data-toggle="tooltip" title="添加"></span>
+		#end
+	<td class="td_badge"
+		style="max-width: 150px; min-width: 100px; max-height: 60px;">
+		#if($r.permissions)
+			#foreach($p in $r.permissions)
+				<code>$p</code>
+				#if(${velocityCount}==2)<span style="color: #c7254e;">...</span>#break#end
+			#end 
+			<span class="badge">$r.pCount</span>
+		#else
+			<span class="glyphicon glyphicon-plus" style="color: #337ab7" data-toggle="tooltip" title="添加"></span>
+		#end
 	</td>
-	<td>可用</td>
-	<td class="tdoverhied" style="max-width: 150px; max-height: 60px;">这里给个描述N个字你好你好你好你好哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</td>
+	<td>#if($r.status==1)<span class="glyphicon glyphicon-ok-circle" style="color:green" data-toggle="tooltip" title="可用"></span>
+		#else<span class="glyphicon glyphicon-ban-circle" style="color:#c7254e" data-toggle="tooltip" title="禁用"></span>
+		#end</td>
+	<td class="tdoverhied" style="max-width: 150px; max-height: 60px;"><span  data-toggle="tooltip" data-placement="left" title="$!r.roleDesc">$!r.roleDesc</span></td>
 	<td><span class="glyphicon glyphicon-pencil" data-toggle="tooltip"
-		title="编辑"></span> <span class="glyphicon glyphicon-trash"
-		data-toggle="tooltip" title="删除"></span></td>
+		title="编辑" onclick="edit($r.roleId)"></span> <span class="glyphicon glyphicon-trash"
+		data-toggle="tooltip" title="删除" onclick="del($r.roleId)"></span></td>
 </tr>
+#end
+
+
+<script>
+	$(function(){
+		$("[data-toggle='tooltip']").tooltip(); 
+		
+		$('.td_badge .badge').click(function(){
+			var rid = $(this).closest("tr").attr("rid");
+		})
+	})
+	
+	function del(id) {
+		if (confirm("确定要删除此角色？")) {
+			$.post("#springUrl('/word/delRole.do')", {
+				id : id
+			}, function(msg) {
+				alert(msg)
+				load();
+			});
+		}
+	}
+	
+	function edit(id) {
+			$('#myModal').load("#springUrl('/word/updataRolePage.do')", {
+				id : id
+			}).modal('show');
+	}
+</script>

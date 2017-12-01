@@ -1,5 +1,9 @@
 package com.oumuv.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.oumuv.entity.PermissionEntity;
 
 public interface PermissionEntityMapper {
@@ -14,4 +18,16 @@ public interface PermissionEntityMapper {
     int updateByPrimaryKeySelective(PermissionEntity record);
 
     int updateByPrimaryKey(PermissionEntity record);
+    
+    
+    
+//    ********************************************************************
+    
+    /**
+     * 根据角色id获取PermissionEntity
+     * @param rid
+     * @return
+     */
+    List<PermissionEntity> getPermissionEntityByRid(@Param("rid")Long rid);
+    
 }

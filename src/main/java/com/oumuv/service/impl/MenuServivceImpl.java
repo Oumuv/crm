@@ -1,5 +1,6 @@
 package com.oumuv.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +89,13 @@ public class MenuServivceImpl implements MenuService{
 		}
 		return rightEntity;
 		
+	}
+	public List<String> getMenuNameListByRid(Long rid) {
+		List<RightEntity> menuByRid = menuDao.getMenuByRid(rid);
+		List<String> namelist = new ArrayList<String>();
+		for(RightEntity r:menuByRid){
+			namelist.add(r.getRightText());
+		}
+		return namelist;
 	}
 }

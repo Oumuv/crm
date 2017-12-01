@@ -1,7 +1,9 @@
 package com.oumuv.action;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,14 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oumuv.core.info.RoleInfo;
 import com.oumuv.entity.RoleEntity;
+import com.oumuv.service.MenuService;
+import com.oumuv.service.PermissionService;
 import com.oumuv.service.RoleService;
-import com.oumuv.utils.MyCopyUtil;
 
 @Controller
 public class RoleAction {
 
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+	private MenuService menuService;
+	@Autowired
+	private PermissionService permissionService;
+	
 	
 	/***
 	 * role管理页面
@@ -39,15 +47,74 @@ public class RoleAction {
 		if(null==name){
 			name=new String("");
 		}
-		List<RoleEntity> list = roleService.getRoleByInput(name);
-		List<RoleInfo> rList = new ArrayList<RoleInfo>();
-		for(RoleEntity r:list){
-			RoleInfo role = new RoleInfo();
-			MyCopyUtil.copyProp(role, r, new String []{});
-			rList.add(role);
+		 List<RoleInfo> list = roleService.findRoleByInputResult(name);
+		 for(RoleInfo r:list){
+			 int i = 0;
+			 int j = 0;
+			 if(i<=1) if(r.getmCount()>0){
+				 List<String> menuNameListByRid = menuService.getMenuNameListByRid(r.getRoleId());
+				 r.setMenus(menuNameListByRid);
+				 i++;
+			 }
+			 if(j<=1) if(r.getpCount()>0){
+				 List<String> permissionNameListByRid = permissionService.getPermissionNameListByRid(r.getRoleId());
+				 r.setPermissions(permissionNameListByRid);
+				 j++;
+			 }
+		 }
+		map.put("roles", list);
+		return "views/role";
+	}
+	
+	/***
+	 * 添加页面
+	 * @return
+	 */
+	@RequestMapping("/word/addRolePage.do")
+	public String addRolePage(){
+		
+		return "views/add_role";
+	}
+	/***
+	 * 添加页面
+	 * @return
+	 */
+	@RequestMapping("/word/updataRolePage.do")
+	public String updataRolePage(ModelMap map,Long id){
+		RoleEntity role = roleService.getRole(id);
+		map.put("role", role);
+		return "views/edit_role";
+	}
+	
+	@RequestMapping("/word/addRole.do")
+	public void addRole(RoleEntity roleEntiy,HttpServletResponse response) throws IOException{
+		response.setCharacterEncoding("utf-8");
+		int i = roleService.addRole(roleEntiy);
+		if(i>0){
+			response.getWriter().write("添加成功");
+		}else{
+			response.getWriter().write("添加失败");
 		}
-		map.put("roles", rList);
-		return "word/rolemanage";
+	}
+	@RequestMapping("/word/delRole.do")
+	public void delRole(Long id,HttpServletResponse response) throws IOException{
+		response.setCharacterEncoding("utf-8");
+		int i = roleService.deleteRole(id);
+		if(i>0){
+			response.getWriter().write("删除成功");
+		}else{
+			response.getWriter().write("删除失败，该角色正在被使用");
+		}
+	}
+	@RequestMapping("/word/updataRole.do")
+	public void updataRole(RoleEntity roleEntity,HttpServletResponse response) throws IOException{
+		response.setCharacterEncoding("utf-8");
+		int i = roleService.updataRole(roleEntity);
+		if(i>0){
+			response.getWriter().write("修改成功");
+		}else{
+			response.getWriter().write("修改失败");
+		}
 	}
 	
 }

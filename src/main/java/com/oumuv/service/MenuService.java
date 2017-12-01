@@ -2,8 +2,11 @@ package com.oumuv.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.oumuv.entity.RightEntity;
 
+@Service
 public interface MenuService {
 	/**根据用户id获取用户菜单*/
 	public List<RightEntity> getMenuByUid(Long id);
@@ -25,4 +28,11 @@ public interface MenuService {
 	
 	/**根据id删除菜单*/
 	public int delMenuByLevel(List<Long> ids);
+	
+	/**
+	 * 根据角色id获取菜单名
+	 * @param rid
+	 * @return
+	 */
+	public List<String> getMenuNameListByRid(Long rid);
 }

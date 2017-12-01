@@ -63,11 +63,10 @@
 
 <script type="text/javascript">
 
-var flag = false;
-var timer;
 	$(function(){
+		var flag = false;
+		var timer;
 		getdetails();
-		
 		$('#input-search').keydown(function() {
 			clearTimeout(timer);
 			flag = true;
@@ -104,16 +103,18 @@ var timer;
 	}
 
 	function del() {
-		var did = $('.list-group .active').attr("did");
-		if (did != null) {
-			$.post("#springUrl('/word/delDepartment.do')", {
-				id : did
-			}, function(msg) {
-				alert(msg)
-				getdetails();
-			});
-		} else {
-			alert("请选择要删除的节点")
+		if (confirm("确定要删除此部门？")) {
+			var did = $('.list-group .active').attr("did");
+			if (did != null) {
+				$.post("#springUrl('/word/delDepartment.do')", {
+					id : did
+				}, function(msg) {
+					alert(msg)
+					getdetails();
+				});
+			} else {
+				alert("请选择要删除的节点")
+			}
 		}
 	}
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.oumuv.core.info.RoleInfo;
 import com.oumuv.entity.RoleEntity;
 
 public interface RoleEntityMapper {
@@ -32,4 +33,5 @@ public interface RoleEntityMapper {
     List<RoleEntity> findRoleByUid(Long uid);
     
     List<RoleEntity> findRoleByInput(@Param("name")String name);
+    List<RoleInfo> findRoleByInputResult(@Param("name")String name);
 }

@@ -107,5 +107,16 @@
 	from role_info 
 	where role_name like '%${name}%' 
   </select>
+ <select id="findRoleByInputResult" parameterType="java.lang.String" resultType="com.oumuv.core.info.RoleInfo">
+	SELECT 
+	ro.role_id roleId,ro.role_name roleName,ro.role_desc roleDesc,ro.`status` status,ro.role_code roleCode , count(DISTINCT rr.rf_id) mCount,count(DISTINCT  p.id) pCount
+	FROM role_info ro
+	LEFT JOIN role_right_info rr ON ro.role_id=rr.rf_role_id
+	LEFT JOIN right_info ri ON ri.right_code=rr.rf_right_code
+	LEFT JOIN role_permission_info rp ON rp.rid=ro.role_id
+	LEFT JOIN permission_info p ON p.id=rp.pid
+	WHERE ro.role_name LIKE '%${name}%'
+	GROUP BY ro.role_id
+  </select>
   
 </mapper>

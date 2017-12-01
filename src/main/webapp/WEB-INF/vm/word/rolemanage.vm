@@ -47,19 +47,20 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="footer" style="position:relative;height:50px;">
-		<span style="position: absolute;top: 50%;transform: translateY(-50%);">显示第1页记录，共5页</span>
-		<ul class="pagination pagination-sm " style="position: absolute;float: right;height: 30px;margin: auto 1px;top: 50%;right: 10px;transform: translateY(-50%);">
-		    <li class="toPrevious"><a href="#">&laquo;</a></li>
-		    <li class=" toFirst active"><a href="#">1</a></li>
-		    <li><a href="#">2</a></li>
-		    <li><a href="#">3</a></li>
-		    <li><a href="#">4</a></li>
-		    <li class="disabled"><a href="#">..</a></li>
-		    <li class="toLast"><a href="#">5</a></li>
-		    <li class="toNext"><a href="#">&raquo;</a></li>
-		</ul>
-	</div>
+<!-- 	分页 -->
+<!-- 	<div class="footer" style="position:relative;height:50px;"> -->
+<!-- 		<span style="position: absolute;top: 50%;transform: translateY(-50%);">显示第1页记录，共5页</span> -->
+<!-- 		<ul class="pagination pagination-sm " style="position: absolute;float: right;height: 30px;margin: auto 1px;top: 50%;right: 10px;transform: translateY(-50%);"> -->
+<!-- 		    <li class="toPrevious"><a href="#">&laquo;</a></li> -->
+<!-- 		    <li class=" toFirst active"><a href="#">1</a></li> -->
+<!-- 		    <li><a href="#">2</a></li> -->
+<!-- 		    <li><a href="#">3</a></li> -->
+<!-- 		    <li><a href="#">4</a></li> -->
+<!-- 		    <li class="disabled"><a href="#">..</a></li> -->
+<!-- 		    <li class="toLast"><a href="#">5</a></li> -->
+<!-- 		    <li class="toNext"><a href="#">&raquo;</a></li> -->
+<!-- 		</ul> -->
+<!-- 	</div> -->
 </div>  
 
 
@@ -69,13 +70,37 @@
 <script>
 	$(function(){
 		$("[data-toggle='tooltip']").tooltip(); 
+// 		var page = $('.footer .pagination-sm .active>a').html();
+		load()
 		
-		var input = $('#input-search').val();
-		
-		var page = $('.footer .pagination-sm .active>a').html();
-		
-		$('#tbody_content').load("#springUrl('/word/getRoleByName.do')");
-		
+		var flag = false;
+		var timer;
+		$('#input-search').keydown(function() {
+			clearTimeout(timer);
+			flag = true;
+			timer = setTimeout(function() {
+				flag = false;
+				load();
+			}, 1000);
+
+		})
 		
 	})
+	
+	function load(){
+		var input = $('#input-search').val();
+		$('#tbody_content').load("#springUrl('/word/getRoleByName.do')",{name:input});
+	}
+	
+	function reset() {
+		if($('#input-search').val()!=""){
+			$('#input-search').val("");
+			load();
+		}
+	}
+	
+	function add() {
+		$('#myModal').load("#springUrl('/word/addRolePage.do')").modal(
+				'show');
+	}
 </script>

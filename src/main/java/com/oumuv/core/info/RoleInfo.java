@@ -1,7 +1,9 @@
 package com.oumuv.core.info;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
+
+import com.oumuv.entity.MenuEntity;
 
 public class RoleInfo implements Serializable {
 
@@ -18,6 +20,14 @@ public class RoleInfo implements Serializable {
 	private Integer status;
 
 	private String roleCode;
+	
+	private int mCount;
+	
+	private List<String> menus;
+	
+	private int pCount;
+	
+	private List<String> permissions;
 
 	public Long getRoleId() {
 		return roleId;
@@ -59,4 +69,39 @@ public class RoleInfo implements Serializable {
 		this.roleCode = roleCode == null ? null : roleCode.trim();
 	}
 
+	public int getmCount() {
+		return mCount;
+	}
+
+	public void setmCount(int mCount) {
+		this.mCount = mCount;
+	}
+
+	public List<String> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(List<String> menus) {
+		this.menus = menus;
+	}
+
+	public int getpCount() {
+		return pCount;
+	}
+
+	public void setpCount(int pCount) {
+		this.pCount = pCount;
+	}
+
+	public List<String> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<String> permissions) {
+		this.permissions = permissions;
+	}
+
+
+
+	
 }

@@ -1,0 +1,106 @@
+<style>
+#form_table td {
+	text-align: center;
+	line-height: 2.5;
+	vertical-align: top;
+}
+</style>
+<link href="#springUrl('/css/bootstrap-select.min.css')"
+	rel="stylesheet">
+<link href="#springUrl('/css/bootstrapValidator.css')" rel="stylesheet">
+<link rel="stylesheet" href="#springUrl('/css/jquery-labelauty.css')">
+<script src="#springUrl('/js/bootstrap-select.min.js')"></script>
+<div class="modal-dialog" style="z-index: 9999">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h4 class="modal-title" id="myModalLabel">
+				角色 | 编辑<input type='hidden'></input>
+			</h4>
+		</div>
+		<div class="modal-body">
+			<form id="form_table" action="">
+				<table class="table">
+					<tbody>
+					<input type="hidden" name="roleId" value="$role.roleId"></input>
+						<tr>
+							<td>角色名</td>
+							<td><input type="input" name="roleName" id="roleName"
+								class="form-control" placeholder="NULL" value="$role.roleName"></td>
+						</tr>
+						<tr>
+							<td>角色编码</td>
+							<td><input type="input" name="roleCode" id="roleCode"
+								class="form-control" placeholder="NULL" value="$role.roleCode"></td>
+						</tr>
+						<tr>
+							<td>描述</td>
+							<td><input type="input" name="roleDesc" id="roleDesc"
+								class="form-control" placeholder="NULL" value="$role.roleDesc"></td>
+						</tr>
+						<tr>
+							<td>状态</td>
+							<td>
+							<div class="" style="position: relative;height:52px;">
+							<div class="row" style="position: absolute;top: 50%;transform: translateY(-50%);">
+								<input type="radio" name="status" class="labelauty" id="labelauty-m" value="0" #if($!{role.status}==0)checked="checked"#end style="display: none;">
+								<label for="labelauty-m" class="col-md-4 col-sm-4 radio_labels" style="margin: 0px 5px 0px 5px">
+									<span class="labelauty-unchecked-image"></span>
+									<span class="labelauty-unchecked">禁用</span>
+									<span class="labelauty-checked-image"></span>
+									<span class="labelauty-checked">禁用</span>
+								</label>
+								
+								<input type="radio" name="status" class="labelauty" id="labelauty-w" value="1" #if($!{role.status}==1)checked="checked"#end style="display: none;">
+								<label for="labelauty-w" class="col-md-4 col-sm-4 radio_labels" style="margin: 0px 5px 0px 5px">
+									<span class="labelauty-unchecked-image"></span>
+									<span class="labelauty-unchecked">可用</span>
+									<span class="labelauty-checked-image"></span>
+									<span class="labelauty-checked">可用</span>
+								</label>
+								
+							</div>	
+							</div>	
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+			</button>
+			<button type="button" class="btn btn-primary" id="submit_btn">提交更改</button>
+		</div>
+	</div>
+</div>
+<script src="#springUrl('/js/bootstrapValidator.js')"></script>
+<script src="#springUrl('/js/jquery-labelauty.js')"></script>
+<script>
+	$(function() {
+		
+		
+
+	});
+
+	$('#submit_btn').click(function() {
+		if (confirm("确认修改角色信息？")) {
+			var params = $("#form_table").serialize();
+			$.ajax({
+				type : "POST",
+				url : "#springUrl('/word/updataRole.do')",
+				data : params,
+				success : function(msg) {
+					alert(msg);
+					load();
+					$('#myModal').empty();
+					$('#myModal').modal('hide');
+				},
+				error : function(msg) {
+					alert(msg)
+				}
+			});
+		}
+	})
+</script>

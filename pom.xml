@@ -234,7 +234,7 @@
 				<version>8.1.15.v20140411</version>
 				<configuration>
 <!-- 				自动重新加载时间间隔 -->
-					<scanIntervalSeconds>1</scanIntervalSeconds>
+<!-- 					<scanIntervalSeconds>1</scanIntervalSeconds> -->
 					<stopKey>foo</stopKey>
 					<stopPort>9999</stopPort>
 					<webAppConfig>

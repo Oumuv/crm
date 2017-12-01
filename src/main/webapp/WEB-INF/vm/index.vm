@@ -10,6 +10,7 @@
 
 <!-- Bootstrap -->
 <link href="#springUrl('/css/bootstrap.css')" rel="stylesheet">
+
 <link href="#springUrl('/css/style.css')" rel="stylesheet">
 <!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script> -->
 
@@ -99,6 +100,7 @@ body {
 </style>
 <script src="#springUrl('/js/jquery.min.js')"></script>
 <script src="#springUrl('/js/bootstrap.js')"></script>
+
 <script>
 	function initPage(){   
 	    $('#loading_div').css("display","none");

@@ -2,6 +2,8 @@ package com.oumuv.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.oumuv.entity.RightEntity;
 
 public interface RightEntityMapper {
@@ -31,5 +33,7 @@ public interface RightEntityMapper {
 	
 	/**根据level获取所有的RightEntity*/
 	List<RightEntity> getMenuByLevel(int level);
+	
+	List<RightEntity> getMenuByRid(@Param("rid")Long rid);
 	
 }
