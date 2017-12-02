@@ -35,4 +35,11 @@ public interface MenuService {
 	 * @return
 	 */
 	public List<String> getMenuNameListByRid(Long rid);
+	/**
+	 * 根据角色id获取菜单
+	 * @param rid
+	 * @return
+	 */
+	public List<RightEntity> getMenuListByRid(Long rid);
+	
 }

@@ -196,8 +196,6 @@
 	})
 	
 	function editImg(e){
-// 		alert($(e)[0].src)
-// $('#imgedit_div').load("springUrl('/user/editImg.do')")
 		$('#myModal').load("#springUrl('/user/editImg.do')",function(){
 		})
 	}

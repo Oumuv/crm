@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.oumuv.core.info.RoleInfo;
+import com.oumuv.entity.PermissionEntity;
+import com.oumuv.entity.RightEntity;
 import com.oumuv.entity.RoleEntity;
 import com.oumuv.service.MenuService;
 import com.oumuv.service.PermissionService;
@@ -82,6 +85,14 @@ public class RoleAction {
 	@RequestMapping("/word/updataRolePage.do")
 	public String updataRolePage(ModelMap map,Long id){
 		RoleEntity role = roleService.getRole(id);
+		List<RightEntity> allMenus = menuService.getAllMenus();
+		List<RightEntity> menuListByRid = menuService.getMenuListByRid(id);
+		List<PermissionEntity> allPermission = permissionService.getAllPermission();
+		List<PermissionEntity> permissionsByRid = permissionService.getPermissionListByRid(id);
+		map.put("allMenus", allMenus);
+		map.put("allPermission", allPermission);
+		map.put("menus", menuListByRid);
+		map.put("permissions", permissionsByRid);
 		map.put("role", role);
 		return "views/edit_role";
 	}
@@ -107,11 +118,11 @@ public class RoleAction {
 		}
 	}
 	@RequestMapping("/word/updataRole.do")
-	public void updataRole(RoleEntity roleEntity,HttpServletResponse response) throws IOException{
+	public void updataRole(RoleEntity roleEntity,@RequestParam(value="menus",required=false)List<Long> menus,@RequestParam(value="permissions",required=false)List<Long> permissions,HttpServletResponse response) throws IOException{
 		response.setCharacterEncoding("utf-8");
-		int i = roleService.updataRole(roleEntity);
+		int i = roleService.updataRole(roleEntity,menus,permissions);
 		if(i>0){
-			response.getWriter().write("修改成功");
+			response.getWriter().write("修改成功,1分钟之后生效！");
 		}else{
 			response.getWriter().write("修改失败");
 		}

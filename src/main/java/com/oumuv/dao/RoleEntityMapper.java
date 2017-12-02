@@ -31,7 +31,28 @@ public interface RoleEntityMapper {
      * @return
      */
     List<RoleEntity> findRoleByUid(Long uid);
-    
+    /**
+     * 根据搜索名称获取roleEntity
+     * @param name
+     * @return
+     */
     List<RoleEntity> findRoleByInput(@Param("name")String name);
+    
+    /***
+     * 搜索名称获取RoleInfo
+     * @param name
+     * @return
+     */
     List<RoleInfo> findRoleByInputResult(@Param("name")String name);
+    
+  
+    int insertMenusByRidAndMids(@Param("sql")String sql);
+   
+    int insertPsermissionByRidAndPids(@Param("sql")String sql);
+    
+    int deleteMenusByRidAndMids(@Param("rid")String rid,@Param("sql")String sql);
+    
+    int deletePsermissionByRidAndPids(@Param("rid")String rid,@Param("sql")String sql);
+    
+    
 }

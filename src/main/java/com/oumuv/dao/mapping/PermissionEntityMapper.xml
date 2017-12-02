@@ -79,5 +79,10 @@
 	INNER JOIN role_permission_info rp ON rp.pid=p.id
 	where rp.rid=${rid}
   </select>
+  <select id="getAllPermissionEntity" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from permission_info
+  </select>
 
 </mapper>

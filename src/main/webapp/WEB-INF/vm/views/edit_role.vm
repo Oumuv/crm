@@ -4,6 +4,13 @@
 	line-height: 2.5;
 	vertical-align: top;
 }
+.radio_labels{
+	float:left;
+	margin:3px 3px;
+}
+.radio_labels span{
+	margin:1px 3px;
+}
 </style>
 <link href="#springUrl('/css/bootstrap-select.min.css')"
 	rel="stylesheet">
@@ -42,26 +49,48 @@
 						<tr>
 							<td>状态</td>
 							<td>
-							<div class="" style="position: relative;height:52px;">
-							<div class="row" style="position: absolute;top: 50%;transform: translateY(-50%);">
-								<input type="radio" name="status" class="labelauty" id="labelauty-m" value="0" #if($!{role.status}==0)checked="checked"#end style="display: none;">
-								<label for="labelauty-m" class="col-md-4 col-sm-4 radio_labels" style="margin: 0px 5px 0px 5px">
-									<span class="labelauty-unchecked-image"></span>
-									<span class="labelauty-unchecked">禁用</span>
-									<span class="labelauty-checked-image"></span>
-									<span class="labelauty-checked">禁用</span>
-								</label>
-								
-								<input type="radio" name="status" class="labelauty" id="labelauty-w" value="1" #if($!{role.status}==1)checked="checked"#end style="display: none;">
-								<label for="labelauty-w" class="col-md-4 col-sm-4 radio_labels" style="margin: 0px 5px 0px 5px">
-									<span class="labelauty-unchecked-image"></span>
-									<span class="labelauty-unchecked">可用</span>
-									<span class="labelauty-checked-image"></span>
-									<span class="labelauty-checked">可用</span>
-								</label>
-								
-							</div>	
-							</div>	
+								<div class="btn-group">
+								   <label class="checkbox-inline btn btn-default">
+								      <input type="radio" name="status" 
+								         value="1" checked > 可用</input>
+								   </label>
+								   <label class="checkbox-inline btn btn-default">
+								      <input type="radio" name="status" 
+								         value="0"> 禁用</input>
+								   </label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>菜单权限</td>
+							<td>
+								<div class="btn-group" style="max-width: 350px;">
+								#foreach($menu in $allMenus)
+									<input type="checkbox" name="menus" class="labelauty"
+										id="labelautym-$menu.rightCode" value="$menu.rightCode" mid="$menu.rightCode" pid="$!menu.rightParentCode" onchange="change(this,$!menu.rightParentCode)" style="display: none;"> 
+										<label
+										for="labelautym-$menu.rightCode" class="radio_labels"> <span
+										class="labelauty-unchecked">$menu.rightText</span> <span
+										class="labelauty-checked">$menu.rightText</span>
+									</label>
+								#end
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>操作权限</td>
+							<td>
+								<div class="btn-group" style="max-width: 350px;">
+									#foreach($permission in $allPermission)
+									<input type="checkbox" name="permissions" class="labelauty"
+										id="labelautyp-$permission.id" value="$permission.id" style="display: none;"> 
+										<label
+										for="labelautyp-$permission.id" class="radio_labels"> <span
+										class="labelauty-unchecked">$permission.name</span> <span
+										class="labelauty-checked">$permission.name</span>
+									</label>
+								#end
+								</div>
 							</td>
 						</tr>
 					</tbody>
@@ -79,12 +108,39 @@
 <script src="#springUrl('/js/jquery-labelauty.js')"></script>
 <script>
 	$(function() {
+		#foreach($m in $menus)
+			$("[name='menus']:checkbox[value='$m.rightCode']").attr('checked','true');
+		#end
+		#foreach($p in $permissions)
+			$("[name='permissions']:checkbox[value='$p.id']").attr('checked','true');
+		#end
 		
-		
+		$("[name='status']:radio[value='$role.status']").attr("checked","true")
 
 	});
 
+	/**菜单权限复选框控制
+	*/
+	function change(e){
+		var pid = $(e).attr("pid");
+		var mid = $(e).attr("mid")
+		var flag = $(e).prop('checked');
+		if(null!=pid&&pid!=""){
+			if(flag){
+				$("[name='menus']:checkbox[value='"+pid+"']").prop('checked',true);
+			}
+		}
+		if(!flag){
+			$("[name='menus']:checkbox[pid='"+mid+"']").prop('checked',false);
+		}
+	}
+	
+	
 	$('#submit_btn').click(function() {
+// 		$("[name='menus']:checked").each(function(){
+// 			console.log($(this).val())
+// 		})
+// 		return;
 		if (confirm("确认修改角色信息？")) {
 			var params = $("#form_table").serialize();
 			$.ajax({

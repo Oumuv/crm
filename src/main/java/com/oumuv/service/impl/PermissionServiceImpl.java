@@ -26,5 +26,14 @@ public class PermissionServiceImpl implements PermissionService{
 		return list;
 	}
 
+	public List<PermissionEntity> getAllPermission() {
+		List<PermissionEntity> allPermissionEntity = permissionDao.getAllPermissionEntity();
+		return allPermissionEntity;
+	}
+
+	public List<PermissionEntity> getPermissionListByRid(Long rid) {
+		return permissionDao.getPermissionEntityByRid(rid);
+	}
+
 	
 }

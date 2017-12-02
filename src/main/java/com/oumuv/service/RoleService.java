@@ -34,7 +34,14 @@ public interface RoleService {
 	
 	int deleteRole(Long id);
 	
-	int updataRole(RoleEntity roleEntity);
+	/**
+	 * 更新roleEntity，同时更新roleEntity对应的permission和menu的桥表
+	 * @param roleEntity
+	 * @param menus
+	 * @param permissions
+	 * @return
+	 */
+	int updataRole(RoleEntity roleEntity,List<Long> menus,List<Long> permissions);
 	
 	RoleEntity getRole(Long id);
 	

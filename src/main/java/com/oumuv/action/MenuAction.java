@@ -85,7 +85,7 @@ public class MenuAction {
 				}
 			}
 			map.put("menulist", menuresult);
-			jedisUtil.set(keyBytes, ObjectUtil.object2Bytes(menuresult), 240);//缓存到redis,缓存时间4分钟
+			jedisUtil.set(keyBytes, ObjectUtil.object2Bytes(menuresult), 60);//缓存到redis,缓存时间4分钟
 		}else{
 			List<MenuInfo> bytes2Object = (List<MenuInfo>) ObjectUtil.bytes2Object(bs);
 			map.put("menulist", bytes2Object);

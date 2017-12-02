@@ -98,4 +98,7 @@ public class MenuServivceImpl implements MenuService{
 		}
 		return namelist;
 	}
+	public List<RightEntity> getMenuListByRid(Long rid) {
+		return  menuDao.getMenuByRid(rid);
+	}
 }

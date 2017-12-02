@@ -11,7 +11,7 @@
 			#end
 			<span class="badge">$r.mCount</span></td>
 		#else
-			<span class="glyphicon glyphicon-plus" style="color: #337ab7" data-toggle="tooltip" title="添加"></span>
+			<span class="glyphicon glyphicon-plus" style="color: #337ab7" data-toggle="tooltip" title="添加"  onclick="edit($r.roleId)"></span>
 		#end
 	<td class="td_badge"
 		style="max-width: 150px; min-width: 100px; max-height: 60px;">
@@ -22,7 +22,7 @@
 			#end 
 			<span class="badge">$r.pCount</span>
 		#else
-			<span class="glyphicon glyphicon-plus" style="color: #337ab7" data-toggle="tooltip" title="添加"></span>
+			<span class="glyphicon glyphicon-plus" style="color: #337ab7" data-toggle="tooltip" title="添加"  onclick="edit($r.roleId)"></span>
 		#end
 	</td>
 	<td>#if($r.status==1)<span class="glyphicon glyphicon-ok-circle" style="color:green" data-toggle="tooltip" title="可用"></span>
@@ -59,6 +59,8 @@
 	function edit(id) {
 			$('#myModal').load("#springUrl('/word/updataRolePage.do')", {
 				id : id
-			}).modal('show');
+			},function(){
+				$('#myModal').modal('show');
+			});
 	}
 </script>

@@ -30,4 +30,6 @@ public interface PermissionEntityMapper {
      */
     List<PermissionEntity> getPermissionEntityByRid(@Param("rid")Long rid);
     
+    List<PermissionEntity> getAllPermissionEntity();
+    
 }

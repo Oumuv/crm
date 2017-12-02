@@ -119,4 +119,17 @@
 	GROUP BY ro.role_id
   </select>
   
+  <insert id="insertMenusByRidAndMids" parameterType="java.lang.String">
+ 	 insert into role_right_info(rf_role_id,rf_right_code) values${sql}
+  </insert>
+  <insert id="insertPsermissionByRidAndPids" parameterType="java.lang.String">
+ 	 insert into role_permission_info(rid,pid) values${sql}
+  </insert>
+   <delete id="deleteMenusByRidAndMids" parameterType="java.lang.String">
+   delete from role_right_info where rf_role_id=${rid} and rf_right_code in ${sql}
+  </delete>
+   <delete id="deletePsermissionByRidAndPids" parameterType="java.lang.String">
+    delete from role_permission_info where rid=${rid} and pid in ${sql}
+  </delete>
+  
 </mapper>
