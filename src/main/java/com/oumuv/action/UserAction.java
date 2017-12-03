@@ -103,7 +103,7 @@ public class UserAction {
 	
 	/**
 	 * 创建文件夹
-	 * @param path
+	 * @param path 文件夹路径
 	 * @return
 	 */
 	public static boolean mkDirectory(String path) {

@@ -1,22 +1,31 @@
 package com.oumuv.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import com.oumuv.core.info.RoleInfo;
+import com.oumuv.entity.PermissionEntity;
 import com.oumuv.entity.RoleEntity;
 
 @Service
 public interface RoleService {
 	
 	/**
-	 * 用户id获取权限
+	 * 用户id获取角色
 	 * @param id
 	 * @return
 	 */
 	List<String>getRoles(Long id);
+	List<RoleEntity> getRoleEntitys(Long id);
 	
+	/**
+	 * 根据用户id获取权限
+	 * @param id
+	 * @return
+	 */
+	Set<PermissionEntity> getPermissionsByUid(Long id);
 	/**
 	 * search搜索获取role
 	 * @param name

@@ -2,8 +2,6 @@ package com.oumuv.action;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.oumuv.core.info.UserCardInfo;
+import com.oumuv.entity.DepartmentEntity;
+import com.oumuv.entity.RoleEntity;
 import com.oumuv.entity.User;
+import com.oumuv.service.DepartmentService;
+import com.oumuv.service.RoleService;
 import com.oumuv.service.UserService;
 
 
@@ -25,6 +27,11 @@ public class UserManageAction {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RoleService roleService;
+	@Autowired
+	private DepartmentService departmentService;
+	
 	
 	
 	/**
@@ -50,5 +57,31 @@ public class UserManageAction {
 		List<UserCardInfo> users = userService.getUserCardListByUnameAndDid(name, did);
 		map.put("users", users);
 		return "views/namecard";
+	}
+	
+	/**
+	 * 编辑用户资料页面
+	 * @param id
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("word/editUsercardPage.do")
+	public String editPage(Long id,ModelMap map){
+		User u = new User();
+		u.setId(id);
+		User user = userService.getPersonInfo(u);
+		List<RoleEntity> roleEntitys = roleService.getRoleEntitys(id);
+		List<DepartmentEntity> departmenEntitys = departmentService.getAllEntity();		
+		map.put("user", user);
+		map.put("departmens", departmenEntitys);
+		
+		return "views/edit_usercard";
+	}
+	
+	@RequestMapping("word/selectRolePopover.do")
+	public String selectRolePopover(Long id,ModelMap map){
+		List<RoleEntity> roleEntitys = roleService.getRoleEntitys(id);
+		map.put("roles", 1);
+		return "views/selectRolePopover";
 	}
 }

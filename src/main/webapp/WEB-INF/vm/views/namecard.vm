@@ -1,16 +1,16 @@
 <style>
-.thumbnail {
+.user_card {
 	box-shadow: 0px 0px 10px #e6e6e6;
 	padding-top: 8px;
 	background: #fdfdfd;
 }
 
-.thumbnail .glyphicon-fullscreen {
+.user_card .glyphicon-fullscreen {
 	position: relative;
 	color: #909090
 }
 
-.thumbnail .head_img {
+.user_card .head_img {
 	width: 68%;
 	border-radius: 50%;
 	-moz-border-radius: 50%;
@@ -18,7 +18,7 @@
 	overflow: hidden;
 }
 
-.thumbnail .name_title {
+.user_card .name_title {
 	text-align: center;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -36,9 +36,9 @@
 
 #foreach($user in $users)
 <div class="col-sm-3 col-md-3">
-	<div class="thumbnail" style="">
+	<div class="thumbnail user_card" style="">
 		<input type="hidden" class="uid" value="$user.id">
-		<span class="glyphicon glyphicon-fullscreen fullscreen_btn glyphicon_btns" style="">
+		<span class="glyphicon glyphicon-fullscreen fullscreen_btn glyphicon_btns" style="" onclick="detail($user.id)">
 		</span> <img
 			class="head_img" src=#if($!{user.himg}) "#springUrl($!{user.himg})" #else"#springUrl('/images/headM.png')"#end style=""
 			alt="图片丢失">
@@ -49,7 +49,7 @@
 			</h4>
 			<p style="text-align: center; color: #337ab7;">$!{user.departmentEntity.name}</p>
 			<p style="text-align: right; margin-bottom: 1px;">
-				<span class="glyphicon glyphicon-pencil glyphicon_btns" title="编辑"></span>
+				<span class="glyphicon glyphicon-pencil glyphicon_btns" title="编辑" onclick="edit($user.id)"></span>
 			</p>
 		</div>
 	</div>
@@ -62,4 +62,34 @@
 	$('.fullscreen_btn').click(function(){
 		var uid = $(this).prev().val();
 	})
+	
+	function detail(id){
+// 		alert(id)
+		$('#myModal').modal('show');
+	}
+	
+	function edit(id){
+		$('#myModal').load("#springUrl('/word/editUsercardPage.do')",{id:id},function(){
+			$('#myModal').modal('show');
+		})
+	}
+	
+	
+	
+	
+	
+	/**动画效果*/
+	$('.context_div .thumbnail img').mousedown(function(){
+		$(this).closest('.thumbnail').css({'transform':' scale(0.8)','transition': 'all 0.3s'});
+	})
+	$('.context_div .thumbnail img').mouseup(function(){
+			$(this).closest('.thumbnail').css({'transform':' scale(1)','transition': 'all 0.3s'});
+	})
+	$('.thumbnail').on("mouseleave",function(){
+		$(this).css({'transform':' scale(1)','transition': 'all 0.3s'});
+	})
+	$('.thumbnail').on("mouseenter ",function(){
+		$(this).css({'transform':' scale(1.05)','transition': 'all 0.3s'});
+	})
+	
 </script>

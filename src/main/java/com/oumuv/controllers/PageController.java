@@ -87,7 +87,6 @@ public class PageController {
 	 */
 	@RequestMapping("/open/developing.do")
 	public String developingPage(){
-		System.out.println("+++++++++++");
 		return "msg/msg";
 	}
 

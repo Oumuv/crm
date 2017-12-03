@@ -1,6 +1,7 @@
 package com.oumuv.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -31,5 +32,7 @@ public interface PermissionEntityMapper {
     List<PermissionEntity> getPermissionEntityByRid(@Param("rid")Long rid);
     
     List<PermissionEntity> getAllPermissionEntity();
+    
+    Set<PermissionEntity> getPermissionEntityByUid(@Param("uid")Long uid);
     
 }

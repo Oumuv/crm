@@ -1,10 +1,13 @@
 package com.oumuv.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,6 +39,13 @@ public class RoleAction {
 	 */
 	@RequestMapping("/word/roleManage.do")
 	public String roleManage(){
+		Subject subject = SecurityUtils.getSubject();
+		List<String> roles = new ArrayList<String>();
+		roles.add("Admin");
+		boolean hasAllRoles = subject.hasAllRoles(roles);
+		if(!hasAllRoles){
+			return "views/permissionDenied";
+		}
 		return "word/rolemanage";
 	}
 	

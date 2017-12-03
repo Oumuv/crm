@@ -1,0 +1,8 @@
+<span style='color:red' onclick='run()'>$roles</span>
+
+<script>
+
+	function run(){
+		alert(255);
+	}
+</script>

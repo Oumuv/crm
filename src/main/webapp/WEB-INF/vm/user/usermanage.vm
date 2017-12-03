@@ -1,14 +1,5 @@
 <style>
-.context_div .thumbnail {
-	transition: all 0.3s;
-}
 
-.context_div .thumbnail:HOVER {
- 	transform: scale(1.05); 
-}
-.context_div .thumbnail:ACTIVE {
-	transform: scale(0.8);
-}
 </style>
 <link href="#springUrl('/css/bootstrap-select.min.css')"
 	rel="stylesheet">
@@ -32,9 +23,9 @@
 				<select id="department_select" class="btn btn-primary  form-control" name="department" data-live-search="false" ><!-- disabled -->
 				</select> 
 		</div>
-		<div class="btn btn-warning " id="edit_btn">编辑</div>
+<!-- 		<div class="btn btn-warning " id="edit_btn">编辑</div> -->
 		<div class="btn btn-success " id="add_btn">添加</div>
-		<div class="btn btn-danger" id="del_btn">删除</div>
+<!-- 		<div class="btn btn-danger" id="del_btn">删除</div> -->
 		<!-- 				deleteTree() -->
 	</div>
 

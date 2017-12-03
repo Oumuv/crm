@@ -17,6 +17,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.oumuv.entity.PermissionEntity;
 import com.oumuv.entity.RoleEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.RoleService;
@@ -42,10 +43,17 @@ public class ShiroRealm extends AuthorizingRealm {
 			PrincipalCollection principals) {
 		User user = (User) getAvailablePrincipal(principals);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		
 		Set<String> rolelist = new HashSet<String>();
 		rolelist.addAll(roleService.getRoles(user.getId()));
 		info.setRoles(rolelist);//设置用户的角色
-//		info.setStringPermissions(null);//设置用户的权限
+		
+		Set<String> permissionlist = new HashSet<String>();
+		Set<PermissionEntity> permissionsByUid = roleService.getPermissionsByUid(user.getId());
+		for(PermissionEntity p:permissionsByUid){
+			permissionlist.add(p.getAction());
+		}
+		info.setStringPermissions(permissionlist);//设置用户的权限
 		return info;
 	}
 

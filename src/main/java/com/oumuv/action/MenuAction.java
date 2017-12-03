@@ -49,8 +49,9 @@ public class MenuAction {
 	public String goMenumanage(){
 		Subject subject = SecurityUtils.getSubject();// 获取subject实例
 		boolean hasRole = subject.hasRole("Admin");
-
-		System.out.println();
+		if(!hasRole){
+			return "views/permissionDenied";
+		}
 		return "views/menumanage";
 	}
 	

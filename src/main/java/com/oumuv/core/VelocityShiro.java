@@ -25,12 +25,21 @@ public class VelocityShiro {
     public boolean hasPermission(String permission) {  
         logger.info(permission);  
         Subject subject = SecurityUtils.getSubject();  
-        return subject != null && subject.isPermitted(permission);  
+        boolean permitted = subject.isPermitted(permission);
+        return subject != null && permitted;  
     }  
-  
-    public String run(String string){
-    	return string;
+    
+    /**
+     * 是否拥有该角色
+     * @param role 角色标识
+     * @return
+     */
+	public boolean hasRole(String role) {
+		logger.info(role);
+		Subject subject = SecurityUtils.getSubject();
+		return subject != null && subject.hasRole(role);
     }
+  
     /** 
      * 是否拥有该权限 
      *  

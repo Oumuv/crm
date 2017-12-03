@@ -2,6 +2,7 @@ package com.oumuv.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,10 @@ public class RoleServiceImpl implements RoleService{
 			rlist.add(r.getRoleName());
 		}
 		return rlist;
+	}
+	public List<RoleEntity> getRoleEntitys(Long uid) {
+		List<RoleEntity> list = RoleDao.findRoleByUid(uid);
+		return list;
 	}
 
 	public List<RoleEntity> getRoleByInput(String name) {
@@ -142,6 +147,10 @@ public class RoleServiceImpl implements RoleService{
 	public RoleEntity getRole(Long id) {
 		RoleEntity selectByPrimaryKey = RoleDao.selectByPrimaryKey(id);
 		return selectByPrimaryKey;
+	}
+	public Set<PermissionEntity> getPermissionsByUid(Long id) {
+		Set<PermissionEntity> permissionEntityByUid = permissionDao.getPermissionEntityByUid(id);
+		return permissionEntityByUid;
 	}
 
 }

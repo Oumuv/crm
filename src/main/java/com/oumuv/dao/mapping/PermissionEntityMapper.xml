@@ -1,88 +1,103 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.oumuv.dao.PermissionEntityMapper" >
-  <resultMap id="BaseResultMap" type="com.oumuv.entity.PermissionEntity" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="action" property="action" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, name, action
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from permission_info
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from permission_info
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.oumuv.entity.PermissionEntity" >
-    insert into permission_info (id, name, action
-      )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{action,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.oumuv.entity.PermissionEntity" >
-    insert into permission_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="action != null" >
-        action,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="action != null" >
-        #{action,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.PermissionEntity" >
-    update permission_info
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="action != null" >
-        action = #{action,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.oumuv.entity.PermissionEntity" >
-    update permission_info
-    set name = #{name,jdbcType=VARCHAR},
-      action = #{action,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  
-  
-  
-<!--   ************************************************************************** -->
-  <select id="getPermissionEntityByRid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    *
-    from permission_info p
-	INNER JOIN role_permission_info rp ON rp.pid=p.id
-	where rp.rid=${rid}
-  </select>
-  <select id="getAllPermissionEntity" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from permission_info
-  </select>
+<mapper namespace="com.oumuv.dao.PermissionEntityMapper">
+	<resultMap id="BaseResultMap" type="com.oumuv.entity.PermissionEntity">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="action" property="action" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, action
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from permission_info
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from permission_info
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.oumuv.entity.PermissionEntity">
+		insert into permission_info (id, name, action
+		)
+		values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+		#{action,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.oumuv.entity.PermissionEntity">
+		insert into permission_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="action != null">
+				action,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="action != null">
+				#{action,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.PermissionEntity">
+		update permission_info
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="action != null">
+				action = #{action,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.oumuv.entity.PermissionEntity">
+		update permission_info
+		set name = #{name,jdbcType=VARCHAR},
+		action = #{action,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
 
+
+
+	<!-- ************************************************************************** -->
+	<select id="getPermissionEntityByRid" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		*
+		from permission_info p
+		INNER JOIN role_permission_info rp ON rp.pid=p.id
+		where rp.rid=${rid}
+	</select>
+
+	<select id="getAllPermissionEntity" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from permission_info
+	</select>
+
+	<select id="getPermissionEntityByUid" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		SELECT DISTINCT  p.* 
+		FROM permission_info p 
+		INNER JOIN role_permission_info  rp ON rp.pid=p.id
+		INNER JOIN role_info r ON r.role_id=rp.rid
+		INNER JOIN user_role_info  ur ON r. role_id=ur.rid
+		INNER JOIN user_info u ON  u.id=ur.uid
+		WHERE u.id=#{uid}
+	</select>
 </mapper>
