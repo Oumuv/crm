@@ -156,7 +156,8 @@ public class UserAction {
                 String path = request.getSession().getServletContext().getRealPath("/") + "/upload/" +_dy+"/"+_dm+"/";
                 System.out.println("文件名："+file.getOriginalFilename());
                 mkDirectory(path);//创建文件夹路径
-                File file2 = new File(path,date +"_" +file.getOriginalFilename());
+                String fileSuffixes = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."),file.getOriginalFilename().length());
+                File file2 = new File(path,date+fileSuffixes);
                 String filePath = file2.getPath();
                 System.out.println("文件保存路径:"+filePath);
                 file.transferTo(file2);// 转存文件  
@@ -172,7 +173,7 @@ public class UserAction {
                 User user = (User) session.getAttribute("user");
                 String imgpath = StringTool.subStringIndex2End("/upload", filePath.replace("\\", "/"));
                 String oldimg =request.getSession().getServletContext().getRealPath("/") + user.getHimg();
-                new Timer().schedule(new DeleteFileTimerTask(new File(oldimg)), 5000);//延迟删除旧的图片
+                new Timer().schedule(new DeleteFileTimerTask(new File(oldimg)), 5000);//延迟删除旧的图片,5秒后
                 user.setHimg(imgpath);
                 userService.savePersonInfo(user);
                 
