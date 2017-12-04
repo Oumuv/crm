@@ -132,4 +132,9 @@
     delete from role_permission_info where rid=${rid} and pid in ${sql}
   </delete>
   
+   <select id="getAllRoleEntity"  resultMap="BaseResultMap">
+	select * 
+	from role_info
+  </select>
+  
 </mapper>

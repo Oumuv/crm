@@ -53,6 +53,9 @@ public interface RoleEntityMapper {
     int deleteMenusByRidAndMids(@Param("rid")String rid,@Param("sql")String sql);
     
     int deletePsermissionByRidAndPids(@Param("rid")String rid,@Param("sql")String sql);
-    
-    
+    /**
+     * 获取所有的RoleEntity
+     * @return
+     */
+    List<RoleEntity> getAllRoleEntity();
 }

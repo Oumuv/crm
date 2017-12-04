@@ -7,11 +7,14 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.oumuv.core.info.UserCardInfo;
 import com.oumuv.dao.DepartmentEntityMapper;
+import com.oumuv.dao.RoleEntityMapper;
 import com.oumuv.dao.UserMapper;
 import com.oumuv.entity.DepartmentEntity;
+import com.oumuv.entity.RoleEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.UserService;
 
@@ -21,6 +24,8 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userDao;
 	@Autowired
 	private DepartmentEntityMapper DepartmentDao;
+	@Autowired
+	private RoleEntityMapper roleDao;
 
 	public User login(String username, String password) {
 		User user = userDao.login(username, password);
@@ -104,6 +109,69 @@ public class UserServiceImpl implements UserService {
 	public int savePersonInfo(User u) {
 		int selective = userDao.updateByPrimaryKeySelective(u);
 		return selective;
+	}
+
+	@Transactional
+	public int updataUsercardInfo(User user, List<Long> rids) {
+		int j = userDao.updateByPrimaryKeySelective(user);
+		List<RoleEntity> oldRoles = roleDao.findRoleByUid(user.getId());
+		List<Long> odlRoleId = new ArrayList<Long>();
+		for(RoleEntity r:oldRoles){
+			odlRoleId.add(r.getRoleId());
+		}
+		List<Long> delId = setDifferenceSet(odlRoleId,rids);
+		List<Long> addId = setDifferenceSet(rids,odlRoleId);
+		if(null!=delId&&delId.size()>0){
+			String Sql = jointSql2(delId);
+			int i = userDao.delRoles(user.getId().toString(), Sql);
+			System.out.println("删除用户角色"+i+"个");
+		}
+		if(null!=addId&&addId.size()>0){
+			String jointSql = jointSql(user.getId(),addId);
+			int i = userDao.addRoles(user.getId().toString(),jointSql);
+			System.out.println("添加用户角色"+i+"个");
+		}
+		return j;
+	}
+	
+	/**
+	 * 集合差集运算
+	 * @return
+	 */
+	private List<Long> setDifferenceSet(List<Long> list1,List<Long> list2){
+		List<Long> list = new ArrayList<Long>();
+		list.addAll(list1);
+		list.removeAll(list2);
+		return list;
+	}
+	/**
+	 * 拼接sql
+	 * 格式"({@link rid},{@link ids}),({@link rid},{@link ids})"
+	 * @param rid
+	 * @param ids
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	private String jointSql(Long rid,List<Long> ids){
+		String sql = "";
+		for(Long id:ids){
+			sql += "("+rid+","+id+"),";
+		}
+		return sql.substring(0, sql.length()-1);
+	}
+	/**
+	 * 拼接sql
+	 * 格式({@link id},{@link id})
+	 * @param ids
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	private String jointSql2(List<Long> ids){
+		String sql = "(";
+		for(Long id:ids){
+			sql += id+",";
+		}
+		return sql.substring(0, sql.length()-1)+")";
 	}
 
 }

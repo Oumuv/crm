@@ -17,8 +17,17 @@ public interface RoleService {
 	 * @param id
 	 * @return
 	 */
-	List<String>getRoles(Long id);
-	List<RoleEntity> getRoleEntitys(Long id);
+	List<String>getRoles(Long uid);
+	/**
+	 * 用户id获取角色
+	 * @param id
+	 * @return
+	 */
+	List<RoleEntity> getRoleEntitys(Long uid);
+	
+	List<RoleEntity> getAllRoleEntitys();
+	
+	
 	
 	/**
 	 * 根据用户id获取权限
@@ -52,6 +61,11 @@ public interface RoleService {
 	 */
 	int updataRole(RoleEntity roleEntity,List<Long> menus,List<Long> permissions);
 	
+	/**
+	 * rid获取role
+	 * @param id
+	 * @return
+	 */
 	RoleEntity getRole(Long id);
 	
 }

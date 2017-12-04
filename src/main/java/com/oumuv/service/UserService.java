@@ -40,4 +40,12 @@ public interface UserService {
 	 * @return
 	 */
 	public int savePersonInfo(User u);
+	
+	/**
+	 * 更新用户usercard信息
+	 * @param user user实体类，包含内容有部门ID，角色ID
+	 * @param rids 角色ID列
+	 * @return
+	 */
+	public int updataUsercardInfo(User user,List<Long> rids);
 }

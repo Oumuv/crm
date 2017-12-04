@@ -1,8 +1,71 @@
-<span style='color:red' onclick='run()'>$roles</span>
+<style>
+.select_div .label{
+	margin-right:2px;
+	line-height: 2;
+}
+</style>
+
+<div class="select_div" style="width:250px;max-width:250px">
+	<span>选中：</span>
+	<div class="isSelected" style="width:100%;">
+	</div>
+	<hr>
+	<div class="noselect" style="width:100%;">
+		#foreach($r in $rolenoselect)
+			<span class="btn label label-default" rid="$r.roleId">$r.roleName</span>
+		#end
+	</div>
+	<hr>
+	<button type="button" class="btn btn-primary" id="ok_btn">OK</button>
+	<span id="tip_span" style="color:#c7254e;font-size: 9px;display:none;">一个用户最多开放两个角色！</span>
+</div>
 
 <script>
+$(function(){
+})
 
-	function run(){
-		alert(255);
+//确定
+$('#ok_btn').on("click",function(){
+	 $('#role_show').empty();
+	 var rid = $('.isSelected .label').eq(0).attr("rid");
+	 $('#roleId').val(rid);
+	 $("#roles").val("")
+	 $('.isSelected .label').each(function(index){
+		 var id = $(this).attr("rid");
+		 var html = $(this).html();
+		 if(index==0){
+			 $('#role_show').append("<span class='label label-primary' style='margin-right:2px;' rid='"+id+"'>"+html+"</span>")
+		 }else{
+			 $('#role_show').append("<span class='label label-info' style='margin-right:2px;' rid='"+id+"'>"+html+"</span>")
+		 }
+		 var roles_id = $("#roles").val()+id+",";
+		 $("#roles").val(roles_id);
+	 });
+	console.log()
+	return;
+	$('#role_edit').popover('destroy');
+})
+//选择
+$('.noselect .label').on("click",function(){
+	var rid = $(this).attr('rid');
+	var rname = $(this).html();
+	var count = $(".isSelected .label").length;
+	console.log(count)
+	if(count==0){
+		$('.isSelected').append("<span class='btn label label-primary' onclick='noselect(this)' rid='"+rid+"'>"+rname+"</span>")
+		$(this).hide();
+	}else if(count<2&&count>0){
+		$('.isSelected').append("<span class='btn label label-info' onclick='noselect(this)' rid='"+rid+"'>"+rname+"</span>")
+		$(this).hide();
+	}else if(count>=2){
+		$('#tip_span').show();
 	}
+})
+//取消选择
+function noselect(e){
+	var rid = $(e).attr('rid');
+	$(".noselect .label[rid='"+rid+"']").show();
+	$(e).remove();
+	
+}
 </script>

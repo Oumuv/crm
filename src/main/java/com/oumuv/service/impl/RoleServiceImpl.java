@@ -152,5 +152,9 @@ public class RoleServiceImpl implements RoleService{
 		Set<PermissionEntity> permissionEntityByUid = permissionDao.getPermissionEntityByUid(id);
 		return permissionEntityByUid;
 	}
+	public List<RoleEntity> getAllRoleEntitys() {
+		
+		return RoleDao.getAllRoleEntity();
+	}
 
 }

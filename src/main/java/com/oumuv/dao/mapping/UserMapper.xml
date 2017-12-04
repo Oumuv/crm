@@ -301,5 +301,11 @@
     ${sqlString}
   </select>
   
+   <insert id="addRoles" parameterType="java.lang.String">
+ 	 insert into user_role_info(uid,rid) values${sql}
+  </insert>
+   <delete id="delRoles" parameterType="java.lang.String">
+   delete from user_role_info where uid=${uid} and rid in ${sql}
+  </delete>
   
 </mapper>
