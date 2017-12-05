@@ -45,6 +45,12 @@ public class MD5Util {
         return sBuffer.toString();
     }
 
+    
+    /**
+     * MD5转换
+     * @param strObj
+     * @return
+     */
     public static String GetMD5Code(String strObj) {
         String resultString = null;
         try {

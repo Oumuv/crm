@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
 	public List<User> getUserListByUnameAndDid(String uname, Long did) {
 		String sql = "SELECT * FROM user_info";
-		List<User> userListBySql;
+		List<User> userListBySql = new ArrayList<User>();
 		boolean nameflag = null!=uname&&!uname.equals("");
 		boolean didflag = null!=did&&!did.equals("");
 		if (!nameflag && !didflag) {// 如果都为空
