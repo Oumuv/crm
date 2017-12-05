@@ -17,6 +17,7 @@ import com.oumuv.entity.DepartmentEntity;
 import com.oumuv.entity.RoleEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.UserService;
+import com.oumuv.utils.MD5Util;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -119,18 +120,27 @@ public class UserServiceImpl implements UserService {
 		for(RoleEntity r:oldRoles){
 			odlRoleId.add(r.getRoleId());
 		}
-		List<Long> delId = setDifferenceSet(odlRoleId,rids);
-		List<Long> addId = setDifferenceSet(rids,odlRoleId);
-		if(null!=delId&&delId.size()>0){
-			String Sql = jointSql2(delId);
-			int i = userDao.delRoles(user.getId().toString(), Sql);
-			System.out.println("删除用户角色"+i+"个");
+		if(null==rids){
+			rids = new ArrayList<Long>();
 		}
-		if(null!=addId&&addId.size()>0){
-			String jointSql = jointSql(user.getId(),addId);
-			int i = userDao.addRoles(user.getId().toString(),jointSql);
-			System.out.println("添加用户角色"+i+"个");
-		}
+			List<Long> delId = setDifferenceSet(odlRoleId,rids);
+			List<Long> addId = setDifferenceSet(rids,odlRoleId);
+			if(null!=delId&&delId.size()>0){
+				String Sql = jointSql2(delId);
+				int i = userDao.delRoles(user.getId().toString(), Sql);
+				System.out.println("删除用户角色"+i+"个");
+			}
+			if(null!=addId&&addId.size()>0){
+				String jointSql = jointSql(user.getId(),addId);
+				int i = userDao.addRoles(user.getId().toString(),jointSql);
+				System.out.println("添加用户角色"+i+"个");
+			}
+		return j;
+	}
+	@Transactional
+	public int addUsercardInfo(User user) {
+		user.setPassword(MD5Util.GetMD5Code("123456"));//默认密码123456
+		int j = userDao.insertSelective(user);
 		return j;
 	}
 	

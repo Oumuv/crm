@@ -20,6 +20,7 @@ encoding//src/main/webapp/WEB-INF/vm/user/usermanage.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/views/add_department.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/views/add_menu.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/views/add_role.vm=UTF-8
+encoding//src/main/webapp/WEB-INF/vm/views/add_user.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/views/departmentdetail.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/views/edit_menu.vm=UTF-8
 encoding//src/main/webapp/WEB-INF/vm/views/edit_role.vm=UTF-8

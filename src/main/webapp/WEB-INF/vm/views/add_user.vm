@@ -23,7 +23,7 @@
 			<button type="button" class="close" data-dismiss="modal"
 				aria-hidden="true">×</button>
 			<h4 class="modal-title" id="myModalLabel">
-				$!{user.name} | 用户编辑<input type='hidden'></input>
+				用户 | 新增<input type='hidden'></input>
 			</h4>
 		</div>
 		<div class="modal-body">
@@ -34,24 +34,23 @@
 						<!-- 头像框 -->
 							<a href="#" class="col-md-12  col-sm-12 thumbnail" style="border:0px;">
 								<img alt="头像"  style="width: 68%;border-radius: 50%;-moz-border-radius: 50%;-webkit-border-radius: 50%;overflow: hidden;"
-									src="#if(${user.himg})#springUrl(${user.himg}) #else #springUrl('/images/headM.png')#end" >
+									src="#springUrl('/images/headM.png')" >
 							</a>
-							#if($shiro.hasRole("Admin"))<a class="col-md-12  col-sm-12 glyphicon glyphicon-edit"  id="resetPassword" style="text-align: center">重置密码</a>#end
 					</div>
-					<input type="hidden" name="id" value="$!{user.id}">
+					<input type="hidden" name="id" value="">
 					<div class="col-md-8 col-sm-8 row">
 						<div class="form-group col-md-6 col-sm-12">
 							<label for="name" class=" control-label">姓名:</label>
 							<div class="">
-								<input type="text" class="form-control" value="$!{user.name}" name="name" id="name"
-									placeholder="请输入姓名" disabled>
+								<input type="text" class="form-control" value="" name="name" id="name"
+									placeholder="请输入姓名" >
 							</div>
 						</div>
 						<div class="form-group col-md-6 col-sm-12">
 							<label for="username" class=" control-label">登录用户名:</label>
 							<div class="">
-								<input type="text" class="form-control" value="$!{user.username}" name="username" id="username"
-									placeholder="请输入登录用户名" disabled>
+								<input type="text" class="form-control" value="" name="username" id="username"
+									placeholder="请输入登录用户名" >
 							</div>
 						</div>
 						<div class="form-group col-md-12 col-sm-12">
@@ -61,24 +60,6 @@
 								name="departmentId" data-live-search="true"></select>
 							</div>
 						</div>
-						<div class="form-group col-md-12 col-sm-12">
-							<label  class=" control-label">角色:</label>
-							<div class="">
-								<input type="hidden" class="form-control" value="$!{user.roleId}" name="roleId" id="roleId">
-								<input type="hidden" class="form-control" value="#foreach($r in $roleEntitys)$r.roleId,#end" name="roles" id="roles">
-								<div id="role_show" style="display:inline-block; *display:inline; *zoom:1;">
-								#foreach($r in $roleEntitys)
-									#if($r.roleId==$!{user.roleId})
-									<span class="label label-primary" rid="$r.roleId">$r.roleName</span>
-									#else
-									<span class="label label-info" rid="$r.roleId">$r.roleName</span>
-									#end
-								#end
-								</div>
-								<span class="glyphicon glyphicon-pencil btn" id="role_edit"></span>
-							</div>
-						</div>
-						
 					</div>
 				</div>
 			</form>
@@ -100,64 +81,34 @@
 			select.append("<option value='$d.id'>$d.name</option>");
 		#end
 		
-		$(".selectpicker").selectpicker({
-			noneSelectedText : '请选择',
-			width:'100%'//默认显示内容  
-		});
-		$('#department').selectpicker('val', '$!{user.departmentId}');
-		
-		$('#role_edit').on('click',function(){
-			console.log("click")
-			$('#role_edit').popover({
-				html:true,
-				content:getpopover(),
-				placement: 'right',
-				title:"<span id='role_edit_popover_title'>选择权限</span>",
-				width:'300'
-			})
-			.popover("show")
-			.on("shown.bs.popover",function(){
-				var flag = false;
-				var timer;
-				$(".popover").mouseleave(function(){
-					timer = setTimeout(function() {
-						flag = false;
-						$('#role_edit').popover('destroy')
-					}, 1000)
-				}).mouseenter(function(){
-					clearTimeout(timer);
-					flag = true;
-				});
-			});
-		})
-		
-		
-		
+		$('#department').selectpicker('val', ''); 
+		$('#department').selectpicker({  
+            noneSelectedText : '请选择',//默认显示内容  
+            	width:'100%'//默认显示内容  
+        });
+		$('#department').selectpicker('refresh')
 		
 	});
 	
 	//获取权限选择列表界面
-	function getpopover(){
-		var html="";
-		
-		$.ajax({
-			url:"#springUrl('/word/selectRolePopover.do')",
-			data:{id:$!{user.id}#if($!{user.roleId}),rid:$!{user.roleId}#end},
-			async:false,
-			dataType:"html",
-			success:function(data){
-				html = data;
-			}
-		})
-		return html;
+	
+	function check(){
+		var name = $('#name').val();
+		var username = $('#username').val();
+		if(name==""){alert("姓名不能为空");return false;}
+		if(username==""){alert("登录名不能为空");return false;}
+		return true;
 	}
 	
 	$('#submit_btn').click(function() {
-		if (confirm("确认修改用户信息？")) {
+		if(!check()){
+			return false;
+		}
+		if (confirm("确认新增用户？")) {
 			var params = $("#form_table").serialize();
 			$.ajax({
 				type : "POST",
-				url : "#springUrl('/word/updataUsercard.do')",
+				url : "#springUrl('/word/addUsercard.do')",
 				data : params,
 				success : function(msg) {
 					alert(msg);
