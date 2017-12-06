@@ -84,8 +84,15 @@ public class UserManageAction {
 		return "views/edit_usercard";
 	}
 	
-	
-	@RequestMapping("/word/updataUsercardRole.do")
+	/**
+	 * 修改usercard
+	 * @param user
+	 * @param roles
+	 * @param map
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping("/word/updataUsercard.do")
 	public void updataRolePopover(User user,@RequestParam("roles")String roles,ModelMap map,HttpServletResponse response) throws IOException{
 		response.setCharacterEncoding("utf-8");
 		String[] split = roles.split(",");
@@ -95,18 +102,47 @@ public class UserManageAction {
 		}
 		int i = userService.updataUsercardInfo(user,idlist);
 		response.getWriter().write("修改成功");
-		
+	}
+	/**
+	 * 添加usercard
+	 * @param user
+	 * @param roles
+	 * @param map
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping("/word/addUsercard.do")
+	public void addRolePopover(User user,ModelMap map,HttpServletResponse response) throws IOException{
+		response.setCharacterEncoding("utf-8");
+		int i = userService.addUsercardInfo(user);
+		if(i>0){
+			response.getWriter().write("新增成功");
+		}else{
+			response.getWriter().write("新增失败");
+		}
 	}
 	@RequestMapping("word/selectRolePopover.do")
-	public String selectRolePopover(@RequestParam("id")Long id,@RequestParam(value="rid",required=false)Long rid,ModelMap map){
+	public String selectRolePopover(@RequestParam(value="id",required=false)Long id,@RequestParam(value="rid",required=false)Long rid,ModelMap map){
 		List<RoleEntity> roleEntitys = roleService.getAllRoleEntitys();
-		List<RoleEntity> roleselected = roleService.getRoleEntitys(id);
+		if(null!=id){
+			List<RoleEntity> roleselected = roleService.getRoleEntitys(id);
+			map.put("roleselected", roleselected);
+		}
 		
-		map.put("roleselected", roleselected);
 		map.put("rolenoselect", roleEntitys);
 		if(null!=rid){
 			map.put("rid", rid);
 		}
 		return "views/selectRolePopover";
 	}
+	
+	@RequestMapping("/word/addUsercardPage.do")
+	public String addUsercardPage(ModelMap map){
+		List<DepartmentEntity> departmenEntitys = departmentService.getAllEntity();	
+		
+		
+		map.put("departmens", departmenEntitys);
+		return "views/add_user";
+	}
+	
 }

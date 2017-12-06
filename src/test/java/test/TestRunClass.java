@@ -10,29 +10,7 @@ import org.junit.Test;
 public class TestRunClass {
 	
 	
-	final static TestSynchronze testSynchronze = new  TestSynchronze();
 	public static void main(String[] args) {
-		Thread t1 = new Thread(new Runnable() {
-			public void run() {
-				testSynchronze.testrun(); 
-				System.out.println(testSynchronze);
-			}
-		});
-		Thread t2 = new Thread(new Runnable() {
-			public void run() {
-				testSynchronze.testrun();  
-				System.out.println(testSynchronze);
-			}
-		});
-		Thread t3 = new Thread(new Runnable() {
-			public void run() {
-				new TestSynchronze().testrun();  
-				System.out.println(testSynchronze);
-			}
-		});
-		t1.start();
-		t2.start();
-		t3.start();	
 	}
 	public void run(){
 			

@@ -1,0 +1,46 @@
+#foreach($p in $permissions)
+<tr>
+	<td>$p.name</td>
+	<td>#if($p.level==1)<span class="label label-danger">一级权限</span>#elseif($p.level==2)<span class="label label-warning">二级权限</span>#elseif($p.level==3)<span class="label label-success">三级权限</span>#end</td>
+	<td>$p.action</td>
+	<td>#if($p.status==1)<span class="glyphicon glyphicon-ok-circle"
+		style="color: green" data-toggle="tooltip" title="可用"></span> #else<span
+		class="glyphicon glyphicon-ban-circle" style="color: #c7254e"
+		data-toggle="tooltip" title="禁用"></span> #end
+	</td>
+	<td><span class="glyphicon glyphicon-pencil" data-toggle="tooltip"
+		title="编辑" onclick="edit($p.id)"></span> <span
+		class="glyphicon glyphicon-trash" data-toggle="tooltip" title="删除"
+		onclick="del($p.id)"></span></td>
+</tr>
+#end
+
+<script>
+	$(function(){
+		$("[data-toggle='tooltip']").tooltip(); 
+		
+		$('.td_badge .badge').click(function(){
+			var rid = $(this).closest("tr").attr("rid");
+		})
+	})
+	
+	function del(id) {
+		if (confirm("确定要删除此角色？")) {
+			$.post("#springUrl('/word/delPermission.do')", {
+				id : id
+			}, function(msg) {
+				alert(msg)
+				load();
+			});
+		}
+	}
+	
+	function edit(id) {
+			$('#myModal').empty();
+			$('#myModal').load("#springUrl('/word/updataPermissionPage.do')", {
+				id : id
+			},function(){
+				$('#myModal').modal('show');
+			});
+	}
+</script>

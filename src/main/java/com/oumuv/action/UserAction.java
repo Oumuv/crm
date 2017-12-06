@@ -356,19 +356,23 @@ public class UserAction {
 	/**
 	 * 保存个人信息
 	 * @param user
+	 * @throws IOException 
 	 */
 	@ResponseBody
 	@RequestMapping(value="/savePersonInfo.do")
-	public void savePersoninfo(UserInfo user){
+	public void savePersoninfo(UserInfo user,HttpServletResponse response) throws IOException{
+		response.setCharacterEncoding("utf-8");
 		User u = new User();
 		
 		MyCopyUtil.copyProp(u, user, new String []{"birthday","graduationTime"});
 		u.setBirthday(DateUtils.parseStr2Date(user.getBirthday(), 3));
 		u.setGraduationTime(DateUtils.parseStr2Date(user.getGraduationTime(),3));
-		
-		int i = 0;
-		i = userService.savePersonInfo(u);
-		
+		int	i = userService.savePersonInfo(u);
+		if(i>0){
+			response.getWriter().write("修改成功");
+		}else{
+			response.getWriter().write("修改失败");
+		}
 	}
 
 

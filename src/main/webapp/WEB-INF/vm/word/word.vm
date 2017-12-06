@@ -109,6 +109,9 @@ li {
 		<nav style="border-radius: 8px 8px 0px 0px;" class=" nav_list">
 			<ul id="navigation_ul" class="nav nav-pills nav-stacked " style="width: 100%;">
 			</ul>
+			<script type="text/javascript">
+				$('#navigation_ul').load("#springUrl('/user/getmenu.do')");
+			</script>
 		</nav>
 		<!-- 日历 -->
 		<div style="width: 100%; height: 320px" class="calendar_div">
@@ -124,14 +127,14 @@ li {
 	</div>
 	<!-- word space -->
 	<div class="word_div" style="">
-		#parse("./user/usermanage.vm")
+		#parse("./word/permissionManage.vm")
 	</div>
 
 
 </div>
 <script type="text/javascript">
 $(function(){
-	$('#navigation_ul').load("#springUrl('/user/getmenu.do')");
 })
+
 </script>
 

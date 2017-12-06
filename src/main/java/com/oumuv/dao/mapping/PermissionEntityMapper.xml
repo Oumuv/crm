@@ -1,81 +1,101 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oumuv.dao.PermissionEntityMapper">
-	<resultMap id="BaseResultMap" type="com.oumuv.entity.PermissionEntity">
-		<id column="id" property="id" jdbcType="BIGINT" />
-		<result column="name" property="name" jdbcType="VARCHAR" />
-		<result column="action" property="action" jdbcType="VARCHAR" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		id, name, action
-	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Long">
-		select
-		<include refid="Base_Column_List" />
-		from permission_info
-		where id = #{id,jdbcType=BIGINT}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from permission_info
-		where id = #{id,jdbcType=BIGINT}
-	</delete>
-	<insert id="insert" parameterType="com.oumuv.entity.PermissionEntity">
-		insert into permission_info (id, name, action
-		)
-		values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
-		#{action,jdbcType=VARCHAR}
-		)
-	</insert>
-	<insert id="insertSelective" parameterType="com.oumuv.entity.PermissionEntity">
-		insert into permission_info
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="name != null">
-				name,
-			</if>
-			<if test="action != null">
-				action,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=BIGINT},
-			</if>
-			<if test="name != null">
-				#{name,jdbcType=VARCHAR},
-			</if>
-			<if test="action != null">
-				#{action,jdbcType=VARCHAR},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.PermissionEntity">
-		update permission_info
-		<set>
-			<if test="name != null">
-				name = #{name,jdbcType=VARCHAR},
-			</if>
-			<if test="action != null">
-				action = #{action,jdbcType=VARCHAR},
-			</if>
-		</set>
-		where id = #{id,jdbcType=BIGINT}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="com.oumuv.entity.PermissionEntity">
-		update permission_info
-		set name = #{name,jdbcType=VARCHAR},
-		action = #{action,jdbcType=VARCHAR}
-		where id = #{id,jdbcType=BIGINT}
-	</update>
+  <resultMap id="BaseResultMap" type="com.oumuv.entity.PermissionEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, action, level, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from permission_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from permission_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.oumuv.entity.PermissionEntity">
+    insert into permission_info (id, name, action, 
+      level, status)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{action,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oumuv.entity.PermissionEntity">
+    insert into permission_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="action != null">
+        action,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null">
+        #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oumuv.entity.PermissionEntity">
+    update permission_info
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null">
+        action = #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oumuv.entity.PermissionEntity">
+    update permission_info
+    set name = #{name,jdbcType=VARCHAR},
+      action = #{action,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
 
 
 
 	<!-- ************************************************************************** -->
-	<select id="getPermissionEntityByRid" resultMap="BaseResultMap"
-		parameterType="java.lang.Long">
+	<select id="getPermissionEntityByRid" parameterType="java.lang.Long" resultMap="BaseResultMap">
 		select
 		*
 		from permission_info p
@@ -83,15 +103,17 @@
 		where rp.rid=${rid}
 	</select>
 
-	<select id="getAllPermissionEntity" resultMap="BaseResultMap"
-		parameterType="java.lang.Long">
+	<select id="getAllPermissionEntity" parameterType="java.lang.Long" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from permission_info
 	</select>
+	
+	<select id="getPermissionListByNameAndLevel" parameterType="java.lang.String" resultMap="BaseResultMap">
+		${sql}
+	</select>
 
-	<select id="getPermissionEntityByUid" resultMap="BaseResultMap"
-		parameterType="java.lang.Long">
+	<select id="getPermissionEntityByUid" parameterType="java.lang.Long" resultMap="BaseResultMap">
 		SELECT DISTINCT  p.* 
 		FROM permission_info p 
 		INNER JOIN role_permission_info  rp ON rp.pid=p.id

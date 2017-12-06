@@ -1,0 +1,124 @@
+<style>
+#form_table td {
+	text-align: center;
+	line-height: 2.5;
+	vertical-align: top;
+}
+.radio_labels{
+	float:left;
+	margin:3px 3px;
+}
+.radio_labels span{
+	margin:1px 3px;
+}
+</style>
+<link href="#springUrl('/css/bootstrap-select.min.css')"
+	rel="stylesheet">
+<link href="#springUrl('/css/bootstrapValidator.css')" rel="stylesheet">
+<link rel="stylesheet" href="#springUrl('/css/jquery-labelauty.css')">
+<script src="#springUrl('/js/bootstrap-select.min.js')"></script>
+<div class="modal-dialog" style="z-index: 9999">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h4 class="modal-title" id="myModalLabel">
+				用户 | 新增<input type='hidden'></input>
+			</h4>
+		</div>
+		<div class="modal-body">
+			<form id="form_table">
+				<div class=" row"
+					style="width: 100%; height: 100%; margin-left: 0px;">
+					<div class=" col-md-4 col-sm-4 row">
+						<!-- 头像框 -->
+							<a href="#" class="col-md-12  col-sm-12 thumbnail" style="border:0px;">
+								<img alt="头像"  style="width: 68%;border-radius: 50%;-moz-border-radius: 50%;-webkit-border-radius: 50%;overflow: hidden;"
+									src="#springUrl('/images/headM.png')" >
+							</a>
+					</div>
+					<input type="hidden" name="id" value="">
+					<div class="col-md-8 col-sm-8 row">
+						<div class="form-group col-md-6 col-sm-12">
+							<label for="name" class=" control-label">姓名:</label>
+							<div class="">
+								<input type="text" class="form-control" value="" name="name" id="name"
+									placeholder="请输入姓名" >
+							</div>
+						</div>
+						<div class="form-group col-md-6 col-sm-12">
+							<label for="username" class=" control-label">登录用户名:</label>
+							<div class="">
+								<input type="text" class="form-control" value="" name="username" id="username"
+									placeholder="请输入登录用户名" >
+							</div>
+						</div>
+						<div class="form-group col-md-12 col-sm-12">
+							<label for="department" class=" control-label">部门:</label>
+							<div class="">
+								<select id="department" class="selectpicker"
+								name="departmentId" data-live-search="true"></select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+			</button>
+			<button type="button" class="btn btn-primary" id="submit_btn">提交更改</button>
+		</div>
+	</div>
+</div>
+<script src="#springUrl('/js/bootstrapValidator.js')"></script>
+<script src="#springUrl('/js/jquery-labelauty.js')"></script>
+<script>
+	$(function() {
+
+		var select = $("#department");
+		#foreach($d in $departmens)
+			select.append("<option value='$d.id'>$d.name</option>");
+		#end
+		
+		$('#department').selectpicker('val', ''); 
+		$('#department').selectpicker({  
+            noneSelectedText : '请选择',//默认显示内容  
+            	width:'100%'//默认显示内容  
+        });
+		$('#department').selectpicker('refresh')
+		
+	});
+	
+	//获取权限选择列表界面
+	
+	function check(){
+		var name = $('#name').val();
+		var username = $('#username').val();
+		if(name==""){alert("姓名不能为空");return false;}
+		if(username==""){alert("登录名不能为空");return false;}
+		return true;
+	}
+	
+	$('#submit_btn').click(function() {
+		if(!check()){
+			return false;
+		}
+		if (confirm("确认新增用户？")) {
+			var params = $("#form_table").serialize();
+			$.ajax({
+				type : "POST",
+				url : "#springUrl('/word/addUsercard.do')",
+				data : params,
+				success : function(msg) {
+					alert(msg);
+					$('#myModal').empty();
+					$('#myModal').modal('hide');
+				},
+				error : function(msg) {
+					alert(msg)
+				}
+			});
+		}
+	})
+</script>

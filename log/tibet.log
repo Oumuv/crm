@@ -29277,4 +29277,5 @@ Was expecting one of:
 	at java.lang.Thread.run(Thread.java:745)
 [ERROR][17-12-04][org.apache.velocity]ResourceManager : unable to find resource 'word/updataUsercardRole.vm' in any resource loader.
   [ERROR][17-12-04][org.apache.velocity]ResourceManager : unable to find resource 'word/updataUsercardRole.vm' in any resource loader.
+  [ERROR][17-12-06][org.apache.velocity]ResourceManager : unable to find resource 'views/edit_permission.vm' in any resource loader.
   

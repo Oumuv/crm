@@ -57,4 +57,10 @@
 		var n = $('#name-search').val();
 		$('#context_div').load("#springUrl('/word/getusercard.do')",{name:n,id:d})
 	}
+	
+	$('#add_btn').click(function(){
+		$('#myModal').load("#springUrl('/word/addUsercardPage.do')",function(){
+			$('#myModal').modal("show")
+		})
+	})
 </script>

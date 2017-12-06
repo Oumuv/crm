@@ -30,7 +30,7 @@
 		
 		
 		<table class="table table-hover" style="min-width:815px;">
-			<caption><hr></caption>
+			<caption><h3>角色列表</h3><hr></caption>
 			<thead>
 				<tr>
 					<th>角色编码</th>
@@ -39,7 +39,7 @@
 					<th>操作权限</th>
 					<th>状态</th>
 					<th>描述</th>
-					<th>动作</th>
+					<th>编辑</th>
 				</tr>
 			</thead>
 			<tbody id="tbody_content">

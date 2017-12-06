@@ -48,4 +48,11 @@ public interface UserService {
 	 * @return
 	 */
 	public int updataUsercardInfo(User user,List<Long> rids);
+	/**
+	 * 添加用户usercard
+	 * @param user
+	 * @param rids
+	 * @return
+	 */
+	public int addUsercardInfo(User user);
 }

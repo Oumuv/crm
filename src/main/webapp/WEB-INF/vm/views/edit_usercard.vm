@@ -153,11 +153,11 @@
 	}
 	
 	$('#submit_btn').click(function() {
-		if (confirm("确认修改角色信息？")) {
+		if (confirm("确认修改用户信息？")) {
 			var params = $("#form_table").serialize();
 			$.ajax({
 				type : "POST",
-				url : "#springUrl('/word/updataUsercardRole.do')",
+				url : "#springUrl('/word/updataUsercard.do')",
 				data : params,
 				success : function(msg) {
 					alert(msg);
