@@ -63,6 +63,26 @@ public class PermissionAction {
 			response.getWriter().write("新增失败");
 		}
 	}
+	@RequestMapping("/word/updataPermission.do")
+	public void updataPermission(PermissionEntity p,ModelMap map,HttpServletResponse response) throws IOException{
+		response.setCharacterEncoding("utf-8");
+		int i = permissionService.updataPermission(p);
+		if(i>0){
+			response.getWriter().write("修改成功");
+		}else{
+			response.getWriter().write("修改失败");
+		}
+	}
+	@RequestMapping("/word/delPermission.do")
+	public void delPermission(Long id,ModelMap map,HttpServletResponse response) throws IOException{
+		response.setCharacterEncoding("utf-8");
+		int i = permissionService.deletePermission(id);
+		if(i>0){
+			response.getWriter().write("删除成功");
+		}else{
+			response.getWriter().write("删除失败");
+		}
+	}
 	
 	
 	
