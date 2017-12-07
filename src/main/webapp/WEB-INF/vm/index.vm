@@ -23,6 +23,7 @@
 /* 设置滚动条的样式 */
 ::-webkit-scrollbar {
 	width: 9px;
+    height: 9px;
 }
 /* 滚动槽 */
 ::-webkit-scrollbar-track {

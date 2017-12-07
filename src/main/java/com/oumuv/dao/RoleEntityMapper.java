@@ -36,14 +36,14 @@ public interface RoleEntityMapper {
      * @param name
      * @return
      */
-    List<RoleEntity> findRoleByInput(@Param("name")String name);
+    List<RoleEntity> findRoleByInput(@Param("input")String input);
     
     /***
      * 搜索名称获取RoleInfo
      * @param name
      * @return
      */
-    List<RoleInfo> findRoleByInputResult(@Param("name")String name);
+    List<RoleInfo> findRoleByInputResult(@Param("input")String input);
     
   
     int insertMenusByRidAndMids(@Param("sql")String sql);

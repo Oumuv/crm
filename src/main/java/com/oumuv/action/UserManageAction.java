@@ -138,8 +138,8 @@ public class UserManageAction {
 	@RequestMapping("/word/addUsercardPage.do")
 	public String addUsercardPage(ModelMap map){
 		List<DepartmentEntity> departmenEntitys = departmentService.getAllEntity();	
-		
-		
+
+
 		map.put("departmens", departmenEntitys);
 		return "views/add_user";
 	}
