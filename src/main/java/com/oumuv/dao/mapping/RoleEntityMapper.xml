@@ -105,7 +105,7 @@
 	select 
 	<include refid="Base_Column_List" />
 	from role_info 
-	where role_name like '%${name}%' 
+	where role_name like '%${input}%'
   </select>
  <select id="findRoleByInputResult" parameterType="java.lang.String" resultType="com.oumuv.core.info.RoleInfo">
 	SELECT 
@@ -115,7 +115,7 @@
 	LEFT JOIN right_info ri ON ri.right_code=rr.rf_right_code
 	LEFT JOIN role_permission_info rp ON rp.rid=ro.role_id
 	LEFT JOIN permission_info p ON p.id=rp.pid
-	WHERE ro.role_name LIKE '%${name}%'
+	WHERE ro.role_name LIKE '%${input}%'
 	GROUP BY ro.role_id
   </select>
   
