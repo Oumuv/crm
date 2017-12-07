@@ -106,7 +106,6 @@ public class UserManageAction {
 	/**
 	 * 添加usercard
 	 * @param user
-	 * @param roles
 	 * @param map
 	 * @param response
 	 * @throws IOException
