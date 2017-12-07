@@ -6,6 +6,9 @@
         overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
         text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/
     }
+    .bg_shadow .table th{
+        min-width: 100px;
+    }
 </style>
 
 <div class="bg_shadow"
@@ -26,11 +29,11 @@
         <div class="btn btn-success" id="add_btn" onclick="add()">添加</div>
         <!-- 		<div class="btn btn-danger" id="del_btn" onclick="del()">删除</div> -->
     </div>
+    <h3>客户列表</h3><hr>
     <div style="overflow:auto;">
 
 
         <table class="table table-hover" style="min-width:815px;">
-            <caption><h3>客户列表</h3><hr></caption>
             <thead>
             <tr>
                 <th>客户名</th>
@@ -44,9 +47,9 @@
                 <th>公司规模</th>
                 <th>客户来源</th>
                 <th>下次回访时间</th>
+                <th>客户负责人</th>
                 <th>备注</th>
                 <th>状态</th>
-                <th>编辑</th>
             </tr>
             </thead>
             <tbody id="tbody_content">
@@ -55,19 +58,19 @@
         </table>
     </div>
     <!-- 	分页 -->
-    <!-- 	<div class="footer" style="position:relative;height:50px;"> -->
-    <!-- 		<span style="position: absolute;top: 50%;transform: translateY(-50%);">显示第1页记录，共5页</span> -->
-    <!-- 		<ul class="pagination pagination-sm " style="position: absolute;float: right;height: 30px;margin: auto 1px;top: 50%;right: 10px;transform: translateY(-50%);"> -->
-    <!-- 		    <li class="toPrevious"><a href="#">&laquo;</a></li> -->
-    <!-- 		    <li class=" toFirst active"><a href="#">1</a></li> -->
-    <!-- 		    <li><a href="#">2</a></li> -->
-    <!-- 		    <li><a href="#">3</a></li> -->
-    <!-- 		    <li><a href="#">4</a></li> -->
-    <!-- 		    <li class="disabled"><a href="#">..</a></li> -->
-    <!-- 		    <li class="toLast"><a href="#">5</a></li> -->
-    <!-- 		    <li class="toNext"><a href="#">&raquo;</a></li> -->
-    <!-- 		</ul> -->
-    <!-- 	</div> -->
+    <div class="footer" style="position:relative;height:50px;">
+        <span style="position: absolute;top: 50%;transform: translateY(-50%);">显示第1页记录，共5页</span>
+        <ul class="pagination pagination-sm " style="position: absolute;float: right;height: 30px;margin: auto 1px;top: 50%;right: 10px;transform: translateY(-50%);">
+            <li class="toPrevious"><a href="#">&laquo;</a></li>
+            <li class=" toFirst active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li class="disabled"><a href="#">..</a></li>
+            <li class="toLast"><a href="#">7</a></li>
+            <li class="toNext"><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
 </div>
 
 
@@ -78,7 +81,7 @@
     $(function(){
         $("[data-toggle='tooltip']").tooltip();
 // 		var page = $('.footer .pagination-sm .active>a').html();
-        load()
+//         load()
 
         var flag = false;
         var timer;
@@ -87,7 +90,7 @@
             flag = true;
             timer = setTimeout(function() {
                 flag = false;
-                load();
+                // load();
             }, 1000);
 
         })

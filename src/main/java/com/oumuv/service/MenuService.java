@@ -2,6 +2,7 @@ package com.oumuv.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.oumuv.entity.RightEntity;
@@ -9,7 +10,7 @@ import com.oumuv.entity.RightEntity;
 @Service
 public interface MenuService {
 	/**根据用户id获取用户菜单*/
-	public List<RightEntity> getMenuByUid(Long id);
+	public List<RightEntity> getMenuByUid(@Param("id") Long id);
 	
 	/**获取所有的菜单*/
 	public List<RightEntity> getAllMenus();

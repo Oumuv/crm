@@ -32,7 +32,7 @@ import com.oumuv.utils.ObjectUtil;
 
 @Controller
 public class MenuAction {
-	
+
 	@Autowired
 	private MenuService menuservice;
 
@@ -62,8 +62,10 @@ public class MenuAction {
 		User user = (User) session.getAttribute("user");
 		String key="menus"+user.getId();
 		byte[] keyBytes = ObjectUtil.object2Bytes(key);
-		byte[] bs = jedisUtil.get(keyBytes);
-		
+//		jedisUtil.del(keyBytes);
+		byte[] bs = null;
+		bs = jedisUtil.get(keyBytes);
+
 		if(null==bs){
 			List<RightEntity> menu = menuservice.getMenuByUid(user.getId());
 			List<MenuInfo> menuresult = new LinkedList<MenuInfo>();//最后的结果 
