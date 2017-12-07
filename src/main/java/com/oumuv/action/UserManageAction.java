@@ -106,7 +106,6 @@ public class UserManageAction {
 	/**
 	 * 添加usercard
 	 * @param user
-	 * @param roles
 	 * @param map
 	 * @param response
 	 * @throws IOException
@@ -139,8 +138,8 @@ public class UserManageAction {
 	@RequestMapping("/word/addUsercardPage.do")
 	public String addUsercardPage(ModelMap map){
 		List<DepartmentEntity> departmenEntitys = departmentService.getAllEntity();	
-		
-		
+
+
 		map.put("departmens", departmenEntitys);
 		return "views/add_user";
 	}
