@@ -1,5 +1,6 @@
 package com.oumuv.service;
 
+import com.oumuv.core.info.ClienInfo;
 import com.oumuv.entity.ClienEntity;
 
 import java.util.List;
@@ -33,6 +34,17 @@ public interface ClienService {
      */
     public ClienEntity findClienEntityById(Long id);
 
-    public List<ClienEntity> getClienEntityByName();
+    /**
+     *
+     * @param name
+     * @param source
+     * @param status
+     * @param pagenum
+     * @param constomerType
+     * @param pagesize
+     * @return
+     */
+    public List<ClienInfo> getClienEntityByFiltrate(String name, String source, String constomerType, String status, String pagenum, String pagesize);
+
 
 }

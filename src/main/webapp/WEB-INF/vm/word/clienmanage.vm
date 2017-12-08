@@ -1,6 +1,10 @@
 <link rel="stylesheet" href="#springUrl('/css/jquery-labelauty.css')">
+<link href="#springUrl('/css/bootstrap-select.min.css')"
+      rel="stylesheet">
+<script src="#springUrl('/js/bootstrap-select.min.js')"></script>
+
 <style>
-    .bg_shadow .tdoverhied{
+    .bg_shadow td{
         word-break:keep-all;/* 不换行 */
         white-space:nowrap;/* 不换行 */
         overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
@@ -19,12 +23,65 @@
         <div class="col-lg-5 col-sm-5 col-md-5 col-xs-5">
             <div class="input-group">
                 <input type="input" id="input-search" name="name"
-                       class="form-control" placeholder="快速搜索..."> <span
+                       class="form-control" placeholder="客户名称搜索..."> <span
                     class="input-group-btn">
 					<button class="btn btn-default" id="reset_btn" type="button" onclick="reset()">重置</button>
 				</span>
             </div>
         </div>
+        <!--  菜单等级下拉框 -->
+    ##客户状态
+        <div class="btn-group">
+            <select id="status_select" class="selectpicker" name="status" data-live-search="true" multiple></select>
+        </div>
+    ##客户类型
+        <div class="btn-group">
+            <select id="customerType_select" class="selectpicker" name="customerType" data-live-search="true" multiple></select>
+        </div>
+    ##客户来源
+        <div class="btn-group">
+            <select id="source_select" class="selectpicker" name="source" data-live-search="true" multiple></select>
+        </div>
+        <script>
+
+            var status_select = $("#status_select");
+            var customerType_select = $("#customerType_select");
+            var source_select = $("#source_select");
+            // 客户状态
+            status_select.append("<option value='潜在客户' >潜在客户</option>");
+            status_select.append("<option value='意向客户' >意向客户</option>");
+            status_select.append("<option value='成交客户' >成交客户</option>");
+            status_select.append("<option value='无效客户' >无效客户</option>");
+            // 客户类型
+            customerType_select.append("<option value='潜在客户' >潜在客户</option>");
+            customerType_select.append("<option value='普通客户' >普通客户</option>");
+            customerType_select.append("<option value='VIP客户' >VIP客户</option>");
+            customerType_select.append("<option value='代理商' >代理商</option>");
+            customerType_select.append(" <option value='合作伙伴' >合作伙伴</option>");
+            // 客户来源
+            source_select.append("<option value='电话来访' >电话来访</option>");
+            source_select.append("<option value='客户介绍' >客户介绍</option>");
+            source_select.append("<option value='媒体宣传' >媒体宣传</option>");
+            source_select.append("<option value='促销活动' >促销活动</option>");
+            source_select.append("<option value='老客户介绍' >老客户介绍</option>");
+            source_select.append("<option value='互联网' >互联网</option>");
+            source_select.append("<option value='公开招标' >公开招标</option>");
+            source_select.append("<option value='其它' >其它</option>");
+
+            status_select.selectpicker({
+                noneSelectedText : '客户状态'//默认显示内容
+            });
+            customerType_select.selectpicker({
+                noneSelectedText : '客户类型'//默认显示内容
+            });
+            source_select.selectpicker({
+                noneSelectedText : '客户来源'//默认显示内容
+            });
+            $(".selectpicker").selectpicker({
+                width:"120px"
+            });
+            $('.selectpicker').selectpicker('refresh');
+        </script>
         <!-- 		<div class="btn btn-warning" id="edit_btn" onclick="edit()">编辑</div> -->
         <div class="btn btn-success" id="add_btn" onclick="add()">添加</div>
         <!-- 		<div class="btn btn-danger" id="del_btn" onclick="del()">删除</div> -->
@@ -61,14 +118,14 @@
     <div class="footer" style="position:relative;height:50px;">
         <span style="position: absolute;top: 50%;transform: translateY(-50%);">显示第1页记录，共5页</span>
         <ul class="pagination pagination-sm " style="position: absolute;float: right;height: 30px;margin: auto 1px;top: 50%;right: 10px;transform: translateY(-50%);">
-            <li class="toPrevious"><a href="#">&laquo;</a></li>
+            <li class="toPrevious"><a href="#">上一页</a></li>
             <li class=" toFirst active"><a href="#">1</a></li>
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
             <li><a href="#">4</a></li>
             <li class="disabled"><a href="#">..</a></li>
             <li class="toLast"><a href="#">7</a></li>
-            <li class="toNext"><a href="#">&raquo;</a></li>
+            <li class="toNext"><a href="#">下一页</a></li>
         </ul>
     </div>
 </div>
@@ -81,7 +138,7 @@
     $(function(){
         $("[data-toggle='tooltip']").tooltip();
 // 		var page = $('.footer .pagination-sm .active>a').html();
-//         load()
+        load()
 
         var flag = false;
         var timer;
@@ -98,10 +155,29 @@
     })
 
     function load(){
-        var input = $('#input-search').val();
-        $('#tbody_content').load("#springUrl('/word/getRoleByName.do')",{name:input});
+        $('#tbody_content').load("#springUrl('/word/getClienList.do')");
     }
 
+    //根据条件筛选加载数据
+    function loadByFiltrate(){
+        var input = $('#input-search').val();
+        var statsu = $("#status_select").val();
+        var customerType = $("#customerType_select").val();
+        var source = $("#source_select").val();
+        $('#tbody_content').load("#springUrl('/word/getClienList.do')");
+    }
+
+    //页数跳转
+    function loadByFiltrateOnPageNum(){
+        var input = $('#input-search').val();
+        var statsu = $("#status_select").val();
+        var customerType = $("#customerType_select").val();
+        var source = $("#source_select").val();
+        $('#tbody_content').load("#springUrl('/word/getClienList.do')");
+    }
+
+
+    //重置
     function reset() {
         if($('#input-search').val()!=""){
             $('#input-search').val("");
@@ -109,8 +185,9 @@
         }
     }
 
+    //添加
     function add() {
-        $('#myModal').load("#springUrl('/word/addRolePage.do')").modal(
+        $('#myModal').load("#springUrl('/word/addclienManagePage.do')").modal(
                 'show');
     }
 </script>

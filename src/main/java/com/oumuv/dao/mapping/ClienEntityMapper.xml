@@ -29,7 +29,7 @@
     from clien_info
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from clien_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
@@ -220,4 +220,31 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+
+  <!--*************************************************************-->
+
+
+  <select id="getClienEntityByFiltrate" resultType="com.oumuv.core.info.ClienInfo">
+    SELECT
+    c.*,u.id user.id,u.username user.username
+    FROM clien_info c
+    INNER JOIN user_info u ON c.uid=u.id
+    where c.`name` LIKE BINARY '%%'
+    <if test="source != null" >
+      AND c.source IN (#{source})
+    </if>
+    <if test="constomerType != null" >
+      AND c.customer_type IN (#{constomerType})
+    </if>
+    <if test="status != null" >
+      AND c.`status` IN (#{status})
+    </if>
+    <if test="offset != null" >
+      LIMIT #{offset}
+    </if>
+  </select>
+
+
 </mapper>
