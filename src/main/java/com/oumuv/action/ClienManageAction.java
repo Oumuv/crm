@@ -74,6 +74,7 @@ public class ClienManageAction {
                                ModelMap map) {
         List<ClienInfo> cliens =  clienService.getClienEntityByFiltrate(name,source,constomerType,status,pagenum,pagesize);
 
+        int i = 0;
         map.put("cliens", null);
         return "views/clien";
     }

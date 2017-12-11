@@ -138,7 +138,8 @@
     $(function(){
         $("[data-toggle='tooltip']").tooltip();
 // 		var page = $('.footer .pagination-sm .active>a').html();
-        load()
+//         load()
+        loadByFiltrate();
 
         var flag = false;
         var timer;
@@ -148,6 +149,7 @@
             timer = setTimeout(function() {
                 flag = false;
                 // load();
+                loadByFiltrate();
             }, 1000);
 
         })
@@ -164,6 +166,7 @@
         var statsu = $("#status_select").val();
         var customerType = $("#customerType_select").val();
         var source = $("#source_select").val();
+        console.log(input+statsu+customerType+source)
         $('#tbody_content').load("#springUrl('/word/getClienList.do')");
     }
 
