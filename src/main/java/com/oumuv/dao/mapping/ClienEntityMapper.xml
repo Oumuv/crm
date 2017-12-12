@@ -16,7 +16,7 @@
     <result column="department" jdbcType="VARCHAR" property="department" />
     <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="scale_of_company" jdbcType="VARCHAR" property="scaleOfCompany" />
-    <result column="returnvisit_time" jdbcType="DATE" property="returnvisitTime" />
+    <result column="returnvisit_time" jdbcType="TIMESTAMP" property="returnvisitTime" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="uid" jdbcType="BIGINT" property="uid" />
   </resultMap>
@@ -43,9 +43,9 @@
       remark, uid)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=BIGINT}, 
       #{address,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{qq,jdbcType=BIGINT}, 
-      #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{customerType,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{customerType,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
-      #{source,jdbcType=VARCHAR}, #{scaleOfCompany,jdbcType=VARCHAR}, #{returnvisitTime,jdbcType=DATE}, 
+      #{source,jdbcType=VARCHAR}, #{scaleOfCompany,jdbcType=VARCHAR}, #{returnvisitTime,jdbcType=TIMESTAMP},
       #{remark,jdbcType=VARCHAR}, #{uid,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.oumuv.entity.ClienEntity">
@@ -147,7 +147,7 @@
         #{scaleOfCompany,jdbcType=VARCHAR},
       </if>
       <if test="returnvisitTime != null">
-        #{returnvisitTime,jdbcType=DATE},
+        #{returnvisitTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -200,7 +200,7 @@
         scale_of_company = #{scaleOfCompany,jdbcType=VARCHAR},
       </if>
       <if test="returnvisitTime != null">
-        returnvisit_time = #{returnvisitTime,jdbcType=DATE},
+        returnvisit_time = #{returnvisitTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
@@ -226,7 +226,7 @@
       department = #{department,jdbcType=VARCHAR},
       source = #{source,jdbcType=VARCHAR},
       scale_of_company = #{scaleOfCompany,jdbcType=VARCHAR},
-      returnvisit_time = #{returnvisitTime,jdbcType=DATE},
+      returnvisit_time = #{returnvisitTime,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR},
       uid = #{uid,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
@@ -239,7 +239,27 @@
 
   <select id="getClienEntityByFiltrate" resultType="com.oumuv.core.info.ClienInfo">
     SELECT
-    c.*,u.name as "cuser.name",u.id as "cuser.id"
+    c.*,
+    u.name as "cuser.name",
+    u.id as "cuser.id"
+    FROM clien_info c
+    INNER JOIN user_info u ON c.uid=u.id
+    where c.`name` LIKE BINARY '%${inputname}%'
+    <if test="source != null">
+      AND c.source IN (${source})
+    </if>
+    <if test="constomerType != null">
+      AND c.customer_type IN (${constomerType})
+    </if>
+    <if test="status != null">
+      AND c.`status` IN (${status})
+    </if>
+  </select>
+
+
+  <select id="getClienEntityByFiltrate2" resultMap="BaseResultMap">
+    SELECT
+    c.*
     FROM clien_info c
     INNER JOIN user_info u ON c.uid=u.id
     where c.`name` LIKE BINARY '%${inputname}%'

@@ -19,7 +19,12 @@ public interface ClienEntityMapper {
 
     int updateByPrimaryKey(ClienEntity record);
 
+
     List<ClienInfo> getClienEntityByFiltrate(@Param("inputname") String inputname,
+                                             @Param("source") String source,@Param("constomerType") String constomerType,
+                                             @Param("status")String status, @Param("offset")String offset,@Param("pagenum") String pagenum);
+
+    List<ClienEntity> getClienEntityByFiltrate2(@Param("inputname") String inputname,
                                              @Param("source") String source,@Param("constomerType") String constomerType,
                                              @Param("status")String status, @Param("offset")String offset,@Param("pagenum") String pagenum);
 }

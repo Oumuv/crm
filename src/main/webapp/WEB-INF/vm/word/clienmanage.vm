@@ -99,7 +99,7 @@
                 <th>QQ</th>
                 <th>email</th>
                 <th>创建时间</th>
-                <th>客户种类</th>
+                <th>客户类型</th>
                 <th>公司</th>
                 <th>公司规模</th>
                 <th>客户来源</th>
@@ -181,6 +181,6 @@
 
     //添加
     function add() {
-        ## $('#myModal').load("#springUrl('/word/addclienManagePage.do')").modal('show');
+         $('#myModal').load("#springUrl('/word/addclienManagePage.do')").modal('show');
     }
 </script>

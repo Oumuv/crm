@@ -1,25 +1,51 @@
 
 #foreach($c in $cliens)
-<tr>
+<tr cid="$c.id">
     <td>$!c.name</td>
-    <td>$!c.phone</td>
-    <td>$!c.wechat</td>
-    <td>$!c.qq</td>
-    <td>$!c.email</td>
+    <td>#if($c.phone)$c.phone#else - #end</td>
+    <td>#if($c.wechat)$c.wechat#else - #end</td>
+    <td>#if($c.qq)$c.qq#else - #end</td>
+    <td>#if($c.email)$c.email#else - #end</td>
     <td>$!c.createTime</td>
     <td>$!c.customerType</td>
-    <td>$!c.company</td>
-    <td>$!c.scaleOfCompany</td>
+    <td>#if($c.company)$c.company#else - #end</td>
+    <td>#if($c.scaleOfCompany)$c.scaleOfCompany#else - #end</td>
     <td>$!c.source</td>
-    <td>2017-12-9</td>
+    <td>#if($c.returnvisitTime)$c.returnvisitTime#else - #end</td>
     <td>$!c.cuser.name</td>
-    <td>#if($c.remark)$c.remark#else 无 #end</td>
+    <td>#if($c.remark)$c.remark#else - #end</td>
     <td>$!c.status</td>
 </tr>
 #end
 
 
 <script>
+    //阻止浏览器默认右键点击事件
+    $("#tbody_content").bind("contextmenu", function(){
+        return false;
+    })
+    $("#tbody_content tr").mousedown(function(e) {
+        //右键为3
+        if (3 == e.which) {
+            console.log($(this).attr("cid"))
 
 
+
+        }
+    // else if (1 == e.which) {
+    //         //左键为1
+    //       alert(1)
+    //     }
+    })
+
+    $('tr').click(function() {
+        console.log($(this).attr('cid'))
+        $('tr').popover({
+            html:true,
+            content:"<span>123</span>",
+            placement: 'right',
+            title:"<span id='role_edit_popover_title'>选择权限</span>",
+            width:'300'
+        }).popover("show")
+    });
 </script>

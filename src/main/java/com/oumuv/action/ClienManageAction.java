@@ -1,6 +1,8 @@
 package com.oumuv.action;
 
 import com.oumuv.core.info.ClienInfo;
+import com.oumuv.entity.ClienEntity;
+import com.oumuv.entity.User;
 import com.oumuv.service.ClienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -73,10 +78,28 @@ public class ClienManageAction {
                                @RequestParam(value = "status", required = false) String status,
                                ModelMap map) {
         List<ClienInfo> cliens =  clienService.getClienEntityByFiltrate(name,source,customerType,status,pagenum,pagesize);
-
-        int i = 0;
         map.put("cliens", cliens);
         return "views/clien";
+    }
+
+    /**
+     * 添加客户
+     * @param clienEntity
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping("word/addClien.do")
+
+    public void addClien(ClienEntity clienEntity, HttpServletResponse response, HttpSession session) throws IOException {
+        User user = (User) session.getAttribute("user");
+        clienEntity.setUid(user.getId());
+        response.setCharacterEncoding("utf-8");
+        int i = clienService.addClien(clienEntity);
+        if (i > 0) {
+            response.getWriter().write("添加客户成功");
+        }else{
+            response.getWriter().write("添加客户失败");
+        }
     }
 
 
