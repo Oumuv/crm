@@ -7,17 +7,17 @@ public class ClienEntity {
 
     private String name;
 
-    private Integer phone;
+    private Long phone;
 
     private String address;
 
     private String wechat;
 
-    private Integer qq;
+    private Long qq;
 
     private String status;
 
-    private Date contactTime;
+    private Date createTime;
 
     private String customerType;
 
@@ -35,6 +35,8 @@ public class ClienEntity {
 
     private String remark;
 
+    private Long uid;
+
     public Long getId() {
         return id;
     }
@@ -51,11 +53,11 @@ public class ClienEntity {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
@@ -75,11 +77,11 @@ public class ClienEntity {
         this.wechat = wechat == null ? null : wechat.trim();
     }
 
-    public Integer getQq() {
+    public Long getQq() {
         return qq;
     }
 
-    public void setQq(Integer qq) {
+    public void setQq(Long qq) {
         this.qq = qq;
     }
 
@@ -91,12 +93,12 @@ public class ClienEntity {
         this.status = status == null ? null : status.trim();
     }
 
-    public Date getContactTime() {
-        return contactTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setContactTime(Date contactTime) {
-        this.contactTime = contactTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getCustomerType() {
@@ -161,5 +163,13 @@ public class ClienEntity {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public Long getUid() {
+        return uid;
+    }
+
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
 }

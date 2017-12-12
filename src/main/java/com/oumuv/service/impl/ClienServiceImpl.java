@@ -4,6 +4,7 @@ import com.oumuv.core.info.ClienInfo;
 import com.oumuv.dao.ClienEntityMapper;
 import com.oumuv.entity.ClienEntity;
 import com.oumuv.service.ClienService;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,21 +36,33 @@ public class ClienServiceImpl implements ClienService {
         return null;
     }
 
-    public List<ClienInfo> getClienEntityByFiltrate(String name, String source, String constomerType, String status, String pagenum, String pagesize) {
-
-        boolean nameflag = null != name && !name.equals("");
-        boolean sourceflag = null != source && !source.equals("");
-        boolean constomerTypeflag = null != constomerType && !constomerType.equals("");
-        boolean statusflag = null != status && !status.equals("");
-        boolean pagenumflag = null != pagenum && !pagenum.equals("");
-        boolean pagesizeflag = null != pagesize && !pagesize.equals("");
-
-
-        int offset = 15;
-        if(pagenumflag && pagesizeflag){
-             offset = parseInt(pagesize)* parseInt(pagenum);
-        }
-        List<ClienInfo> cliengs = clienDao.getClienEntityByFiltrate(name,source,constomerType,status, String.valueOf(offset));
+    public List<ClienInfo> getClienEntityByFiltrate(String name, String source, String customerType, String status, String pagenum, String pagesize) {
+        List<ClienInfo> cliengs = clienDao.getClienEntityByFiltrate(name,splitString(source),splitString(customerType),splitString(status),"15","15");
         return cliengs;
+
     }
+
+    /**
+     *字符串拼接
+     * 原字符串：潜在客户,意向客户
+     * 拼接后字符串：'潜在客户','意向客户'
+     * @param str
+     * @return
+     */
+    private String splitString(String str){
+        String result = "";
+        if (null != str) {
+            String[] split = str.split(",");
+            for (int i = 0; i < split.length; i++) {
+                result += "'";
+                result += split[i] + "',";
+            }
+            result = result.substring(0, result.length() - 1);
+        }else{
+            return null;
+        }
+        return result;
+    }
+
+
 }
