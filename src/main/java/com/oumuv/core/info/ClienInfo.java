@@ -9,7 +9,7 @@ public class ClienInfo {
 
     private String name;
 
-    private Integer phone;
+    private Long phone;
 
     private String address;
 
@@ -19,7 +19,7 @@ public class ClienInfo {
 
     private String status;
 
-    private Date contactTime;
+    private Date createTime;
 
     private String customerType;
 
@@ -37,7 +37,7 @@ public class ClienInfo {
 
     private String remark;
 
-    private User user;
+    private User cuser;
 
     public Long getId() {
         return id;
@@ -52,14 +52,14 @@ public class ClienInfo {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
-    public Integer getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
@@ -68,7 +68,7 @@ public class ClienInfo {
     }
 
     public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+        this.address = address;
     }
 
     public String getWechat() {
@@ -76,7 +76,7 @@ public class ClienInfo {
     }
 
     public void setWechat(String wechat) {
-        this.wechat = wechat == null ? null : wechat.trim();
+        this.wechat = wechat;
     }
 
     public Integer getQq() {
@@ -92,15 +92,15 @@ public class ClienInfo {
     }
 
     public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+        this.status = status;
     }
 
-    public Date getContactTime() {
-        return contactTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setContactTime(Date contactTime) {
-        this.contactTime = contactTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getCustomerType() {
@@ -108,7 +108,7 @@ public class ClienInfo {
     }
 
     public void setCustomerType(String customerType) {
-        this.customerType = customerType == null ? null : customerType.trim();
+        this.customerType = customerType;
     }
 
     public String getEmail() {
@@ -116,7 +116,7 @@ public class ClienInfo {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email;
     }
 
     public String getCompany() {
@@ -124,7 +124,7 @@ public class ClienInfo {
     }
 
     public void setCompany(String company) {
-        this.company = company == null ? null : company.trim();
+        this.company = company;
     }
 
     public String getDepartment() {
@@ -132,7 +132,7 @@ public class ClienInfo {
     }
 
     public void setDepartment(String department) {
-        this.department = department == null ? null : department.trim();
+        this.department = department;
     }
 
     public String getSource() {
@@ -140,7 +140,7 @@ public class ClienInfo {
     }
 
     public void setSource(String source) {
-        this.source = source == null ? null : source.trim();
+        this.source = source;
     }
 
     public String getScaleOfCompany() {
@@ -148,7 +148,7 @@ public class ClienInfo {
     }
 
     public void setScaleOfCompany(String scaleOfCompany) {
-        this.scaleOfCompany = scaleOfCompany == null ? null : scaleOfCompany.trim();
+        this.scaleOfCompany = scaleOfCompany;
     }
 
     public Date getReturnvisitTime() {
@@ -164,14 +164,10 @@ public class ClienInfo {
     }
 
     public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+        this.remark = remark;
     }
 
-    public User getUser() {
-        return user;
-    }
+    public User getCuser() { return cuser; }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public void setCuser(User cuser) { this.cuser = cuser; }
 }

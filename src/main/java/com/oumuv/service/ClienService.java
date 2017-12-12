@@ -40,11 +40,11 @@ public interface ClienService {
      * @param source
      * @param status
      * @param pagenum
-     * @param constomerType
+     * @param customerType
      * @param pagesize
      * @return
      */
-    public List<ClienInfo> getClienEntityByFiltrate(String name, String source, String constomerType, String status, String pagenum, String pagesize);
+    public List<ClienInfo> getClienEntityByFiltrate(String name, String source, String customerType, String status, String pagenum, String pagesize);
 
 
 }

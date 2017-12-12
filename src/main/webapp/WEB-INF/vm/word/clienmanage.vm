@@ -14,7 +14,7 @@
         min-width: 100px;
     }
 </style>
-
+<form id="panel_form" >
 <div class="bg_shadow"
      style="width: 100%; height: 100%; border-radius: 8px 8px 8px 8px; padding: 10px 10px 10px 10px;">
     <!-- 筛选 -->
@@ -25,7 +25,7 @@
                 <input type="input" id="input-search" name="name"
                        class="form-control" placeholder="客户名称搜索..."> <span
                     class="input-group-btn">
-					<button class="btn btn-default" id="reset_btn" type="button" onclick="reset()">重置</button>
+					<button class="btn btn-default" id="reset_btn" type="button" onclick="resetAll()">重置</button>
 				</span>
             </div>
         </div>
@@ -129,7 +129,7 @@
         </ul>
     </div>
 </div>
-
+</form>
 
 
 <script src="#springUrl('/js/jquery-labelauty.js')"></script>
@@ -137,9 +137,7 @@
 <script>
     $(function(){
         $("[data-toggle='tooltip']").tooltip();
-// 		var page = $('.footer .pagination-sm .active>a').html();
-//         load()
-        loadByFiltrate();
+        loadByFiltrate();//初始化
 
         var flag = false;
         var timer;
@@ -156,19 +154,13 @@
 
     })
 
-    function load(){
-        $('#tbody_content').load("#springUrl('/word/getClienList.do')");
-    }
 
     //根据条件筛选加载数据
     function loadByFiltrate(){
-        var input = $('#input-search').val();
-        var statsu = $("#status_select").val();
-        var customerType = $("#customerType_select").val();
-        var source = $("#source_select").val();
-        console.log(input+statsu+customerType+source)
-        $('#tbody_content').load("#springUrl('/word/getClienList.do')");
+        var params = $("#panel_form").serialize();
+         $('#tbody_content').load("#springUrl('/word/getClienList.do')",params);
     }
+
 
     //页数跳转
     function loadByFiltrateOnPageNum(){
@@ -181,16 +173,14 @@
 
 
     //重置
-    function reset() {
-        if($('#input-search').val()!=""){
-            $('#input-search').val("");
-            load();
-        }
+    function resetAll() {
+        $('#input-search').val('');
+        $('.selectpicker').selectpicker('val','');
+        loadByFiltrate();
     }
 
     //添加
     function add() {
-        $('#myModal').load("#springUrl('/word/addclienManagePage.do')").modal(
-                'show');
+        ## $('#myModal').load("#springUrl('/word/addclienManagePage.do')").modal('show');
     }
 </script>

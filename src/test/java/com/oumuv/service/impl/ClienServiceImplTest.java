@@ -27,7 +27,6 @@ public class ClienServiceImplTest {
 
         ClienEntity c = new ClienEntity();
         c.setName("马云");
-        c.setPhone(1134452205);
         clienServiceImpl.addClien(c);
     }
 

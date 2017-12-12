@@ -1,21 +1,22 @@
 
-
+#foreach($c in $cliens)
 <tr>
-    <td>张某某</td>
-    <td>13788459121</td>
-    <td>luo1134420025</td>
-    <td>1134420025</td>
-    <td>1134420025@qq.com</td>
-    <td>2017-9-14</td>
-    <td>VIP客户</td>
-    <td>上海alibaba公司</td>
-    <td>无</td>
-    <td>电话来访</td>
+    <td>$!c.name</td>
+    <td>$!c.phone</td>
+    <td>$!c.wechat</td>
+    <td>$!c.qq</td>
+    <td>$!c.email</td>
+    <td>$!c.createTime</td>
+    <td>$!c.customerType</td>
+    <td>$!c.company</td>
+    <td>$!c.scaleOfCompany</td>
+    <td>$!c.source</td>
     <td>2017-12-9</td>
-    <td>欧银锋</td>
-    <td>无</td>
-    <td>意向客户</td>
+    <td>$!c.cuser.name</td>
+    <td>#if($c.remark)$c.remark#else 无 #end</td>
+    <td>$!c.status</td>
 </tr>
+#end
 
 
 <script>

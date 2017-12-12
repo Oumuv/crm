@@ -58,7 +58,7 @@ public class ClienManageAction {
      * @param name 客户名
      * @param pagesize 页面显示的数据条数
      * @param pagenum 页数
-     * @param constomerType 客户类型
+     * @param customerType 客户类型
      * @param status 客户状态
      * @param source 客户来源
      * @param map
@@ -66,16 +66,16 @@ public class ClienManageAction {
      */
     @RequestMapping("word/getClienList.do")
     public String getClienList(@RequestParam(value = "name", required = false) String name,
-                               @RequestParam(value = "constomerType", required = false) String constomerType,
+                               @RequestParam(value = "customerType", required = false) String customerType,
                                @RequestParam(value = "pagesize", required = false) String pagesize,
                                @RequestParam(value = "pagenum", required = false) String pagenum,
                                @RequestParam(value = "source", required = false) String source,
                                @RequestParam(value = "status", required = false) String status,
                                ModelMap map) {
-        List<ClienInfo> cliens =  clienService.getClienEntityByFiltrate(name,source,constomerType,status,pagenum,pagesize);
+        List<ClienInfo> cliens =  clienService.getClienEntityByFiltrate(name,source,customerType,status,pagenum,pagesize);
 
         int i = 0;
-        map.put("cliens", null);
+        map.put("cliens", cliens);
         return "views/clien";
     }
 
