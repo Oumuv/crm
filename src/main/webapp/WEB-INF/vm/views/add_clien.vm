@@ -1,0 +1,211 @@
+<link href="#springUrl('/css/bootstrap-select.min.css')"
+      rel="stylesheet">
+<script src="#springUrl('/js/bootstrap-select.min.js')"></script>
+
+
+<style>
+    #form_table td {
+        text-align: center;
+        line-height: 2.5;
+        vertical-align: top;
+    }
+   #form_table td .btn-group {
+       width: 100%;
+   }
+</style>
+<link href="#springUrl('/css/bootstrap-select.min.css')"
+      rel="stylesheet">
+<script src="#springUrl('/js/bootstrap-select.min.js')"></script>
+<div class="modal-dialog" style="z-index: 9999">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">
+                客户 | 添加<input type='hidden'></input>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <form id="form_table" action="">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>客户名称</td>
+                        <td><input type="input" name="name" id="name"
+                                   class="form-control" placeholder="NULL"></td>
+                        <td>联系电话</td>
+                        <td><input type="input" name="phone" id="phone"
+                                   class="form-control" placeholder="NULL"></td>
+                    </tr>
+                    <tr>
+                        <td>微信</td>
+                        <td><input type="input" name="wechat" id="wechat"
+                                   class="form-control" placeholder="NULL"></td>
+                        <td>QQ</td>
+                        <td><input type="input" name="qq" id="qq"
+                                   class="form-control" placeholder="NULL"></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="input" name="name" id=""
+                                   class="form-control" placeholder="NULL"></td>
+                        <td>地址</td>
+                        <td><input type="input" name="address" id="address"
+                                   class="form-control" placeholder="NULL"></td>
+
+
+                    </tr>
+                    <tr>
+                        <td>客户类型</td>
+                        <td>
+                            <div class="btn-group">
+                                <select id="customerType" class="selectpicker" name="customerType" data-live-search="true"></select>
+                            </div>
+##                            <input type="input" name="customerType" id="customerType"
+##                                   class="form-control" placeholder="NULL">
+                        </td>
+                        <td>客户来源</td>
+                        <td>
+                            <div class="btn-group">
+                                <select id="source" class="selectpicker" name="source" data-live-search="true"></select>
+                            </div>
+##                            <input type="input" name="source" id="source"
+##                                   class="form-control" placeholder="NULL">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>客户状态</td>
+                        <td>
+                            <div class="btn-group">
+                                <select id="status" class="selectpicker" name="status" data-live-search="true"></select>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>公司</td>
+                        <td><input type="input" name="company" id="company"
+                                   class="form-control" placeholder="NULL"></td>
+                        <td>公司规模</td>
+                        <td><input type="input" name="scaleOfCompany" id="scaleOfCompany"
+                                   class="form-control" placeholder="NULL"></td>
+                    </tr>
+
+                    <tr>
+                        <td>备注</td>
+                        <td colspan="3">
+                            <textarea name="remark" id="remark" class="form-control" placeholder="NULL"></textarea>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+            </button>
+            <button type="button" class="btn btn-primary" id="submit_btn">提交</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        //数据赋值
+        var status = $("#status");
+        var customerType = $("#customerType");
+        var source = $("#source");
+        // 客户状态
+        status.append("<option value='潜在客户' >潜在客户</option>");
+        status.append("<option value='意向客户' >意向客户</option>");
+        status.append("<option value='成交客户' >成交客户</option>");
+        status.append("<option value='无效客户' >无效客户</option>");
+        // 客户类型
+        customerType.append("<option value='潜在客户' >潜在客户</option>");
+        customerType.append("<option value='普通客户' >普通客户</option>");
+        customerType.append("<option value='VIP客户' >VIP客户</option>");
+        customerType.append("<option value='代理商' >代理商</option>");
+        customerType.append(" <option value='合作伙伴' >合作伙伴</option>");
+        // 客户来源
+        source.append("<option value='电话来访' >电话来访</option>");
+        source.append("<option value='客户介绍' >客户介绍</option>");
+        source.append("<option value='媒体宣传' >媒体宣传</option>");
+        source.append("<option value='促销活动' >促销活动</option>");
+        source.append("<option value='老客户介绍' >老客户介绍</option>");
+        source.append("<option value='互联网' >互联网</option>");
+        source.append("<option value='公开招标' >公开招标</option>");
+        source.append("<option value='其它' >其它</option>");
+
+        status.selectpicker({
+            noneSelectedText : '客户状态'//默认显示内容
+        });
+        customerType.selectpicker({
+            noneSelectedText : '客户类型'//默认显示内容
+        });
+        source.selectpicker({
+            noneSelectedText : '客户来源'//默认显示内容
+        });
+        $(".selectpicker").selectpicker({
+            width:"100%"
+        });
+        $('.selectpicker').selectpicker('val');
+        $('.selectpicker').selectpicker('refresh');
+
+
+    });
+
+
+
+    function check(){
+        var name = $("#name").val();
+        var phone = $("#phone").val();
+        var customerType = $("#customerType").val();
+        var status = $("#status").val();
+        var source = $("#source").val();
+        if(name==""){
+            alert("请输入部门名")
+            return false;
+        }
+        if(phone==""){
+            alert("请输入联系电话")
+            return false;
+        }
+        if(customerType==""){
+            alert("请选择客户类型")
+            return false;
+        }
+        if(status==""){
+            alert("请选择客户状态")
+            return false;
+        }
+        if(source==""){
+            alert("请选择客户来源")
+            return false;
+        }
+        return true;
+
+    }
+    $('#submit_btn').click(function() {
+        if(!check()){
+            return flase;
+        }
+        if (confirm("确认添加客户信息？")) {
+            var params = $("#form_table").serialize();
+            $.ajax({
+                type : "POST",
+                url : "#springUrl('/word/addClien.do')",
+                data : params,
+                success : function(msg) {
+                    alert(msg);
+                    $('#myModal').empty();
+                    $('#myModal').modal('hide');
+                    getdetails();
+                },
+                error : function(msg) {
+                    alert(msg)
+                }
+            });
+        }
+    })
+</script>

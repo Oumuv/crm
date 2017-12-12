@@ -39,7 +39,12 @@ public class ClienServiceImpl implements ClienService {
     public List<ClienInfo> getClienEntityByFiltrate(String name, String source, String customerType, String status, String pagenum, String pagesize) {
         List<ClienInfo> cliengs = clienDao.getClienEntityByFiltrate(name,splitString(source),splitString(customerType),splitString(status),"15","15");
         return cliengs;
+    }
 
+    public List<ClienEntity> getClienEntityByFiltrate2(String name, String source, String customerType, String status, String pagenum, String pagesize) {
+        List<ClienEntity> cliengs = clienDao.getClienEntityByFiltrate2(name,splitString(source),splitString(customerType),splitString(status),"15","15");
+
+        return cliengs;
     }
 
     /**

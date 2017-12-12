@@ -1,6 +1,8 @@
 package com.oumuv.core.info;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.oumuv.entity.User;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -15,11 +17,13 @@ public class ClienInfo {
 
     private String wechat;
 
-    private Integer qq;
+    private Long qq;
 
     private String status;
 
-    private Date createTime;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+
+    private String createTime;
 
     private String customerType;
 
@@ -33,7 +37,9 @@ public class ClienInfo {
 
     private String scaleOfCompany;
 
-    private Date returnvisitTime;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    private String returnvisitTime;
 
     private String remark;
 
@@ -79,11 +85,11 @@ public class ClienInfo {
         this.wechat = wechat;
     }
 
-    public Integer getQq() {
+    public Long getQq() {
         return qq;
     }
 
-    public void setQq(Integer qq) {
+    public void setQq(Long qq) {
         this.qq = qq;
     }
 
@@ -95,11 +101,12 @@ public class ClienInfo {
         this.status = status;
     }
 
-    public Date getCreateTime() {
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -151,11 +158,10 @@ public class ClienInfo {
         this.scaleOfCompany = scaleOfCompany;
     }
 
-    public Date getReturnvisitTime() {
-        return returnvisitTime;
-    }
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    public String getReturnvisitTime() { return returnvisitTime; }
 
-    public void setReturnvisitTime(Date returnvisitTime) {
+    public void setReturnvisitTime(String returnvisitTime) {
         this.returnvisitTime = returnvisitTime;
     }
 

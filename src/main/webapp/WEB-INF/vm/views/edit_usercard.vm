@@ -107,7 +107,6 @@
 		$('#department').selectpicker('val', '$!{user.departmentId}');
 		
 		$('#role_edit').on('click',function(){
-			console.log("click")
 			$('#role_edit').popover({
 				html:true,
 				content:getpopover(),
