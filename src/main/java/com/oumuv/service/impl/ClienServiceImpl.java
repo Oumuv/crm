@@ -33,7 +33,8 @@ public class ClienServiceImpl implements ClienService {
     }
 
     public ClienEntity findClienEntityById(Long id) {
-        return null;
+        ClienEntity clienEntity = clienDao.selectByPrimaryKey(id);
+        return clienEntity;
     }
 
     public List<ClienInfo> getClienEntityByFiltrate(String name, String source, String customerType, String status, String pagenum, String pagesize) {
@@ -41,11 +42,6 @@ public class ClienServiceImpl implements ClienService {
         return cliengs;
     }
 
-    public List<ClienEntity> getClienEntityByFiltrate2(String name, String source, String customerType, String status, String pagenum, String pagesize) {
-        List<ClienEntity> cliengs = clienDao.getClienEntityByFiltrate2(name,splitString(source),splitString(customerType),splitString(status),"15","15");
-
-        return cliengs;
-    }
 
     /**
      *字符串拼接

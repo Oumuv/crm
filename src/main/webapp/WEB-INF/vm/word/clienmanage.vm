@@ -1,7 +1,3 @@
-<link rel="stylesheet" href="#springUrl('/css/jquery-labelauty.css')">
-<link href="#springUrl('/css/bootstrap-select.min.css')"
-      rel="stylesheet">
-<script src="#springUrl('/js/bootstrap-select.min.js')"></script>
 
 <style>
     .bg_shadow td{
@@ -32,15 +28,15 @@
         <!--  菜单等级下拉框 -->
     ##客户状态
         <div class="btn-group">
-            <select id="status_select" class="selectpicker" name="status" data-live-search="true" multiple></select>
+            <select id="status_select" class="selectpicker selectclass1" name="status" data-live-search="true" multiple></select>
         </div>
     ##客户类型
         <div class="btn-group">
-            <select id="customerType_select" class="selectpicker" name="customerType" data-live-search="true" multiple></select>
+            <select id="customerType_select" class="selectpicker selectclass1" name="customerType" data-live-search="true" multiple></select>
         </div>
     ##客户来源
         <div class="btn-group">
-            <select id="source_select" class="selectpicker" name="source" data-live-search="true" multiple></select>
+            <select id="source_select" class="selectpicker selectclass1" name="source" data-live-search="true" multiple></select>
         </div>
         <script>
 
@@ -77,10 +73,10 @@
             source_select.selectpicker({
                 noneSelectedText : '客户来源'//默认显示内容
             });
-            $(".selectpicker").selectpicker({
+            $(".selectclass1").selectpicker({
                 width:"120px"
             });
-            $('.selectpicker').selectpicker('refresh');
+            $('.selectclass1').selectpicker('refresh');
         </script>
         <!-- 		<div class="btn btn-warning" id="edit_btn" onclick="edit()">编辑</div> -->
         <div class="btn btn-success" id="add_btn" onclick="add()">添加</div>
@@ -132,7 +128,7 @@
 </form>
 
 
-<script src="#springUrl('/js/jquery-labelauty.js')"></script>
+
 
 <script>
     $(function(){
@@ -151,7 +147,7 @@
             }, 1000);
 
         })
-
+        alertMsg('info',"小贴士：鼠标右键可以进行编辑、删除操作哦");
     })
 
 

@@ -53,7 +53,8 @@ public class ClienManageAction {
      */
     @RequestMapping("word/updataclienManagePage.do")
     public String updataclienManagePage(Long id, ModelMap map) {
-
+        ClienEntity clienEntity = clienService.findClienEntityById(id);
+        map.put("clien", clienEntity);
         return "views/edit_clien";
     }
 
