@@ -24,26 +24,26 @@
                     <tbody>
                     <tr>
                         <td>客户名称</td>
-                        <td><input type="input" name="name" id="name"
+                        <td><input type="input" name="name" id="name" value="$!clien.name"
                                    class="form-control" placeholder="NULL"></td>
                         <td>联系电话</td>
-                        <td><input type="input" name="phone" id="phone"
+                        <td><input type="input" name="phone" id="phone" value="$!clien.phone"
                                    class="form-control" placeholder="NULL"></td>
                     </tr>
                     <tr>
                         <td>微信</td>
-                        <td><input type="input" name="wechat" id="wechat"
+                        <td><input type="input" name="wechat" id="wechat" value="$!clien.wechat"
                                    class="form-control" placeholder="NULL"></td>
                         <td>QQ</td>
-                        <td><input type="input" name="qq" id="qq"
+                        <td><input type="input" name="qq" id="qq" value="$!clien.qq"
                                    class="form-control" placeholder="NULL"></td>
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td><input type="input" name="name" id=""
+                        <td><input type="input" name="email" id="email" value="$!clien.email"
                                    class="form-control" placeholder="NULL"></td>
                         <td>地址</td>
-                        <td><input type="input" name="address" id="address"
+                        <td><input type="input" name="address" id="address" value="$!clien.address"
                                    class="form-control" placeholder="NULL"></td>
 
 
@@ -52,56 +52,42 @@
                         <td>客户类型</td>
                         <td>
                             <div class="btn-group">
-                                <select id="customerType" class="selectpicker selectclass2" name="customerType" data-live-search="false"></select>
+                                <select id="customerType" class="selectpicker" name="customerType" data-live-search="true"></select>
                             </div>
-
+##                            <input type="input" name="customerType" id="customerType"
+##                                   class="form-control" placeholder="NULL">
                         </td>
                         <td>客户来源</td>
                         <td>
                             <div class="btn-group">
-                                <select id="source" class="selectpicker selectclass2" name="source" data-live-search="false"></select>
+                                <select id="source" class="selectpicker" name="source" data-live-search="true"></select>
                             </div>
+##                            <input type="input" name="source" id="source"
+##                                   class="form-control" placeholder="NULL">
                         </td>
                     </tr>
                     <tr>
                         <td>客户状态</td>
                         <td>
                             <div class="btn-group">
-                                <select id="status" class="selectpicker selectclass2" name="status" data-live-search="false"></select>
+                                <select id="status" class="selectpicker" name="status" data-live-search="true"></select>
                             </div>
-
                         </td>
 
                     </tr>
                     <tr>
                         <td>公司</td>
-                        <td><input type="input" name="company" id="company"
+                        <td><input type="input" name="company" id="company" value="$!clien.company"
                                    class="form-control" placeholder="NULL"></td>
                         <td>公司规模</td>
-                        <td>
-                            <div class="btn-group">
-                                <select id="scaleOfCompany" class="selectpicker " name="scaleOfCompany" data-live-search="false"></select>
-                                <script>
-                                    var scaleOfCompany = $("#scaleOfCompany");
-                                    scaleOfCompany.append("<option value=''>请选择</option>");
-                                    scaleOfCompany.append("<option value='10人以内' >10人以内</option>");
-                                    scaleOfCompany.append("<option value='10-20人' >10-20人</option>");
-                                    scaleOfCompany.append("<option value='50-200人' >50-200人</option>");
-                                    scaleOfCompany.append("<option value='200人以上' >200人以上</option>");
-                                    scaleOfCompany.selectpicker({
-                                        noneSelectedText : '公司规模'//默认显示内容
-                                    });
-                                    scaleOfCompany.selectpicker('val','');
-                                    scaleOfCompany.selectpicker('refresh')
-                                </script>
-                            </div>
-                        </td>
+                        <td><input type="input" name="scaleOfCompany" id="scaleOfCompany" value="$!clien.name"
+                                   class="form-control" placeholder="NULL"></td>
                     </tr>
 
                     <tr>
                         <td>备注</td>
                         <td colspan="3">
-                            <textarea name="remark" id="remark" class="form-control" placeholder="NULL"></textarea>
+                            <textarea name="remark" id="remark" class="form-control" value="$!clien.remark"></textarea>
                         </td>
 
                     </tr>
@@ -123,22 +109,18 @@
         var status = $("#status");
         var customerType = $("#customerType");
         var source = $("#source");
-
         // 客户状态
-        status.append("<option value=''>请选择</option>");
         status.append("<option value='潜在客户' >潜在客户</option>");
         status.append("<option value='意向客户' >意向客户</option>");
         status.append("<option value='成交客户' >成交客户</option>");
         status.append("<option value='无效客户' >无效客户</option>");
         // 客户类型
-        customerType.append("<option value=''>请选择</option>");
         customerType.append("<option value='潜在客户' >潜在客户</option>");
         customerType.append("<option value='普通客户' >普通客户</option>");
         customerType.append("<option value='VIP客户' >VIP客户</option>");
         customerType.append("<option value='代理商' >代理商</option>");
         customerType.append(" <option value='合作伙伴' >合作伙伴</option>");
         // 客户来源
-        source.append("<option value=''>请选择</option>");
         source.append("<option value='电话来访' >电话来访</option>");
         source.append("<option value='客户介绍' >客户介绍</option>");
         source.append("<option value='媒体宣传' >媒体宣传</option>");
@@ -147,8 +129,6 @@
         source.append("<option value='互联网' >互联网</option>");
         source.append("<option value='公开招标' >公开招标</option>");
         source.append("<option value='其它' >其它</option>");
-
-
 
         status.selectpicker({
             noneSelectedText : '客户状态'//默认显示内容
@@ -159,13 +139,11 @@
         source.selectpicker({
             noneSelectedText : '客户来源'//默认显示内容
         });
-
-        $(".selectclass2").selectpicker({
+        $(".selectpicker").selectpicker({
             width:"100%"
         });
-
-        $('.selectclass2').selectpicker('val','');
-        $('.selectclass2').selectpicker('refresh');
+        $('.selectpicker').selectpicker('val');
+        $('.selectpicker').selectpicker('refresh');
 
 
     });
@@ -212,10 +190,10 @@
                 url : "#springUrl('/word/addClien.do')",
                 data : params,
                 success : function(msg) {
+                    alert(msg);
                     $('#myModal').empty();
                     $('#myModal').modal('hide');
-                    alertMsg('success',msg);
-                    loadByFiltrate();
+                    getdetails();
                 },
                 error : function(msg) {
                     alert(msg)

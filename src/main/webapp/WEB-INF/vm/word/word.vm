@@ -1,11 +1,12 @@
 <style>
-li {
-	text-align: center;
-}
+/*li {*/
+
+/*}*/
 
 .test {
 	border: 1px red solid;
 }
+
 
 #nav {
 	width: 200px;
@@ -98,9 +99,7 @@ li {
 	}
 }
 </style>
-<!-- 引入 ECharts 文件 -->
-<script src="#springUrl('/js/echarts.min.js')"></script>
-<script src="#springUrl('/js/bootstrap-treeview.js')"></script>
+
 <div class="">
 	<span class="btn glyphicon glyphicon-option-horizontal" id="nav_btn"
 		style="color: white; z-index: 999" onclick="nav_control()"></span>

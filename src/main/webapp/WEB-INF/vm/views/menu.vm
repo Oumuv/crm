@@ -4,6 +4,12 @@
 <!-- 	<ul class="dropdown-menu"> -->
 <!-- 		<li role="presentation"><a href="#">权限管理</a></li> -->
 <!-- 	</ul></li> -->
+<style>
+     #navigation_ul li{
+        text-align: center;
+    }
+
+</style>
 <li role="presentation" class="active"><a href="#"></a></li>
 #foreach($m in $menulist)
 	#if(${m.menus})
