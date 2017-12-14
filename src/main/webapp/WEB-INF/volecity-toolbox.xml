@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <toolbox>  
-    <!-- velocity 自定义标签 -->  
+    <!-- velocity 自定义标签 -->
+    <!--前端使用shiro验证功能的标签-->
     <tool>  
         <key>shiro</key>  
         <scope>application</scope>  
         <class>com.oumuv.core.VelocityShiro</class>  
-    </tool>  
+    </tool>
+    <!--时间格式化工具用于前端显示时间-->
+    <!--使用方法：$!date.format('yyyy-MM-dd HH:mm:ss ',$!time)  $!time是后台传入的时间  -->
+    <tool>
+        <key>date</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.DateTool</class>
+    </tool>
 </toolbox>  

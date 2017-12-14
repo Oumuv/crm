@@ -90,7 +90,6 @@ public class ClienManageAction {
      * @throws IOException
      */
     @RequestMapping("word/addClien.do")
-
     public void addClien(ClienEntity clienEntity, HttpServletResponse response, HttpSession session) throws IOException {
         User user = (User) session.getAttribute("user");
         clienEntity.setUid(user.getId());
@@ -101,7 +100,40 @@ public class ClienManageAction {
         }else{
             response.getWriter().write("添加客户失败");
         }
+    }
 
+    /**
+     *修改客户信息
+     * @param clienEntity
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping("word/updataClien.do")
+    public void updataClien(ClienEntity clienEntity, HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("utf-8");
+        int i = clienService.updataClien(clienEntity);
+        if (i > 0) {
+            response.getWriter().write("修改成功");
+        }else{
+            response.getWriter().write("修改失败");
+        }
+    }
+
+    /**
+     * 删除
+     * @param id
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping("word/deleteClien.do")
+    public void deleteClien(Long id, HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("utf-8");
+        int i = clienService.deleteClienById(id);
+        if (i > 0) {
+            response.getWriter().write("删除成功");
+        }else{
+            response.getWriter().write("删除失败");
+        }
     }
 
 

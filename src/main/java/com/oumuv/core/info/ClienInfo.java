@@ -21,9 +21,7 @@ public class ClienInfo {
 
     private String status;
 
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-
-    private String createTime;
+    private Date createTime;
 
     private String customerType;
 
@@ -37,9 +35,7 @@ public class ClienInfo {
 
     private String scaleOfCompany;
 
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    private String returnvisitTime;
+    private Date returnvisitTime;
 
     private String remark;
 
@@ -101,12 +97,11 @@ public class ClienInfo {
         this.status = status;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -158,10 +153,9 @@ public class ClienInfo {
         this.scaleOfCompany = scaleOfCompany;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
-    public String getReturnvisitTime() { return returnvisitTime; }
+    public Date getReturnvisitTime() { return returnvisitTime; }
 
-    public void setReturnvisitTime(String returnvisitTime) {
+    public void setReturnvisitTime(Date returnvisitTime) {
         this.returnvisitTime = returnvisitTime;
     }
 

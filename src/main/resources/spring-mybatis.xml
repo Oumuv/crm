@@ -61,10 +61,10 @@
     </bean>  
   
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->  
-    <!--<bean id="transactionManager"  -->
-        <!--class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  -->
-        <!--<property name="dataSource" ref="dataSource" />  -->
-    <!--</bean>-->
+    <bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
 	<!-- 开启事务管理注解 -->
-  	<!--<tx:annotation-driven proxy-target-class="false" transaction-manager="transactionManager" />-->
+  	<tx:annotation-driven  transaction-manager="transactionManager" />
 </beans>  

@@ -23,6 +23,7 @@
                 <table class="table">
                     <tbody>
                     <tr>
+                        <input type="hidden" name="id" value="$!clien.id">
                         <td>客户名称</td>
                         <td><input type="input" name="name" id="name" value="$!clien.name"
                                    class="form-control" placeholder="NULL"></td>
@@ -52,7 +53,7 @@
                         <td>客户类型</td>
                         <td>
                             <div class="btn-group">
-                                <select id="customerType" class="selectpicker" name="customerType" data-live-search="true"></select>
+                                <select id="customerType" class="selectpicker selectpicker2" name="customerType" data-live-search="true"></select>
                             </div>
 ##                            <input type="input" name="customerType" id="customerType"
 ##                                   class="form-control" placeholder="NULL">
@@ -60,17 +61,15 @@
                         <td>客户来源</td>
                         <td>
                             <div class="btn-group">
-                                <select id="source" class="selectpicker" name="source" data-live-search="true"></select>
+                                <select id="source" class="selectpicker selectpicker2" name="source" data-live-search="true"></select>
                             </div>
-##                            <input type="input" name="source" id="source"
-##                                   class="form-control" placeholder="NULL">
                         </td>
                     </tr>
                     <tr>
                         <td>客户状态</td>
                         <td>
                             <div class="btn-group">
-                                <select id="status" class="selectpicker" name="status" data-live-search="true"></select>
+                                <select id="status" class="selectpicker selectpicker2" name="status" data-live-search="true"></select>
                             </div>
                         </td>
 
@@ -80,14 +79,17 @@
                         <td><input type="input" name="company" id="company" value="$!clien.company"
                                    class="form-control" placeholder="NULL"></td>
                         <td>公司规模</td>
-                        <td><input type="input" name="scaleOfCompany" id="scaleOfCompany" value="$!clien.name"
-                                   class="form-control" placeholder="NULL"></td>
+                        <td>
+                            <div class="btn-group">
+                                <select id="scaleOfCompany" class="selectpicker selectclass2" name="scaleOfCompany" data-live-search="false"></select>
+                            </div>
+                        </td>
                     </tr>
 
                     <tr>
                         <td>备注</td>
                         <td colspan="3">
-                            <textarea name="remark" id="remark" class="form-control" value="$!clien.remark"></textarea>
+                            <textarea name="remark" id="remark" class="form-control">$!clien.remark</textarea>
                         </td>
 
                     </tr>
@@ -109,6 +111,13 @@
         var status = $("#status");
         var customerType = $("#customerType");
         var source = $("#source");
+        var scaleOfCompany = $("#scaleOfCompany");
+        // 公司规模
+        scaleOfCompany.append("<option value=''>请选择</option>");
+        scaleOfCompany.append("<option value='10人以内' >10人以内</option>");
+        scaleOfCompany.append("<option value='10-20人' >10-20人</option>");
+        scaleOfCompany.append("<option value='50-200人' >50-200人</option>");
+        scaleOfCompany.append("<option value='200人以上' >200人以上</option>");
         // 客户状态
         status.append("<option value='潜在客户' >潜在客户</option>");
         status.append("<option value='意向客户' >意向客户</option>");
@@ -130,20 +139,15 @@
         source.append("<option value='公开招标' >公开招标</option>");
         source.append("<option value='其它' >其它</option>");
 
-        status.selectpicker({
-            noneSelectedText : '客户状态'//默认显示内容
-        });
-        customerType.selectpicker({
-            noneSelectedText : '客户类型'//默认显示内容
-        });
-        source.selectpicker({
-            noneSelectedText : '客户来源'//默认显示内容
-        });
-        $(".selectpicker").selectpicker({
+        status.selectpicker('val','$!clien.status');
+        customerType.selectpicker('val','$!clien.customerType');
+        source.selectpicker('val','$!clien.source');
+        scaleOfCompany.selectpicker('val','$!clien.scaleOfCompany');
+
+        $(".selectpicker2").selectpicker({
             width:"100%"
         });
-        $('.selectpicker').selectpicker('val');
-        $('.selectpicker').selectpicker('refresh');
+        $('.selectpicker2').selectpicker('refresh');
 
 
     });
@@ -181,22 +185,22 @@
     }
     $('#submit_btn').click(function() {
         if(!check()){
-            return flase;
+            return false;
         }
-        if (confirm("确认添加客户信息？")) {
+        if (confirm("确认修改客户信息？")) {
             var params = $("#form_table").serialize();
             $.ajax({
                 type : "POST",
-                url : "#springUrl('/word/addClien.do')",
+                url : "#springUrl('/word/updataClien.do')",
                 data : params,
                 success : function(msg) {
-                    alert(msg);
                     $('#myModal').empty();
                     $('#myModal').modal('hide');
-                    getdetails();
+                    alert(msg);
+                    loadByFiltrate();
                 },
                 error : function(msg) {
-                    alert(msg)
+                    alertMsg('error','修改失败');
                 }
             });
         }

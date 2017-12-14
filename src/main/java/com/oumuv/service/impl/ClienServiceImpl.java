@@ -25,11 +25,13 @@ public class ClienServiceImpl implements ClienService {
     }
 
     public int updataClien(ClienEntity clienentity) {
-        return 0;
+        int i = clienDao.updateByPrimaryKeySelective(clienentity);
+        return i;
     }
 
     public int deleteClienById(Long id) {
-        return 0;
+        int i = clienDao.deleteByPrimaryKey(id);
+        return i;
     }
 
     public ClienEntity findClienEntityById(Long id) {

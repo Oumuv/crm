@@ -80,20 +80,7 @@
                         <td>公司规模</td>
                         <td>
                             <div class="btn-group">
-                                <select id="scaleOfCompany" class="selectpicker " name="scaleOfCompany" data-live-search="false"></select>
-                                <script>
-                                    var scaleOfCompany = $("#scaleOfCompany");
-                                    scaleOfCompany.append("<option value=''>请选择</option>");
-                                    scaleOfCompany.append("<option value='10人以内' >10人以内</option>");
-                                    scaleOfCompany.append("<option value='10-20人' >10-20人</option>");
-                                    scaleOfCompany.append("<option value='50-200人' >50-200人</option>");
-                                    scaleOfCompany.append("<option value='200人以上' >200人以上</option>");
-                                    scaleOfCompany.selectpicker({
-                                        noneSelectedText : '公司规模'//默认显示内容
-                                    });
-                                    scaleOfCompany.selectpicker('val','');
-                                    scaleOfCompany.selectpicker('refresh')
-                                </script>
+                                <select id="scaleOfCompany" class="selectpicker selectclass2" name="scaleOfCompany" data-live-search="false"></select>
                             </div>
                         </td>
                     </tr>
@@ -123,6 +110,13 @@
         var status = $("#status");
         var customerType = $("#customerType");
         var source = $("#source");
+        var scaleOfCompany = $("#scaleOfCompany");
+
+        scaleOfCompany.append("<option value=''>请选择</option>");
+        scaleOfCompany.append("<option value='10人以内' >10人以内</option>");
+        scaleOfCompany.append("<option value='10-20人' >10-20人</option>");
+        scaleOfCompany.append("<option value='50-200人' >50-200人</option>");
+        scaleOfCompany.append("<option value='200人以上' >200人以上</option>");
 
         // 客户状态
         status.append("<option value=''>请选择</option>");
@@ -159,7 +153,9 @@
         source.selectpicker({
             noneSelectedText : '客户来源'//默认显示内容
         });
-
+        scaleOfCompany.selectpicker({
+            noneSelectedText : '公司规模'//默认显示内容
+        });
         $(".selectclass2").selectpicker({
             width:"100%"
         });
@@ -203,7 +199,7 @@
     }
     $('#submit_btn').click(function() {
         if(!check()){
-            return flase;
+            return false;
         }
         if (confirm("确认添加客户信息？")) {
             var params = $("#form_table").serialize();
@@ -218,7 +214,7 @@
                     loadByFiltrate();
                 },
                 error : function(msg) {
-                    alert(msg)
+                    alertMsg('error',msg);
                 }
             });
         }

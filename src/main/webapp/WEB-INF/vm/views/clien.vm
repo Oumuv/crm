@@ -5,12 +5,12 @@
     <td>#if($c.wechat)$c.wechat#else - #end</td>
     <td>#if($c.qq)$c.qq#else - #end</td>
     <td>#if($c.email)$c.email#else - #end</td>
-    <td>$!c.createTime</td>
+    <td>$!date.format('yyyy-MM-dd',$!c.createTime)</td>
     <td>$!c.customerType</td>
     <td>#if($c.company)$c.company#else - #end</td>
     <td>#if($c.scaleOfCompany)$c.scaleOfCompany#else - #end</td>
     <td>$!c.source</td>
-    <td>#if($c.returnvisitTime)$c.returnvisitTime#else - #end</td>
+    <td>#if($c.returnvisitTime)$!date.format('yyyy-MM-dd',$!c.returnvisitTime)#else - #end</td>
     <td>$!c.cuser.name</td>
     <td>#if($c.remark)$c.remark#else - #end</td>
     <td>$!c.status</td>
@@ -63,7 +63,15 @@
                       name: '删除',
                       iconClass: "fa-trash-o",
                       onClick: function (row) {
-                          // toastr.info("'Edit description' clicked on '" + row.name + "'");
+                          var cid = $(row).attr('cid');
+                          if (confirm("确定要删除此客户？")) {
+                              $.post("#springUrl('/word/deleteClien.do')", {
+                                  id : cid
+                              }, function(msg) {
+                                  alert(msg);
+                                  loadByFiltrate();
+                              });
+                          }
                       }
                   }
               }
