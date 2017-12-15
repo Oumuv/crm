@@ -1,11 +1,16 @@
 package com.oumuv.utils;
+
 import java.io.*;
 /**
  * Created by Kinglf on 2016/10/17.
  * 
- * 对象工具类
+ * 对象序列化工具类
  */
 public class ObjectUtil {
+
+
+
+
     /**
      * 对象转byte[]
      * @param obj

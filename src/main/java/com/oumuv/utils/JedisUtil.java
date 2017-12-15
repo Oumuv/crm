@@ -1,5 +1,6 @@
 package com.oumuv.utils;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -22,19 +23,19 @@ public class JedisUtil {
 	@Autowired
 	private JedisPool jedisPool;
 
-	@Test
-	public void setAndGetKey(String key, String value) {
-
+	/**
+	 * 根据key前缀批量删除数据<br>
+	 * <span style="color:red">注意！key只能是String类型，不能删除redis中的key是byte类型的数据</span>
+	 * @param str 前缀
+	 */
+	public void batchDel(String str){
 		Jedis jedis = jedisPool.getResource();
-		System.out.println("start set key");
-		jedis.set(key, value);
-		jedis.expire(key, 60);
-		System.out.println("start get key");
-		String string = jedis.get(key);
-		System.out.println("myname is " + string);
-		// 关闭连接
-		if (jedis != null) {
-			jedisPool.close();
+		Set<String> set = jedis.keys(str +"*");
+		Iterator<String> it = set.iterator();
+		while(it.hasNext()){
+			String keyStr = it.next();
+			System.out.println(keyStr+"被删除");
+			jedis.del(keyStr);
 		}
 	}
 

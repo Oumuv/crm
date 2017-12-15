@@ -44,14 +44,5 @@ public class ClienServiceImplTest {
         int i = 0;
     }
 
-    @Test
-    public void getClienEntityByFiltrate2() {
-        String name = "罗";
-        String source = null;
-        String customerType= null;
-        String status = null;
-        String offsest = "15";
-        List<ClienEntity> clienEntityByFiltrate2 = clienServiceImpl.getClienEntityByFiltrate2(name, source, customerType, status, "1", "15");
-        int i = 0;
-    }
+
 }

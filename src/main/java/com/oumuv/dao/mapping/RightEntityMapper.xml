@@ -118,10 +118,6 @@
   
 <!--   ************************************************************** -->
   <select id="getRightByUId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-<!--     select  -->
-<!--     <include refid="Base_Column_List" /> -->
-<!--     from right_info -->
-<!--     where right_code in(select rr.rf_right_code from role_right_info rr where rr.rf_role_id=#{rightCode,jdbcType=BIGINT}) -->
 			select r.*
 			from right_info r
 			INNER JOIN role_right_info rr ON rr.rf_right_code=r.right_code

@@ -1,15 +1,11 @@
 package com.oumuv.action;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.oumuv.core.info.MenuInfo;
+import com.oumuv.entity.RightEntity;
+import com.oumuv.entity.User;
+import com.oumuv.service.MenuService;
+import com.oumuv.utils.JedisUtil;
+import com.oumuv.utils.ObjectUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
@@ -22,24 +18,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.oumuv.core.info.MenuInfo;
-import com.oumuv.entity.RightEntity;
-import com.oumuv.entity.User;
-import com.oumuv.service.MenuService;
-import com.oumuv.utils.JedisUtil;
-import com.oumuv.utils.ObjectUtil;
-
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.*;
 
 @Controller
 public class MenuAction {
 
 	@Autowired
-	private MenuService menuservice;
+	private MenuService menuService;
 
 	@Autowired
 	private JedisUtil jedisUtil;
-	
-	
+
+
 	/**
 	 * 跳转菜单管理页面
 	 * @return
@@ -67,7 +60,7 @@ public class MenuAction {
 		bs = jedisUtil.get(keyBytes);
 
 		if(null==bs){
-			List<RightEntity> menu = menuservice.getMenuByUid(user.getId());
+			List<RightEntity> menu = menuService.getMenuByUid(user.getId());
 			List<MenuInfo> menuresult = new LinkedList<MenuInfo>();//最后的结果 
 			
 			//遍历一级菜单，一级菜单没有parentid
@@ -88,7 +81,7 @@ public class MenuAction {
 				}
 			}
 			map.put("menulist", menuresult);
-			jedisUtil.set(keyBytes, ObjectUtil.object2Bytes(menuresult), 60);//缓存到redis,缓存时间4分钟
+			jedisUtil.set(keyBytes, ObjectUtil.object2Bytes(menuresult), 5);//缓存到redis,缓存时间1分钟
 		}else{
 			List<MenuInfo> bytes2Object = (List<MenuInfo>) ObjectUtil.bytes2Object(bs);
 			map.put("menulist", bytes2Object);
@@ -128,7 +121,7 @@ public class MenuAction {
 	public void getmenujson(HttpServletResponse response){
 		String json = "";
 		response.setCharacterEncoding("utf-8");
-		List<RightEntity> menu = menuservice.getAllMenus();
+		List<RightEntity> menu = menuService.getAllMenus();
 		List<MenuInfo> menuresult = new LinkedList<MenuInfo>();//最后的结果 
 		
 		//遍历一级菜单，一级菜单没有parentid
@@ -212,14 +205,13 @@ public class MenuAction {
 	 */
 	@RequestMapping("/word/openEditPage.do")
 	public String editMenuTree(ModelMap map,@RequestParam(value="mid",required=true)Long mid){
-		RightEntity menu = menuservice.getMenu(mid);
+		RightEntity menu = menuService.getMenu(mid);
 		map.put("menu", menu);
 		map.put("title", menu.getRightText());
 		return "views/edit_menu";
 	}
 	/**
 	 * 修改菜单内容
-	 * @param map
 	 * @param rightEntity
 	 * @return
 	 * @throws IOException 
@@ -230,7 +222,7 @@ public class MenuAction {
 			response.setCharacterEncoding("utf-8");
 		
 			try {
-				menuservice.updataMenu(rightEntity);
+				menuService.updataMenu(rightEntity);
 				response.getWriter().write("修改成功");
 			} catch (Exception e) {
 				response.getWriter().write("修改失败");
@@ -251,7 +243,6 @@ public class MenuAction {
 	
 	/**
 	 * 添加菜单内容
-	 * @param map
 	 * @param rightEntity
 	 * @return
 	 * @throws IOException 
@@ -261,7 +252,7 @@ public class MenuAction {
 	public void addMenuTree(RightEntity rightEntity,HttpServletResponse response) throws IOException{
 			response.setCharacterEncoding("utf-8");
 			try {
-				menuservice.insertMenu(rightEntity);
+				menuService.insertMenu(rightEntity);
 				response.getWriter().write("新增成功");
 			} catch (Exception e) {
 				response.getWriter().write("新增失败");
@@ -278,7 +269,7 @@ public class MenuAction {
 	@RequestMapping(value="/word/getMenu.do",produces = "application/json;charset=utf-8",method={RequestMethod.POST,RequestMethod.GET} )
 	public String getMenubyLevel(int level,HttpServletResponse response){
 		response.setCharacterEncoding("utf-8");
-		List<RightEntity> list = menuservice.getMenuByLevel(level-1);
+		List<RightEntity> list = menuService.getMenuByLevel(level-1);
 		Map<Long, String> map = new HashMap<Long, String>();
  		for(RightEntity r:list){
 			map.put(r.getRightCode(), r.getRightText());
@@ -306,7 +297,7 @@ public class MenuAction {
 		for(int j = 0;j<split.length;j++){
 			idlist.add(Long.parseLong(split[j]));
 		}
-		i = menuservice.delMenuByLevel(idlist);
+		i = menuService.delMenuByLevel(idlist);
 		if(i==0){
 			msg="数据删除失败！请先删除子菜单再删除父菜单";
 		}else{

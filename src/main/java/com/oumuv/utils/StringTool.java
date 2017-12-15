@@ -7,9 +7,10 @@ public class StringTool {
 
 
 	/**
-	 * 字符串截取，指定位置截取到字符末尾
+	 * 字符串截取，指定位置截取到字符末尾<br>
+	 * 列如，123456a789截取从a位置到结尾，结果为:a789
 	 * @param regex 开始截取的位置的字符
-	 * @param str
+	 * @param str 被截取字符串
 	 */
 	public final static String subStringIndex2End(String regex,String str){
 		String substring = "";

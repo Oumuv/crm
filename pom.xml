@@ -115,6 +115,7 @@
             <artifactId>spring-data-redis</artifactId>
             <version>1.5.0.RELEASE</version>
         </dependency>
+
         <!-- ************************************************* -->
         <!-- JSTL标签类 -->
         <dependency>
@@ -138,6 +139,20 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.dyuproject.protostuff/protostuff-core -->
+        <!--protostuff序列化工具-->
+        <dependency>
+            <groupId>com.dyuproject.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>1.0.8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.dyuproject.protostuff/protostuff-runtime -->
+        <dependency>
+            <groupId>com.dyuproject.protostuff</groupId>
+            <artifactId>protostuff-runtime</artifactId>
+            <version>1.0.8</version>
         </dependency>
 
         <!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
@@ -168,12 +183,22 @@
             <artifactId>json</artifactId>
             <version>20160810</version>
         </dependency>
-
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.13</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.7.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.7.4</version>
+        </dependency>
+
         <!-- 上传组件包 -->
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -190,16 +215,7 @@
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.7.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.7.4</version>
-        </dependency>
+
         <!-- velocity -->
         <dependency>
             <groupId>org.apache.velocity</groupId>

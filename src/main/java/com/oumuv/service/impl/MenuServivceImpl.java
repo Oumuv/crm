@@ -3,6 +3,8 @@ package com.oumuv.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.oumuv.utils.JedisUtil;
+import com.oumuv.utils.ProtostuffUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,19 +19,47 @@ public class MenuServivceImpl implements MenuService{
 
 	@Autowired
 	private RightEntityMapper menuDao;
+
+	@Autowired
+	private JedisUtil jedisUtil;
+
+	private final String ALLMENUS = "ALLMENUS";//所有菜单的缓存 key
 	/**
 	 * 获取菜单
 	 * */
 	public List<RightEntity> getMenuByUid(Long id) {
-		List<RightEntity> rightByUId = menuDao.getRightByUId(id);
-		return rightByUId;
+		String key = "getMenuByUid:"+id;
+		byte[] bytes = jedisUtil.get(key.getBytes());
+		if (bytes != null) {
+			List<RightEntity> deserialize = ProtostuffUtil.deserializeList(bytes, RightEntity.class);
+			return deserialize;
+		}else{
+			List<RightEntity> rightByUId = menuDao.getRightByUId(id);
+			byte[] bytes1 = ProtostuffUtil.serializeList(rightByUId);
+			jedisUtil.set(key.getBytes(),bytes1,60*5);//缓存5分钟
+			return rightByUId;
+		}
 	}
 	public List<RightEntity> getAllMenus() {
-		List<RightEntity> list = menuDao.getAllRightEntity();
-		return list;
+		byte[] bytes = jedisUtil.get(ALLMENUS.getBytes());
+		if (bytes != null) {
+			List<RightEntity> deserialize = ProtostuffUtil.deserializeList(bytes, RightEntity.class);
+			return deserialize;
+		}else{
+			List<RightEntity> list = menuDao.getAllRightEntity();
+			byte[] bytes1 = ProtostuffUtil.serializeList(list);
+			jedisUtil.set(ALLMENUS.getBytes(),bytes1,60*5);//缓存5分钟
+			return list;
+		}
+
 	}
 	public void updataMenu(RightEntity rightEntity) {
-		menuDao.updateByPrimaryKeySelective(dispose(rightEntity));
+		try {
+			menuDao.updateByPrimaryKeySelective(dispose(rightEntity));
+			jedisUtil.del(ALLMENUS.getBytes());//清除ALLMENUS缓存
+		} catch (Exception e) {
+			throw new RuntimeException("更新菜单失败");
+		}
 	}
 	public RightEntity getMenu(Long id) {
 		RightEntity rightEntity = menuDao.selectByPrimaryKey(id);
