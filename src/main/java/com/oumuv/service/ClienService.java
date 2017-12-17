@@ -44,7 +44,10 @@ public interface ClienService {
      * @param pagesize
      * @return
      */
-    public List<ClienInfo> getClienEntityByFiltrate(String name, String source, String customerType, String status, String pagenum, String pagesize);
+    public List<ClienInfo> getClienEntityByFiltrate(String name, String source, String customerType, String status, Integer pagenum, Integer pagesize);
+
+
+    public int getClienEntityByFiltrateSize(String name, String source, String customerType, String status);
 
 
 }

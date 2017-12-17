@@ -154,35 +154,6 @@
 
 
 
-    function check(){
-        var name = $("#name").val();
-        var phone = $("#phone").val();
-        var customerType = $("#customerType").val();
-        var status = $("#status").val();
-        var source = $("#source").val();
-        if(name==""){
-            alert("请输入部门名")
-            return false;
-        }
-        if(phone==""){
-            alert("请输入联系电话")
-            return false;
-        }
-        if(customerType==""){
-            alert("请选择客户类型")
-            return false;
-        }
-        if(status==""){
-            alert("请选择客户状态")
-            return false;
-        }
-        if(source==""){
-            alert("请选择客户来源")
-            return false;
-        }
-        return true;
-
-    }
     $('#submit_btn').click(function() {
         if(!check()){
             return false;

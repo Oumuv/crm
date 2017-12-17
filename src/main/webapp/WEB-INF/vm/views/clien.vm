@@ -1,20 +1,23 @@
+#set($count=1+$count_index)
 #foreach($c in $cliens)
 <tr cid="$c.id" class="trlist">
+    <td>${count}</td>
     <td>$!c.name</td>
-    <td>#if($c.phone)$c.phone#else - #end</td>
-    <td>#if($c.wechat)$c.wechat#else - #end</td>
-    <td>#if($c.qq)$c.qq#else - #end</td>
-    <td>#if($c.email)$c.email#else - #end</td>
+    <td>#if($c.phone&&$c.phone!="")$c.phone#else - #end</td>
+    <td>#if($c.wechat&&$c.wechat!="")$c.wechat#else - #end</td>
+    <td>#if($c.qq&&$c.qq!="")$c.qq#else - #end</td>
+    <td>#if($c.email&&$c.email!="")$c.email#else - #end</td>
     <td>$!date.format('yyyy-MM-dd',$!c.createTime)</td>
     <td>$!c.customerType</td>
-    <td>#if($c.company)$c.company#else - #end</td>
-    <td>#if($c.scaleOfCompany)$c.scaleOfCompany#else - #end</td>
+    <td>#if($c.company&&$c.company!="")$c.company#else - #end</td>
+    <td>#if($c.scaleOfCompany&&$c.scaleOfCompany!="")$c.scaleOfCompany#else - #end</td>
     <td>$!c.source</td>
-    <td>#if($c.returnvisitTime)$!date.format('yyyy-MM-dd',$!c.returnvisitTime)#else - #end</td>
+    <td>#if($c.returnvisitTime&&$c.returnvisitTime!="")$!date.format('yyyy-MM-dd',$!c.returnvisitTime)#else - #end</td>
     <td>$!c.cuser.name</td>
-    <td>#if($c.remark)$c.remark#else - #end</td>
+    <td>#if($c.remark&&$c.remark!="")<span data-toggle="tooltip" title="$c.remark" data-placement="left">$c.remark</span>#else - #end</td>
     <td>$!c.status</td>
 </tr>
+    #set($count = $count+1)
 #end
 
 <script>
@@ -38,44 +41,44 @@
     // })
 
     $(function () {
-
-          var menu = new BootstrapMenu('.trlist', {
-              menuEvent: 'right-click',
-              actionsGroups: [
-                  ['editAction'],
-                  ['deleteAction']
-              ],
-              fetchElementData: function (e) {
-                  return e;
-              },
-              actions: {
-                  editAction: {
-                      name: '编辑',
-                      iconClass: "fa-edit",
-                      onClick: function (row) {
-                          var cid = $(row).attr('cid');
-                           $('#myModal').load("#springUrl('/word/updataclienManagePage.do')",{id:cid},function(){
-                               $('#myModal') .modal('show');
-                           })
-                      }
-                  },
-                  deleteAction: {
-                      name: '删除',
-                      iconClass: "fa-trash-o",
-                      onClick: function (row) {
-                          var cid = $(row).attr('cid');
-                          if (confirm("确定要删除此客户？")) {
-                              $.post("#springUrl('/word/deleteClien.do')", {
-                                  id : cid
-                              }, function(msg) {
-                                  alert(msg);
-                                  loadByFiltrate();
-                              });
-                          }
-                      }
-                  }
-              }
-          });
+        $("[data-toggle='tooltip']").tooltip();
+        var menu = new BootstrapMenu('.trlist', {
+            menuEvent: 'right-click',
+            actionsGroups: [
+                ['editAction'],
+                ['deleteAction']
+            ],
+            fetchElementData: function (e) {
+                return e;
+            },
+            actions: {
+                editAction: {
+                    name: '编辑',
+                    iconClass: "fa-edit",
+                    onClick: function (row) {
+                        var cid = $(row).attr('cid');
+                        $('#myModal').load("#springUrl('/word/updataclienManagePage.do')", {id: cid}, function () {
+                            $('#myModal').modal('show');
+                        })
+                    }
+                },
+                deleteAction: {
+                    name: '删除',
+                    iconClass: "fa-trash-o",
+                    onClick: function (row) {
+                        var cid = $(row).attr('cid');
+                        if (confirm("确定要删除此客户？")) {
+                            $.post("#springUrl('/word/deleteClien.do')", {
+                                id: cid
+                            }, function (msg) {
+                                alert(msg);
+                                loadByFiltrate();
+                            });
+                        }
+                    }
+                }
+            }
+        });
     })
 
 

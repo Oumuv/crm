@@ -9,6 +9,8 @@
        width: 100%;
    }
 </style>
+<link href="#springUrl('/css/bootstrapValidator.css')" rel="stylesheet">
+<script src="#springUrl('/js/bootstrapValidator.js')"></script>
 <div class="modal-dialog" style="z-index: 9999">
     <div class="modal-content">
         <div class="modal-header">
@@ -19,80 +21,125 @@
             </h4>
         </div>
         <div class="modal-body">
-            <form id="form_table" action="">
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td>客户名称</td>
-                        <td><input type="input" name="name" id="name"
-                                   class="form-control" placeholder="NULL"></td>
-                        <td>联系电话</td>
-                        <td><input type="input" name="phone" id="phone"
-                                   class="form-control" placeholder="NULL"></td>
-                    </tr>
-                    <tr>
-                        <td>微信</td>
-                        <td><input type="input" name="wechat" id="wechat"
-                                   class="form-control" placeholder="NULL"></td>
-                        <td>QQ</td>
-                        <td><input type="input" name="qq" id="qq"
-                                   class="form-control" placeholder="NULL"></td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td><input type="input" name="name" id=""
-                                   class="form-control" placeholder="NULL"></td>
-                        <td>地址</td>
-                        <td><input type="input" name="address" id="address"
-                                   class="form-control" placeholder="NULL"></td>
-
-
-                    </tr>
-                    <tr>
-                        <td>客户类型</td>
-                        <td>
-                            <div class="btn-group">
-                                <select id="customerType" class="selectpicker selectclass2" name="customerType" data-live-search="false"></select>
+            <form id="form_table" action="" class="validForm form-horizontal">
+                <table class="table row">
+                    <tr class="row">
+                        <td class="col-lg-6">
+                            <div class="form-group center-block">
+                                <label class="col-lg-4 control-label" style="padding-top:0px">客户名称</label>
+                                <div class="col-lg-8">
+                                    <input type="input" name="name" id="name"
+                                           class="form-control" placeholder="NULL">
+                                </div>
                             </div>
-
                         </td>
-                        <td>客户来源</td>
-                        <td>
-                            <div class="btn-group">
-                                <select id="source" class="selectpicker selectclass2" name="source" data-live-search="false"></select>
+                        <td class="col-lg-6">
+                            <div class="form-group center-block">
+                                <label class="col-lg-4 control-label" style="padding-top:0px">联系电话</label>
+                                <div class="col-lg-8 ">
+                                    <input type="input" name="phone" id="phone"
+                                            class="form-control" placeholder="NULL">
+                                </div>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>客户状态</td>
-                        <td>
-                            <div class="btn-group">
-                                <select id="status" class="selectpicker selectclass2" name="status" data-live-search="false"></select>
-                            </div>
-
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td>公司</td>
-                        <td><input type="input" name="company" id="company"
-                                   class="form-control" placeholder="NULL"></td>
-                        <td>公司规模</td>
-                        <td>
-                            <div class="btn-group">
-                                <select id="scaleOfCompany" class="selectpicker selectclass2" name="scaleOfCompany" data-live-search="false"></select>
+                    <tr class="row">
+                        <td class="col-lg-6">
+                            <div class="form-group center-block">
+                                <label class="col-lg-4 control-label" style="padding-top:0px">微信</label>
+                                <div class="col-lg-8">
+                                    <input type="input" name="wechat" id="wechat"
+                                           class="form-control" placeholder="NULL">
+                                </div>
                             </div>
                         </td>
-                    </tr>
-
-                    <tr>
-                        <td>备注</td>
-                        <td colspan="3">
-                            <textarea name="remark" id="remark" class="form-control" placeholder="NULL"></textarea>
+                        <td class="col-lg-6">
+                            <div class="form-group center-block">
+                                <label class="col-lg-4 control-label" style="padding-top:0px">QQ</label>
+                                <div class="col-lg-8 ">
+                                    <input type="input" name="qq" id="qq"
+                                           class="form-control" placeholder="NULL">
+                                </div>
+                            </div>
                         </td>
-
                     </tr>
-                    </tbody>
+                    <tr class="row">
+                        <td class="col-lg-6">
+                            <div class="form-group center-block">
+                                <label class="col-lg-4 control-label" style="padding-top:0px">Email</label>
+                                <div class="col-lg-8">
+                                    <input type="input" name="email" id="email"
+                                           class="form-control" placeholder="NULL">
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-lg-6">
+                            <div class="form-group center-block">
+                                <label class="col-lg-4 control-label" style="padding-top:0px">地址</label>
+                                <div class="col-lg-8 ">
+                                    <input type="input" name="address" id="address"
+                                           class="form-control" placeholder="NULL">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-lg-6">
+                            <div class="form-group center-block">
+                                <label class="col-lg-4 control-label" style="padding-top:0px">客户类型</label>
+                                <div class="col-lg-8">
+                                    <select id="customerType" class="selectpicker selectclass2" name="customerType" data-live-search="false"></select>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-lg-6">
+                            <div class="form-group center-block">
+                                <label class="col-lg-4 control-label" style="padding-top:0px">客户来源</label>
+                                <div class="col-lg-8 ">
+                                    <select id="source" class="selectpicker selectclass2" name="source" data-live-search="false"></select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-lg-6">
+                            <div class="form-group center-block">
+                                <label class="col-lg-4 control-label" style="padding-top:0px">客户状态</label>
+                                <div class="col-lg-8">
+                                    <select id="status" class="selectpicker selectclass2" name="status" data-live-search="false"></select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-lg-6">
+                            <div class="form-group center-block">
+                                <label class="col-lg-4 control-label" style="padding-top:0px">公司</label>
+                                <div class="col-lg-8">
+                                    <input type="input" name="company" id="company" class="form-control" placeholder="NULL">
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-lg-6">
+                            <div class="form-group center-block">
+                                <label class="col-lg-4 control-label" style="padding-top:0px">公司规模</label>
+                                <div class="col-lg-8 ">
+                                    <select id="scaleOfCompany" class="selectpicker selectclass2" name="scaleOfCompany" data-live-search="false"></select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="row">
+                        <td class="col-lg-6" colspan="2">
+                            <div class="form-group center-block">
+                                <label class="col-lg-2 control-label" style="padding-top:0px">备注</label>
+                                <div class="col-lg-10 ">
+                                    <textarea name="remark" id="remark" class="form-control" placeholder="NULL"></textarea>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
                 </table>
             </form>
         </div>
@@ -163,40 +210,38 @@
         $('.selectclass2').selectpicker('val','');
         $('.selectclass2').selectpicker('refresh');
 
-
+        $('.validForm').bootstrapValidator({
+            message: '不能为空',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                name: {
+                    validators: {
+                        notEmpty: {
+                            message: '请输入你的姓名'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        emailAddress: {
+                            message: '请输入有效的电子邮箱'
+                        },
+                        notEmpty: {
+                            message: '请输入有效的电子邮箱'
+                        }
+                    }
+                }
+            }
+        });
     });
 
 
 
-    function check(){
-        var name = $("#name").val();
-        var phone = $("#phone").val();
-        var customerType = $("#customerType").val();
-        var status = $("#status").val();
-        var source = $("#source").val();
-        if(name==""){
-            alert("请输入部门名")
-            return false;
-        }
-        if(phone==""){
-            alert("请输入联系电话")
-            return false;
-        }
-        if(customerType==""){
-            alert("请选择客户类型")
-            return false;
-        }
-        if(status==""){
-            alert("请选择客户状态")
-            return false;
-        }
-        if(source==""){
-            alert("请选择客户来源")
-            return false;
-        }
-        return true;
 
-    }
     $('#submit_btn').click(function() {
         if(!check()){
             return false;

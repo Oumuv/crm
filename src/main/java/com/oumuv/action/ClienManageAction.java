@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -73,14 +74,27 @@ public class ClienManageAction {
     @RequestMapping("word/getClienList.do")
     public String getClienList(@RequestParam(value = "name", required = false) String name,
                                @RequestParam(value = "customerType", required = false) String customerType,
-                               @RequestParam(value = "pagesize", required = false) String pagesize,
-                               @RequestParam(value = "pagenum", required = false) String pagenum,
+                               @RequestParam(value = "pagesize", required = false) Integer pagesize,
+                               @RequestParam(value = "pagenum", required = false) Integer pagenum,
                                @RequestParam(value = "source", required = false) String source,
                                @RequestParam(value = "status", required = false) String status,
                                ModelMap map) {
         List<ClienInfo> cliens =  clienService.getClienEntityByFiltrate(name,source,customerType,status,pagenum,pagesize);
         map.put("cliens", cliens);
+       int countIndex = pagesize * (pagenum - 1);
+        map.put("count_index", countIndex);
         return "views/clien";
+    }
+
+    @RequestMapping("word/resetpage.do")
+    @ResponseBody
+    public int resetPage(@RequestParam(value = "name", required = false) String name,
+                          @RequestParam(value = "customerType", required = false) String customerType,
+                          @RequestParam(value = "source", required = false) String source,
+                          @RequestParam(value = "status", required = false) String status,
+                          HttpServletResponse response) {
+        final int i = clienService.getClienEntityByFiltrateSize(name, source, customerType, status);
+        return i;
     }
 
     /**

@@ -254,15 +254,17 @@
     <if test="status != null">
       AND c.`status` IN (${status})
     </if>
+    ORDER BY c.id
+    LIMIT ${offset}, ${pagesize}
   </select>
 
 
-  <select id="getClienEntityByFiltrate2" resultMap="BaseResultMap">
+  <select id="getClienEntityByFiltrateSize" resultType="java.lang.Integer">
     SELECT
-    c.*
+    count(c.id)
     FROM clien_info c
     INNER JOIN user_info u ON c.uid=u.id
-    where c.`name` LIKE BINARY '%${inputname}%'
+    WHERE c.`name` LIKE BINARY '%${inputname}%'
     <if test="source != null">
       AND c.source IN (${source})
     </if>

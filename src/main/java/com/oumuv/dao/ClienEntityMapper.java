@@ -22,9 +22,7 @@ public interface ClienEntityMapper {
 
     List<ClienInfo> getClienEntityByFiltrate(@Param("inputname") String inputname,
                                              @Param("source") String source,@Param("constomerType") String constomerType,
-                                             @Param("status")String status, @Param("offset")String offset,@Param("pagenum") String pagenum);
+                                             @Param("status")String status, @Param("offset")Integer offset,@Param("pagesize") Integer pagesize);
 
-    List<ClienEntity> getClienEntityByFiltrate2(@Param("inputname") String inputname,
-                                             @Param("source") String source,@Param("constomerType") String constomerType,
-                                             @Param("status")String status, @Param("offset")String offset,@Param("pagenum") String pagenum);
+    int getClienEntityByFiltrateSize(@Param("inputname") String inputname, @Param("source") String source,@Param("constomerType") String constomerType, @Param("status")String status);
 }
