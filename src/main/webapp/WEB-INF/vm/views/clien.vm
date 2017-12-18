@@ -1,7 +1,7 @@
 #set($count=1+$count_index)
 #foreach($c in $cliens)
 <tr cid="$c.id" class="trlist">
-    <td>${count}</td>
+    <td style="min-width: 30px">${count}</td>
     <td>$!c.name</td>
     <td>#if($c.phone&&$c.phone!="")$c.phone#else - #end</td>
     <td>#if($c.wechat&&$c.wechat!="")$c.wechat#else - #end</td>

@@ -212,6 +212,7 @@
 
         $('.validForm').bootstrapValidator({
             message: '不能为空',
+            submitButtons: '#submit_btn',
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
                 invalid: 'glyphicon glyphicon-remove',
@@ -225,6 +226,22 @@
                         }
                     }
                 },
+                phone: {
+                    validators: {
+                        notEmpty: {
+                            message: '请输入手机号'
+                        },
+                        stringLength: {
+                            min: 11,
+                            max: 11,
+                            message: '请输入11位的手机号码'
+                        },
+                        digits: {
+                            message: '错误字符'
+                        }
+                    }
+                },
+
                 email: {
                     validators: {
                         emailAddress: {
