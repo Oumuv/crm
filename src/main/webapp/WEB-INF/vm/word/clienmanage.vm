@@ -16,6 +16,10 @@
     }
 
 </style>
+
+<link rel="stylesheet" href="#springUrl('/css/jquery.page.css')">#*分页css*#
+
+<script src="#springUrl('/js/jquery.page.js')"></script>#*分页js*#
 <form id="panel_form" >
 <div class="bg_shadow"
      style="width: 100%; height: 100%; border-radius: 8px 8px 8px 8px; padding: 10px 10px 10px 10px;">
@@ -122,7 +126,7 @@
     ##   跳转页
         <input type="hidden" id="pagenum" name="pagenum" value="1">
     ##   页面大小
-        <select type="hidden" id="pagesize" name="pagesize" style="position: absolute;top: 50%;transform: translateY(-50%);">
+        <select type="hidden" id="pagesize" name="pagesize" style="position: absolute;top: 50%;transform: translateY(-50%);float:left;left:10px;">
             <option value="2"  selected>2</option>
             <option value="10"  >10</option>
             <option value="15">15</option>
@@ -130,10 +134,13 @@
             <option value="30">30</option>
         </select>
     ##   分页标题
-        <span id="page_text" style="position: absolute;top: 50%;transform: translateY(-50%);margin-left: 50px;"></span>
+        <span id="page_text" style="position: absolute;top: 50%;transform: translateY(-50%);margin-left: 50px;float:left;left:10px;"></span>
     ##   分页导航
-        <ul id="page_sorter" class="pagination pagination-sm" style="position: absolute;float: right;height: 30px;margin: auto 1px;top: 50%;right: 10px;transform: translateY(-50%);">
-        </ul>
+        <div id="page_sorter" style="position: absolute;float: right;height: 30px;margin: auto 1px;top: 50%;right: 10px;transform: translateY(-50%);">
+
+        </div>
+       #* <ul id="page_sorter" class="pagination pagination-sm" style="position: absolute;float: right;height: 30px;margin: auto 1px;top: 50%;right: 10px;transform: translateY(-50%);">
+        </ul>*#
     </div>
 </div>
 </form>
@@ -174,26 +181,17 @@
         })
 
         //分页跳转
-        $('#page_sorter').on('click','.pageindex',function() {
-            $('.pageindex').removeClass('active');
-            $(this).addClass('active');
-            var num = $(this).find('a').html();
-            var index = $('.pageindex').index(this);
-            console.log(index)
-            loadByFiltrateOnPageNum(num);
-        })
+        // $('#page_sorter').on('click','.pageindex',function() {
+        //     $('.pageindex').removeClass('active');
+        //     $(this).addClass('active');
+        //     var num = $(this).find('a').html();
+        //     var index = $('.pageindex').index(this);
+        //     console.log(index)
+        //     loadByFiltrateOnPageNum(num);//跳转请求
+        // })
 
         alertMsg('info',"小贴士：鼠标右键可以进行编辑、删除操作哦",5000);
     })
-
-    //页面控件的效果控制
-    function pageController(index){
-        if(index<3) {
-
-        }else if(index>=3&&index<=$('.pageindex').length-1) {
-
-        }
-    }
 
     //页数跳转
     function loadByFiltrateOnPageNum(pagenum){
@@ -224,30 +222,15 @@
                 var pagenum = $('#pagenum').val();;//当前页
                 var pagecount =  Math.ceil(data/pagesize);//总页数
                 $('#page_text').html("显示第1页记录，共"+pagecount+"页，"+data+"条数据")
-                var html = "";
-                // html += "<li class='toPrevious'><a>上一页</a></li>"
-                for(var i=pagenum;i<=pagecount;i++){
-                    // html += "<li class='pageindex'><a>" + i + "</a></li>";
-                    if (i == 1) {
-                        html += "<li class='toPrevious'><a>上一页</a></li>"
-                        html += "<li class='pageindex First active'><a>" + i + "</a></li>"
-                        html += "<li class='disabled First hidden'><a>..</a></li>"
-                    } else if (i > 1 && i < pagecount) {
-                        if(i<=5){
-                            html += "<li class='pageindex'><a>" + i + "</a></li>"
-                        }else if(i>5){
-                            html += "<li class='pageindex hidden'><a>" + i + "</a></li>"
-                        }
-                    } else if (i = pagecount) {
-                        if(pagecount>7) {
-                            html += "<li class='disabled Last'><a>..</a></li>"
-                        }
-                        html += "<li class='pageindex '><a>" + i + "</a></li>"
-                        html += "<li class='toNext'><a>下一页</a></li>"
+                $("#page_sorter").Page({
+                    totalPages: pagecount,//分页总数
+                    liNums: 7,//分页的数字按钮数(建议取奇数)
+                    activeClass: 'activP', //active 类样式定义
+                    callBack : function(page){
+                        console.log(page)
+                        loadByFiltrateOnPageNum(page)
                     }
-                }
-                // html += "<li class='toNext'><a>下一页</a></li>"
-                $('#page_sorter').html(html);
+                });
             }
         });
     }
