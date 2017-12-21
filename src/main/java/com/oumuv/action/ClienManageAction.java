@@ -4,13 +4,16 @@ import com.oumuv.core.info.ClienInfo;
 import com.oumuv.entity.ClienEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.ClienService;
+import com.sun.xml.internal.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -150,5 +153,18 @@ public class ClienManageAction {
         }
     }
 
+    @RequestMapping("word/importPage.do")
+    public String importpage(){
+        return "views/importexcel";
+    }
+
+    @RequestMapping("word/importClienExcel.do")
+    @ResponseBody
+    public void imporClienExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam("upload_file") MultipartFile upload_file){
+        response.setCharacterEncoding("utf-8");
+        String filename = upload_file.getOriginalFilename();
+        //TODO
+
+    }
 
 }

@@ -1,23 +1,14 @@
 package com.oumuv.action;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Timer;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.google.gson.Gson;
+import com.oumuv.core.DeleteFileTimerTask;
+import com.oumuv.core.info.Result;
+import com.oumuv.core.info.UserInfo;
+import com.oumuv.entity.LoginRecordEntity;
+import com.oumuv.entity.User;
+import com.oumuv.service.LoginRecordService;
+import com.oumuv.service.UserService;
+import com.oumuv.utils.*;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -25,6 +16,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -34,21 +26,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
-import com.oumuv.core.DeleteFileTimerTask;
-import com.oumuv.core.info.Result;
-import com.oumuv.core.info.UserInfo;
-import com.oumuv.entity.LoginRecordEntity;
-import com.oumuv.entity.User;
-import com.oumuv.service.LoginRecordService;
-import com.oumuv.service.UserService;
-import com.oumuv.utils.AccessSiteUtil;
-import com.oumuv.utils.DateUtils;
-import com.oumuv.utils.JedisUtil;
-import com.oumuv.utils.MD5Util;
-import com.oumuv.utils.MyCopyUtil;
-import com.oumuv.utils.StringTool;
-import com.oumuv.utils.ThumbnailatorUtils;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author Administrator user控制层
@@ -138,7 +125,7 @@ public class UserAction {
 	public void editImg2(HttpServletRequest request, HttpSession session,
 			HttpServletResponse response,@RequestParam("avatar_file")MultipartFile file, String avatar_src,String avatar_data) throws IOException {
 		response.setCharacterEncoding("utf-8");
-		 // 判断文件是否为空  
+		 // 判断文件是否为空
 		System.out.println("=============================开始上传图片=============================");
 		String type = file.getContentType();
 		System.out.println("文件类型："+type);
@@ -150,32 +137,33 @@ public class UserAction {
 		String _dy = dy.format(today);//年
 		String _dm = dm.format(today);//月日
 		Gson gson=new Gson();
-        if (!file.isEmpty()) {  
-            try {  
-                // 文件保存路径  
-                String path = request.getSession().getServletContext().getRealPath("/") + "/upload/" +_dy+"/"+_dm+"/";
-                System.out.println("文件名："+file.getOriginalFilename());
-                mkDirectory(path);//创建文件夹路径
-                String fileSuffixes = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."),file.getOriginalFilename().length());
-                File file2 = new File(path,date+fileSuffixes);
-                String filePath = file2.getPath();
-                System.out.println("文件保存路径:"+filePath);
-                file.transferTo(file2);// 转存文件  
-                JSONObject object =gson.fromJson(avatar_data, JSONObject.class);
-                double x = (Double)object.get("x");
-                double y = (Double) object.get("y");
-                double rotate = (Double) object.get("rotate");
-                double width = (Double) object.get("width");
-                double height = (Double) object.get("height");
-                ThumbnailatorUtils.ImgSourceRegion(filePath,filePath,(int)x,(int)y,(int)width,(int)height,170/*固定宽度*/,170/*固定长度*/,true);
-                System.out.println("=============================结束上传图片=============================");
-                response.getWriter().write(gson.toJson(new Result(file.getOriginalFilename()+"上传成功",null,200)));
-                User user = (User) session.getAttribute("user");
-                String imgpath = StringTool.subStringIndex2End("/upload", filePath.replace("\\", "/"));
-                String oldimg =request.getSession().getServletContext().getRealPath("/") + user.getHimg();
-                new Timer().schedule(new DeleteFileTimerTask(new File(oldimg)), 5000);//延迟删除旧的图片,5秒后
-                user.setHimg(imgpath);
-                userService.savePersonInfo(user);
+        if (!file.isEmpty()) {
+			try {
+				// 文件保存路径
+				String path = request.getSession().getServletContext().getRealPath("/") + "/upload/" + _dy + "/" + _dm + "/";
+				System.out.println("文件名：" + file.getOriginalFilename());
+				mkDirectory(path);//创建文件夹路径
+				//	文件后缀
+				String fileSuffixes = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."), file.getOriginalFilename().length());
+				File file2 = new File(path, date + fileSuffixes);
+				String filePath = file2.getPath();
+				System.out.println("文件保存路径:" + filePath);
+				file.transferTo(file2);// 转存文件
+				JSONObject object = gson.fromJson(avatar_data, JSONObject.class);
+				double x = (Double) object.get("x");
+				double y = (Double) object.get("y");
+				double rotate = (Double) object.get("rotate");
+				double width = (Double) object.get("width");
+				double height = (Double) object.get("height");
+				ThumbnailatorUtils.ImgSourceRegion(filePath, filePath, (int) x, (int) y, (int) width, (int) height, 170/*固定宽度*/, 170/*固定长度*/, true);
+				System.out.println("=============================结束上传图片=============================");
+				response.getWriter().write(gson.toJson(new Result(file.getOriginalFilename() + "上传成功", null, 200)));
+				User user = (User) session.getAttribute("user");
+				String imgpath = StringTool.subStringIndex2End("/upload", filePath.replace("\\", "/"));
+				String oldimg = request.getSession().getServletContext().getRealPath("/") + user.getHimg();
+				new Timer().schedule(new DeleteFileTimerTask(new File(oldimg)), 5000);//延迟删除旧的图片,5秒后
+				user.setHimg(imgpath);
+				userService.savePersonInfo(user);
                 
             } catch (Exception e) {  
             	response.getWriter().write(gson.toJson(new Result(file.getOriginalFilename()+"上传失败",e.getMessage(),500)));
@@ -310,9 +298,7 @@ public class UserAction {
 	/**
 	 * 获取当前用户近30天的登录记录图标数据
 	 * 
-	 * @param uid
-	 *            用户id
-	 * @throws Exception 
+	 * @throws Exception
 	 * */
 	@RequestMapping("/getloginrecords")
 	public void getloginRecoredForMonth(HttpSession session,HttpServletRequest request, HttpServletResponse response) throws Exception {

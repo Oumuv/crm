@@ -1,5 +1,4 @@
-
-<style>
+<style xmlns="http://java.sun.com/jsf/html">
     .bg_shadow td{
         word-break:keep-all;/* 不换行 */
         white-space:nowrap;/* 不换行 */
@@ -92,7 +91,10 @@
         <div class="btn btn-success" id="add_btn" onclick="add()">添加</div>
         <!-- 		<div class="btn btn-danger" id="del_btn" onclick="del()">删除</div> -->
     </div>
-    <h3>客户列表</h3><hr>
+    <h3>客户列表
+        <span class="pull-right btn glyphicon glyphicon-download-alt" style="font-size: 15px;" data-toggle='tooltip' title="下载"></span>
+        <span class="pull-right btn glyphicon glyphicon-upload" onclick="imports()" style="font-size: 18px;" data-toggle='tooltip' title="上传"></span>
+    </h3><hr>
     <div style="overflow:auto;">
 
 
@@ -279,5 +281,9 @@
     //添加
     function add() {
          $('#myModal').load("#springUrl('/word/addclienManagePage.do')").modal('show');
+    }
+
+    function imports(){
+        $('#myModal').load("#springUrl('/word/importPage.do')").modal('show');
     }
 </script>

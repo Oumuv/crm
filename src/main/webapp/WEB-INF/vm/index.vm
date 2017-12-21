@@ -26,6 +26,7 @@
     <script src="#springUrl('/js/BootstrapMenu.min.js')"></script>
     <script src="#springUrl('/js/jquery-labelauty.js')"></script>
     <script src="#springUrl('/js/bootstrap-select.min.js')"></script>
+    <script src="#springUrl('/js/jquery.form.min.js')"></script>
 
 
 <style>
