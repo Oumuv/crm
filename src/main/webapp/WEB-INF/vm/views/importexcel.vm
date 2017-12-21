@@ -1,0 +1,53 @@
+<form id="upload_form" action="#springUrl('/word/importClienExcel.do')" enctype="multipart/form-data" method="post">
+    <input type="file" name="file" class="pull-right btn glyphicon glyphicon-upload" style="font-size: 18px;" data-toggle='tooltip' title="上传"></input>
+</form>
+
+<style>
+    #form_table td {
+        text-align: center;
+        line-height: 2.5;
+        vertical-align: top;
+    }
+</style>
+<link href="#springUrl('/css/bootstrap-select.min.css')"
+      rel="stylesheet">
+<link href="#springUrl('/css/bootstrapValidator.css')" rel="stylesheet">
+<script src="#springUrl('/js/bootstrap-select.min.js')"></script>
+<div class="modal-dialog" style="z-index: 9999">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">
+                客户信息 | 上传
+            </h4>
+        </div>
+        <div class="modal-body">
+            <form id="form_table" action="" enctype="multipart/form-data" method="post">
+                <input type="file" name="upload_file" class="btn" style="font-size: 18px;" data-toggle='tooltip' title="上传"></input>
+            </form>
+            <a class="pull-right" style="font-size: 10px;">点击下载模板</a>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+            </button>
+            <button type="button" class="btn btn-primary" id="submit_btn">提交更改</button>
+        </div>
+    </div>
+</div>
+<script>
+
+    $('#submit_btn').click(function() {
+        var form = $("#form_table");
+        var options  = {
+            url:"#springUrl('/word/importClienExcel.do')",
+            type:'post',
+            success:function(data)
+            {
+                alert("TODO")
+
+            }
+        };
+        form.ajaxSubmit(options);
+    })
+</script>
