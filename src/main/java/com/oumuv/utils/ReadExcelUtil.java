@@ -159,7 +159,6 @@ public class ReadExcelUtil {
      *
      * @Title: writeExcel
      * @Date : 2016-7-27 下午01:50:38
-     * @param xlsPath
      * @throws IOException
      */
     public List<Row> readExcel() throws IOException{
@@ -363,7 +362,6 @@ public class ReadExcelUtil {
      * @Title: writeExcel_xlsx
      * @Date : 2016-7-27 下午01:50:38
      * @param rowList
-     * @param xlsPath
      * @throws IOException
      */
     public void writeExcel_xlsx(List<Row> rowList, String src_xlsPath, String dist_xlsPath) throws IOException {
@@ -735,8 +733,6 @@ public class ReadExcelUtil {
      * 获取合并单元格的值
      *
      * @param sheet
-     * @param row
-     * @param column
      * @return
      */
     public void setMergedRegion(Sheet sheet) {
@@ -767,7 +763,6 @@ public class ReadExcelUtil {
     /**
      * 打印消息，
      * @param msg 消息内容
-     * @param tr 换行
      */
     private void out(String msg){
         if(printMsg){

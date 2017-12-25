@@ -4,7 +4,14 @@ import com.oumuv.core.info.ClienInfo;
 import com.oumuv.entity.ClienEntity;
 import com.oumuv.entity.User;
 import com.oumuv.service.ClienService;
-import com.sun.xml.internal.bind.v2.TODO;
+import com.oumuv.utils.ExcelHelper;
+import com.oumuv.utils.ReadExcelUtil;
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,7 +23,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -160,11 +170,18 @@ public class ClienManageAction {
 
     @RequestMapping("word/importClienExcel.do")
     @ResponseBody
-    public void imporClienExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam("upload_file") MultipartFile upload_file){
+    public void imporClienExcel(HttpServletRequest request, HttpServletResponse response, @RequestParam("upload_file") MultipartFile upload_file) throws IOException {
         response.setCharacterEncoding("utf-8");
-        String filename = upload_file.getOriginalFilename();
-        //TODO
-
+        if (!upload_file.isEmpty()) {
+            String originalFilename = upload_file.getOriginalFilename();
+            InputStream inputStream = upload_file.getInputStream();
+            List<String[]> strings = ExcelHelper.exportListFromExcel(inputStream,originalFilename , 0, 1, 11 );
+            for (String[] s : strings) {
+                String s1 = s[0];
+            }
+        } else {
+            System.out.println("无上传文件");
+        }
     }
 
 }
