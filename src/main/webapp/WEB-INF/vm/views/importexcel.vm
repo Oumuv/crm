@@ -1,6 +1,4 @@
-<form id="upload_form" action="#springUrl('/word/importClienExcel.do')" enctype="multipart/form-data" method="post">
-    <input type="file" name="file" class="pull-right btn glyphicon glyphicon-upload" style="font-size: 18px;" data-toggle='tooltip' title="上传"></input>
-</form>
+
 
 <style>
     #form_table td {
