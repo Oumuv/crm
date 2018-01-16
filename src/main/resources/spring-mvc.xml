@@ -64,6 +64,7 @@
         <property name="exposeRequestAttributes" value="false"/>
         <property name="exposeSessionAttributes" value="false"/>
         <property name="exposeSpringMacroHelpers" value="true"/>
+        <!--配置velocity工具箱-->
         <property name="toolboxConfigLocation" value="/WEB-INF/volecity-toolbox.xml"/>
     </bean>
 
