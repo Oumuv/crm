@@ -40,7 +40,7 @@
 	})
 	
 	function returnpage(link,li){
-		loadingPage();
+		// loadingPage();
 		var menuText = li.innerHTML;
 		if($(li).closest("ul").hasClass("dropdown-menu")){
 			var menuText = $(li).closest("ul").prev().text()+'>>'+menuText;

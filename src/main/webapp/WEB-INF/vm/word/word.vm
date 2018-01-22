@@ -126,7 +126,7 @@
 	</div>
 	<!-- word space -->
 	<div class="word_div" style="">
-		#parse("./word/clienmanage.vm")
+		#parse("./word/announcement.vm")
 	</div>
 
 

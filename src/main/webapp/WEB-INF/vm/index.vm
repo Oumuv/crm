@@ -145,6 +145,8 @@ body {
 
 			<!-- 工具按钮 -->
 			<div class="btn-uitl " style="float: right; z-index: 99">
+                <a class="btn  glyphicon glyphicon-user" aria-hidden="true"><span
+                        class="text-nav"> 你好！${user.name}</span></a>
 				<a class="btn  glyphicon glyphicon-cog" aria-hidden="true"><span
 					class="text-nav">设置</span></a> <a
 					class="btn  glyphicon glyphicon-log-out" aria-hidden="true"
@@ -197,7 +199,7 @@ body {
 <script type="text/javascript">
 	/*点击主导航栏切换页面 */
 	$(".navlist").click(function() {
-		loadingPage();
+		// loadingPage();
 		$(".navlist").removeClass("active");
 		$(this).addClass("active");
 		$("#title_nav").html($(this).find("span").html());

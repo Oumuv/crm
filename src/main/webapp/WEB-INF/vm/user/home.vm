@@ -1,5 +1,5 @@
 <script>
-	loadingPage();
+	// loadingPage();
 </script>
 <script src="#springUrl('/js/echarts.min.js')"></script>
 <style>
