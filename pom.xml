@@ -270,7 +270,7 @@
         </dependency>
 
         <!--开源poi项目：https://gitee.com/lemur/easypoi-->
-        <dependency>
+       <dependency>
             <groupId>cn.afterturn</groupId>
             <artifactId>easypoi-base</artifactId>
             <version>3.0.3</version>
