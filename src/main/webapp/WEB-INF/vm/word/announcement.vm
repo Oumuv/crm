@@ -1,3 +1,6 @@
+##公告管理
+
+
 <div class="bg_shadow"
      style="width: 100%; height: 100%; border-radius: 8px 8px 8px 8px; padding: 10px 10px 10px 10px;">
     <!-- 筛选 -->
@@ -20,17 +23,87 @@
         <h3>公告列表</h3>
         <hr/>
         <div>
-            <div style="position: relative;width: 100%; margin: 0px; height: 130px; border-radius: 8px 8px 8px 8px; border: 1px #dedede solid; padding: 5px 1px 1px 5px;" class="row">
+            <div style="position: relative;width: 100%; margin: 0px; height: 130px; border-radius: 8px 8px 8px 8px; border: 1px #dedede solid; padding: 5px 1px 1px 5px;"
+                 class="row col-lg-12 col-sm-12 col-md-12 col-xs-12">
                 <a href="#" class="thumbnail col-lg-4 col-sm-4 col-md-4 col-xs-4" style="width: 120px;height: 120px;">
-                    <img src="#springUrl('/images/headM.png')" alt="图标丢失">
+                    <img src="#springUrl('/images/gonggao.png')" alt="图标丢失">
                 </a>
                 <div style="margin: 5px" class="col-lg-8 col-sm-8 col-md-8 col-xs-8">
-                    <a href="#" style="font-size: 18px; font-weight: 600;">游泳健身了解一下！办卡之后，你为什么不去健身房了？夜间健身越来越受到市民的青睐</a> &nbsp; &nbsp;
+                    <a href="#" style="font-size: 18px; font-weight: 600;">游泳健身了解一下！办卡之后，你为什么不去健身房了？夜间健身越来越受到市民的青睐</a>
+                    &nbsp; &nbsp;
                     <p>“游泳、健身，了解一下。”不知何时起，在街边路口你总能听到这样的声音。其背后除了近年来无数健身房如雨后春笋一般涌现出来以外，更映射出如今全民健身热潮的兴起。</p>
                 </div>
                 <div style="position: absolute;right: 10px;height: 100%;width: 100px;" class="pull-left">
-                    <span style="position: absolute; right: 10px; bottom: 10px;color: #807c7c;" class="">2017-18.28</span>
+                    <span style="position: absolute; right: 10px; bottom: 10px;color: #807c7c;"
+                          class="">2017-18.28</span>
                     <span style="position: absolute; right: 10px;" class="glyphicon glyphicon-flag" title="置顶" class="">TOP</span>
+                    <span style="position: absolute;top: 50%;right: 10px;transform: translateY(-50%);">
+                    <a>编辑</a>
+                    <a>删除</a>
+                    </span>
+
+                </div>
+            </div>
+            <div style="position: relative;width: 100%; margin: 0px; height: 130px; border-radius: 8px 8px 8px 8px; border: 1px #dedede solid; padding: 5px 1px 1px 5px;"
+                 class="row col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                <a href="#" class="thumbnail col-lg-4 col-sm-4 col-md-4 col-xs-4" style="width: 120px;height: 120px;">
+                    <img src="#springUrl('/images/gonggao.png')" alt="图标丢失">
+                </a>
+                <div style="margin: 5px" class="col-lg-8 col-sm-8 col-md-8 col-xs-8">
+                    <a href="#" style="font-size: 18px; font-weight: 600;">游泳健身了解一下！办卡之后，你为什么不去健身房了？夜间健身越来越受到市民的青睐</a>
+                    &nbsp; &nbsp;
+                    <p>“游泳、健身，了解一下。”不知何时起，在街边路口你总能听到这样的声音。其背后除了近年来无数健身房如雨后春笋一般涌现出来以外，更映射出如今全民健身热潮的兴起。</p>
+                </div>
+                <div style="position: absolute;right: 10px;height: 100%;width: 100px;" class="pull-left">
+                    <span style="position: absolute; right: 10px; bottom: 10px;color: #807c7c;"
+                          class="">2017-18.28</span>
+                    <span style="position: absolute; right: 10px;" class="glyphicon glyphicon-flag" title="置顶" class="">TOP</span>
+                    <span style="position: absolute;top: 50%;right: 10px;transform: translateY(-50%);">
+                    <a>编辑</a>
+                    <a>删除</a>
+                    </span>
+
+                </div>
+            </div><div style="position: relative;width: 100%; margin: 0px; height: 130px; border-radius: 8px 8px 8px 8px; border: 1px #dedede solid; padding: 5px 1px 1px 5px;"
+                 class="row col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                <a href="#" class="thumbnail col-lg-4 col-sm-4 col-md-4 col-xs-4" style="width: 120px;height: 120px;">
+                    <img src="#springUrl('/images/gonggao.png')" alt="图标丢失">
+                </a>
+                <div style="margin: 5px" class="col-lg-8 col-sm-8 col-md-8 col-xs-8">
+                    <a href="#" style="font-size: 18px; font-weight: 600;">游泳健身了解一下！办卡之后，你为什么不去健身房了？夜间健身越来越受到市民的青睐</a>
+                    &nbsp; &nbsp;
+                    <p>“游泳、健身，了解一下。”不知何时起，在街边路口你总能听到这样的声音。其背后除了近年来无数健身房如雨后春笋一般涌现出来以外，更映射出如今全民健身热潮的兴起。</p>
+                </div>
+                <div style="position: absolute;right: 10px;height: 100%;width: 100px;" class="pull-left">
+                    <span style="position: absolute; right: 10px; bottom: 10px;color: #807c7c;"
+                          class="">2017-18.28</span>
+                    <span style="position: absolute; right: 10px;" class="glyphicon glyphicon-flag" title="置顶" class="">TOP</span>
+                    <span style="position: absolute;top: 50%;right: 10px;transform: translateY(-50%);">
+                    <a>编辑</a>
+                    <a>删除</a>
+                    </span>
+
+                </div>
+            </div>
+            <div style="position: relative;width: 100%; margin: 0px; height: 130px; border-radius: 8px 8px 8px 8px; border: 1px #dedede solid; padding: 5px 1px 1px 5px;"
+                 class="row col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                <a href="#" class="thumbnail col-lg-4 col-sm-4 col-md-4 col-xs-4" style="width: 120px;height: 120px;">
+                    <img src="#springUrl('/images/gonggao.png')" alt="图标丢失">
+                </a>
+                <div style="margin: 5px" class="col-lg-8 col-sm-8 col-md-8 col-xs-8">
+                    <a href="#" style="font-size: 18px; font-weight: 600;">游泳健身了解一下！办卡之后，你为什么不去健身房了？夜间健身越来越受到市民的青睐</a>
+                    &nbsp; &nbsp;
+                    <p>“游泳、健身，了解一下。”不知何时起，在街边路口你总能听到这样的声音。其背后除了近年来无数健身房如雨后春笋一般涌现出来以外，更映射出如今全民健身热潮的兴起。</p>
+                </div>
+                <div style="position: absolute;right: 10px;height: 100%;width: 100px;" class="pull-left">
+                    <span style="position: absolute; right: 10px; bottom: 10px;color: #807c7c;"
+                          class="">2017-18.28</span>
+                    <span style="position: absolute; right: 10px;" class="glyphicon glyphicon-flag" title="置顶" class="">TOP</span>
+                    <span style="position: absolute;top: 50%;right: 10px;transform: translateY(-50%);">
+                    <a>编辑</a>
+                    <a>删除</a>
+                    </span>
+
                 </div>
             </div>
         </div>
