@@ -1,12 +1,15 @@
 package com.oumuv.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+
 import java.util.Date;
 
 public class ClienEntity {
     private Long id;
 
+    @Excel(name = "姓名",isImportField = "true_st")
     private String name;
-
+    @Excel(name = "联系电话",isImportField = "true_st")
     private Long phone;
 
     private String address;

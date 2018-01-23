@@ -1,5 +1,9 @@
 package com.oumuv.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,10 +17,11 @@ public class User implements Serializable{
 
 	private Long id;
 
+	@Excel(name = "用户名",isImportField = "true_st")
 	private String username;
 
 	private String password;
-
+	@Excel(name = "姓名",isImportField = "true_st")
 	private String name;
 
 	private String himg;
@@ -31,6 +36,7 @@ public class User implements Serializable{
 
 	private Long phone;
 
+	@Temporal(TemporalType.DATE)
 	private Date birthday;
 
 	private Integer height;
@@ -43,6 +49,7 @@ public class User implements Serializable{
 
 	private String major;
 
+	@Temporal(TemporalType.DATE)
 	private Date graduationTime;
 
 	private String male;
