@@ -130,7 +130,9 @@
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
         </dependency>
-        <dependency>
+
+        <!--因为引用了开源项目https://github.com/code4craft/webmagic 里面已经定义了slf4j依赖所以这里暂时注释-->
+        <!--<dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
@@ -139,7 +141,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/com.dyuproject.protostuff/protostuff-core -->
         <!--protostuff序列化工具-->
@@ -293,6 +295,18 @@
             <version>4.0.2</version>
         </dependency>
 
+
+        <!--Java爬虫开源项目：https://github.com/code4craft/webmagic-->
+        <dependency>
+            <groupId>us.codecraft</groupId>
+            <artifactId>webmagic-core</artifactId>
+            <version>0.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>us.codecraft</groupId>
+            <artifactId>webmagic-extension</artifactId>
+            <version>0.7.3</version>
+        </dependency>
     </dependencies>
 
 
@@ -324,7 +338,7 @@
                     </webAppConfig>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <port>89</port>
+                            <port>8080</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
