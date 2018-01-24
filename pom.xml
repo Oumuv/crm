@@ -286,6 +286,13 @@
             <version>3.0.3</version>
         </dependency>
 
+        <!--开源项目：https://gitee.com/loolly/hutool-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+
     </dependencies>
 
 
