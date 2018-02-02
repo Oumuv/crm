@@ -310,7 +310,6 @@ body {
 	 * @param timeout 显示时间
      */
 	function alertMsg(state,msg,timeout) {
-        var timeout;
         if(null!=timeout) {
             timeout = timeout;
         }else{
