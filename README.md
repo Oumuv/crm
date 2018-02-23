@@ -1,6 +1,7 @@
 # <center> crm系统</center >
 ## 系统概述
 + 集成Spring、SpringMVC、Mybatis、Shiro等主流的web框架
++ mysql数据库 + redis缓存
 + 集成Velocity模板引擎
 + 使用了Bootstrap作为页面渲染框架
 + 使用Vue2.0实现前端双向数据绑定
