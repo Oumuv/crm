@@ -16,7 +16,8 @@
     <link href="#springUrl('/css/bootstrap-select.min.css')" rel="stylesheet">#*下拉框控件*#
     <link rel="stylesheet" href="#springUrl('/css/font-awesome-4.7.0/css/font-awesome.css')">#*字体图标库*#
 
-    <script src="#springUrl('/js/jquery.min.js')"></script>
+##    <script src="#springUrl('/js/jquery.min.js')"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.0.2/jquery.min.js"></script>
     <script src="#springUrl('/js/bootstrap.js')"></script>
 <!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script> -->
     <script src="#springUrl('/js/toastr.js')"></script>
