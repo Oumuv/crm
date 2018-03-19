@@ -59,13 +59,11 @@
 	<div class="container control index"
 		style="text-align: center; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);">
 		<!-- 页头招呼语 -->
-		<h1>Wellcome CRM!</h1>
-		<p class="lead">Spring + SpringMVC + Mybatis + Shiro integrated CRM
-			system, using bootstrap, easyUI and other front-end tools drawing
-			interface.</p>
+		<h1>Sign in to CRM</h1>
+		<p class="lead">Spring + SpringMVC + Mybatis + Shiro + Velocity + bootstrap + Vue</p>
 		<p>
 			<a class="btn btn-lg btn-success hbtn" style="max-width: 380px"
-				href="<%=request.getContextPath()%>/getmenu.do" role="button">Log in and start to using</a>
+				href="<%=request.getContextPath()%>/login.jsp" role="button">New to CRM? Create an account.</a>
 		</p>
 		<br>
 		<!-- 登录框 -->
@@ -106,7 +104,7 @@
 				<div class="input-group">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="button" onfocus="$('#password_input').focus()">Password:</button>
-					</span> <input id="password_input" type="text" name="password" value="123456" class="form-control"
+					</span> <input id="password_input" type="password" name="password" value="123456" class="form-control"
 						placeholder="请输入密码..">
 				</div>
 				<!-- /input-group -->
