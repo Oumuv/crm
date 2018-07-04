@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +27,7 @@ import java.util.List;
  * @Date: Create in 2017/12/7 12:50
  */
 @Controller
-public class ClienManageAction {
+public class ClienManageAction extends WebMvcConfigurerAdapter {
 
     @Autowired
     private ClienService clienService;
@@ -45,9 +47,10 @@ public class ClienManageAction {
      */
     @RequestMapping("word/addclienManagePage.do")
     public String addclienManagePage(ModelMap map) {
-
         return "views/add_clien";
     }
+
+
 
     /**
      * 跳转修改页面

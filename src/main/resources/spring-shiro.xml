@@ -53,6 +53,7 @@
 				/login.jsp = anon
 				/user/login* = anon
 				/user/check* = anon
+				/user/getAuthCode* = anon
 				/pagejumps* = anon
 				/user/logout* = logout
 				/pageturn* = authc

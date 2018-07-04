@@ -63,7 +63,7 @@
 		<p class="lead">Spring + SpringMVC + Mybatis + Shiro + Velocity + bootstrap + Vue</p>
 		<p>
 			<a class="btn btn-lg btn-success hbtn" style="max-width: 380px"
-				href="<%=request.getContextPath()%>/login.jsp" role="button">New to CRM? Create an account.</a>
+				href="<%=request.getContextPath()%>/login.jsp" role="button">Hello！Welcome to CRM</a>
 		</p>
 		<br>
 		<!-- 登录框 -->
@@ -109,6 +109,13 @@
 				</div>
 				<!-- /input-group -->
 				<br>
+				<%--验证码--%>
+				<div class="form-group" style="text-align: center; width: 100%;margin-top: 5px;">
+					<img id="AuthCode" src="<%=request.getContextPath()%>/user/getAuthCode.do">&nbsp;&nbsp;
+					<input name="authCode" type="text" class="" style="width: 100px;">
+				</div>
+				<!-- /input-group -->
+				<br>
 				<div class="container control"
 					style="width: 80%; text-align: center">
 					<input type="submit" class="btn btn-primary lbtn" onclick="return submits()" value="Login"
@@ -131,7 +138,8 @@
 	<script src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 	
 	<script type="text/javascript">
-	
+
+
 		/*验证用户是否存在*/
 		function check(t){
 			if($(".form-control").eq(0).val()==""){
@@ -161,6 +169,7 @@
 				return false;
 			}
 			return true;
+
 		};
 		
 		$(".form-control").focus(function(){

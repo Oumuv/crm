@@ -1,5 +1,10 @@
 package com.oumuv.action;
 
+import cn.hutool.captcha.CaptchaUtil;
+import cn.hutool.captcha.CircleCaptcha;
+import cn.hutool.captcha.ICaptcha;
+import cn.hutool.captcha.LineCaptcha;
+import cn.hutool.core.lang.Console;
 import com.google.gson.Gson;
 import com.oumuv.core.DeleteFileTimerTask;
 import com.oumuv.core.info.Result;
@@ -27,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -187,9 +193,16 @@ public class UserAction {
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String shiroLogin(@Param(value = "usename") String username,
 			@Param("password") String password,
+			@Param("authCode") String authCode,
 			@Param("address") String address, HttpServletRequest request,
 			ModelMap map, HttpSession session) throws UnsupportedEncodingException {
-
+		ICaptcha linecaptcha = (ICaptcha)session.getAttribute("authCode");
+		if (!linecaptcha.verify(authCode)) {
+			map.clear();
+			map.put("username", username);
+			map.put("msg1", "密码或验证码错误，请重新输入");
+			return "forward:/login.jsp";
+		}
 		Subject subject = SecurityUtils.getSubject();// 获取subject实例
 		boolean authenticated = subject.isAuthenticated();// 判断用户是否已经登录
 //			SavedRequest request2 = WebUtils.getSavedRequest(request);
@@ -222,9 +235,50 @@ public class UserAction {
 		} catch (AuthenticationException e) {
 			map.clear();
 			map.put("username", username);
-			map.put("msg1", "密码错误，请重新输入");
+			map.put("msg1", "密码或验证码错误，请重新输入");
 			return "forward:/login.jsp";
 		}
+	}
+
+	/**
+	 * 获取验证码
+	 * @param response
+	 */
+	@RequestMapping(value="/getAuthCode.do",method={RequestMethod.POST,RequestMethod.GET})
+	public void LineCaptchaAuthCode(HttpServletResponse response,HttpSession session) {
+		//定义图形验证码的长和宽
+		CircleCaptcha lineCaptcha = CaptchaUtil.createCircleCaptcha(100, 27,4,5);
+		/*//图形验证码写出，可以写出到文件，也可以写出到流
+		lineCaptcha.write("d:/line.png");
+		//输出code
+		Console.log(lineCaptcha.getCode());
+		//验证图形验证码的有效性，返回boolean值
+		lineCaptcha.verify("1234");
+		//重新生成验证码
+		lineCaptcha.createCode();
+		lineCaptcha.write("d:/line.png");
+		//新的验证码
+		Console.log(lineCaptcha.getCode());
+		//验证图形验证码的有效性，返回boolean值
+		lineCaptcha.verify("1234");
+*/
+		ServletOutputStream outputStream=null;
+		try {
+			outputStream = response.getOutputStream();
+			lineCaptcha.write(outputStream);
+			session.setAttribute("authCode",lineCaptcha);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			if (outputStream!=null) {
+				try {
+					outputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
 	}
 
 	/**
