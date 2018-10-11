@@ -292,6 +292,13 @@
             <version>3.0.3</version>
         </dependency>
 
+        <!--java邮件jar-->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+
         <!--开源项目：https://gitee.com/loolly/hutool-->
         <dependency>
             <groupId>cn.hutool</groupId>

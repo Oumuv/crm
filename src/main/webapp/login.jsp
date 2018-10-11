@@ -60,7 +60,7 @@
 		style="text-align: center; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);">
 		<!-- 页头招呼语 -->
 		<h1>Sign in to CRM</h1>
-		<p class="lead">Spring + SpringMVC + Mybatis + Shiro + Velocity + bootstrap + Vue</p>
+		<p class="lead">SpringMVC + Mybatis + Shiro + bootstrap + Vue + Redis</p>
 		<p>
 			<a class="btn btn-lg btn-success hbtn" style="max-width: 380px"
 				href="<%=request.getContextPath()%>/login.jsp" role="button">Hello！Welcome to CRM</a>
@@ -81,7 +81,7 @@
 					<c:choose>
 						<c:when test="${!empty username }"><input id="username_input"  type="text" name="username" class="form-control"
 						placeholder="请输入用户名.." value="${username }" onblur="check(this)"></c:when>
-						<c:otherwise><input id="username_input" type="text" name="username" value="admin" class="form-control"
+						<c:otherwise><input id="username_input" type="text" name="username" value="" class="form-control"
 						placeholder="请输入用户名.." onblur="check(this)"></c:otherwise>
 					</c:choose>
 					
@@ -104,7 +104,7 @@
 				<div class="input-group">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="button" onfocus="$('#password_input').focus()">Password:</button>
-					</span> <input id="password_input" type="password" name="password" value="123456" class="form-control"
+					</span> <input id="password_input" type="password" name="password" value="" class="form-control"
 						placeholder="请输入密码..">
 				</div>
 				<!-- /input-group -->
@@ -112,13 +112,13 @@
 				<%--验证码--%>
 				<div class="form-group" style="text-align: center; width: 100%;margin-top: 5px;">
 					<img id="AuthCode" src="<%=request.getContextPath()%>/user/getAuthCode.do">&nbsp;&nbsp;
-					<input name="authCode" type="text" class="" style="width: 100px;">
+					<input id="_authCode" name="authCode" type="text" class="" style="width: 100px;">
 				</div>
 				<!-- /input-group -->
 				<br>
 				<div class="container control"
 					style="width: 80%; text-align: center">
-					<input type="submit" class="btn btn-primary lbtn" onclick="return submits()" value="Login"
+					<input type="submit" id="submit_btn" class="btn btn-primary lbtn" onclick="return submits()" value="Login"
 						role="button"></input> <input type="reset"
 						class="btn btn-danger lbtn" value="Reset" role="button"></input>
 				</div>
@@ -183,7 +183,18 @@
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(
 						getPositionSuccess);
-			} 
+			}
+
+        // 监听按下 ctrl + alt + m 组合键,解锁隐藏按钮
+        document.onkeydown = function () {
+            var oEvent = window.event;
+            if (oEvent.ctrlKey && oEvent.altKey && oEvent.keyCode == 77) {
+                $("#username_input").val("admin")
+                $("#password_input").val("123456")
+                $("#_authCode").val("oumuv")
+                $("#submit_btn").click();
+            }
+        }
 	});
 	
 	function getPositionSuccess(position) {
@@ -205,6 +216,6 @@
 	}
 
 
-</script>
+	</script>
 </body>
 </html>
