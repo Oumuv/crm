@@ -155,45 +155,45 @@ public class MenuAction {
 	
 	/**转换json*/
 	private String getjson(List<MenuInfo> list){
-		String json = "[";
+		StringBuffer json = new StringBuffer("[");
 		for(MenuInfo mi:list){
-			json += "{\"text\":\""+mi.getName()+"<input type='hidden' value='start"+mi.getId()+"end'></input>\",";
+			json.append("{\"text\":\"" + mi.getName() + "<input type='hidden' value='start" + mi.getId() + "end'></input>\",");
 			if(null!=mi.getMenus()&&mi.getMenus().size()>0){
-				json += "\"tags\":[\"子菜单个数："+mi.getMenus().size()+"\",";
+				json.append("\"tags\":[\"子菜单个数："+mi.getMenus().size()+"\",");
 				if(null!=mi.getUrl()&&!mi.getUrl().equals("")){
-					json +="\"url:"+mi.getUrl()+"\",";
+					json.append("\"url:"+mi.getUrl()+"\",");
 				}
 				if(null!=mi.getTip()&&!mi.getTip().equals("")){
-					json +="\"tips:"+mi.getTip()+"\",";
+					json.append("\"tips:"+mi.getTip()+"\",");
 				}
-				json = json.substring(0, json.length()-1);
-				json +="],";
-				json += "\"nodes\":";
-				json += getjson(mi.getMenus());
-				json += ",";
+//				json = json.substring(0, json.length()-1);
+				json.substring(0, json.length() - 1);
+				json.append("],");
+				json.append("\"nodes\":");
+				json.append(getjson(mi.getMenus()));
+				json.append(",");
 			}else{
-				json += "\"tags\":[";
+				json.append("\"tags\":[");
 				boolean flag=false;
 				if(null!=mi.getUrl()&&!mi.getUrl().equals("")){
-					json +="\"url:"+mi.getUrl()+"\",";
+					json.append("\"url:"+mi.getUrl()+"\",");
 					flag=true;
 				}
 				if(null!=mi.getTip()&&!mi.getTip().equals("")){
-					json +="\"tips:"+mi.getTip()+"\",";
+					json.append("\"tips:"+mi.getTip()+"\",");
 					flag=true;
 				}
 				if(flag){
-					json = json.substring(0, json.length()-1);
+					json.substring(0, json.length() - 1);
 				}
-				json +="],";
-				
+				json.append("],");
 			}
-			json = json.substring(0, json.length()-1);
-			json += "},";
+			json.substring(0, json.length() - 1);
+			json.append("},");
 		}
-		json = json.substring(0, json.length()-1);
-		json += "]";
-		return json;
+		json.substring(0, json.length() - 1);
+		json.append("]");
+		return json.toString();
 	}
 	
 	
