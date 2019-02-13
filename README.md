@@ -5,6 +5,7 @@
 + 集成Velocity模板引擎
 + 使用了Bootstrap作为页面渲染框架
 + 使用Vue2.0实现前端双向数据绑定
++ Echarts可视化图表
 
 ## 系统截图
 
@@ -21,4 +22,4 @@
 ![菜单管理界面](https://raw.githubusercontent.com/Oumuv/crm/master/src/main/webapp/images/github/%E8%8F%9C%E5%8D%95%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD%E7%95%8C%E9%9D%A2.png)
 ---
 
-### **联系我**  1134420025@qq.com
+### **联系我**  oumuv163@163.com
