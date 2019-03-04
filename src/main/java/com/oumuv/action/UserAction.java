@@ -229,7 +229,8 @@ public class UserAction {
 			if (!address.equals("")) {
 				record.setLoginSite(address);
 			} else {
-				record.setLoginSite(accessSiteUtil.getAddresses("ip="+ accessSiteUtil.getIpAddr(request), "utf-8"));
+//				String addresses = accessSiteUtil.getAddresses("ip=" + accessSiteUtil.getIpAddr(request), "utf-8");
+//				record.setLoginSite();
 			}
 			loginRecordService.loginRecored(record);
 			return "index";
