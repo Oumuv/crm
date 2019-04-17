@@ -10,7 +10,11 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<<<<<<< HEAD
 <title>CRM login page2</title>
+=======
+<title>CRM login page3</title>
+>>>>>>> branch 'master' of https://github.com/Oumuv/crm.git
 <link rel="Shortcut Icon" href="<%=request.getContextPath()%>/images/headM.png" /> 
 
 <!-- Bootstrap -->
